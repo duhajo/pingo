@@ -1,4 +1,13 @@
 Duhajo::Application.routes.draw do
+  resources :job_workers
+
+
+  resources :workers
+
+
+  resources :jobs
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
