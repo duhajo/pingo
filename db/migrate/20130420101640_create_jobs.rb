@@ -4,7 +4,9 @@ class CreateJobs < ActiveRecord::Migration
       t.string :title
       t.string :description
       t.date :deadline
-      t.integer :job_id
+      t.integer :parent_id
+      t.integer :lft
+      t.integer :rgt
 
       t.timestamps
     end

@@ -1,5 +1,6 @@
 class Job < ActiveRecord::Base
-  attr_accessible :deadline, :description, :job_id, :title
+  acts_as_nested_set
+  attr_accessible :deadline, :description, :lft, :parent_id, :rgt, :title
   has_many :job_workers
   has_many :workers, :through => :job_workers
 end

@@ -5,7 +5,9 @@
     <th>Title</th>
     <th>Description</th>
     <th>Deadline</th>
-    <th>Job</th>
+    <th>Parent</th>
+    <th>Lft</th>
+    <th>Rgt</th>
     <th></th>
     <th></th>
     <th></th>
@@ -16,7 +18,9 @@
     <td><%= job.title %></td>
     <td><%= job.description %></td>
     <td><%= job.deadline %></td>
-    <td><%= job.job_id %></td>
+    <td><%= job.parent_id %></td>
+    <td><%= job.lft %></td>
+    <td><%= job.rgt %></td>
     <td><%= link_to 'Show', job %></td>
     <td><%= link_to 'Edit', edit_job_path(job) %></td>
     <td><%= link_to 'Destroy', job, method: :delete, data: { confirm: 'Are you sure?' } %></td>

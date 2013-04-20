@@ -24,8 +24,16 @@
     <%= f.date_select :deadline %>
   </div>
   <div class="field">
-    <%= f.label :job_id %><br />
-    <%= f.number_field :job_id %>
+    <%= f.label :parent_id %><br />
+    <%= f.number_field :parent_id %>
+  </div>
+  <div class="field">
+    <%= f.label :lft %><br />
+    <%= f.number_field :lft %>
+  </div>
+  <div class="field">
+    <%= f.label :rgt %><br />
+    <%= f.number_field :rgt %>
   </div>
   <div class="actions">
     <%= f.submit %>

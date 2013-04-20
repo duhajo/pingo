@@ -3,11 +3,15 @@
 one:
   title: MyString
   description: MyString
-  deadline: 2013-04-19
-  job_id: 1
+  deadline: 2013-04-20
+  parent_id: 1
+  lft: 1
+  rgt: 1
 
 two:
   title: MyString
   description: MyString
-  deadline: 2013-04-19
-  job_id: 1
+  deadline: 2013-04-20
+  parent_id: 1
+  lft: 1
+  rgt: 1
