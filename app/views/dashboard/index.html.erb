@@ -1,0 +1,7 @@
+<%unless current_user.blank? -%>
+angemeldet als <%= current_user.name %> (<%= link_to "Abmelden", '/logout'%>)
+<% else %>
+<%= link_to "Anmelden", '/login'%>
+<% end %>
+<hr />
+<%= link_to "Jobs", :controller => :jobs, :action => :index%>
