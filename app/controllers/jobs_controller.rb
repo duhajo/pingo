@@ -1,13 +1,17 @@
 class JobsController < ApplicationController
+
+  before_filter :require_user, :only => :new
+
   # GET /jobs
   # GET /jobs.json
   def index
-    @jobs = Job.all
+	
+	@jobs = Job.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @jobs }
-    end
+    #respond_to do |format|
+    #  format.html # index.html.erb
+    #  format.json { render json: @jobs }
+    #end
   end
 
   # GET /jobs/1
@@ -24,12 +28,18 @@ class JobsController < ApplicationController
   # GET /jobs/new
   # GET /jobs/new.json
   def new
-    @job = Job.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @job }
+    if params[:id]
+       @parent_id = Job.find(params[:id]).id
     end
+    @job = Job.new
+    respond_to do |format|
+       format.html # new.html.erb
+       format.json { render json: @job }
+    end
+  end
+
+  def child
+    render :create
   end
 
   # GET /jobs/1/edit
