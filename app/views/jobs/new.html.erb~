@@ -27,8 +27,8 @@
     <%= f.date_select :deadline %>
   </div>
   <div class="field">
-    <%= f.label :skill_list, "Tags (separated by commas)" %><br />
-    <%= f.text_field :skill_list %>
+    <%= f.label :tags %><br />
+    <%= f.text_field :tags %>
   </div>
   <div class="actions">
     <%= f.submit %>

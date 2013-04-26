@@ -23,8 +23,6 @@ gem 'jquery-rails'
 
 gem 'nested_set'
 
-gem 'acts_as_taggable'
-
 gem 'acts-as-taggable-on'
 
 # To use ActiveModel has_secure_password
