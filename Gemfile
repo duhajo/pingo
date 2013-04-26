@@ -27,6 +27,8 @@ gem 'acts_as_taggable'
 
 gem 'acts-as-taggable-on'
 
+gem 'authlogic'
+
 # To use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.0.0'
 

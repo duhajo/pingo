@@ -23,7 +23,11 @@ gem 'jquery-rails'
 
 gem 'nested_set'
 
+gem 'acts_as_taggable'
+
 gem 'acts-as-taggable-on'
+
+gem 'authlogic', :git => 'git://github.com/odorcicd/authlogic.git', :branch => 'rails3'
 
 # To use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.0.0'
