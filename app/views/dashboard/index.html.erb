@@ -1,5 +1,5 @@
 <%unless current_user.blank? -%>
-angemeldet als <%= current_user.name %> (<%= link_to "Abmelden", '/logout'%>)
+angemeldet als <%= current_user.name %> (<%= link_to "Profil bearbeiten", '/myprofile'%> | <%= link_to "Abmelden", '/logout'%>)
 <% else %>
 <%= link_to "Anmelden", '/login'%> oder <%= link_to "Registrieren", '/signup'%>
 <% end %>

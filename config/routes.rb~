@@ -1,11 +1,14 @@
 Duhajo::Application.routes.draw do
 
   match '/signup', :to => 'users#new'
+  match '/myprofile', :to => 'users#profile'
   match '/login', :to => 'sessions#new'
   match '/logout', :to => 'sessions#destroy'
 
   resources :users do
-    resource :tag
+    collection do
+      get :tag
+    end
   end
   resources :sessions, :only => [:new, :create, :destroy]
   resources :jobs

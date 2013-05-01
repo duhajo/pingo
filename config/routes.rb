@@ -1,6 +1,7 @@
 Duhajo::Application.routes.draw do
 
   match '/signup', :to => 'users#new'
+  match '/myprofile', :to => 'users#my_profile'
   match '/login', :to => 'sessions#new'
   match '/logout', :to => 'sessions#destroy'
 
