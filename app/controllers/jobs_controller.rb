@@ -29,7 +29,7 @@ class JobsController < ApplicationController
   # GET /jobs/new.json
   def new
     if params[:id]
-       @parent_id = Job.find(params[:id]).id
+       @parent_job = Job.find(params[:id])
     end
     @job = Job.new
     respond_to do |format|

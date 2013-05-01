@@ -12,8 +12,11 @@
       </ul>
     </div>
   <% end %>
-  Parent Id: <%= @parent_id %>
-  <%= f.hidden_field :parent_id, value: @parent_id %>
+  <% if not @parent_job.id.nil? %>
+    Neuer Job für: <%= @parent_job.title %>
+    <%= f.hidden_field :parent_id, value: @parent_job.id %>
+    <hr />
+  <% end %>
   <div class="field">
     <%= f.label :title %><br />
     <%= f.text_field :title %>
@@ -27,8 +30,8 @@
     <%= f.date_select :deadline %>
   </div>
   <div class="field">
-    <%= f.label :tags %><br />
-    <%= f.text_field :tags %>
+    <%= f.label :skill_list, "Tags (separated by commas)" %><br />
+    <%= f.text_field :skill_list %>
   </div>
   <div class="actions">
     <%= f.submit %>

@@ -29,7 +29,7 @@ class JobsController < ApplicationController
   # GET /jobs/new.json
   def new
     if params[:id]
-       @parent_id = Job.find(params[:id]).id
+       @parent_id = Job.find(params[:id])
     end
     @job = Job.new
     respond_to do |format|
@@ -84,8 +84,7 @@ class JobsController < ApplicationController
   # DELETE /jobs/1.json
   def destroy
     @job = Job.find(params[:id])
-    #JobsWorker.destroy_all("job_id = #{@job.id}")
-    @job.destroy_all
+    @job.destroy
 
     respond_to do |format|
       format.html { redirect_to jobs_url }

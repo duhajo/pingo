@@ -1,4 +1,4 @@
-<h1>All Jobs</h1>
+<h1>Listing jobs</h1>
 
 <div class="pages">
   <%= sorted_nested_li(@jobs, :title) do |job| %>

@@ -12,8 +12,11 @@
       </ul>
     </div>
   <% end %>
-  Parent Id: <%= @parent_id %>
-  <%= f.hidden_field :parent_id, value: @parent_id %>
+  <% if not @parent_job.id.nil? %>
+    für: <%= @parent_job.title %>
+    <%= f.hidden_field :parent_id, value: @parent_job.id %>
+    <hr />
+  <% end %>
   <div class="field">
     <%= f.label :title %><br />
     <%= f.text_field :title %>

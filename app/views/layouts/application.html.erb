@@ -15,7 +15,7 @@ angemeldet als <%= current_user.name %> (<%= link_to "Profil bearbeiten", '/mypr
 <hr />
 <%= link_to "Dashboard", :controller => :dashboard, :action => :index%> | 
 <%= link_to "Jobs", :controller => :jobs, :action => :index%> | 
-<%= link_to "Users", :controller => :users, :action => :index%>
+<%= link_to "Workers", :controller => :users, :action => :index%>
 <hr />
 <%= yield %>
 

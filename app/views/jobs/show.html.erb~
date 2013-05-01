@@ -16,22 +16,14 @@
   <%= @job.deadline %>
 </p>
 
+<% if not @job.skill_list.empty? %>
 <p>
-  <b>Parent:</b>
-  <%= @job.parent_id %>
+  <b>Tags:</b>
+  <%= @job.skill_list %>
 </p>
+<% end %>
 
-<p>
-  <b>Lft:</b>
-  <%= @job.lft %>
-</p>
-
-<p>
-  <b>Rgt:</b>
-  <%= @job.rgt %>
-</p>
-
-
+<%= link_to 'Add Task', "jobs/#{@job.id}/new" %> |
 <%= link_to 'Edit', edit_job_path(@job) %> |
 <%= link_to "Delete", @job, :method => :delete, :confirm => "Are you sure ?"%> |
 <%= link_to 'Back', jobs_path %>
