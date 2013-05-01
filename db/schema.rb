@@ -11,15 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130426104718) do
-
-  create_table "job_workers", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "job_id"
-    t.boolean  "iscreator"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
+ActiveRecord::Schema.define(:version => 20130501131412) do
 
   create_table "jobs", :force => true do |t|
     t.string   "title"
@@ -31,6 +23,16 @@ ActiveRecord::Schema.define(:version => 20130426104718) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
+
+  create_table "jobs_workers", :id => false, :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "job_id"
+    t.boolean  "isCreator"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "jobs_workers", ["job_id", "user_id"], :name => "index_jobs_workers_on_job_id_and_user_id"
 
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"

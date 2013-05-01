@@ -51,8 +51,7 @@ class JobsController < ApplicationController
   # POST /jobs.json
   def create
     @job = Job.new(params[:job])
-    #ToDo: add creator to user (don't forget the iscreator value)
-    #@jobworker = JobWorker.new(@job.id, @current_user.id)
+    @job.jobs_workers.build( :user_id => current_user.id, :isCreator => true)
 
     respond_to do |format|
       if @job.save
@@ -91,5 +90,5 @@ class JobsController < ApplicationController
       format.html { redirect_to jobs_url }
       format.json { head :no_content }
     end
-  end
+  end 
 end

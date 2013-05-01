@@ -51,8 +51,7 @@ class JobsController < ApplicationController
   # POST /jobs.json
   def create
     @job = Job.new(params[:job])
-    #ToDo: add creator to user (don't forget the iscreator value)
-    @jobworker = JobWorker.new(@job.id, @current_user.id)
+    @job.jobs_workers.build( :user_id => current_user.id, :isCreator => true)
 
     respond_to do |format|
       if @job.save
@@ -85,11 +84,12 @@ class JobsController < ApplicationController
   # DELETE /jobs/1.json
   def destroy
     @job = Job.find(params[:id])
-    @job.destroy
+    #JobsWorker.destroy_all("job_id = #{@job.id}")
+    @job.destroy_all
 
     respond_to do |format|
       format.html { redirect_to jobs_url }
       format.json { head :no_content }
     end
-  end
+  end 
 end

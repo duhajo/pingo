@@ -5,9 +5,7 @@ Duhajo::Application.routes.draw do
   match '/logout', :to => 'sessions#destroy'
 
   resources :users do
-    collection do
-      get :tag
-    end
+    resource :tag
   end
   resources :sessions, :only => [:new, :create, :destroy]
   resources :jobs

@@ -1,4 +1,10 @@
 class UsersController < ApplicationController
+  
+  def index
+    @users = User.all
+    @tags = User.tag_counts_on(:skills)
+  end
+  
   def new
     @user = User.new
   end

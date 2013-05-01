@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   has_secure_password
   attr_accessor   :new_password, :new_password_confirmation 
-  attr_accessible :name, :email, :new_password, :new_password_confirmation, :skill_list
+  attr_accessible :name, :email, :password, :password_confirmation, :new_password, :new_password_confirmation, :skill_list
 
   validates_confirmation_of :new_password, :if => :password_changed?
 
@@ -26,8 +26,8 @@ class User < ActiveRecord::Base
             :length => { :within => 6..40 },
             :if => :password_changed?
   validates_presence_of :password, :on => :create
-  has_many :job_workers
-  has_many :jobs, :through => :job_workers
+  has_many :jobs_workers
+  has_many :jobs, :through => :jobs_workers
   
   acts_as_taggable
   acts_as_taggable_on :skills
