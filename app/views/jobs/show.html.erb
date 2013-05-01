@@ -21,16 +21,6 @@
   <%= @job.parent_id %>
 </p>
 
-<p>
-  <b>Lft:</b>
-  <%= @job.lft %>
-</p>
-
-<p>
-  <b>Rgt:</b>
-  <%= @job.rgt %>
-</p>
-
 
 <%= link_to 'Edit', edit_job_path(@job) %> |
 <%= link_to "Delete", @job, :method => :delete, :confirm => "Are you sure ?"%> |
