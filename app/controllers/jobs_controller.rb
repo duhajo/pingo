@@ -18,6 +18,7 @@ class JobsController < ApplicationController
   # GET /jobs/1.json
   def show
     @job = Job.find(params[:id])
+    @activities = @job.activities.all
 
     respond_to do |format|
       format.html # show.html.erb
@@ -32,6 +33,7 @@ class JobsController < ApplicationController
        @parent_job = Job.find(params[:id])
     end
     @job = Job.new
+    
     respond_to do |format|
        format.html # new.html.erb
        format.json { render json: @job }
@@ -90,5 +92,10 @@ class JobsController < ApplicationController
       format.html { redirect_to jobs_url }
       format.json { head :no_content }
     end
-  end 
+  end
+  
+  
+  def comment
+    #?
+  end
 end

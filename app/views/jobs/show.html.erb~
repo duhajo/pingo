@@ -23,7 +23,34 @@
 </p>
 <% end %>
 
-<%= link_to 'Add Task', "jobs/#{@job.id}/new" %> |
+
+<%= link_to 'Add Task', "#{@job.id}/new" %> |
 <%= link_to 'Edit', edit_job_path(@job) %> |
 <%= link_to "Delete", @job, :method => :delete, :confirm => "Are you sure ?"%> |
 <%= link_to 'Back', jobs_path %>
+
+<%= form_for([@job, @job.activities.build]) do |f| %>
+   <%= f.text_area :content %>
+   <%= f.submit "Post Comment" %>
+<% end %>
+
+<% @activities.each do |activity| %>
+    <p>
+      <% if not activity.user.nil? %>
+        <b><%= activity.user.name %> said:</b><br />
+      <% else %>
+        <% activity.user %>
+      <% end %>
+
+      <%= activity.created_at %>
+    </p>
+
+    <p>
+      <%= activity.content %>
+    </p>
+
+<%= link_to 'Edit', edit_activities_path(activity) %> |
+<%= link_to 'Show', activities_path %>
+ 
+<% end %>
+

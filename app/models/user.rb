@@ -25,9 +25,11 @@ class User < ActiveRecord::Base
             :confirmation => true,
             :length => { :within => 6..40 },
             :if => :password_changed?
+  validates_presence_of :name
   validates_presence_of :password, :on => :create
   has_many :jobs_workers
   has_many :jobs, :through => :jobs_workers
+  has_many :activities
   
   acts_as_taggable
   acts_as_taggable_on :skills

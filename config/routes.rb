@@ -5,22 +5,20 @@ Duhajo::Application.routes.draw do
   match '/login', :to => 'sessions#new'
   match '/logout', :to => 'sessions#destroy'
 
+  resources :activities
   resources :users do
     collection do
       get :tag
     end
+    resources :activities
   end
   resources :sessions, :only => [:new, :create, :destroy]
-  resources :jobs
-
+  resources :jobs do
+    resources :activities
+  end
+  
   match "jobs/:id/new" => "jobs#new"
 
-  # The priority is based upon order of creation:
-  # first created -> highest priority.
-
-  # Sample of regular route:
-  #   match 'products/:id' => 'catalog#view'
-  # Keep in mind you can assign values other than :controller and :action
 
   # Sample of named route:
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
@@ -41,12 +39,6 @@ Duhajo::Application.routes.draw do
   #     end
   #   end
 
-  # Sample resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
-
   # Sample resource route with more complex sub-resources
   #   resources :products do
   #     resources :comments
@@ -60,10 +52,6 @@ Duhajo::Application.routes.draw do
   #     # Directs /admin/products/* to Admin::ProductsController
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
-  #   end
-
-  # You can have the root of your site routed with "root"
-  # just remember to delete public/index.html.
   root :to => 'dashboard#index'
 
   # See how all your routes lay out with "rake routes"
