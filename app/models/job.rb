@@ -6,4 +6,6 @@ class Job < ActiveRecord::Base
   has_many :jobs_workers, :dependent => :destroy, :conditions => "isCreator = 'true'"
   has_many :users, :through => :jobs_workers
   has_many :activities
+  
+  scope :by_join_date, order("created_at DESC")
 end

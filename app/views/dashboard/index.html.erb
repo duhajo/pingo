@@ -1,1 +1,8 @@
-Willkommen ... mit tollen Frontend ist hier noch nichts :)
+Willkommen ... mit tollen Frontend ist hier noch 
+<hr />
+Empfohlene Jobs:
+<ul>
+<% @jobs.each do |job|%>
+<li><%= job.title %></li>
+<% end %>
+</ul>
