@@ -3,6 +3,6 @@ Willkommen ... mit tollen Frontend ist hier noch
 Empfohlene Jobs:
 <ul>
 <% @jobs.each do |job|%>
-<li><%= job.title %></li>
+<li><%= link_to job.title, job %></li>
 <% end %>
 </ul>

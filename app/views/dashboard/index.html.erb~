@@ -1,12 +1,5 @@
 Willkommen ... mit tollen Frontend ist hier noch 
-
-<%= @skills.to_a() %>
-<ul>
-<% @skills.to_a().each do |skill|%>
-<li><%= skill.name %></li>
-<% end %>
-</ul>
-<%= @skill_list %>
+<hr />
 Empfohlene Jobs:
 <ul>
 <% @jobs.each do |job|%>
