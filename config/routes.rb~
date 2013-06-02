@@ -5,7 +5,7 @@ Duhajo::Application.routes.draw do
   match '/login', :to => 'sessions#new'
   match '/logout', :to => 'sessions#destroy'
 
-  resource :activities
+  resources :activities
   resources :users do
     collection do
       get :tag
@@ -14,7 +14,7 @@ Duhajo::Application.routes.draw do
   end
   resources :sessions, :only => [:new, :create, :destroy]
   resources :jobs do
-    resource :activities
+    resources :activities
   end
   
   match "jobs/:id/new" => "jobs#new"

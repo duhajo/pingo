@@ -14,7 +14,9 @@ Duhajo::Application.routes.draw do
   end
   resources :sessions, :only => [:new, :create, :destroy]
   resources :jobs do
-    resources :activities
+    resources :activities do
+      resources :activities
+    end
   end
   
   match "jobs/:id/new" => "jobs#new"

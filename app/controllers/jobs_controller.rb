@@ -94,8 +94,7 @@ class JobsController < ApplicationController
     end
   end
   
-  
-  def comment
-    #?
+  def support
+    
   end
 end
