@@ -1,8 +1,0 @@
-class Activity < ActiveRecord::Base
-  acts_as_nested_set
-  
-  attr_accessible :content, :type, :lft, :parent_id, :rgt
-  
-  belongs_to :user
-  belongs_to :job
-end
