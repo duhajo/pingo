@@ -68,9 +68,8 @@
         $('#openLocationFields').show();
         s.text("Deine Position konnte ermittelt werden!");
         s.addClass('success');
-        
-        $("user_latitude").text(position.coords.latitude);
-        $("user_longitude").text(position.coords.longitude);
+        $("#user_latitude").val(position.coords.latitude);
+        $("#user_longitude").val(position.coords.longitude);
 
         
         navigator.geolocation.clearWatch(watchId);

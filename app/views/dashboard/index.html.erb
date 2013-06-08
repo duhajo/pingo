@@ -7,12 +7,14 @@ Empfohlene Jobs per Tags:
 <% end %>
 </ul>
 
-Empfohlene Jobs per Nähe:
-<ul>
-<% @near_jobs.each do |job|%>
-<li><%= link_to job.title, job %></li>
+<%if !@near_jobs.nil? %>
+  Empfohlene Jobs per Nähe:
+  <ul>
+  <% @near_jobs.each do |job|%>
+  <li><%= link_to job.title, job %></li>
+  <% end %>
+  </ul>
 <% end %>
-</ul>
 
 Meine Aktivitäten (aus den involvierten Jobs):
 <% @my_activities.each do |activity|%>
