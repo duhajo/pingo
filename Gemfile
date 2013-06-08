@@ -23,11 +23,17 @@ gem 'jquery-rails'
 
 gem 'nested_set'
 
+#To use tagging
 gem 'acts_as_taggable'
 
 gem 'acts-as-taggable-on'
 
 gem 'authlogic'
+
+# To use Geolocations
+gem "geocoder"
+
+gem 'gmaps4rails'
 
 # To use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.0.0'
@@ -43,3 +49,4 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 
 # To use debugger
 # gem 'debugger'
+

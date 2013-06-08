@@ -8,4 +8,11 @@
 
 <br />
 
+<%= form_tag jobs_path, :method => :get do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search Near", :name => nil %>
+  </p>
+<% end %>
+
 <%= link_to 'New Job', new_job_path %>

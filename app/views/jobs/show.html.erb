@@ -23,6 +23,12 @@
 </p>
 <% end %>
 
+<%= gmaps4rails(@json) %>
+<p>
+  <b>Adresse:</b>
+  <%= @job.country %> => <%= @job.city %> => <%= @job.street %>
+</p>
+
 
 <%= link_to 'Add Task', "#{@job.id}/new" %> |
 <%= link_to 'Edit', edit_job_path(@job) %> |

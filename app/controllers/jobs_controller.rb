@@ -5,8 +5,12 @@ class JobsController < ApplicationController
   # GET /jobs
   # GET /jobs.json
   def index
-	
-	@jobs = Job.all
+  
+  if params[:search].present?
+    @jobs = Job.near(params[:search], 10, :order => :distance)
+  else
+    @jobs = Job.all
+  end
 
     #respond_to do |format|
     #  format.html # index.html.erb
@@ -19,6 +23,7 @@ class JobsController < ApplicationController
   def show
     @job = Job.find(params[:id])
     @activities = @job.activities.all
+    @json = @job.to_gmaps4rails
 
     respond_to do |format|
       format.html # show.html.erb
@@ -97,4 +102,5 @@ class JobsController < ApplicationController
   def support
     
   end
+
 end

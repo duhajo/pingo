@@ -20,6 +20,7 @@ Duhajo::Application.routes.draw do
   end
   
   match "jobs/:id/new" => "jobs#new"
+  match "jobs/:id/map" => "jobs#map"
 
 
   # Sample of named route:

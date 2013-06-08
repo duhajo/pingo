@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130505133646) do
+ActiveRecord::Schema.define(:version => 20130608115401) do
 
   create_table "activities", :force => true do |t|
     t.integer  "type"
@@ -25,6 +25,14 @@ ActiveRecord::Schema.define(:version => 20130505133646) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "job_workers", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "job_id"
+    t.boolean  "iscreator"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "jobs", :force => true do |t|
     t.string   "title"
     t.string   "description"
@@ -34,6 +42,12 @@ ActiveRecord::Schema.define(:version => 20130505133646) do
     t.integer  "rgt"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "country"
+    t.string   "city"
+    t.string   "street"
+    t.boolean  "gmaps"
   end
 
   create_table "jobs_workers", :id => false, :force => true do |t|
@@ -69,6 +83,12 @@ ActiveRecord::Schema.define(:version => 20130505133646) do
     t.string   "password_digest"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "country"
+    t.string   "city"
+    t.string   "district"
+    t.integer  "radius"
   end
 
 end

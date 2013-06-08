@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>Duhajo</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= stylesheet_link_tag "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
@@ -18,6 +18,6 @@ angemeldet als <%= current_user.name %> (<%= link_to "Profil bearbeiten", '/mypr
 <%= link_to "Workers", :controller => :users, :action => :index%>
 <hr />
 <%= yield %>
-
+<%= yield :scripts %>
 </body>
 </html>

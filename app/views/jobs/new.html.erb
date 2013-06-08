@@ -12,7 +12,7 @@
       </ul>
     </div>
   <% end %>
-  <% if not @parent_job.id.nil? %>
+  <% if not @parent_job.nil? %>
     für: <%= @parent_job.title %>
     <%= f.hidden_field :parent_id, value: @parent_job.id %>
     <hr />
@@ -32,6 +32,18 @@
   <div class="field">
     <%= f.label :skill_list, "Tags (separated by commas)" %><br />
     <%= f.text_field :skill_list %>
+  </div>
+  <div class="field">
+    <%= f.label :country %><br />
+    <%= f.text_field :country %>
+  </div>
+  <div class="field">
+    <%= f.label :city %><br />
+    <%= f.text_field :city %>
+  </div>
+  <div class="field">
+    <%= f.label :street %><br />
+    <%= f.text_field :street %>
   </div>
   <div class="actions">
     <%= f.submit %>

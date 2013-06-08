@@ -1,0 +1,23 @@
+/* 
+    Document   : base
+    Created on : 08.06.2013, 13:00:39
+    Author     : Psyphant
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+@font-face {
+  font-family: 'LilGrotesk';
+  src: "<%= asset_path('fonts/LilGrotesk-Regular.otf') %>" format('opentype');
+  font-weight: normal;
+  font-style: normal;
+} 
+
+body {
+    font-family: 'LilGrotesk', Arial, Sans-Serif;
+} 
+
+.tag1 { font-size: 1.0em; }
+.tag2 { font-size: 1.2em; }
+.tag3 { font-size: 1.4em; }
+.tag4 { font-size: 1.6em; }

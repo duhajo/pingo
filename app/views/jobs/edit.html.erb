@@ -1,6 +1,44 @@
 <h1>Editing job</h1>
 
-<%= render 'form' %>
-
-<%= link_to 'Show', @job %> |
+<%= form_for @job do |f| %>
+  <% if @job.errors.any? %>
+    <div class="error_messages">
+      <h2>Form is invalid</h2>
+      <ul>
+        <% for message in @job.errors.full_messages %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.label :deadline %><br />
+    <%= f.date_select :deadline %>
+  </div>
+  <div class="field">
+    <%= f.label :skill_list, "Tags (separated by commas)" %><br />
+    <%= f.text_field :skill_list %>
+  </div>
+  <div class="field">
+    <%= f.label :country %><br />
+    <%= f.text_field :country %>
+  </div>
+  <div class="field">
+    <%= f.label :city %><br />
+    <%= f.text_field :city %>
+  </div>
+  <div class="field">
+    <%= f.label :street %><br />
+    <%= f.text_field :street %>
+  </div>
+  <div class="actions"><%= f.submit %></div>
+<% end %>
 <%= link_to 'Back', jobs_path %>
