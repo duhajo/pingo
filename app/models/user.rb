@@ -1,15 +1,11 @@
 class User < ActiveRecord::Base
   has_secure_password
   attr_accessor   :new_password, :new_password_confirmation 
-  attr_accessible :name, :email, :password, :password_confirmation, :new_password, :new_password_confirmation, :skill_list
+  attr_accessible :name, :email, :password, :password_confirmation, :new_password, :new_password_confirmation, :skill_list, :country, :city, :district, :latitude, :longitude, :radius
 
   validates_confirmation_of :new_password, :if => :password_changed?
 
   before_save :hash_new_password, :if => :password_changed?
-
-  def password_changed?
-    !@new_password.blank?
-  end
 
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
@@ -33,6 +29,17 @@ class User < ActiveRecord::Base
   
   acts_as_taggable
   acts_as_taggable_on :skills
+  
+  geocoded_by :address
+  after_validation :geocode, :if => :address_changed?
+  
+  def address
+    [district, city, country].compact.join(', ')
+  end
+  
+  def address_changed?
+    :country_changed? or :city_changed? or :district_changed?
+  end
   
   private
     # This is where the real work is done, store the BCrypt has in the

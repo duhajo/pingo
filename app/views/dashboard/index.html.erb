@@ -1,11 +1,19 @@
 Willkommen ... mit tollen Frontend ist hier noch nichts
 <hr />
-Empfohlene Jobs:
+Empfohlene Jobs per Tags:
 <ul>
 <% @recommendations.each do |recommendation|%>
 <li><%= link_to recommendation.title, recommendation %></li>
 <% end %>
 </ul>
+
+Empfohlene Jobs per Nähe:
+<ul>
+<% @near_jobs.each do |job|%>
+<li><%= link_to job.title, job %></li>
+<% end %>
+</ul>
+
 Meine Aktivitäten (aus den involvierten Jobs):
 <% @my_activities.each do |activity|%>
   <h3><%= link_to activity.user.name, activity.user %> schrieb <%= link_to activity.created_at, activity %></h3>

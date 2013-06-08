@@ -7,7 +7,12 @@ class JobsController < ApplicationController
   def index
   
   if params[:search].present?
-    @jobs = Job.near(params[:search], 10, :order => :distance)
+    @radius = User.find(current_user.id).radius
+    if(@radius.nil?)
+      @jobs = Job.near(params[:search], 10, :order => :distance)
+    else
+      @jobs = Job.near(params[:search], @radius, :order => :distance)
+    end
   else
     @jobs = Job.all
   end

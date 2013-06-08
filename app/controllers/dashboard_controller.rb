@@ -7,5 +7,10 @@ class DashboardController < ApplicationController
     
     @my_activities = Activity.joins("LEFT JOIN `jobs_workers` ON activities.job_id = jobs_workers.job_id").where('jobs_workers.user_id' => @current_user.id).to_a
     
+    
+    @center_point = [@user.latitude, @user.longitude]
+    @box = Geocoder::Calculations.bounding_box(@center_point, @user.radius)
+    @near_jobs = Job.within_bounding_box(@box)
+
   end
 end
