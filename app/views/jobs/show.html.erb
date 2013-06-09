@@ -1,6 +1,7 @@
 
 <p id="notice"><%= notice %></p>
-
+<%= button_to 'Add Task', :action => "new" %>
+<%= button_to "Support!", :action => "support", :confirm => "Do you want to support this job?"%>
 <p>
   <b>Title:</b>
   <%= @job.title %>
@@ -16,6 +17,18 @@
   <%= @job.deadline %>
 </p>
 
+<p>
+  <b>Workers</b>
+  <ul>
+    <% @workers.each do |worker| %>
+      <li>
+        <%= link_to worker.name, worker %> 
+        <% if(worker.isCreator == 1)%>(Ersteller)<%end%>
+      </li>
+    <%end%>
+  </ul>
+</p>
+
 <% if not @job.skill_list.empty? %>
 <p>
   <b>Tags:</b>
@@ -29,8 +42,6 @@
   <%= @job.country %> => <%= @job.city %> => <%= @job.street %>
 </p>
 
-
-<%= link_to 'Add Task', "#{@job.id}/new" %> |
 <%= link_to 'Edit', edit_job_path(@job) %> |
 <%= link_to "Delete", @job, :method => :delete, :confirm => "Are you sure ?"%> |
 <%= link_to 'Back', jobs_path %>

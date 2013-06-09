@@ -29,6 +29,9 @@ class JobsController < ApplicationController
     @job = Job.find(params[:id])
     @activities = @job.activities.all
     @json = @job.to_gmaps4rails
+    @workers = User.joins(:jobs_workers)
+    .where('jobs_workers.job_id' => @job.id)
+    .select("name, id, jobs_workers.isCreator").to_a
 
     respond_to do |format|
       format.html # show.html.erb
@@ -105,7 +108,15 @@ class JobsController < ApplicationController
   end
   
   def support
+    @job = Job.find(params[:id])
     
+    JobsWorker.where('jobs_workers.job_id' => @job.id)
+    .where('jobs_workers.user_id' => current_user.id).first_or_create(:isCreator => false)
+
+    respond_to do |format|
+      format.html { redirect_to @job }
+      format.json { head :no_content }
+    end
   end
 
 end

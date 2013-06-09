@@ -1,8 +1,13 @@
 class User < ActiveRecord::Base
   has_secure_password
+  acts_as_taggable
+  acts_as_taggable_on :skills
   attr_accessor   :new_password, :new_password_confirmation 
   attr_accessible :name, :email, :password, :password_confirmation, :new_password, :new_password_confirmation, :skill_list, :country, :city, :district, :latitude, :longitude, :radius
-
+  has_many :jobs_workers
+  has_many :jobs, :through => :jobs_workers
+  has_many :activities
+  
   validates_confirmation_of :new_password, :if => :password_changed?
 
   before_save :hash_new_password, :if => :password_changed?
@@ -23,12 +28,6 @@ class User < ActiveRecord::Base
             :if => :password_changed?
   validates_presence_of :name
   validates_presence_of :password, :on => :create
-  has_many :jobs_workers
-  has_many :jobs, :through => :jobs_workers
-  has_many :activities
-  
-  acts_as_taggable
-  acts_as_taggable_on :skills
   
   geocoded_by :address
   after_validation :geocode, :if => :address_changed?
