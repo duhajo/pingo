@@ -3,30 +3,43 @@
     <li><%= link_to 'Neuer Job', new_job_path %></li>
   </ul>
 <% end %>
+<script>
+$(function() {
+	$( "#content-tabs" ).tabs();
+});
+</script>
+<div id="content-tabs">
+  <div id="sub-navigation">
+    <ul>
+      <li><a href="#all">Alle</a></li>
+      <li><a href="#popular">Populär</a></li>
+      <li><a href="#local">Lokal</a></li>
+    </ul>
+  </div>
+  <div class="content-box" id="all">
+    <%if @jobs.empty? %>
+      Es sind noch keine Jobs vorhanden.
+    <% else %>
+      <div class="pages">
+        <%= sorted_nested_li(@jobs, :title) do |job| %>
+          <%= link_to job.title, job %>
+        <% end %>
+      </div>
 
-<div id="sub-navigation">
-  <ul>
-    <li class="active"><a href="">Alle</a></li>
-    <li><a href="">Populär</a></li>
-    <li><a href="">Lokal</a></li>
-  </ul>
-</div>
+      <br />
 
-<%if @jobs.empty? %>
-  Es sind noch keine Jobs vorhanden.
-<% else %>
-  <div class="pages">
-    <%= sorted_nested_li(@jobs, :title) do |job| %>
-      <%= link_to job.title, job %>
+      <%= form_tag jobs_path, :method => :get do %>
+        <p>
+          <%= text_field_tag :search, params[:search] %>
+          <%= submit_tag "Search Near", :name => nil %>
+        </p>
+      <% end %>
     <% end %>
   </div>
-
-  <br />
-
-  <%= form_tag jobs_path, :method => :get do %>
-    <p>
-      <%= text_field_tag :search, params[:search] %>
-      <%= submit_tag "Search Near", :name => nil %>
-    </p>
-  <% end %>
-<% end %>
+  <div class="content-box" id="popular">
+    Diese Funktion fehlt noch...  
+  </div>
+  <div class="content-box" id="local">
+    Diese Funktion fehlt auch noch...  
+  </div>
+</div>

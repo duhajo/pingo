@@ -29,6 +29,19 @@ a {
   color: #3f81b9;
 }
 
+/** HIDING FOCUSRING */
+a:active, a, li { 
+	outline: none; 
+}
+ 
+:focus { 
+	-moz-outline-style: none; 
+}
+ 
+:-moz-any-link:focus {
+	outline: none;
+}
+
 #sidebar {
   position: absolute;
   left: 0;
@@ -212,11 +225,11 @@ a {
   padding: 0 8px;
 }
 
-#sub-navigation .active {
+#sub-navigation .ui-tabs-active {
   border-bottom-color: #dc007c;
 }
 
-#sub-navigation .active a {
+#sub-navigation .ui-tabs-active a {
   color: #dc007c;
 }
 
