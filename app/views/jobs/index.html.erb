@@ -12,17 +12,21 @@
   </ul>
 </div>
 
-<div class="pages">
-  <%= sorted_nested_li(@jobs, :title) do |job| %>
-    <%= link_to job.title, job %>
+<%if @jobs.empty? %>
+  Es sind noch keine Jobs vorhanden.
+<% else %>
+  <div class="pages">
+    <%= sorted_nested_li(@jobs, :title) do |job| %>
+      <%= link_to job.title, job %>
+    <% end %>
+  </div>
+
+  <br />
+
+  <%= form_tag jobs_path, :method => :get do %>
+    <p>
+      <%= text_field_tag :search, params[:search] %>
+      <%= submit_tag "Search Near", :name => nil %>
+    </p>
   <% end %>
-</div>
-
-<br />
-
-<%= form_tag jobs_path, :method => :get do %>
-  <p>
-    <%= text_field_tag :search, params[:search] %>
-    <%= submit_tag "Search Near", :name => nil %>
-  </p>
 <% end %>
