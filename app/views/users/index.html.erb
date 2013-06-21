@@ -1,5 +1,10 @@
-<h1>All Workers</h1>
-
+<div id="sub-navigation">
+  <ul>
+    <li class="active"><a href="">Alle</a></li>
+    <li><a href="">Populär</a></li>
+    <li><a href="">Lokal</a></li>
+  </ul>
+</div>
 <ul>
 <% @users.each do |user|%>
 <li><%= link_to user.name, user %></li>

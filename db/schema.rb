@@ -25,14 +25,6 @@ ActiveRecord::Schema.define(:version => 20130608115401) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "job_workers", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "job_id"
-    t.boolean  "iscreator"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "jobs", :force => true do |t|
     t.string   "title"
     t.string   "description"

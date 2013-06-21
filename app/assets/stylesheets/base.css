@@ -14,132 +14,210 @@
 } 
 
 body {
-    font-family: 'LilGrotesk', Arial, Sans-Serif;
-    font-size: 18px;
+  font-family: 'LilGrotesk', Arial, Sans-Serif;
+  font-size: 18px;
 } 
 
 ul {
-    list-style: none outside none;
-    margin: 0;
-    padding: 0;
+  list-style: none outside none;
+  margin: 0;
+  padding: 0;
 }
 
 a {
-    text-decoration: none;
-    color: #3f81b9;
+  text-decoration: none;
+  color: #3f81b9;
 }
 
 #sidebar {
-    position: absolute;
-    left: 0;
-    width: 200px;
-    top: 0;
-    bottom: 0;
+  position: absolute;
+  left: 0;
+  width: 200px;
+  top: 0;
+  bottom: 0;
 }
 
 #sidebar #logo {
-    width: 200px;
-    height: 70px;
+  width: 200px;
+  height: 70px;
 }
 
 #sidebar #profile {
-    padding: 18px 30px;
+  padding: 15px;
+  position: relative;
 }
 
-#profile a {
-    font-size: 20px;
-    color: #3f81b9;
+#profile .profile-avatar img {
+  border-radius: 500px;
+  float: left;
+  margin-right: 10px;
+  margin-top: 2px;
+  width: 32px;
+  height: 32px;
 }
 
-#profile a .text-arrow {  
-    display: inline-block;
-    height: 35px;
-    transform: rotate(90deg);
-    width: 25px;
+#profile .profile-menu {
+  float: right;
+  height: 32px;
+  line-height: 32px;
+  list-style: none outside none;
+  margin: 0;
+  padding: 0;
+  width: 125px;
+}
+
+#profile .profile-menu-list {
+  clear: both;
+  left: 5px;
+  list-style: none outside none;
+  margin-top: 17px;
+  padding: 20px 5px 5px;
+  position: absolute;
+  right: 5px;
+  text-align: right;
+  top: 18px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+#profile .profile-menu:hover .profile-menu-list {
+  opacity: 1;
+}
+
+#profile .text-arrow {  
+  display: inline-block;
+  float: right;
+  text-align: right;
+  text-decoration: none;
+}
+
+#profile .text-arrow:before {
+  border: 1px solid #FFFFFF;
+  border-radius: 24px 24px 24px 24px;
+  content: ">";
+  display: inline-block;
+  padding: 0;
+  transform: rotate(90deg);
+  transform-origin: 50% 50% 0;
+}
+
+#profile .profile-menu:hover .more-actions.open {
+  display: block;
+  color: #dc007c;
+  height: 100%;
+  position: relative;
+  z-index: 11;
+}
+
+.profile-menu:hover .more-actions {
+  display: none;
+}
+
+.profile-menu .more-actions.open {
+  display: none;
+}
+
+#profile .profile-menu .more-actions a {
+  display: block;
+  margin: 0;
+  max-width: 125px;
+  overflow: hidden;
+  padding: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#profile .profile-menu .more-actions a .profile-name {
+  float: left;
+  text-align: right;
+}
+
+.hidden {
+  display: none;
 }
 
 #main {
-    background-color: #f7f7f7;
-    position: absolute;
-    bottom: 0;
-    left: 200px;
-    right: 10px;
-    top: 0;
+  background-color: #f7f7f7;
+  position: absolute;
+  bottom: 0;
+  left: 200px;
+  right: 10px;
+  top: 0;
 }
 
 #main-navigation {
-    background-color: #FFFFFF;
-    height: 70px;
+  background-color: #FFFFFF;
+  height: 70px;
 }
 
 #main-navigation li {
-    float: left;
-    margin: 0px 20px;
-    padding: 18px 0;
-    border-top: 5px solid transparent;
+  float: left;
+  margin: 0px 18px;
+  padding: 18px 0;
+  border-top: 5px solid transparent;
 }
 
 #main-navigation a {
-    font-size: 24px;
-    color: #3f81b9;
-    padding: 18px 0;
+  font-size: 24px;
+  color: #3f81b9;
+  padding: 18px 0;
 }
 
 #main-navigation .active {
-    border-top-color: #dc007c;
+  border-top-color: #dc007c;
 }
 
 #main-navigation .active a {
-    color: #dc007c;
+  color: #dc007c;
 }
 
 #main-navigation a:hover {
-    color: #dc007c;
+  color: #dc007c;
 }
 
 #actionbar {
-    background-color: #55a0da;
-    border-bottom: 2px solid #357eb6;
-    clear: both;
+  background-color: #55a0da;
+  border-bottom: 2px solid #357eb6;
+  clear: both;
 }
 
 #actionbar li {
-    padding: 18px 30px;
+  padding: 18px 30px;
 }
 
 #actionbar a {
-    color: #FFFFFF;
-    font-size: 18px;
+  color: #FFFFFF;
+  font-size: 18px;
 }
 
 #content-wrapper {
-    margin: 10px;
+  margin: 20px;
 }
 
 #sub-navigation {
-    margin-left: 20px;
+  margin-bottom: 20px;
 }
 
 #sub-navigation ul {
-    border-bottom: 1px solid #DADADA;
-    height: 40px;
-    width: 50%;
+  border-bottom: 1px solid #DADADA;
+  height: 40px;
+  width: 50%;
 }
 
 #sub-navigation li {
-    border-bottom: 3px solid transparent;
-    float: left;
-    line-height: 38px;
-    margin-right: 50px;
-    padding: 0 8px;
+  border-bottom: 3px solid transparent;
+  float: left;
+  line-height: 38px;
+  margin-right: 50px;
+  padding: 0 8px;
 }
 
 #sub-navigation .active {
-    border-bottom-color: #dc007c;
+  border-bottom-color: #dc007c;
 }
 
 #sub-navigation .active a {
-    color: #dc007c;
+  color: #dc007c;
 }
 
 .tag1 { font-size: 1.0em; }

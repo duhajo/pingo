@@ -12,10 +12,31 @@
       <div id="logo">
         <%= image_tag "logo.png" %>
       </div>
-      <div id="profile">          
-        <%unless current_user.blank? -%> angemeldet als <%= current_user.name %><br />
-          <a href="/myprofile">Mein Profil<span class="text-arrow">&gt;</span>
-          <%= link_to "Abmelden", '/logout'%>
+      <div id="profile">  
+        <%unless current_user.blank? -%>
+          <a href="/myprofile">
+            <span class="profile-avatar"><%= image_tag avatar_url(current_user) %></span>
+          </a>
+          <ul aria-haspopup="true" class="profile-menu">
+            <li class="more-actions">
+              <a href="/myprofile">
+                <span class="profile-name">Mein Profil</span>
+                <span class="text-arrow"></span>
+              </a>
+            </li>
+            <li class="more-actions open hidden">
+              <a href="/myprofile">
+                <span class="profile-name"><%= current_user.name %></span>
+                <span class="text-arrow"></span>
+              </a>
+            </li>
+          	<ul class="profile-menu-list">
+          		<li id="editprofile">
+                <a href="/microblog/global/portal/user-edit">Profil bearbeiten</a>
+              </li>
+            	<li id="logout"><%= link_to "Abmelden", '/logout'%></li>
+          	</ul>
+          </ul>
         <% else %>
           <%= link_to "Anmelden", '/login'%> oder <%= link_to "Registrieren", '/signup'%>
         <% end %>
@@ -24,9 +45,9 @@
     <div id="main">
       <div id="main-navigation">
         <ul>
-          <li <%=cp(root_path)%>><%= link_to "Dashboard", root_path%></li>
-          <li <%=cp(jobs_path)%>><%= link_to "Jobs", jobs_path%></li>
-          <li <%=cp(users_path)%>><%= link_to "Workers", users_path%></li>
+          <li <%=cp("dashboard")%>><%= link_to "Dashboard", root_path%></li>
+          <li <%=cp("jobs")%>><%= link_to "Jobs", jobs_path%></li>
+          <li <%=cp("users")%>><%= link_to "Workers", users_path%></li>
           <li><a href="#">Tags</a></li>
         </ul>
       </div>
