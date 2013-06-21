@@ -32,7 +32,7 @@
             </li>
           	<ul class="profile-menu-list">
           		<li id="editprofile">
-                <a href="/microblog/global/portal/user-edit">Profil bearbeiten</a>
+                <a href="/users/<%= current_user.id %>/edit">Profil bearbeiten</a>
               </li>
             	<li id="logout"><%= link_to "Abmelden", '/logout'%></li>
           	</ul>
