@@ -1,4 +1,16 @@
-<h1>All Jobs</h1>
+<% content_for :actionbar do %>
+  <ul>
+    <li><%= link_to 'Neuer Job', new_job_path %></li>
+  </ul>
+<% end %>
+
+<div id="sub-navigation">
+  <ul>
+    <li class="active"><a href="">Alle</a></li>
+    <li><a href="">Populär</a></li>
+    <li><a href="">Lokal</a></li>
+  </ul>
+</div>
 
 <div class="pages">
   <%= sorted_nested_li(@jobs, :title) do |job| %>
@@ -14,5 +26,3 @@
     <%= submit_tag "Search Near", :name => nil %>
   </p>
 <% end %>
-
-<%= link_to 'New Job', new_job_path %>

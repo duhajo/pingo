@@ -7,17 +7,39 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<%unless current_user.blank? -%>
-angemeldet als <%= current_user.name %> (<%= link_to "Profil bearbeiten", '/myprofile'%> | <%= link_to "Abmelden", '/logout'%>)
-<% else %>
-<%= link_to "Anmelden", '/login'%> oder <%= link_to "Registrieren", '/signup'%>
-<% end %>
-<hr />
-<%= link_to "Dashboard", :controller => :dashboard, :action => :index%> | 
-<%= link_to "Jobs", :controller => :jobs, :action => :index%> | 
-<%= link_to "Workers", :controller => :users, :action => :index%>
-<hr />
-<%= yield %>
-<%= yield :scripts %>
+  <div id="duhajo">
+    <div id="sidebar">
+      <div id="logo">
+        <%= image_tag "logo.png" %>
+      </div>
+      <div id="profile">          
+        <%unless current_user.blank? -%> angemeldet als <%= current_user.name %><br />
+          <a href="/myprofile">Mein Profil<span class="text-arrow">&gt;</span>
+          <%= link_to "Abmelden", '/logout'%>
+        <% else %>
+          <%= link_to "Anmelden", '/login'%> oder <%= link_to "Registrieren", '/signup'%>
+        <% end %>
+      </div>
+    </div>
+    <div id="main">
+      <div id="main-navigation">
+        <ul>
+          <li <%=cp(root_path)%>><%= link_to "Dashboard", root_path%></li>
+          <li <%=cp(jobs_path)%>><%= link_to "Jobs", jobs_path%></li>
+          <li <%=cp(users_path)%>><%= link_to "Workers", users_path%></li>
+          <li><a href="#">Tags</a></li>
+        </ul>
+      </div>
+      <div id="content-container">
+        <div id="actionbar">
+          <%= yield :actionbar %>
+        </div>
+        <div id="content-wrapper">
+          <%= yield %>
+          <%= yield :scripts %>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

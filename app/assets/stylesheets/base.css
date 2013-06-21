@@ -15,9 +15,135 @@
 
 body {
     font-family: 'LilGrotesk', Arial, Sans-Serif;
+    font-size: 18px;
 } 
+
+ul {
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: #3f81b9;
+}
+
+#sidebar {
+    position: absolute;
+    left: 0;
+    width: 200px;
+    top: 0;
+    bottom: 0;
+}
+
+#sidebar #logo {
+    width: 200px;
+    height: 70px;
+}
+
+#sidebar #profile {
+    padding: 18px 30px;
+}
+
+#profile a {
+    font-size: 20px;
+    color: #3f81b9;
+}
+
+#profile a .text-arrow {  
+    display: inline-block;
+    height: 35px;
+    transform: rotate(90deg);
+    width: 25px;
+}
+
+#main {
+    background-color: #f7f7f7;
+    position: absolute;
+    bottom: 0;
+    left: 200px;
+    right: 10px;
+    top: 0;
+}
+
+#main-navigation {
+    background-color: #FFFFFF;
+    height: 70px;
+}
+
+#main-navigation li {
+    float: left;
+    margin: 0px 20px;
+    padding: 18px 0;
+    border-top: 5px solid transparent;
+}
+
+#main-navigation a {
+    font-size: 24px;
+    color: #3f81b9;
+    padding: 18px 0;
+}
+
+#main-navigation .active {
+    border-top-color: #dc007c;
+}
+
+#main-navigation .active a {
+    color: #dc007c;
+}
+
+#main-navigation a:hover {
+    color: #dc007c;
+}
+
+#actionbar {
+    background-color: #55a0da;
+    border-bottom: 2px solid #357eb6;
+    clear: both;
+}
+
+#actionbar li {
+    padding: 18px 30px;
+}
+
+#actionbar a {
+    color: #FFFFFF;
+    font-size: 18px;
+}
+
+#content-wrapper {
+    margin: 10px;
+}
+
+#sub-navigation {
+    margin-left: 20px;
+}
+
+#sub-navigation ul {
+    border-bottom: 1px solid #DADADA;
+    height: 40px;
+    width: 50%;
+}
+
+#sub-navigation li {
+    border-bottom: 3px solid transparent;
+    float: left;
+    line-height: 38px;
+    margin-right: 50px;
+    padding: 0 8px;
+}
+
+#sub-navigation .active {
+    border-bottom-color: #dc007c;
+}
+
+#sub-navigation .active a {
+    color: #dc007c;
+}
 
 .tag1 { font-size: 1.0em; }
 .tag2 { font-size: 1.2em; }
 .tag3 { font-size: 1.4em; }
 .tag4 { font-size: 1.6em; }
+
