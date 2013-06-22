@@ -7,14 +7,16 @@ class JobsController < ApplicationController
   def index
   
   if params[:search].present?
-    @radius = User.find(current_user.id).radius
+    if(current_user)
+      @radius = User.find(current_user.id).radius
+    end
     if(@radius.nil?)
       @jobs = Job.near(params[:search], 10, :order => :distance)
     else
       @jobs = Job.near(params[:search], @radius, :order => :distance)
     end
   else
-    @jobs = Job.all
+    @jobs = Job.find_all_by_parent_id(nil);
   end
 
     #respond_to do |format|
@@ -27,6 +29,7 @@ class JobsController < ApplicationController
   # GET /jobs/1.json
   def show
     @job = Job.find(params[:id])
+    @jobs = Job.find_all_by_parent_id(@job.id);
     @activities = @job.activities.all
     @json = @job.to_gmaps4rails
     @workers = User.joins(:jobs_workers)

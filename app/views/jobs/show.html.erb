@@ -1,6 +1,5 @@
 
 <p id="notice"><%= notice %></p>
-<%= button_to 'Add Task', :action => "new" %>
 <%= button_to "Support!", :action => "support", :confirm => "Do you want to support this job?"%>
 <p>
   <b>Title:</b>
@@ -36,10 +35,26 @@
 </p>
 <% end %>
 
-<%= gmaps4rails(@json) %>
+<%= gmaps("map_options" => { "auto_zoom" => false, "zoom" => 8},"markers" => { "data" => @json }) %>
 <p>
   <b>Adresse:</b>
-  <%= @job.country %> => <%= @job.city %> => <%= @job.street %>
+  <%= @job.country %>
+  <% if not @job.city.empty? %>
+    => <%= @job.city %>
+  <% end %>
+  <% if not @job.street.empty? %>
+    => <%= @job.street %>
+  <% end %>
+</p>
+
+<p>
+  <b>Zugeordnete Aufgaben</b>
+  <ul>
+    <% @jobs.each do |job| %>
+    <li><%= link_to job.title, job %></li>
+    <% end %>
+  </ul>
+  <%= button_to 'Add Subtask', :action => "new" %>
 </p>
 
 <%= link_to 'Edit', edit_job_path(@job) %> |
