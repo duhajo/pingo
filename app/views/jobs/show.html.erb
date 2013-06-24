@@ -2,7 +2,11 @@
   <ul>
     <li><%= link_to 'Aufgabe anlegen', :action => "new" %></li>
     <li><% if !(@job.users.find_by_id(current_user.id))%>
-          <%= link_to 'Support!', :action => "support", :support => true %>
+          <% if !@isCreator.empty? %>
+            <%= link_to 'Support', :action => "support", :support => true %>
+          <%else%>
+            <%= link_to 'Managen!', :action => "support", :support => true, :creator => true %>
+          <%end%>
         <%else%>
           <%= link_to 'Keine Zeit mehr!', :action => "support" %>
         <%end%>

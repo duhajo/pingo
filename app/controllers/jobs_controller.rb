@@ -30,6 +30,7 @@ class JobsController < ApplicationController
   # GET /jobs/1.json
   def show
     @job = Job.find(params[:id])
+    @isCreator = JobsWorker.where(:job_id => @job.id).where('jobs_workers.isCreator' => true)
     @jobs = Job.find_all_by_parent_id(@job.id);
     @activities = @job.activities.all
     @json = @job.to_gmaps4rails
@@ -114,7 +115,11 @@ class JobsController < ApplicationController
   def support
     @job = Job.find(params[:id])
     if params[:support]
-      JobsWorker.where('jobs_workers.job_id' => @job.id).where('jobs_workers.user_id' => current_user.id).first_or_create()
+      if params[:creator]
+        JobsWorker.where('jobs_workers.job_id' => @job.id).where('jobs_workers.user_id' => current_user.id).where('jobs_workers.isCreator' => true).first_or_create()
+      else
+        JobsWorker.where('jobs_workers.job_id' => @job.id).where('jobs_workers.user_id' => current_user.id).first_or_create()
+      end
     else
       @job.users.delete(current_user)
     end
