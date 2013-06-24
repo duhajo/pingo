@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time  
+  helper_method :current_user, :my_jobs
   protect_from_forgery
   force_ssl
   private
@@ -16,5 +17,8 @@ class ApplicationController < ActionController::Base
     end
   end
   
-  helper_method :current_user
+  def my_jobs
+    @my_jobs = Job.joins("LEFT JOIN `jobs_workers` ON jobs.id = jobs_workers.job_id").where('jobs_workers.user_id' => @current_user.id).to_a
+  end
+  
 end

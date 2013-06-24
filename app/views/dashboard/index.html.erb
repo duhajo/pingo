@@ -7,12 +7,12 @@ $(function() {
 	<div id="sub-navigation">
 	  <ul>
 	    <li><a href="#recommendations">Empfehlungen</a></li>
-	    <li><a href="#activities">Aktivitäten</a></li>
+	    <li><a href="#activities">Aktivit&auml;ten</a></li>
 	  </ul>
 	</div>
   <div class="content-box" id="recommendations">
     <%if @recommendations.empty? && @near_jobs.nil? %>
-      Es konnten keine Empfehlungen für dich gefunden werden.
+      Es konnten keine Empfehlungen f&uuml;r dich gefunden werden.
     <% else %>
 	    <%if !@recommendations.empty? %>
 	      Empfohlene Jobs per Tags:
@@ -23,7 +23,7 @@ $(function() {
 	      </ul>
 	    <% end %>
 	    <%if !@near_jobs.nil? %>
-	      Empfohlene Jobs per Nähe:
+	      Empfohlene Jobs per N&auml;he:
 	      <ul>
 	        <% @near_jobs.each do |job|%>
 	        <li><%= link_to job.title, job %></li>
@@ -34,14 +34,13 @@ $(function() {
   </div>
   <div class="content-box" id="activities">
     <%if !@my_activities.empty? %>
-	      Meine Aktivitäten (aus den involvierten Jobs):
 	      <% @my_activities.each do |activity|%>
 	        <h3><%= link_to activity.user.name, activity.user %> schrieb <%= link_to activity.created_at, activity %></h3>
 	        <p><%= activity.content %></p>
 	        <hr />
 	      <% end %>
     <% else %>
-      Beteilige dich an Jobs, um hier Aktivitäten zu sehen.
+      Beteilige dich an Jobs, um hier Aktivit&auml;ten zu sehen.
     <% end %>
   </div>
 </div>

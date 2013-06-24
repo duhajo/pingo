@@ -1,88 +1,111 @@
-
+<% content_for :actionbar do %>
+  <ul>
+    <li><%= link_to 'Aufgabe anlegen', :action => "new" %></li>
+    <li><% if !(@job.users.find_by_id(current_user.id))%>
+          <%= link_to 'Support!', :action => "support", :support => true %>
+        <%else%>
+          <%= link_to 'Keine Zeit mehr!', :action => "support" %>
+        <%end%>
+    </li>
+    <li><%= link_to 'Edit', edit_job_path(@job) %></li>
+  </ul>
+<% end %>
 <p id="notice"><%= notice %></p>
-<%= button_to "Support!", :action => "support", :confirm => "Do you want to support this job?"%>
-<p>
-  <b>Title:</b>
-  <%= @job.title %>
-</p>
+<script>
+$(function() {
+	$( "#content-tabs" ).tabs();
+});
+</script>
+<div id="content-tabs">
+  <div id="sub-navigation">
+    <ul>
+      <li><a href="#job-details">Details</a></li>
+      <li><a href="#job-location">Ort</a></li>
+      <li><a href="#job-activities">Aktivit&auml;ten</a></li>
+    </ul>
+  </div>
+  <div class="content-box" id="job-details">
+    <p>
+      <b>Title:</b>
+      <%= @job.title %>
+    </p>
 
-<p>
-  <b>Description:</b>
-  <%= @job.description %>
-</p>
+    <p>
+      <b>Description:</b>
+      <%= @job.description %>
+    </p>
 
-<p>
-  <b>Deadline:</b>
-  <%= @job.deadline %>
-</p>
+    <p>
+      <b>Deadline:</b>
+      <%= @job.deadline %>
+    </p>
 
-<p>
-  <b>Workers</b>
-  <ul>
-    <% @workers.each do |worker| %>
-      <li>
-        <%= link_to worker.name, worker %> 
-        <% if(worker.isCreator == 1)%>(Ersteller)<%end%>
-      </li>
-    <%end%>
-  </ul>
-</p>
-
-<% if not @job.skill_list.empty? %>
-<p>
-  <b>Tags:</b>
-  <%= @job.skill_list %>
-</p>
-<% end %>
-
-<%= gmaps("map_options" => { "auto_zoom" => false, "zoom" => 8},"markers" => { "data" => @json }) %>
-<p>
-  <b>Adresse:</b>
-  <%= @job.country %>
-  <% if not @job.city.empty? %>
-    => <%= @job.city %>
-  <% end %>
-  <% if not @job.street.empty? %>
-    => <%= @job.street %>
-  <% end %>
-</p>
-
-<p>
-  <b>Zugeordnete Aufgaben</b>
-  <ul>
-    <% @jobs.each do |job| %>
-    <li><%= link_to job.title, job %></li>
+    <p>
+      <b>Workers</b>
+      <ul>
+        <% @workers.each do |worker| %>
+          <li>
+            <%= link_to worker.name, worker %> 
+            <% if(worker.isCreator == 1)%>(Manager)<%end%>
+          </li>
+        <%end%>
+      </ul>
+    </p>
+    <% if not @job.skill_list.empty? %>
+    <p>
+      <b>Tags:</b>
+      <%= @job.skill_list %>
+    </p>
     <% end %>
-  </ul>
-  <%= button_to 'Add Subtask', :action => "new" %>
-</p>
-
-<%= link_to 'Edit', edit_job_path(@job) %> |
-<%= link_to "Delete", @job, :method => :delete, :confirm => "Are you sure ?"%> |
-<%= link_to 'Back', jobs_path %>
-
-<%= form_for([@job, @job.activities.build]) do |f| %>
-   <%= f.text_area :content %>
-   <%= f.submit "Post Comment" %>
-<% end %>
-
-<% @activities.each do |activity| %>
+    <div id="job-tasks">
+      <p>
+        <b>Zugeordnete Aufgaben</b>
+        <ul>
+          <% @jobs.each do |job| %>
+          <li><%= link_to job.title, job %></li>
+          <% end %>
+        </ul>
+        <%= button_to 'Add Subtask', :action => "new" %>
+      </p>
+    </div>
+  </div>
+  <div class="content-box" id="job-location">
+    <%= gmaps("map_options" => { "auto_zoom" => false, "zoom" => 8},"markers" => { "data" => @json }) %>
     <p>
-      <% if not activity.user.nil? %>
-        <b><%= activity.user.name %> said:</b><br />
-      <% else %>
-        <% activity.user %>
+      <b>Adresse:</b>
+      <%= @job.country %>
+      <% if not @job.city.empty? %>
+        => <%= @job.city %>
       <% end %>
-
-      <%= activity.created_at %>
+      <% if not @job.street.empty? %>
+        => <%= @job.street %>
+      <% end %>
     </p>
+  </div>
+  <div class="content-box" id="job-activities">
+  <%= form_for([@job, @job.activities.build]) do |f| %>
+    <%= text_area_tag(:content, "", :size => "80x2") %><br />
+     <%= f.submit "Post Comment" %>
+  <% end %>
 
-    <p>
-      <%= activity.content %>
-    </p>
+  <% @activities.each do |activity| %>
+      <p>
+        <% if not activity.user.nil? %>
+          <b><%= activity.user.name %> said:</b><br />
+        <% else %>
+          <% activity.user %>
+        <% end %>
 
-<%= link_to 'Edit', edit_activity_path(activity) %> |
-<%= link_to 'Show', activities_path %>
- 
-<% end %>
+        <%= activity.created_at %>
+      </p>
 
+      <p>
+        <%= activity.content %>
+      </p>
+
+  <%= link_to 'Edit', edit_activity_path(activity) %> |
+  <%= link_to 'Show', activities_path %>
+
+  <% end %>
+  </div>
+</div>

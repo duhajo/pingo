@@ -10,7 +10,7 @@
   <div id="duhajo">
     <div id="sidebar">
       <div id="logo">
-        <%= image_tag "logo.png" %>
+        <%= link_to image_tag("logo.png"), root_path %></a>
       </div>
       <div id="profile">  
         <%unless current_user.blank? -%>
@@ -37,19 +37,32 @@
             	<li id="logout"><%= link_to "Abmelden", '/logout'%></li>
           	</ul>
           </ul>
+          <div id="my-job-sidebar">
+            <h2>Meine Aufgaben</h2>
+            <% @my_jobs = my_jobs %>
+            <%if @my_jobs.empty? %>
+              <span>Es sind noch keine Jobs vorhanden.</span>
+            <% else %>
+              <%= sorted_nested_li(@my_jobs, :title) do |job| %>
+                <%= link_to job.title, job %>
+              <% end %>
+            <% end %>
+          </div>
         <% else %>
           <%= link_to "Anmelden", '/login'%> oder <%= link_to "Registrieren", '/signup'%>
         <% end %>
+        
       </div>
     </div>
     <div id="main">
       <div id="main-navigation">
         <ul>
-          <li <%=cp("dashboard")%>><%= link_to "Dashboard", root_path%></li>
-          <li <%=cp("jobs")%>><%= link_to "Jobs", jobs_path%></li>
-          <li <%=cp("users")%>><%= link_to "Workers", users_path%></li>
-          <li><a href="#">Tags</a></li>
+          <li <%=cp("dashboard")%>><%= link_to t('main_nav_dashboard'), root_path%></li>
+          <li <%=cp("jobs")%>><%= link_to t('main_nav_jobs'), jobs_path%></li>
+          <li <%=cp("users")%>><%= link_to t('main_nav_workers'), users_path%></li>
+          <li><a href="#"><%=  t('main_nav_tags') %></a></li>
         </ul>
+        <div id="search"><label for="search"><!-- --></label><input name="search" type="search" placeholder="Durchsuchen" /></div>
       </div>
       <div id="content-container">
         <div id="actionbar">

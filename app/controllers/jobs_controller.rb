@@ -11,10 +11,11 @@ class JobsController < ApplicationController
       @radius = User.find(current_user.id).radius
     end
     if(@radius.nil?)
-      @jobs = Job.near(params[:search], 10, :order => :distance)
+      @near_jobs = Job.near(params[:search], 10, :order => :distance)
     else
-      @jobs = Job.near(params[:search], @radius, :order => :distance)
+      @near_jobs = Job.near(params[:search], @radius, :order => :distance)
     end
+    @jobs = Job.find_all_by_parent_id(nil);
   else
     @jobs = Job.find_all_by_parent_id(nil);
   end
@@ -112,10 +113,12 @@ class JobsController < ApplicationController
   
   def support
     @job = Job.find(params[:id])
+    if params[:support]
+      JobsWorker.where('jobs_workers.job_id' => @job.id).where('jobs_workers.user_id' => current_user.id).first_or_create()
+    else
+      @job.users.delete(current_user)
+    end
     
-    JobsWorker.where('jobs_workers.job_id' => @job.id)
-    .where('jobs_workers.user_id' => current_user.id).first_or_create(:isCreator => false)
-
     respond_to do |format|
       format.html { redirect_to @job }
       format.json { head :no_content }

@@ -12,34 +12,43 @@ $(function() {
   <div id="sub-navigation">
     <ul>
       <li><a href="#all">Alle</a></li>
-      <li><a href="#popular">Populär</a></li>
+      <li><a href="#popular">Popul&auml;r</a></li>
       <li><a href="#local">Lokal</a></li>
     </ul>
   </div>
   <div class="content-box" id="all">
     <%if @jobs.empty? %>
-      Es sind noch keine Jobs vorhanden.
+      <%= t('jobs_no_jobs') %>
     <% else %>
-      <div class="pages">
+      <div id="list-jobs">
         <%= sorted_nested_li(@jobs, :title) do |job| %>
           <%= link_to job.title, job %>
         <% end %>
       </div>
-
-      <br />
-
-      <%= form_tag jobs_path, :method => :get do %>
-        <p>
-          <%= text_field_tag :search, params[:search] %>
-          <%= submit_tag "Search Near", :name => nil %>
-        </p>
-      <% end %>
     <% end %>
   </div>
   <div class="content-box" id="popular">
     Diese Funktion fehlt noch...  
   </div>
   <div class="content-box" id="local">
-    Diese Funktion fehlt auch noch...  
+    <%= form_tag '/jobs#local', :method => :get do %>
+        <p>
+          <%= text_field_tag :search, params[:search] %>
+          <%= submit_tag "Search Near", :name => nil %>
+        </p>
+      <% end %>
+      <% if (params[:search]) %>
+        <%if @near_jobs.empty? %>
+          <%= t('jobs_no_jobs') %>
+        <% else %>
+          <div id="list-jobs">
+            <%= sorted_nested_li(@near_jobs, :title) do |job| %>
+              <%= link_to job.title, job %>
+            <% end %>
+          </div>
+        <% end %>
+    <% else %>
+        <%= t("jobs_near_search_info") %>
+    <% end %>
   </div>
 </div>

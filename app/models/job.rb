@@ -3,7 +3,7 @@ class Job < ActiveRecord::Base
   acts_as_taggable
   acts_as_taggable_on :skills
   attr_accessible :deadline, :description, :parent_id, :title, :skill_list, :country, :city, :street
-  has_many :jobs_workers, :dependent => :destroy, :conditions => "isCreator = 'true'"
+  has_many :jobs_workers, :dependent => :destroy
   has_many :users, :through => :jobs_workers
   has_many :activities
   geocoded_by :address
