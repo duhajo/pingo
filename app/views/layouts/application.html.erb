@@ -15,7 +15,7 @@
       <div id="profile">  
         <%unless current_user.blank? -%>
           <a href="/myprofile">
-            <span class="profile-avatar"><%= image_tag avatar_url(current_user) %></span>
+            <span class="profile-avatar"><%= image_tag avatar_url(current_user), alt: "?" %></span>
           </a>
           <ul aria-haspopup="true" class="profile-menu">
             <li class="more-actions">

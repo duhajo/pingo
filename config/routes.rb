@@ -14,6 +14,9 @@ Duhajo::Application.routes.draw do
   end
   resources :sessions, :only => [:new, :create, :destroy]
   resources :jobs do
+    collection do
+      get :tag
+    end
     resources :activities do
       resources :activities
     end

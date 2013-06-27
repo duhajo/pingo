@@ -1,3 +1,47 @@
 // Place all the styles related to the Jobs controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.job {
+  background-color: #FFFFFF;
+  border: 1px solid #E4E4E4;
+  box-shadow: 0 1px 0 0 #E6E6E6;
+  height: 60px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  padding: 8px;
+  position: relative;
+}
+
+.job .job-title h3 {
+  font-size: 18px;
+  font-weight: normal;
+  margin: 0;
+}
+
+.job .job-tags {
+  bottom: 15px;
+  left: 8px;
+  position: absolute;
+}
+
+.job .job-tags li {
+  float: left;
+  margin-right: 10px;
+}
+
+.job .job-tags a {
+  background-color: #55a0da;
+  border-bottom: 2px solid #367fb7;
+  border-radius: 2px;
+  color: #FFFFFF;
+  font-size: 14px;
+  padding: 5px;
+  transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+}
+
+.job .job-tags li a:hover {
+  background-color: #FFFFFF;
+  border-bottom: 2px solid #dc007c;
+  color: #dc007c;
+}

@@ -21,8 +21,23 @@ $(function() {
       <%= t('jobs_no_jobs') %>
     <% else %>
       <div id="list-jobs">
-        <%= sorted_nested_li(@jobs, :title) do |job| %>
-          <%= link_to job.title, job %>
+        <% @jobs.each do |job|%>
+        <div class="job">
+          <div class="job-details">
+            <div class="job-title"><h3><%= link_to job.title, job %></h3></div>
+            <div class="job-tags">
+              <ul>
+              <% job.tag_counts_on(:skills, :limit => 5, :order => "count desc").each do |tag| %>
+                <li><%= link_to tag.name, { :action => :tag, :id => tag.name } %></li>
+              <% end %>
+              </ul>
+            </div>
+          </div>
+          <div class="job-interactions">
+            <div class="job-likes"></div>
+            <div class="job-fav"></div>
+          </div>
+        </div>
         <% end %>
       </div>
     <% end %>
@@ -42,7 +57,7 @@ $(function() {
           <%= t('jobs_no_jobs') %>
         <% else %>
           <div id="list-jobs">
-            <%= sorted_nested_li(@near_jobs, :title) do |job| %>
+            <% @near_jobs.each do |job|%>
               <%= link_to job.title, job %>
             <% end %>
           </div>

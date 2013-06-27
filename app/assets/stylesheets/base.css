@@ -45,13 +45,13 @@ a:active, a, li {
 #sidebar {
   position: absolute;
   left: 0;
-  width: 200px;
+  width: 230px;
   top: 0;
   bottom: 0;
 }
 
 #sidebar #logo {
-  width: 200px;
+  width: 230px;
   height: 70px;
 }
 
@@ -76,7 +76,7 @@ a:active, a, li {
   list-style: none outside none;
   margin: 0;
   padding: 0;
-  width: 125px;
+  width: 150px;
 }
 
 #profile .profile-menu-list {
@@ -132,7 +132,7 @@ a:active, a, li {
 #profile .profile-menu .more-actions a {
   display: block;
   margin: 0;
-  max-width: 125px;
+  max-width: 150px;
   overflow: hidden;
   padding: 0;
   text-overflow: ellipsis;
@@ -167,7 +167,7 @@ a:active, a, li {
   background-color: #f7f7f7;
   position: absolute;
   bottom: 0;
-  left: 200px;
+  left: 230px;
   right: 10px;
   top: 0;
 }

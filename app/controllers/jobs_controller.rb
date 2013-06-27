@@ -36,7 +36,7 @@ class JobsController < ApplicationController
     @json = @job.to_gmaps4rails
     @workers = User.joins(:jobs_workers)
     .where('jobs_workers.job_id' => @job.id)
-    .select("name, id, jobs_workers.isCreator").to_a
+    .select("name, id, isCreator").to_a
 
     respond_to do |format|
       format.html # show.html.erb
@@ -129,5 +129,9 @@ class JobsController < ApplicationController
       format.json { head :no_content }
     end
   end
-
+  
+  def getTags()
+    @job = Job.find(params[:id])
+    @tags = @job.tag_counts_on(:skills, :limit => 5, :order => "count desc")
+  end
 end
