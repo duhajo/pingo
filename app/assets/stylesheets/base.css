@@ -33,13 +33,20 @@ a {
 a:active, a, li { 
 	outline: none; 
 }
-Â 
-:focus { 
+a:focus { 
 	-moz-outline-style: none; 
 }
-Â 
-:-moz-any-link:focus {
+a:-moz-any-link:focus {
 	outline: none;
+}
+
+.icon {
+  background-image: url("icons/iconssprite.png");
+  background-size: 160px 80px;
+  display: block;
+  float: left;
+  height: 32px;
+  width: 32px;
 }
 
 #sidebar {
@@ -251,7 +258,12 @@ a:active, a, li {
 
 #content-wrapper {
   clear: both;
-  margin: 20px;
+  margin: 0 20px 20px;
+  max-width: 900px;
+}
+
+#content-wrapper #content-tabs {
+  margin-top: 20px;
 }
 
 #sub-navigation {
@@ -285,3 +297,4 @@ a:active, a, li {
 .tag3 { font-size: 1.4em; }
 .tag4 { font-size: 1.6em; }
 
+.clear { clear: both; }

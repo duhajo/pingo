@@ -16,55 +16,92 @@
     <% end %>
   </ul>
 <% end %>
-<p id="notice"><%= notice %></p>
+<div>
+  <% if !@job.parent_id.nil? %>
+  <div id="job-breadcrumb">
+    <span class="icon"><!-- Breadcrumb --></span>
+    <ul>
+        <% @parent_jobs.each.with_index do |job,index| %>
+          <% break if (job.id == @job.id)%>
+          <li><%= link_to job.title, job %></li>
+          <% if @parent_jobs[index+1].id != @job.id %>
+            <li>&raquo;</li>
+          <% end %>
+        <%end%>
+    </ul>
+    <span class="clear"></span>
+  </div>
+  <% end %>
+  <div id="job">
+    <div id="job-title"><h1><%= @job.title %></h1><div class="job-status">In Arbeit</div></div>
+    <div id="job-details">
+        <div id="job-info">
+          <div class="job-tags">
+            <% if not @job.skill_list.empty? %>
+              <ul>
+                <% @job.tag_counts_on(:skills, :limit => 5, :order => "count desc").each do |tag| %>
+                  <li><%= link_to tag.name, { :action => :tag, :id => tag.name } %></li>
+                <% end %>
+              </ul>
+            <% end %>
+            <span class="clear"></span>
+          </div>
+          <div id="job-description"><%if @job.description.empty?%>Noch keine Beschreibung vorhanden...<%else%><%= @job.description %><%end%></div>
+        </div>
+        <div id="job-meta">
+          <div id="job-deadline">
+            <span class="icon"><!----></span>
+            <span class="icon-label" title="<%= @job.deadline.to_formatted_s(:long) %>"><%=  distance_of_time_in_words(@job.deadline, Time.now, true) %></span><span class="clear"></span></div>
+          <div id="job-location">
+            <span class="icon"><!----></span><span class="icon-label">
+                <% #gmaps("map_options" => { "auto_zoom" => false, "zoom" => 8},"markers" => { "data" => @json }) %>
+                <%=@job.address%>
+                <br /><a href="#popup-zur-karte">Wo genau?</a>
+            </span>
+            <span class="clear"></span>
+          </div>
+        </div>
+        <div id="job-more-details">
+          <div class="splitter"><a href="#" title="Hier können die Jobdetails dann mal ausgeklappt werden">Jobdetails</a></div>
+        </div>
+    </div>
+    <div id="job-interactions">
+      <div id="job-results">
+        <h2>Ergebnisse</h2>
+        <div class="results-list">Das Feature gibt es noch nicht :)</div>
+      </div>
+      <div id="job-workers">
+        <h2>Arbeiter</h2>
+        <div class="workers-list">
+          <ul>
+          <% @workers.each do |worker| %>
+            <li>
+              <%= link_to worker.name, worker %> 
+              <% if(worker.isCreator == 1)%>(Manager)<%end%>
+            </li>
+          <%end%>
+            <li>+ X Likes</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
 $(function() {
 	$( "#content-tabs" ).tabs();
 });
 </script>
+<p id="notice"><%= notice %></p>
 <div id="content-tabs">
   <div id="sub-navigation">
     <ul>
-      <li><a href="#job-details">Details</a></li>
-      <li><a href="#job-location">Ort</a></li>
+      <li><a href="#job-tasks">Unteraufgaben</a></li>
       <li><a href="#job-activities">Aktivit&auml;ten</a></li>
     </ul>
   </div>
-  <div class="content-box" id="job-details">
-    <p>
-      <b>Title:</b>
-      <%= @job.title %>
-    </p>
-
-    <p>
-      <b>Description:</b>
-      <%= @job.description %>
-    </p>
-
-    <p>
-      <b>Deadline:</b>
-      <%= @job.deadline %>
-    </p>
-
-    <p>
-      <b>Workers</b>
-      <ul>
-        <% @workers.each do |worker| %>
-          <li>
-            <%= link_to worker.name, worker %> 
-            <% if(worker.isCreator == 1)%>(Manager)<%end%>
-          </li>
-        <%end%>
-      </ul>
-    </p>
-    <% if not @job.skill_list.empty? %>
-    <p>
-      <b>Tags:</b>
-      <%= @job.skill_list %>
-    </p>
-    <% end %>
-    <div id="job-tasks">
-      <p>
+  <div class="content-box" id="job-tasks">
         <b>Zugeordnete Aufgaben</b>
         <% @jobs.each do |job|%>
         <div class="job">
@@ -76,6 +113,7 @@ $(function() {
                 <li><%= link_to tag.name, { :action => :tag, :id => tag.name } %></li>
               <% end %>
               </ul>
+              <span class="clear"></span>
             </div>
           </div>
           <div class="job-interactions">
@@ -84,22 +122,7 @@ $(function() {
           </div>
         </div>
         <% end %>
-        <%= button_to 'Add Subtask', :action => "new" %>
-      </p>
-    </div>
-  </div>
-  <div class="content-box" id="job-location">
-    <%= gmaps("map_options" => { "auto_zoom" => false, "zoom" => 8},"markers" => { "data" => @json }) %>
-    <p>
-      <b>Adresse:</b>
-      <%= @job.country %>
-      <% if not @job.city.empty? %>
-        => <%= @job.city %>
-      <% end %>
-      <% if not @job.street.empty? %>
-        => <%= @job.street %>
-      <% end %>
-    </p>
+       <%= button_to 'Add Subtask', :action => "new" %>
   </div>
   <div class="content-box" id="job-activities">
   <%= form_for([@job, @job.activities.build]) do |f| %>

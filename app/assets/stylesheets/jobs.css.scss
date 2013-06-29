@@ -25,22 +25,165 @@
   position: absolute;
 }
 
-.job .job-tags li {
-  float: left;
-  margin-right: 10px;
+#job-breadcrumb {
+  background-color: #FFFFFF;
+  border-left: 1px solid #E4E4E4;
+  border-right: 1px solid #E4E4E4;
+  color: #707070;
+  height: 40px;
+  line-height: 40px;
+  margin: 0 20px;
+  padding: 5px;
 }
 
-.job .job-tags a {
+#job-breadcrumb .icon {
+  background-position: -80px 0;
+  height: 40px;
+  width: 40px;
+}
+
+#job-breadcrumb li {
+  float: left;
+  margin-left: 10px;
+}
+
+#job {
+  background-color: #FFFFFF;
+  border: 1px solid #E4E4E4;
+  box-shadow: 0 1px 0 0 #E6E6E6;
+  color: #707070;
+  font-size: 14px;
+  padding: 10px 20px;
+}
+
+#job h1, #job h2 {
+  color: #3f81b9;
+  font-weight: normal;
+  float: left;
+  margin: 0;
+  padding: 0;
+}
+
+#job h1 {
+  font-size: 24px;
+}
+
+#job h2 {
+  font-size: 18px;
+}
+  
+#job #job-title .job-status {
+  float: right;
+}
+
+#job #job-details {
+  clear: both;
+  overflow: hidden;
+}
+
+#job #job-details #job-info, #job #job-details #job-meta, #job #job-results, #job #job-workers {
+  margin-top: 15px;
+  float: left;
+  width: 60%;
+}
+
+#job #job-details #job-meta, #job #job-workers {
+  width: 40%;
+}
+
+#job #job-details #job-description {
+  margin-top: 15px;
+}
+
+#job #job-meta #job-deadline, #job #job-meta #job-location {
+  min-height: 40px;
+  margin-bottom: 15px;
+}
+
+#job #job-deadline .icon {
+  background-position: -40px 0;
+  height: 40px;
+  width: 40px;
+}
+
+#job #job-meta .icon-label {
+  float: left;
+  line-height: 20px;
+  margin-left: 15px;
+}
+
+#job #job-deadline .icon-label {
+  padding-top: 5px;
+}
+
+#job #job-location .icon {
+  background-position: 0 0;
+  height: 40px;
+  width: 40px;
+}
+
+#job #job-more-details {
+  clear: both;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+}
+
+#job #job-more-details .splitter {
+  border-bottom: 1px solid #dadada;
+  height: 16px;
+}
+
+#job #job-more-details .splitter a {
   background-color: #55a0da;
   border-bottom: 2px solid #367fb7;
   border-radius: 2px;
   color: #FFFFFF;
   font-size: 14px;
-  padding: 5px;
+  padding: 5px 10px;
   transition: background-color 0.3s, border-color 0.3s, color 0.3s;
 }
 
-.job .job-tags li a:hover {
+#job #job-more-details .splitter a :hover {
+  background-color: #FFFFFF;
+  border-bottom: 2px solid #dc007c;
+  color: #dc007c;
+}
+
+#job #job-interactions {
+  overflow: hidden;
+}
+
+#job #job-workers .workers-list, #job #job-results .results-list {
+  clear: both;
+  padding-top: 10px;
+}
+
+/******** Job Tags **********/
+
+.job-tags {
+  overflow: hidden;
+}
+
+.job-tags li {
+  float: left;
+  margin-right: 10px;
+}
+
+.job-tags a, .job-tags a:active, .job-tags a:visited {
+  background-color: #55A0DA;
+  border-bottom: 2px solid #367FB7;
+  border-radius: 2px 2px 2px 2px;
+  color: #FFFFFF;
+  display: block;
+  font-size: 14px;
+  height: 12px;
+  line-height: 11px;
+  padding: 5px;
+  transition: background-color 0.3s ease 0s, border-color 0.3s ease 0s, color 0.3s ease 0s;
+}
+
+.job-tags li a:hover {
   background-color: #FFFFFF;
   border-bottom: 2px solid #dc007c;
   color: #dc007c;

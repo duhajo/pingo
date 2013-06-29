@@ -18,7 +18,23 @@ class Job < ActiveRecord::Base
   scope :by_join_date, order("created_at DESC")
 
   def address
-    [street, city, country].compact.join(', ')
+    @address = ""
+    unless street.empty? 
+      @address << street
+    end
+    unless city.empty? 
+      if @address != ""
+        @address << ", "
+      end
+      @address << city
+    end
+    unless country.empty?
+      if @address != ""
+        @address << ", "
+      end
+      @address << country
+    end
+    return @address
   end
   
   def address_changed?

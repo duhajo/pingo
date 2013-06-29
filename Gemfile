@@ -22,7 +22,7 @@ end
 gem "jquery-rails"
 gem "jquery-ui-rails"
 
-gem 'nested_set'
+gem 'awesome_nested_set'
 
 #To use tagging
 gem 'acts_as_taggable'
