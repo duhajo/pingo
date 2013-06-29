@@ -32,8 +32,7 @@ class JobsController < ApplicationController
     @job = Job.find(params[:id])
     @isCreator = JobsWorker.where(:job_id => @job.id).where('jobs_workers.isCreator' => true)
     @jobs = Job.find_all_by_parent_id(@job.id);
-    @parent_job = @job.root
-    @parent_jobs = @parent_job.self_and_descendants;
+    @parent_jobs = @job.ancestors
     @activities = @job.activities.all
     @json = @job.to_gmaps4rails
     @workers = User.joins(:jobs_workers)

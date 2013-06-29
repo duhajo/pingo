@@ -24,9 +24,10 @@
         <% @parent_jobs.each.with_index do |job,index| %>
           <% break if (job.id == @job.id)%>
           <li><%= link_to job.title, job %></li>
-          <% if @parent_jobs[index+1].id != @job.id %>
+          <% unless @parent_jobs[index+1].nil? %>
             <li>&raquo;</li>
           <% end %>
+          
         <%end%>
     </ul>
     <span class="clear"></span>
