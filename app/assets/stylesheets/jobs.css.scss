@@ -72,8 +72,43 @@
   font-size: 18px;
 }
   
-#job #job-title .job-status {
+#job #job-title #job-status {
   float: right;
+  text-align: center;
+}
+
+#job #job-title #job-status a {
+  border-radius: 4px;
+  display: block;
+  font-size: 18px;
+  width: 90px;
+  padding: 8px;
+}
+
+#job #job-title #job-status a#status-open, #job #job-title #job-status a#status-closed:hover {
+  background-color: #dc007c;
+  border-bottom: 2px solid #9d4a79;
+  color: #FFFFFF;
+}
+
+#job #job-title #job-status a#status-in-work, #job #job-title #job-status a#status-open:hover {
+  background-color: #8dda55;
+  border-bottom: 2px solid #70b142;
+  color: #FFFFFF;
+}
+
+#job #job-title #job-status a#status-closed, #job #job-title #job-status a#status-in-work:hover {
+  background-color: #f7f7f7;
+  border-bottom: 2px solid #bebebe;
+  color: #707070;
+}
+  
+#job #job-status a:hover span.now, #job #job-status a span.new {
+  display: none;
+}
+  
+#job #job-status a:hover span.new {
+  display: block;
 }
 
 #job #job-details {

@@ -39,7 +39,6 @@ class JobsController < ApplicationController
     @workers = User.joins(:jobs_workers)
     .where('jobs_workers.job_id' => @job.id)
     .select("name, id, isCreator").to_a
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @job }
@@ -132,8 +131,20 @@ class JobsController < ApplicationController
     end
   end
   
-  def getTags()
+  def get_tags()
     @job = Job.find(params[:id])
     @tags = @job.tag_counts_on(:skills, :limit => 5, :order => "count desc")
+  end
+  
+  def set_status
+    @job = Job.find(params[:id])
+    @job.status = params[:status]
+    @job.save()
+    
+    respond_to do |format|
+      format.html { render :partial => 'status', :job => @job }
+      format.json { head :no_content }
+      format.js {}
+    end
   end
 end
