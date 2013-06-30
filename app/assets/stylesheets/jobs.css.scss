@@ -170,13 +170,18 @@
 }
 
 #job #job-more-details .splitter a {
-  background-color: #55a0da;
-  border-bottom: 2px solid #367fb7;
-  border-radius: 2px;
+  background-color: #55A0DA;
+  border-bottom: 2px solid #367FB7;
+  border-radius: 2px 2px 2px 2px;
   color: #FFFFFF;
+  display: block;
   font-size: 14px;
-  padding: 5px 10px;
-  transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+  height: 25px;
+  line-height: 25px;
+  margin: 0 auto;
+  padding: 0 10px;
+  transition: background-color 0.3s ease 0s, border-color 0.3s ease 0s, color 0.3s ease 0s;
+  width: 70px;
 }
 
 #job #job-more-details .splitter a :hover {
@@ -192,6 +197,70 @@
 #job #job-workers .workers-list, #job #job-results .results-list {
   clear: both;
   padding-top: 10px;
+}
+
+#job #job-workers a {
+  display: block;
+  float: left;
+}
+
+#job #job-workers .profile-avatar img {
+  width: 48px;
+  height: 48px;
+}
+
+.ui-tooltip, .arrow:after {
+  background-color: #F7F7F7;
+}
+  
+.ui-tooltip {
+  padding: 8px;
+  color: #707070;
+  font-size: 14px;
+  border-radius: 4px;
+  box-shadow: 0 2px 0 #BEBEBE;
+  max-width: 100px;
+  max-height: 50px;
+  text-align: center;
+}
+  
+.arrow {
+  width: 70px;
+  height: 16px;
+  overflow: hidden;
+  position: absolute;
+  left: 50%;
+  bottom: -16px;
+  margin-left: -35px;
+}
+  
+.arrow.top {
+  top: -22px;
+  bottom: auto;
+}
+
+.arrow.left {
+  left: 20%;
+}
+  
+.arrow:after {
+  content: "";
+  position: absolute;
+  left: 20px;
+  top: -22px;
+  width: 25px;
+  height: 25px;
+  box-shadow: 3px 3px 0 #BEBEBE;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  tranform: rotate(45deg);
+}
+  
+.arrow.top:after {
+  bottom: -20px;
+  top: auto;
 }
 
 /******** Job Tags **********/

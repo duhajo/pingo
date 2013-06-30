@@ -49,6 +49,15 @@ a:-moz-any-link:focus {
   width: 32px;
 }
 
+.profile-avatar img {
+  border-radius: 500px;
+  float: left;
+  margin-right: 10px;
+  margin-top: 2px;
+  width: 32px;
+  height: 32px;
+}
+
 #sidebar {
   position: absolute;
   left: 0;
@@ -65,15 +74,6 @@ a:-moz-any-link:focus {
 #sidebar #profile {
   padding: 15px;
   position: relative;
-}
-
-#profile .profile-avatar img {
-  border-radius: 500px;
-  float: left;
-  margin-right: 10px;
-  margin-top: 2px;
-  width: 32px;
-  height: 32px;
 }
 
 #profile .profile-menu {

@@ -1,7 +1,7 @@
 <% content_for :actionbar do %>
-  <ul>
+  <ul class="actions <% if @job.status == 3 %>hidden<% end %>">
     <li><%= link_to 'Aufgabe anlegen', :action => "new" %></li>
-    <li><% if !(@job.users.find_by_id(current_user.id))%>
+    <li><% unless @job.users.find_by_id(current_user.id)%>
           <% if !@isCreator.empty? %>
             <%= link_to 'Support', :action => "support", :support => true %>
           <%else%>
@@ -79,12 +79,36 @@
           <ul>
           <% @workers.each do |worker| %>
             <li>
-              <%= link_to worker.name, worker %> 
-              <% if(worker.isCreator == 1)%>(Manager)<%end%>
+              <% title = worker.name
+              if(worker.isCreator == 1)
+                title << " (Manager)"
+              end %>
+              <span class="profile-avatar"><%= link_to image_tag(avatar_url(worker), alt: "?"), worker, :title => title %></span>
             </li>
           <%end%>
             <li>+ X Likes</li>
           </ul>
+          <span class="clear"></span>
+          <script>
+            $(function() {
+              $("#job-workers").tooltip({
+                show: false,
+                hide: false,
+                position: {
+                  my: "center bottom-10",
+                  at: "center top",
+                  using: function( position, feedback ) {
+                  $( this ).css( position );
+                  $( "<div>" )
+                    .addClass( "arrow" )
+                    .addClass( feedback.vertical )
+                    .addClass( feedback.horizontal )
+                    .appendTo( this );
+                  }
+                }
+              });
+            });
+          </script>
         </div>
       </div>
     </div>
@@ -169,6 +193,7 @@ $(function() {
       data: {"status":3}})
     .success(function(data){
       $('#job-status').html(data);
+      $('.actions').css("display", "none");
     });
     return false;
   });
@@ -178,6 +203,7 @@ $(function() {
       data: {"status":1}})
     .success(function(data){
       $('#job-status').html(data);
+      $('.actions').css("display", "block");
     });
     return false;
   });

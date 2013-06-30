@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.ui.tabs
+//= require jquery.ui.tooltip
 //= require gmaps4rails/gmaps4rails.base.js.coffee
 //= require gmaps4rails/gmaps4rails.googlemaps.js.coffee
 //= require_tree .

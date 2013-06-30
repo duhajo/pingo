@@ -37,7 +37,7 @@ class JobsController < ApplicationController
     @json = @job.to_gmaps4rails
     @workers = User.joins(:jobs_workers)
     .where('jobs_workers.job_id' => @job.id)
-    .select("name, id, isCreator").to_a
+    .select("name, id, email, isCreator").to_a
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @job }
@@ -141,7 +141,9 @@ class JobsController < ApplicationController
     @job.save()
     
     respond_to do |format|
-      format.html { render :partial => 'status', :job => @job }
+      format.html { 
+        render :partial => 'status', :job => @job
+      }
       format.json { head :no_content }
       format.js {}
     end
