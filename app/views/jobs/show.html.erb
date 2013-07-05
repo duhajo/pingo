@@ -1,20 +1,22 @@
-<% content_for :actionbar do %>
-  <ul class="actions <% if @job.status == 3 %>hidden<% end %>">
-    <li><%= link_to 'Aufgabe anlegen', :action => "new" %></li>
-    <li><% unless @job.users.find_by_id(current_user.id)%>
-          <% if !@isCreator.empty? %>
-            <%= link_to 'Support', :action => "support", :support => true %>
+<% if current_user %>
+  <% content_for :actionbar do %>
+    <ul class="actions <% if @job.status == 3 %>hidden<% end %>">
+      <li><%= link_to 'Aufgabe anlegen', :action => "new" %></li>
+      <li><% unless @job.users.find_by_id(current_user.id)%>
+            <% if !@is_manager.empty? %>
+              <%= link_to 'Support', :action => "support", :support => true %>
+            <%else%>
+              <%= link_to 'Managen!', :action => "support", :support => true, :manager => true %>
+            <%end%>
           <%else%>
-            <%= link_to 'Managen!', :action => "support", :support => true, :creator => true %>
+            <%= link_to 'Keine Zeit mehr!', :action => "support" %>
           <%end%>
-        <%else%>
-          <%= link_to 'Keine Zeit mehr!', :action => "support" %>
-        <%end%>
-    </li>
-    <% if @workers.detect{|w| w.id == current_user.id && w.isCreator == 1 } %>
-      <li><%= link_to 'Edit', edit_job_path(@job) %></li>
-    <% end %>
-  </ul>
+      </li>
+      <% if @workers.detect{|w| w.id == current_user.id && w.isCreator == 1 } %>
+        <li><%= link_to 'Edit', edit_job_path(@job) %></li>
+      <% end %>
+    </ul>
+  <% end %>
 <% end %>
 <div>
   <% if !@job.parent_id.nil? %>
@@ -35,7 +37,7 @@
   <% end %>
   <div id="job" data-id="<%=@job.id%>">
     <div id="job-title"><h1><%= @job.title %></h1>
-      <div id="job-status"><%= render :partial => "status", :job => @job %></div>
+      <%= render :partial => "status", :job => @job, :manager => @managers %>
     </div>
     <div id="job-details">
         <div id="job-info">
@@ -43,7 +45,7 @@
             <% if not @job.skill_list.empty? %>
               <ul>
                 <% @job.tag_counts_on(:skills, :limit => 5, :order => "count desc").each do |tag| %>
-                  <li><%= link_to tag.name, { :action => :tag, :id => tag.name } %></li>
+                  <li><%= link_to tag.name, { :controller => :tags, :action => :show, :id => tag.id } %></li>
                 <% end %>
               </ul>
             <% end %>

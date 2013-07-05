@@ -28,7 +28,7 @@ $(function() {
             <div class="job-tags">
               <ul>
               <% job.tag_counts_on(:skills, :limit => 5, :order => "count desc").each do |tag| %>
-                <li><%= link_to tag.name, { :action => :tag, :id => tag.name } %></li>
+                <li><%= link_to tag.name, { :controller => :tags, :action => :show, :id => tag.id } %></li>
               <% end %>
               </ul>
             </div>

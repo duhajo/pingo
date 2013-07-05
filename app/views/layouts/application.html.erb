@@ -60,7 +60,7 @@
           <li <%=cp("dashboard")%>><%= link_to t('main_nav_dashboard'), root_path%></li>
           <li <%=cp("jobs")%>><%= link_to t('main_nav_jobs'), jobs_path%></li>
           <li <%=cp("users")%>><%= link_to t('main_nav_workers'), users_path%></li>
-          <li><a href="#"><%=  t('main_nav_tags') %></a></li>
+          <li <%=cp("tags")%>><%= link_to t('main_nav_tags'), tags_path%></a></li>
         </ul>
         <div id="search"><label for="search"><!-- --></label><input name="search" type="search" placeholder="Durchsuchen" /></div>
       </div>

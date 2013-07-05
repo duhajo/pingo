@@ -20,8 +20,8 @@ Duhajo::Application.routes.draw do
     resources :activities do
       resources :activities
     end
-    
   end
+  resources :tags
   
   match "jobs/:id/new" => "jobs#new"
   match "jobs/:id/support" => "jobs#support"

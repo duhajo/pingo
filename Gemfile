@@ -25,8 +25,6 @@ gem "jquery-ui-rails"
 gem 'awesome_nested_set'
 
 #To use tagging
-gem 'acts_as_taggable'
-
 gem 'acts-as-taggable-on'
 
 gem 'authlogic'

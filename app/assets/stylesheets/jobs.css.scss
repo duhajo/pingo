@@ -57,19 +57,8 @@
 }
 
 #job h1, #job h2 {
-  color: #3f81b9;
-  font-weight: normal;
   float: left;
   margin: 0;
-  padding: 0;
-}
-
-#job h1 {
-  font-size: 24px;
-}
-
-#job h2 {
-  font-size: 18px;
 }
   
 #job #job-title #job-status {
@@ -77,7 +66,7 @@
   text-align: center;
 }
 
-#job #job-title #job-status a {
+#job #job-title #job-status .button {
   border-radius: 4px;
   display: block;
   font-size: 18px;
@@ -85,29 +74,29 @@
   padding: 8px;
 }
 
-#job #job-title #job-status a#status-open, #job #job-title #job-status a#status-closed:hover {
+#job #job-title #job-status #status-open, #job #job-title #job-status.rights #status-closed:hover {
   background-color: #dc007c;
   border-bottom: 2px solid #9d4a79;
   color: #FFFFFF;
 }
 
-#job #job-title #job-status a#status-in-work, #job #job-title #job-status a#status-open:hover {
+#job #job-title #job-status #status-in-work, #job #job-title #job-status.rights #status-open:hover {
   background-color: #8dda55;
   border-bottom: 2px solid #70b142;
   color: #FFFFFF;
 }
 
-#job #job-title #job-status a#status-closed, #job #job-title #job-status a#status-in-work:hover {
+#job #job-title #job-status #status-closed, #job #job-title #job-status.rights #status-in-work:hover {
   background-color: #f7f7f7;
   border-bottom: 2px solid #bebebe;
   color: #707070;
 }
   
-#job #job-status a:hover span.now, #job #job-status a span.new {
+#job #job-status.rights .button:hover span.now, #job #job-status.rights .button span.new {
   display: none;
 }
   
-#job #job-status a:hover span.new {
+#job #job-status .button:hover span.new {
   display: block;
 }
 

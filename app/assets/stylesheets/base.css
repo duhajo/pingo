@@ -16,6 +16,7 @@
 body {
   font-family: 'LilGrotesk', Arial, Sans-Serif;
   font-size: 18px;
+  line-height: 28px;
 } 
 
 ul {
@@ -38,6 +39,19 @@ a:focus {
 }
 a:-moz-any-link:focus {
 	outline: none;
+}
+
+h1, h2 {
+  color: #3f81b9;
+  font-weight: normal;
+}
+
+h1 {
+  font-size: 24px;
+}
+
+h2 {
+  font-size: 18px;
 }
 
 .icon {
@@ -172,10 +186,11 @@ a:-moz-any-link:focus {
 
 #main {
   background-color: #f7f7f7;
-  position: absolute;
   bottom: 0;
   left: 230px;
-  right: 10px;
+  overflow: auto;
+  position: absolute;
+  right: 0;
   top: 0;
 }
 
@@ -260,10 +275,25 @@ a:-moz-any-link:focus {
   clear: both;
   margin: 0 20px 20px;
   max-width: 900px;
+  overflow: hidden;
 }
 
 #content-wrapper #content-tabs {
   margin-top: 20px;
+}
+
+#content-wrapper .content-box {
+  overflow: hidden;
+}
+
+.content-box.left {
+  float: left;
+  width: 60%;
+}
+
+.content-box.right {
+  float: left;
+  width: 40%;
 }
 
 #sub-navigation {
@@ -291,10 +321,5 @@ a:-moz-any-link:focus {
 #sub-navigation .ui-tabs-active a {
   color: #dc007c;
 }
-
-.tag1 { font-size: 1.0em; }
-.tag2 { font-size: 1.2em; }
-.tag3 { font-size: 1.4em; }
-.tag4 { font-size: 1.6em; }
 
 .clear { clear: both; }

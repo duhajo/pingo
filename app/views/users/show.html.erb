@@ -1,9 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Name:</b>
-  <%= @user.name %>
-</p>
+<h1><%= @user.name %></h1>
 
 <p>
   <b>E-Mail:</b>
@@ -14,6 +11,19 @@
   <b>Tags:</b>
   <%= @user.skill_list %>
 </p>
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<div class="similar-workers">
+  <h2>Ähnliche Arbeiter</h2>
+  <% if @similar_users.empty? %>
+     Sorry, keine Übereinstimmungen gefunden!
+  <% else %>
+    <div class="workers-list">
+      <ul>
+        <% @similar_users.each do |worker|%>
+          <li>
+            <span class="profile-avatar"><%= link_to image_tag(avatar_url(worker), alt: "?"), worker, :title => worker.name %></span>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,76 @@
+<div id="tag-overview">
+  <div id="tag-name"><h1>Verbindungen zum Tag <span><%=@tag.name%></span></h1></div>
+  <%if @jobs.empty? && @workers.empty? %>
+    <div class="content-box">
+      Keine Verbindungen gefunden
+    </div>
+  <%else%>
+    <div class="content-box left">
+      <div class="linked-jobs">
+        <h2>Jobs</h2>
+        <% unless @jobs.empty? %>
+          <% @jobs.each do |job|%>
+          <div class="job">
+            <div class="job-details">
+              <div class="job-title"><h3><%= link_to job.title, job %></h3></div>
+              <div class="job-tags">
+                <ul>
+                <% job.tag_counts_on(:skills, :limit => 5, :order => "count desc").each do |tag| %>
+                  <li><%= link_to tag.name, { :controller => :tags, :action => :show, :id => tag.id } %></li>
+                <% end %>
+                </ul>
+                <span class="clear"></span>
+              </div>
+            </div>
+            <div class="job-interactions">
+              <div class="job-likes"></div>
+              <div class="job-fav"></div>
+            </div>
+          </div>
+          <% end %>
+        <% else %>
+          <%= t('jobs_no_jobs') %>
+        <%  end %>
+      </div>
+    </div>
+    <div class="content-box right">
+      <div class="linked-workers">
+        <h2>Arbeiter</h2>
+        <% unless @workers.empty? %>
+          <div class="workers-list">
+            <ul>
+            <% @workers.each do |worker| %>
+              <li>
+                <span class="profile-avatar"><%= link_to image_tag(avatar_url(worker), alt: "?"), worker, :title => worker.name %></span>
+              </li>
+            <%end%>
+            </ul>
+            <span class="clear"></span>
+            <script>
+              $(function() {
+                $(".workers-list").tooltip({
+                  show: false,
+                  hide: false,
+                  position: {
+                    my: "center bottom-10",
+                    at: "center top",
+                    using: function( position, feedback ) {
+                    $( this ).css( position );
+                    $( "<div>" )
+                      .addClass( "arrow" )
+                      .addClass( feedback.vertical )
+                      .addClass( feedback.horizontal )
+                      .appendTo( this );
+                    }
+                  }
+                });
+              });
+            </script>
+          </div>
+        <% else %>
+          <%= t('workers_no_workers') %>
+        <%  end %>
+      </div>
+    </div>
+  <%end%>
+</div>
