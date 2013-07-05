@@ -18,7 +18,7 @@ $(function() {
 	  <% end %>
 	  </ul>
 
-	  <% tag_cloud(@tags, %w(tag1 tag2 tag3 tag4)) do |tag, css_class| %>
+	  <% tag_cloud(@tags, %w(tag1 tag2 tag3 tag4 tag5 tag6 tag7 tag8 tag9 tag10)) do |tag, css_class| %>
 	    <%= link_to tag.name, { :action => :tag, :id => tag.name }, :class => css_class %>
 	  <% end %>
   </div>
