@@ -20,11 +20,13 @@ Duhajo::Application.routes.draw do
     resources :activities do
       resources :activities
     end
+    
   end
   
   match "jobs/:id/new" => "jobs#new"
   match "jobs/:id/support" => "jobs#support"
   match "jobs/:id/set_status" => "jobs#set_status"
+  
 
 
   # Sample of named route:

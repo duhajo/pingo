@@ -145,7 +145,9 @@ class JobsController < ApplicationController
         render :partial => 'status', :job => @job
       }
       format.json { head :no_content }
-      format.js {}
+      format.js {
+        render :partial => 'status', :job => @job
+      }
     end
   end
 end

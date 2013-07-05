@@ -33,7 +33,7 @@
     <span class="clear"></span>
   </div>
   <% end %>
-  <div id="job">
+  <div id="job" data-id="<%=@job.id%>">
     <div id="job-title"><h1><%= @job.title %></h1>
       <div id="job-status"><%= render :partial => "status", :job => @job %></div>
     </div>
@@ -177,34 +177,3 @@ $(function() {
   <% end %>
   </div>
 </div>
-<script type="text/javascript">
-  $('#status-open').click(function() {
-    $.ajax({
-      url: '<%= url_for :controller => :jobs, :action => :set_status, :id => @job.id %>',
-      data: {"status":2}})
-    .success(function(data){
-      $('#job-status').html(data);
-    });
-    return false;
-  });
-  $('#status-in-work').click(function() {
-    $.ajax({
-      url: '<%= url_for :controller => :jobs, :action => :set_status, :id => @job.id %>',
-      data: {"status":3}})
-    .success(function(data){
-      $('#job-status').html(data);
-      $('.actions').css("display", "none");
-    });
-    return false;
-  });
-  $('#status-closed').click(function() {
-    $.ajax({
-      url: '<%= url_for :controller => :jobs, :action => :set_status, :id => @job.id %>',
-      data: {"status":1}})
-    .success(function(data){
-      $('#job-status').html(data);
-      $('.actions').css("display", "block");
-    });
-    return false;
-  });
-</script>
