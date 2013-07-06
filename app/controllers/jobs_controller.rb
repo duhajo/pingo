@@ -154,4 +154,21 @@ class JobsController < ApplicationController
       format.js {}
     end
   end
+  
+  def like
+    @job = Job.find(params[:id])
+    if current_user
+      unless current_user.voted_as_when_voted_for @job
+        current_user.likes @job
+        @job.save()
+      else
+        current_user.dislikes @job
+        @job.save()
+      end
+    end  
+    
+    respond_to do |format|
+      format.json { render :json => @job.likes.size }
+    end
+  end
 end

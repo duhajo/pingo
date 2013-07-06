@@ -41,31 +41,11 @@
             <ul>
             <% @workers.each do |worker| %>
               <li>
-                <span class="profile-avatar"><%= link_to image_tag(avatar_url(worker), alt: "?"), worker, :title => worker.name %></span>
+                <span class="profile-avatar"><%= link_to image_tag(avatar_url(worker), alt: "?"), worker, :title => worker.name, :rel => "tipsy" %></span>
               </li>
             <%end%>
             </ul>
             <span class="clear"></span>
-            <script>
-              $(function() {
-                $(".workers-list").tooltip({
-                  show: false,
-                  hide: false,
-                  position: {
-                    my: "center bottom-10",
-                    at: "center top",
-                    using: function( position, feedback ) {
-                    $( this ).css( position );
-                    $( "<div>" )
-                      .addClass( "arrow" )
-                      .addClass( feedback.vertical )
-                      .addClass( feedback.horizontal )
-                      .appendTo( this );
-                    }
-                  }
-                });
-              });
-            </script>
           </div>
         <% else %>
           <%= t('workers_no_workers') %>

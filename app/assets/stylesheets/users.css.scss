@@ -1,3 +1,20 @@
-// Place all the styles related to the users controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.workers-list, .results-list {
+  clear: both;
+  padding-top: 10px;
+}
+
+.workers-list a {
+  display: block;
+  float: left;
+  margin-right: 10px;
+}
+
+.profile-avatar img {
+  background-color: #FFFFFF;
+  border-radius: 500px 500px 500px 500px;
+  display: block;
+  height: 48px;
+  line-height: 45px;
+  text-align: center;
+  width: 48px;
+}

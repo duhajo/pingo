@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_secure_password
+  acts_as_voter
   acts_as_taggable
   acts_as_taggable_on :skills
   attr_accessor   :new_password, :new_password_confirmation 

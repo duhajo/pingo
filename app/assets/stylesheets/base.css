@@ -63,21 +63,20 @@ h2 {
   width: 32px;
 }
 
-.profile-avatar img {
-  border-radius: 500px;
-  float: left;
-  margin-right: 10px;
-  margin-top: 2px;
-  width: 32px;
-  height: 32px;
-}
-
 #sidebar {
   position: absolute;
   left: 0;
   width: 230px;
   top: 0;
   bottom: 0;
+}
+
+#sidebar .profile-avatar img {
+  float: left;
+  margin-right: 10px;
+  margin-top: 2px;
+  width: 32px;
+  height: 32px;
 }
 
 #sidebar #logo {
@@ -196,7 +195,7 @@ h2 {
 
 #main-navigation {
   background-color: #FFFFFF;
-  height: 70px;
+  height: 72px;
 }
 
 #main-navigation ul {
@@ -204,10 +203,10 @@ h2 {
 }
 
 #main-navigation li {
-  float: left;
-  margin: 0px 18px;
-  padding: 18px 0;
   border-top: 5px solid transparent;
+  float: left;
+  margin-right: 60px;
+  padding: 18px 0;
 }
 
 #main-navigation a {

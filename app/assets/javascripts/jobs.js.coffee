@@ -34,3 +34,11 @@ $(document).ready ->
           init_status()
         false
     init_status()
+  $("#like-button").click ->
+    $.ajax(
+      type: "PUT"
+      url: "/jobs/"+$('#job').data('id')+"/like"
+    ).success (data) ->
+      $(".likes-number").html data
+    false
+  $('a[rel=tipsy]').tipsy({gravity: 's', opacity: 1})

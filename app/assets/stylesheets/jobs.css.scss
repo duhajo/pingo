@@ -1,6 +1,6 @@
-// Place all the styles related to the Jobs controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+#job-view.closed {
+  margin-top: 20px;
+}
 
 .job {
   background-color: #FFFFFF;
@@ -183,75 +183,6 @@
   overflow: hidden;
 }
 
-#job #job-workers .workers-list, #job #job-results .results-list {
-  clear: both;
-  padding-top: 10px;
-}
-
-#job #job-workers a {
-  display: block;
-  float: left;
-}
-
-#job #job-workers .profile-avatar img {
-  width: 48px;
-  height: 48px;
-}
-
-.ui-tooltip, .arrow:after {
-  background-color: #F7F7F7;
-}
-  
-.ui-tooltip {
-  padding: 8px;
-  color: #707070;
-  font-size: 14px;
-  border-radius: 4px;
-  box-shadow: 0 2px 0 #BEBEBE;
-  max-width: 100px;
-  max-height: 50px;
-  text-align: center;
-}
-  
-.arrow {
-  width: 70px;
-  height: 16px;
-  overflow: hidden;
-  position: absolute;
-  left: 50%;
-  bottom: -16px;
-  margin-left: -35px;
-}
-  
-.arrow.top {
-  top: -22px;
-  bottom: auto;
-}
-
-.arrow.left {
-  left: 20%;
-}
-  
-.arrow:after {
-  content: "";
-  position: absolute;
-  left: 20px;
-  top: -22px;
-  width: 25px;
-  height: 25px;
-  box-shadow: 3px 3px 0 #BEBEBE;
-  -webkit-transform: rotate(45deg);
-  -moz-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  -o-transform: rotate(45deg);
-  tranform: rotate(45deg);
-}
-  
-.arrow.top:after {
-  bottom: -20px;
-  top: auto;
-}
-
 /******** Job Tags **********/
 
 .job-tags {
@@ -266,10 +197,10 @@
 .job-tags a, .job-tags a:active, .job-tags a:visited {
   background-color: #55A0DA;
   border-bottom: 2px solid #367FB7;
-  border-radius: 2px 2px 2px 2px;
+  border-radius: 3px;
   color: #FFFFFF;
   display: block;
-  font-size: 14px;
+  font-size: 16px;
   height: 12px;
   line-height: 11px;
   padding: 5px;

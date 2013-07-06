@@ -1,5 +1,6 @@
 class Job < ActiveRecord::Base
   acts_as_nested_set
+  acts_as_votable
   acts_as_taggable
   acts_as_taggable_on :skills
   attr_accessible :deadline, :description, :parent_id, :title, :skill_list, :country, :city, :street

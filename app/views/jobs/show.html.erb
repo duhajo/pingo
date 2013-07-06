@@ -1,181 +1,164 @@
-<% if current_user %>
-  <% content_for :actionbar do %>
-    <ul class="actions <% if @job.status == 3 %>hidden<% end %>">
-      <li><%= link_to 'Aufgabe anlegen', :action => "new" %></li>
-      <li><% unless @job.users.find_by_id(current_user.id)%>
-            <% if !@is_manager.empty? %>
-              <%= link_to 'Support', :action => "support", :support => true %>
+<div id="job-view"<% if @job.status == 3 %>class="closed"<% end %>>
+  <% if current_user && @job.status != 3 %>
+    <% content_for :actionbar do %>
+      <ul class="actions">
+        <li><%= link_to 'Aufgabe anlegen', :action => "new" %></li>
+        <li><%= link_to 'Like', like_job_path(@job), :id => "like-button", :method => :put, :remote => true%></li>
+        <li><% unless @job.users.find_by_id(current_user.id)%>
+              <% if !@is_manager.empty? %>
+                <%= link_to 'Support', :action => "support", :support => true %>
+              <%else%>
+                <%= link_to 'Managen!', :action => "support", :support => true, :manager => true %>
+              <%end%>
             <%else%>
-              <%= link_to 'Managen!', :action => "support", :support => true, :manager => true %>
+              <%= link_to 'Keine Zeit mehr!', :action => "support" %>
             <%end%>
-          <%else%>
-            <%= link_to 'Keine Zeit mehr!', :action => "support" %>
-          <%end%>
-      </li>
-      <% if @workers.detect{|w| w.id == current_user.id && w.isCreator == 1 } %>
-        <li><%= link_to 'Edit', edit_job_path(@job) %></li>
-      <% end %>
-    </ul>
+        </li>
+        <% if @workers.detect{|w| w.id == current_user.id && w.isCreator == 1 } %>
+          <li><%= link_to 'Edit', edit_job_path(@job) %></li>
+        <% end %>
+      </ul>
+    <% end %>
   <% end %>
-<% end %>
-<div>
-  <% if !@job.parent_id.nil? %>
-  <div id="job-breadcrumb">
-    <span class="icon"><!-- Breadcrumb --></span>
-    <ul>
-        <% @parent_jobs.each.with_index do |job,index| %>
-          <% break if (job.id == @job.id)%>
-          <li><%= link_to job.title, job %></li>
-          <% unless @parent_jobs[index+1].nil? %>
-            <li>&raquo;</li>
-          <% end %>
-          
-        <%end%>
-    </ul>
-    <span class="clear"></span>
-  </div>
-  <% end %>
-  <div id="job" data-id="<%=@job.id%>">
-    <div id="job-title"><h1><%= @job.title %></h1>
-      <%= render :partial => "status", :job => @job, :manager => @managers %>
-    </div>
-    <div id="job-details">
-        <div id="job-info">
-          <div class="job-tags">
-            <% if not @job.skill_list.empty? %>
-              <ul>
-                <% @job.tag_counts_on(:skills, :limit => 5, :order => "count desc").each do |tag| %>
-                  <li><%= link_to tag.name, { :controller => :tags, :action => :show, :id => tag.id } %></li>
-                <% end %>
-              </ul>
+  <div>
+    <% if !@job.parent_id.nil? %>
+    <div id="job-breadcrumb">
+      <span class="icon"><!-- Breadcrumb --></span>
+      <ul>
+          <% @parent_jobs.each.with_index do |job,index| %>
+            <% break if (job.id == @job.id)%>
+            <li><%= link_to job.title, job %></li>
+            <% unless @parent_jobs[index+1].nil? %>
+              <li>&raquo;</li>
             <% end %>
-            <span class="clear"></span>
-          </div>
-          <div id="job-description"><%if @job.description.empty?%>Noch keine Beschreibung vorhanden...<%else%><%= @job.description %><%end%></div>
-        </div>
-        <div id="job-meta">
-          <div id="job-deadline">
-            <span class="icon"><!----></span>
-            <span class="icon-label" title="<%= @job.deadline.to_formatted_s(:long) %>"><%=  distance_of_time_in_words(@job.deadline, Time.now, true) %></span><span class="clear"></span></div>
-          <div id="job-location">
-            <span class="icon"><!----></span><span class="icon-label">
-                <% #gmaps("map_options" => { "auto_zoom" => false, "zoom" => 8},"markers" => { "data" => @json }) %>
-                <%=@job.address%>
-                <br /><a href="#popup-zur-karte">Wo genau?</a>
-            </span>
-            <span class="clear"></span>
-          </div>
-        </div>
-        <div id="job-more-details">
-          <div class="splitter"><a href="#" title="Hier können die Jobdetails dann mal ausgeklappt werden">Jobdetails</a></div>
-        </div>
-    </div>
-    <div id="job-interactions">
-      <div id="job-results">
-        <h2>Ergebnisse</h2>
-        <div class="results-list">Das Feature gibt es noch nicht :)</div>
-      </div>
-      <div id="job-workers">
-        <h2>Arbeiter</h2>
-        <div class="workers-list">
-          <ul>
-          <% @workers.each do |worker| %>
-            <li>
-              <% title = worker.name
-              if(worker.isCreator == 1)
-                title << " (Manager)"
-              end %>
-              <span class="profile-avatar"><%= link_to image_tag(avatar_url(worker), alt: "?"), worker, :title => title %></span>
-            </li>
-          <%end%>
-            <li>+ X Likes</li>
-          </ul>
-          <span class="clear"></span>
-          <script>
-            $(function() {
-              $("#job-workers").tooltip({
-                show: false,
-                hide: false,
-                position: {
-                  my: "center bottom-10",
-                  at: "center top",
-                  using: function( position, feedback ) {
-                  $( this ).css( position );
-                  $( "<div>" )
-                    .addClass( "arrow" )
-                    .addClass( feedback.vertical )
-                    .addClass( feedback.horizontal )
-                    .appendTo( this );
-                  }
-                }
-              });
-            });
-          </script>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 
-<script>
-$(function() {
-	$( "#content-tabs" ).tabs();
-});
-</script>
-<p id="notice"><%= notice %></p>
-<div id="content-tabs">
-  <div id="sub-navigation">
-    <ul>
-      <li><a href="#job-tasks">Unteraufgaben</a></li>
-      <li><a href="#job-activities">Aktivit&auml;ten</a></li>
-    </ul>
-  </div>
-  <div class="content-box" id="job-tasks">
-        <% @jobs.each do |job|%>
-        <div class="job">
-          <div class="job-details">
-            <div class="job-title"><h3><%= link_to job.title, job %></h3></div>
+          <%end%>
+      </ul>
+      <span class="clear"></span>
+    </div>
+    <% end %>
+    <div id="job" data-id="<%=@job.id%>">
+      <div id="job-title"><h1><%= @job.title %></h1>
+        <%= render :partial => "status", :job => @job, :manager => @managers %>
+      </div>
+      <div id="job-details">
+          <div id="job-info">
             <div class="job-tags">
-              <ul>
-              <% job.tag_counts_on(:skills, :limit => 5, :order => "count desc").each do |tag| %>
-                <li><%= link_to tag.name, { :action => :tag, :id => tag.name } %></li>
+              <% if not @job.skill_list.empty? %>
+                <ul>
+                  <% @job.tag_counts_on(:skills, :limit => 5, :order => "count desc").each do |tag| %>
+                    <li><%= link_to tag.name, { :controller => :tags, :action => :show, :id => tag.id } %></li>
+                  <% end %>
+                </ul>
               <% end %>
-              </ul>
+              <span class="clear"></span>
+            </div>
+            <div id="job-description"><%if @job.description.empty?%>Noch keine Beschreibung vorhanden...<%else%><%= @job.description %><%end%></div>
+          </div>
+          <div id="job-meta">
+            <div id="job-deadline">
+              <span class="icon"><!----></span>
+              <span class="icon-label" title="<%= @job.deadline.to_formatted_s(:long) %>"><%=  distance_of_time_in_words(@job.deadline, Time.now, true) %></span><span class="clear"></span></div>
+            <div id="job-location">
+              <span class="icon"><!----></span><span class="icon-label">
+                  <% #gmaps("map_options" => { "auto_zoom" => false, "zoom" => 8},"markers" => { "data" => @json }) %>
+                  <%=@job.address%>
+                  <br /><a href="#popup-zur-karte">Wo genau?</a>
+              </span>
               <span class="clear"></span>
             </div>
           </div>
-          <div class="job-interactions">
-            <div class="job-likes"></div>
-            <div class="job-fav"></div>
+          <div id="job-more-details">
+            <div class="splitter"><a href="#" title="Hier können die Jobdetails dann mal ausgeklappt werden">Jobdetails</a></div>
+          </div>
+      </div>
+      <div id="job-interactions">
+        <div id="job-results">
+          <h2>Ergebnisse</h2>
+          <div class="results-list">Das Feature gibt es noch nicht :)</div>
+        </div>
+        <div id="job-workers">
+          <h2>Arbeiter</h2>
+          <div class="workers-list">
+            <ul>
+              <% @workers.each do |worker| %>
+                <li>
+                  <% title = worker.name
+                  if(worker.isCreator == 1)
+                    title << " (Manager)"
+                  end %>
+                  <span class="profile-avatar"><%= link_to image_tag(avatar_url(worker), alt: "?"), worker, :title => title, :rel => "tipsy" %></span>
+                </li>
+              <%end%>
+                <li id="likes">+ <span class="likes-number"><%= @job.likes.size %></span></li>
+            </ul>
+            <span class="clear"></span>
           </div>
         </div>
-        <% end %>
-       <%= button_to 'Add Subtask', :action => "new" %>
+      </div>
+    </div>
   </div>
-  <div class="content-box" id="job-activities">
-  <%= form_for([@job, @job.activities.build]) do |f| %>
-    <%= text_area_tag(:content, "", :size => "80x2") %><br />
-     <%= f.submit "Post Comment" %>
-  <% end %>
 
-  <% @activities.each do |activity| %>
-      <p>
-        <% if not activity.user.nil? %>
-          <b><%= activity.user.name %> said:</b><br />
-        <% else %>
-          <% activity.user %>
-        <% end %>
+  <script>
+  $(function() {
+    $( "#content-tabs" ).tabs();
+  });
+  </script>
+  <p id="notice"><%= notice %></p>
+  <div id="content-tabs">
+    <div id="sub-navigation">
+      <ul>
+        <li><a href="#job-tasks">Unteraufgaben</a></li>
+        <li><a href="#job-activities">Aktivit&auml;ten</a></li>
+      </ul>
+    </div>
+    <div class="content-box" id="job-tasks">
+          <% @jobs.each do |job|%>
+          <div class="job">
+            <div class="job-details">
+              <div class="job-title"><h3><%= link_to job.title, job %></h3></div>
+              <div class="job-tags">
+                <ul>
+                <% job.tag_counts_on(:skills, :limit => 5, :order => "count desc").each do |tag| %>
+                  <li><%= link_to tag.name, { :action => :tag, :id => tag.name } %></li>
+                <% end %>
+                </ul>
+                <span class="clear"></span>
+              </div>
+            </div>
+            <div class="job-interactions">
+              <div class="job-likes"></div>
+              <div class="job-fav"></div>
+            </div>
+          </div>
+          <% end %>
+         <%= button_to 'Add Subtask', :action => "new" %>
+    </div>
+    <div class="content-box" id="job-activities">
+    <%= form_for([@job, @job.activities.build]) do |f| %>
+      <%= text_area_tag(:content, "", :size => "80x2") %><br />
+       <%= f.submit "Post Comment" %>
+    <% end %>
 
-        <%= activity.created_at %>
-      </p>
+    <% @activities.each do |activity| %>
+        <p>
+          <% if not activity.user.nil? %>
+            <b><%= activity.user.name %> said:</b><br />
+          <% else %>
+            <% activity.user %>
+          <% end %>
 
-      <p>
-        <%= activity.content %>
-      </p>
+          <%= activity.created_at %>
+        </p>
 
-  <%= link_to 'Edit', edit_activity_path(activity) %> |
-  <%= link_to 'Show', activities_path %>
+        <p>
+          <%= activity.content %>
+        </p>
 
-  <% end %>
+    <%= link_to 'Edit', edit_activity_path(activity) %> |
+    <%= link_to 'Show', activities_path %>
+
+    <% end %>
+    </div>
   </div>
 </div>

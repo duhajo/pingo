@@ -7,10 +7,12 @@
   <%= @user.email %>
 </p>
 
-<p>
-  <b>Tags:</b>
-  <%= @user.skill_list %>
-</p>
+<div class="tags">
+  <% @user.skills.each do |tag| %>
+    <%= link_to tag.name, { :controller => :tags, :action => :show, :id => tag.id }, :class => "tag3" %>
+  <% end %>
+</div>
+
 <div class="similar-workers">
   <h2>Ähnliche Arbeiter</h2>
   <% if @similar_users.empty? %>
@@ -20,7 +22,7 @@
       <ul>
         <% @similar_users.each do |worker|%>
           <li>
-            <span class="profile-avatar"><%= link_to image_tag(avatar_url(worker), alt: "?"), worker, :title => worker.name %></span>
+            <span class="profile-avatar"><%= link_to image_tag(avatar_url(worker), alt: "?"), worker, :title => worker.name, :rel => "tipsy" %></span>
           </li>
         <% end %>
       </ul>

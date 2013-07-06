@@ -5,21 +5,18 @@
 h1 span {
   background-color: #55A0DA;
   border-bottom: 2px solid #367FB7;
-  border-radius: 2px 2px 2px 2px;
+  border-radius: 5px;
   color: #FFFFFF;
   display: inline-block;
+  line-height: 32px;
   padding: 5px;
-}
-
-.linked-jobs { 
-
 }
 
 .linked-workers { 
   margin-left: 20px;
 }
 
-.tag-cloud a {
+.tags a {
   background-color: #55A0DA;
   border-bottom: 2px solid #367FB7;
   color: #FFFFFF;
@@ -28,80 +25,69 @@ h1 span {
   transition: background-color 0.3s ease 0s, border-color 0.3s ease 0s, color 0.3s ease 0s;
 }
 
-.tag-cloud a:hover {
-    background-color: #FFFFFF;
-    border-bottom: 2px solid #DC007C;
-    color: #DC007C;
+.tags a:hover {
+  background-color: #FFFFFF;
+  border-bottom: 2px solid #DC007C;
+  color: #DC007C;
 }
 
 .tag1 {
-  font-size: 12px;
-  line-height: 26px;
-  border-radius: 1px;
+  border-radius: 2px;
+  font-size: 13px;
+  line-height: 13px;
 }
 
 .tag2 { 
-  font-size: 14px;
-  line-height: 28px;
   border-radius: 2px;
+  font-size: 14px;
+  line-height: 15px;
 }
 
 .tag3 {
-  font-size: 16px;
-  line-height: 30px;
   border-radius: 3px;
+  font-size: 16px;
+  line-height: 17px;
 }
 
 .tag4 { 
+  border-radius: 3px;
   font-size: 18px;
-  line-height: 32px;
-  border-radius: 4px;
-}
-
-.tag4 { 
-  font-size: 20px;
-  line-height: 34px;
-  border-radius: 5px;
-}
-
-.tag4 { 
-  font-size: 22px;
-  line-height: 36px;
-  border-radius: 6px;
+  line-height: 22px;
 }
 
 .tag5 { 
-  font-size: 24px; 
-  line-height: 38px;
-  border-radius: 7px;
+  border-radius: 4px;
+  font-size: 20px;
+  line-height: 25px;
 }
 
 .tag6 { 
-  font-size: 26px;
-  line-height: 40px;
-  border-radius: 8px;
+  border-radius: 4px;
+  font-size: 22px;
+  line-height: 28px;
 }
 
 .tag7 { 
-  font-size: 28px;
-  line-height: 42px;
-  border-radius: 9px;
+  border-radius: 5px;
+  font-size: 24px; 
+  line-height: 32px;
+ 
 }
 
 .tag8 { 
-  font-size: 30px;
-  line-height: 44px;
-  border-radius: 10px;
+  border-radius: 5px;
+  font-size: 26px;
+  line-height: 34px;
 }
 
 .tag9 { 
-  font-size: 32px; 
-  line-height: 46px;
-  border-radius: 11px;
+  border-radius: 6px;
+  font-size: 28px;
+  line-height: 36px;
 }
 
 .tag10 { 
-  font-size: 34px; 
-  line-height: 48px;
-  border-radius: 12px;
+  border-radius: 6px;
+  font-size: 30px; 
+  line-height: 40px;
 }
