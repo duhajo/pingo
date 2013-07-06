@@ -90,7 +90,9 @@
                   <span class="profile-avatar"><%= link_to image_tag(avatar_url(worker), alt: "?"), worker, :title => title, :rel => "tipsy" %></span>
                 </li>
               <%end%>
-                <li id="likes">+ <span class="likes-number"><%= @job.likes.size %></span></li>
+                <li id="likes" <% if @job.likes.size == 0 %> class="hidden" <% end %>>
+                  + <span class="likes-number"><%= @job.likes.size %></span> Likes
+                </li>
             </ul>
             <span class="clear"></span>
           </div>

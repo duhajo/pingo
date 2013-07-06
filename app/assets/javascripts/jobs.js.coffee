@@ -39,6 +39,10 @@ $(document).ready ->
       type: "PUT"
       url: "/jobs/"+$('#job').data('id')+"/like"
     ).success (data) ->
+      if data == 1
+        $("#likes").css "display", "block"
+      if data == 0
+        $("#likes").css "display", "none"
       $(".likes-number").html data
     false
   $('a[rel=tipsy]').tipsy({gravity: 's', opacity: 1})
