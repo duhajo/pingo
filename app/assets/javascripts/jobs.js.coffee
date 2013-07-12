@@ -45,4 +45,22 @@ $(document).ready ->
         $("#likes").css "display", "none"
       $(".likes-number").html data
     false
+  $(".likes-button").click ->
+    likeButton = $(this)
+    $.ajax(
+      type: "PUT"
+      url: "/jobs/"+likeButton.data('id')+"/like"
+    ).success (data) ->
+      if data == 1
+        likeButton.parent().find(".likes-number").css "display", "block"
+        likeButton.removeClass "no-votes"
+      if data == 0
+        likeButton.parent().find(".likes-number").css "display", "none"
+        likeButton.addClass "no-votes"
+      likeButton.parent().find(".likes-number").html data
+      if likeButton.hasClass("voted")
+        likeButton.removeClass "voted"
+      else
+        likeButton.addClass "voted"
+    false
   $('a[rel=tipsy]').tipsy({gravity: 's', opacity: 1})

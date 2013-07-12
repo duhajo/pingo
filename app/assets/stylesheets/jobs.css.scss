@@ -2,27 +2,62 @@
   margin-top: 20px;
 }
 
-.job {
-  background-color: #FFFFFF;
-  border: 1px solid #E4E4E4;
-  box-shadow: 0 1px 0 0 #E6E6E6;
-  height: 60px;
+.job-container {
+  height: 70px;
   margin-bottom: 20px;
   overflow: hidden;
   padding: 8px;
   position: relative;
 }
 
+.job {
+  background-color: #FFFFFF;
+  border: 1px solid #E4E4E4;
+  box-shadow: 0 1px 0 0 #E6E6E6;
+  height: 60px;
+  padding: 5px;
+  position: relative;
+}
+
 .job .job-title h3 {
   font-size: 18px;
   font-weight: normal;
-  margin: 0;
+  margin: 0 0 0 6px;
 }
 
 .job .job-tags {
-  bottom: 15px;
-  left: 8px;
+  bottom: 10px;
+  left: 10px;
   position: absolute;
+}
+
+.job-container  .job-likes {
+  background-image: url("icons/like-bg.png");
+  height: 78px;
+  position: absolute;
+  right: 90px;
+  top: 5px;
+  width: 70px;
+}
+
+.job-container .likes-button.icon, .job-container .likes-button.voted:hover {
+  background-position: -124px -4px;
+  float: none;
+  margin: 5px 16px 0;
+}
+
+.job-container .likes-button:hover, .job-container .likes-button.voted {
+  background-position: -124px -44px;
+}
+
+.job-container .likes-button.icon.no-votes {
+  margin: 15px 16px 0;
+}
+
+.job-container .likes-number {
+  padding-right: 5px;
+  text-align: center;
+  color: #3f81b9;
 }
 
 #job-breadcrumb {
@@ -181,6 +216,20 @@
 
 #job #job-interactions {
   overflow: hidden;
+}
+
+#job #likes .plus {
+  float: left;
+  margin: 0 10px;
+}
+
+#job #likes .icon {
+  background-position: -124px -4px;
+}
+
+#job #likes .icon-label a {
+  font-size: 16px;
+  margin-left: 10px;
 }
 
 /******** Job Tags **********/

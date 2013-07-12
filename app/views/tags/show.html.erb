@@ -10,23 +10,44 @@
         <h2>Jobs</h2>
         <% unless @jobs.empty? %>
           <% @jobs.each do |job|%>
-          <div class="job">
-            <div class="job-details">
-              <div class="job-title"><h3><%= link_to job.title, job %></h3></div>
-              <div class="job-tags">
-                <ul>
-                <% job.tag_counts_on(:skills, :limit => 5, :order => "count desc").each do |tag| %>
-                  <li><%= link_to tag.name, { :controller => :tags, :action => :show, :id => tag.id } %></li>
-                <% end %>
-                </ul>
+            <div class="job-container">
+              <div class="job">
+                <div class="job-details">
+                  <div class="job-title"><h3><%= link_to job.title, job %></h3></div>
+                  <div class="job-tags">
+                    <ul>
+                    <% job.tag_counts_on(:skills, :limit => 5, :order => "count desc").each do |tag| %>
+                      <li><%= link_to tag.name, { :controller => :tags, :action => :show, :id => tag.id } %></li>
+                    <% end %>
+                    </ul>
+                    <span class="clear"></span>
+                  </div>
+                </div>
+                <div class="job-interactions">
+                  <div class="job-fav"></div>
+                </div>
                 <span class="clear"></span>
               </div>
+              <%
+                likeClass = "likes-button icon"
+                if current_user
+                  if current_user.voted_up_on? job
+                    likeClass << " voted"
+                  end
+                end 
+                if job.likes.size == 0
+                  likeClass << " no-votes"
+                end
+              %>
+              <div class="job-likes">
+                <% if current_user %>
+                  <%= link_to '', like_job_path(job), :class => likeClass, :method => :put, :remote => true, :"data-id" => job.id%>
+                <% else %>
+                  <%= link_to '', login_path, :class => likeClass<<" no-login"%>
+                <% end %>
+                <div class="likes-number <% if job.likes.size == 0 %>hidden<%end%>"><%= job.likes.size %></div>
+              </div>
             </div>
-            <div class="job-interactions">
-              <div class="job-likes"></div>
-              <div class="job-fav"></div>
-            </div>
-          </div>
           <% end %>
         <% else %>
           <%= t('jobs_no_jobs') %>
