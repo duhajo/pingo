@@ -1,12 +1,13 @@
 == Duhajo
 
-... ein einfaches Aufgabenmanagementsystem, welches für mich als Übungsplatz für Rails agiert.
+... ein einfaches Aufgabenmanagementsystem, welches für mich auch als Übungsplatz für Rails agiert.
 
 === Konzept
 
 Ideen/Vorstellungen: https://docs.google.com/document/d/1obJU0ceYl9r45PTaohhALSUmvSm11G7nFomeIO5qOeA/edit#
 
-Design: https://trello-attachments.s3.amazonaws.com/5041e106884216dd1b298d66/5041e411884216dd1b29c310/20abaf80f53eb5614aa3727eb729b871/jobdetail.png
+=== Demo / Letzter Stand
+Findet ihr hier: https://duhajo.herokuapp.com
 
 === Mitstreiter 
 
