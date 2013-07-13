@@ -27,8 +27,6 @@ Duhajo::Application.routes.draw do
   match "jobs/:id/support" => "jobs#support"
   match "jobs/:id/set_status" => "jobs#set_status"
   put 'jobs/:id/like' => 'jobs#like', :as => 'like_job'
-  
-
 
   # Sample of named route:
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase

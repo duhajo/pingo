@@ -1,35 +1,33 @@
-<% if @managers %>
-  <% if @managers.empty? %>
-    <div id="job-status">
-      <%if @job.status == 3%>
-        <div id="status-closed" class="button">
-          <span class="now">Geschlossen</span>
-        </div>
-      <%elsif @job.status == 2 %>
-        <div id="status-in-work" class="button">
-          <span class="now">In Arbeit</span>
-        </div>
-      <%else%>
-        <div id="status-open" class="button">
-          <span class="now">Offen</span>
-        </div>
+<% unless @user_role == 3%>
+  <div id="job-status">
+    <%if @job.status == 3%>
+      <div id="status-closed" class="button">
+        <span class="now">Geschlossen</span>
+      </div>
+    <%elsif @job.status == 2 %>
+      <div id="status-in-work" class="button">
+        <span class="now">In Arbeit</span>
+      </div>
+    <%else%>
+      <div id="status-open" class="button">
+        <span class="now">Offen</span>
+      </div>
+    <%end%>
+  </div>
+<% else %>
+  <div id="job-status" class="rights">
+    <%if @job.status == 3%>
+      <%= link_to "javascript:;", method: :post, id: 'status-closed', class: 'button', :remote => true do%>
+        <span class="now">Geschlossen</span><span class="new">Offen</span>
       <%end%>
-    </div>
-  <% else %>
-    <div id="job-status" class="rights">
-      <%if @job.status == 3%>
-        <%= link_to "javascript:;", method: :post, id: 'status-closed', class: 'button', :remote => true do%>
-          <span class="now">Geschlossen</span><span class="new">Offen</span>
-        <%end%>
-      <%elsif @job.status == 2 %>
-        <%= link_to "javascript:;", method: :post, id: 'status-in-work', class: 'button', :remote => true do%>
-          <span class="now">In Arbeit</span><span class="new">Geschlossen</span>
-        <%end%>
-      <%else%>
-        <%= link_to "javascript:;", method: :post, id: 'status-open', class: 'button', :remote => true do%>
-          <span class="now">Offen</span><span class="new">In Arbeit</span>
-        <%end%>
+    <%elsif @job.status == 2 %>
+      <%= link_to "javascript:;", method: :post, id: 'status-in-work', class: 'button', :remote => true do%>
+        <span class="now">In Arbeit</span><span class="new">Geschlossen</span>
       <%end%>
-    </div>
-  <% end %>
+    <%else%>
+      <%= link_to "javascript:;", method: :post, id: 'status-open', class: 'button', :remote => true do%>
+        <span class="now">Offen</span><span class="new">In Arbeit</span>
+      <%end%>
+    <%end%>
+  </div>
 <% end %>

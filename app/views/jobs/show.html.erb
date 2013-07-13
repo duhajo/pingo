@@ -4,7 +4,7 @@
       <ul class="actions">
         <li><%= link_to 'Aufgabe anlegen', :action => "new" %></li>
         <li><%= link_to 'Like', like_job_path(@job), :id => "like-button", :method => :put, :remote => true%></li>
-        <li><% unless @job.users.find_by_id(current_user.id)%>
+        <li><% unless @user_role > 1%>
               <% if !@is_manager.empty? %>
                 <%= link_to 'Support', :action => "support", :support => true %>
               <%else%>
@@ -14,7 +14,7 @@
               <%= link_to 'Keine Zeit mehr!', :action => "support" %>
             <%end%>
         </li>
-        <% if @workers.detect{|w| w.id == current_user.id && w.isCreator == 1 } %>
+        <% if @user_role == 3 %>
           <li><%= link_to 'Edit', edit_job_path(@job) %></li>
         <% end %>
       </ul>
@@ -39,7 +39,7 @@
     <% end %>
     <div id="job" data-id="<%=@job.id%>">
       <div id="job-title"><h1><%= @job.title %></h1>
-        <%= render :partial => "status", :job => @job, :manager => @managers %>
+        <%= render :partial => "status", :job => @job, :manager => @user_role %>
       </div>
       <div id="job-details">
           <div id="job-info">
@@ -81,6 +81,13 @@
           <h2>Arbeiter</h2>
           <div class="workers-list">
             <ul>
+              <% if @workers.empty? && @user_role != 2 && current_user %>
+                <span class="profile-avatar add">
+                  <%= link_to :action => :support, :support => true, :manager => @is_manager.empty? do%>
+                    <span class='plus'>+</span>
+                  <%end%>
+                </span>
+              <% end %>
               <% @workers.each do |worker| %>
                 <li>
                   <% title = worker.name
