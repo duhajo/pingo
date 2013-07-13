@@ -1,7 +1,10 @@
-<% content_for :actionbar do %>
-  <ul>
-    <li><%= link_to 'Neuer Job', new_job_path %></li>
-  </ul>
+<% if user_signed_in? %>
+
+  <% content_for :actionbar do %>
+    <ul>
+      <li><%= link_to 'Neuer Job', new_job_path %></li>
+    </ul>
+  <% end %>
 <% end %>
 <script>
 $(function() {
@@ -41,8 +44,8 @@ $(function() {
               <span class="clear"></span>
             </div>
             <%
-              likeClass = "likes-button icon"
-              if current_user
+              likeClass = "likes-button like icon"
+              if user_signed_in?
                 if current_user.voted_up_on? job
                   likeClass << " voted"
                 end
@@ -52,10 +55,10 @@ $(function() {
               end
             %>
             <div class="job-likes">
-              <% if current_user %>
+              <% if user_signed_in? %>
                 <%= link_to '', like_job_path(job), :class => likeClass, :method => :put, :remote => true, :"data-id" => job.id%>
               <% else %>
-                <%= link_to '', login_path, :class => likeClass<<" no-login"%>
+                <%= link_to '', login_path, :class => "like icon no-login"%>
               <% end %>
               <div class="likes-number <% if job.likes.size == 0 %>hidden<%end%>"><%= job.likes.size %></div>
             </div>

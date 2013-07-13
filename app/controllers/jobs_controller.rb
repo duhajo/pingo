@@ -1,6 +1,6 @@
 class JobsController < ApplicationController
 
-  before_filter :require_user, :only => :new
+  before_filter :authenticate_user!, :only => :new
 
   # GET /jobs
   # GET /jobs.json

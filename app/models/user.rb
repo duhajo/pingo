@@ -1,35 +1,21 @@
 class User < ActiveRecord::Base
-  has_secure_password
+  # Include default devise modules. Others available are:
+  # :token_authenticatable, :confirmable,
+  # :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
+
+  # Setup accessible (or protected) attributes for your model
+  attr_accessible :email, :password, :password_confirmation, :remember_me
   acts_as_voter
   acts_as_taggable
   acts_as_taggable_on :skills
-  attr_accessor   :new_password, :new_password_confirmation 
-  attr_accessible :name, :email, :password, :password_confirmation, :new_password, :new_password_confirmation, :skill_list, :country, :city, :district, :latitude, :longitude, :radius
+  attr_accessor   :login
+  attr_accessible :login, :name, :email, :password, :password_confirmation, :remember_me, :skill_list, :country, :city, :district, :latitude, :longitude, :radius
   has_many :jobs_workers
   has_many :jobs, :through => :jobs_workers
   has_many :activities
-  
-  validates_confirmation_of :new_password, :if => :password_changed?
-
-  before_save :hash_new_password, :if => :password_changed?
-
-  email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-
-  validates :name, 
-            :presence => true,
-            :length => { :maximum => 50 }
-  validates :email, 
-            :presence => true,
-            :format => { :with => email_regex },
-            :uniqueness => { :case_sensitive => false }
-  validates :new_password, 
-            :presence => true,
-            :confirmation => true,
-            :length => { :within => 6..40 },
-            :if => :password_changed?
-  validates_presence_of :name
-  validates_presence_of :password, :on => :create
-  
+		 
   geocoded_by :address
   after_validation :geocode, :if => :address_changed?
   
@@ -41,31 +27,12 @@ class User < ActiveRecord::Base
     :country_changed? or :city_changed? or :district_changed?
   end
   
-  private
-    # This is where the real work is done, store the BCrypt has in the
-    # database
-    def hash_new_password
-      self.hashed_password = BCrypt::Password.create(@new_password)
+  def self.find_first_by_auth_conditions(warden_conditions)
+    conditions = warden_conditions.dup
+    if login = conditions.delete(:login)
+      where(conditions).where(["lower(name) = :value OR lower(email) = :value", { :value => login.downcase }]).first
+    else
+      where(conditions).first
     end
-    
-    def password_changed?
-      !@new_password.blank?
   end
-    
-  def self.authenticate(email, password)
-    # Because we use bcrypt we can't do this query in one part, first
-    # we need to fetch the potential user
-    if user = find_by_email(email)
-      # Then compare the provided password against the hashed one in the db.
-      if BCrypt::Password.new(user.hashed_password).is_password? password
-        # If they match we return the user 
-        return user
-      end
-    end
-    # If we get here it means either there's no user with that email, or the wrong
-    # password was provided.  But we don't want to let an attacker know which. 
-    return nil
-  end
-
-
 end

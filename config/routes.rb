@@ -1,9 +1,5 @@
 Duhajo::Application.routes.draw do
-
-  match '/signup', :to => 'users#new'
-  match '/myprofile', :to => 'users#my_profile'
-  match '/login', :to => 'sessions#new'
-  match '/logout', :to => 'sessions#destroy'
+  devise_for :users, :controllers => { :sessions => "users/sessions", :registrations => "users/registrations" }
 
   resources :activities
   resources :users do
@@ -12,7 +8,7 @@ Duhajo::Application.routes.draw do
     end
     resources :activities
   end
-  resources :sessions, :only => [:new, :create, :destroy]
+  
   resources :jobs do
     collection do
       get :tag
@@ -22,6 +18,8 @@ Duhajo::Application.routes.draw do
     end
   end
   resources :tags
+  
+  match "dashboard" => "dashboard#index"
   
   match "jobs/:id/new" => "jobs#new"
   match "jobs/:id/support" => "jobs#support"
@@ -54,13 +52,25 @@ Duhajo::Application.routes.draw do
   #       get 'recent', :on => :collection
   #     end
   #   end
-
+  
   # Sample resource route within a namespace:
   #   namespace :admin do
   #     # Directs /admin/products/* to Admin::ProductsController
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
-  root :to => 'dashboard#index'
+
+  devise_scope :user do
+    get "/login", :to => "users/sessions#new", :as => :login
+    post "/users/create", :to => "users/sessions#create", :as => :user_session
+    get "/logout", :to => "users/sessions#destroy", :as => :logout
+    get "/myprofile", :to => "users#my_profile", :as => :myprofile
+  end
+  
+  root :to => "jobs#index"
+  authenticate :user do
+    root :to => "dashboard#index"
+  end
+  
 
   # See how all your routes lay out with "rake routes"
 

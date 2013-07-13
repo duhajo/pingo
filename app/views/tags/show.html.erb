@@ -43,7 +43,7 @@
                 <% if current_user %>
                   <%= link_to '', like_job_path(job), :class => likeClass, :method => :put, :remote => true, :"data-id" => job.id%>
                 <% else %>
-                  <%= link_to '', login_path, :class => likeClass<<" no-login"%>
+                  <%= link_to '', login_path, :class => "like icon no-login"%>
                 <% end %>
                 <div class="likes-number <% if job.likes.size == 0 %>hidden<%end%>"><%= job.likes.size %></div>
               </div>

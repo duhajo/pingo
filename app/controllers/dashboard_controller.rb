@@ -1,7 +1,7 @@
 class DashboardController < ApplicationController
-  before_filter :require_user, :only => :index
+  before_filter :authenticate_user!
   def index
-    @user = User.find(@current_user.id)
+    @user = User.find(current_user.id)
     @skills = @user.tag_counts_on(:skills)
     @recommendations = Job.tagged_with(@skills, :any => true).by_join_date
     

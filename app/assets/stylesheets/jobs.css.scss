@@ -40,17 +40,17 @@
   width: 70px;
 }
 
-.job-container .likes-button.icon, .job-container .likes-button.voted:hover {
+.job-container .like.icon, .job-container .like.voted:hover {
   background-position: -124px -4px;
   float: none;
   margin: 5px 16px 0;
 }
 
-.job-container .likes-button:hover, .job-container .likes-button.voted {
+.job-container .like:hover, .job-container .like.voted {
   background-position: -124px -44px;
 }
 
-.job-container .likes-button.icon.no-votes {
+.job-container .like.icon.no-votes {
   margin: 15px 16px 0;
 }
 

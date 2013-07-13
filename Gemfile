@@ -27,7 +27,7 @@ gem 'awesome_nested_set'
 #To use tagging
 gem 'acts-as-taggable-on'
 
-gem 'authlogic'
+gem 'devise'
 
 # To use Geolocations
 gem "geocoder"

@@ -1,29 +1,14 @@
 class UsersController < ApplicationController
   
-  before_filter :require_user, :only => :my_profile
-  
   def index
     @users = User.all
     @tags = User.tag_counts_on(:skills)
   end
   
   def my_profile
-    @user = User.find(@current_user.id)
-  end
-  
-  def new
-    @user = User.new
+    @user = User.find(current_user.id)
   end
 
-  def create
-    @user = User.new(params[:user])
-    if @user.save
-      redirect_to root_url, :notice => "Signed up!"
-    else
-      render "new"
-    end
-  end
-  
   # GET /users/1
   def show
     @user = User.find(params[:id])
@@ -53,4 +38,5 @@ class UsersController < ApplicationController
       end
     end
   end
+  
 end
