@@ -309,8 +309,12 @@ h2 {
   border-bottom: 3px solid transparent;
   float: left;
   line-height: 38px;
-  margin-right: 50px;
+  margin-right: 40px;
   padding: 0 8px;
+}
+
+#sub-navigation li.last {
+  margin-right: 0;
 }
 
 #sub-navigation .ui-tabs-active {

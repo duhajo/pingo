@@ -30,7 +30,7 @@
               </div>
               <%
                 likeClass = "likes-button icon"
-                if current_user
+                if user_signed_in?
                   if current_user.voted_up_on? job
                     likeClass << " voted"
                   end
@@ -40,7 +40,7 @@
                 end
               %>
               <div class="job-likes">
-                <% if current_user %>
+                <% if user_signed_in? %>
                   <%= link_to '', like_job_path(job), :class => likeClass, :method => :put, :remote => true, :"data-id" => job.id%>
                 <% else %>
                   <%= link_to '', login_path, :class => "like icon no-login"%>

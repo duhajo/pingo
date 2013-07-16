@@ -122,8 +122,8 @@
   <div id="content-tabs">
     <div id="sub-navigation">
       <ul>
-        <li><a href="#job-tasks">Unteraufgaben</a></li>
-        <li><a href="#job-activities">Aktivit&auml;ten</a></li>
+        <li><a href="#job-tasks">Unteraufgaben (<%= @jobs.size %>) </a></li>
+        <li class="last"><a href="#job-activities">Aktivit&auml;ten (<%= @activities.size %>)</a></li>
       </ul>
     </div>
     <div class="content-box" id="job-tasks">
@@ -170,30 +170,30 @@
         <%= button_to 'Add Subtask', :action => "new" %>
     </div>
     <div class="content-box" id="job-activities">
-    <%= form_for([@job, @job.activities.build]) do |f| %>
-      <%= text_area_tag(:content, "", :size => "80x2") %><br />
-       <%= f.submit "Post Comment" %>
-    <% end %>
+      <%= form_for([@job, @job.activities.build]) do |f| %>
+        <%= f.text_area :content, :size => "80x2" %><br />
+        <%= f.submit "Post Comment" %>
+      <% end %>
 
-    <% @activities.each do |activity| %>
-        <p>
-          <% if not activity.user.nil? %>
-            <b><%= activity.user.name %> said:</b><br />
-          <% else %>
-            <% activity.user %>
-          <% end %>
+      <% @activities.each do |activity| %>
+          <p>
+            <% if not activity.user.nil? %>
+              <b><%= activity.user.name %> said:</b><br />
+            <% else %>
+              <% activity.user %>
+            <% end %>
 
-          <%= activity.created_at %>
-        </p>
+            <%= activity.created_at %>
+          </p>
 
-        <p>
-          <%= activity.content %>
-        </p>
+          <p>
+            <%= activity.content %>
+          </p>
 
-    <%= link_to 'Edit', edit_activity_path(activity) %> |
-    <%= link_to 'Show', activities_path %>
+      <%= link_to 'Edit', edit_activity_path(activity) %> |
+      <%= link_to 'Show', activities_path %>
 
-    <% end %>
+      <% end %>
     </div>
   </div>
 </div>
