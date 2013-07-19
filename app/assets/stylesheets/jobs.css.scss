@@ -213,17 +213,6 @@
   border-bottom: 2px solid #dc007c;
   color: #dc007c;
 }
-#job #job-workers .add a {
-  background-color: #55A0DA;
-  border-bottom: 2px solid #367FB7;
-  border-radius: 150px 150px 150px 150px;
-  color: #FFFFFF;
-  font-size: 28px;
-  height: 46px;
-  line-height: 40px;
-  text-align: center;
-  width: 48px;
-}
 
 #job #job-interactions {
   overflow: hidden;
@@ -271,4 +260,19 @@
   background-color: #FFFFFF;
   border-bottom: 2px solid #dc007c;
   color: #dc007c;
+}
+
+.workers-list {
+  border-top: 1px solid #DADADA;
+  padding-top: 20px;
+}
+
+.worker {
+  clear: both;
+  overflow: hidden;
+  padding: 10px 0;
+}
+
+.worker .left {
+  margin-right: 20px;
 }

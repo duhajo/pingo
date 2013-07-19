@@ -325,4 +325,27 @@ h2 {
   color: #dc007c;
 }
 
+.circle-button a {
+  background-color: #55A0DA;
+  border-bottom: 2px solid #367FB7;
+  border-radius: 150px 150px 150px 150px;
+  color: #FFFFFF;
+  font-size: 28px;
+  height: 46px;
+  line-height: 40px;
+  text-align: center;
+  width: 48px;
+}
+
+.white-popup {
+  position: relative;
+  background: #FFFFFF;
+  padding: 20px;
+  width: auto;
+  max-width: 500px;
+  margin: 20px auto;
+}
+
 .clear { clear: both; }
+.overflow { overflow: hidden; }
+.left { float: left; }

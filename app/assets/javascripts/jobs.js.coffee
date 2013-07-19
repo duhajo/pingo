@@ -1,4 +1,5 @@
 $(document).ready ->
+  $(".open-popup-link").magnificPopup type: "inline", midClick: true
   hasRight = $("#job-status").hasClass("rights")
   if hasRight
     init_status = ->
@@ -34,6 +35,7 @@ $(document).ready ->
           init_status()
         false
     init_status()
+    
   $("#like-button").click ->
     $.ajax(
       type: "PUT"

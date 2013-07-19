@@ -54,3 +54,5 @@ gem 'sunspot_rails'
 
 # For voting things :)
 gem 'acts_as_votable', '~> 0.5.0'
+
+gem 'magnific-popup-rails'
