@@ -96,7 +96,7 @@
                   end %>
                   <span class="profile-avatar"><%= link_to image_tag(avatar_url(worker), alt: "?"), worker, :title => title, :rel => "tipsy" %></span>
                 </li>
-                <% if index == 2 %>
+                <% if index == 2 && (@workers.size - index) > 1%>
                   <li id="more-members">
                     <span class="circle-button">
                       <%= link_to "#more-members-content", :title => "#{@workers.size - index - 1} weitere Arbeiter", :rel => "tipsy", :class => "open-popup-link" do%>
