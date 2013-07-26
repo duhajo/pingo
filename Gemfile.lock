@@ -45,7 +45,6 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.3)
-    commonjs (0.2.6)
     country_select (1.2.0)
     devise (3.0.0)
       bcrypt-ruby (~> 3.0)
@@ -70,12 +69,6 @@ GEM
     kaminari (0.14.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
-    less (2.3.2)
-      commonjs (~> 0.2.6)
-    less-rails (2.3.3)
-      actionpack (>= 3.1)
-      less (~> 2.3.1)
-    libv8 (3.11.8.0)
     magnific-popup-rails (0.9.3)
     mail (2.5.4)
       mime-types (~> 1.16)
@@ -119,7 +112,6 @@ GEM
     rake (10.1.0)
     rdoc (3.12.2)
       json (~> 1.4)
-    ref (1.0.5)
     rsolr (1.0.9)
       builder (>= 2.1.2)
     sass (3.2.9)
@@ -150,8 +142,6 @@ GEM
       nokogiri
       sunspot (= 2.0.0)
     temple (0.6.5)
-    therubyracer (0.11.0beta1-x86-mingw32)
-      ref
     thor (0.18.1)
     tilt (1.4.1)
     treetop (1.4.14)
@@ -183,8 +173,6 @@ DEPENDENCIES
   jquery-rails
   jquery-ui-rails
   kaminari
-  less-rails
-  libv8 (= 3.11.8.0)
   magnific-popup-rails
   mysql2
   public_activity
@@ -193,5 +181,4 @@ DEPENDENCIES
   simple_form
   slim-rails
   sunspot_rails
-  therubyracer
   uglifier (>= 1.0.3)
