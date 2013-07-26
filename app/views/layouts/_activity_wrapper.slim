@@ -1,0 +1,17 @@
+.activity
+  .body
+    .mega-icon style="background-image: url(#{image_path "icons/#{a.key}.svg"})"
+    =' timeago a.created_at
+    .title
+      - if a.owner
+        =' link_to a.owner.name, a.owner
+      - else
+        ' someone
+      =' content_for :action
+    .details
+      .avatar
+        - if a.owner
+          = image_tag avatar_url(a.owner), width: "30", height: "30"
+        - else
+          = image_tag "http://i0.wp.com/a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-140.png", width: "30", height: "30"
+      = yield

@@ -191,29 +191,10 @@
         <%= button_to 'Add Subtask', :action => "new" %>
     </div>
     <div class="content-box" id="job-activities">
-      <%= form_for([@job, @job.activities.build]) do |f| %>
-        <%= f.text_area :content, :size => "80x2" %><br />
-        <%= f.submit "Post Comment" %>
-      <% end %>
+      <%= render :partial => "comments/form" %>
 
       <% @activities.each do |activity| %>
-          <p>
-            <% if not activity.user.nil? %>
-              <b><%= activity.user.name %> said:</b><br />
-            <% else %>
-              <% activity.user %>
-            <% end %>
-
-            <%= activity.created_at %>
-          </p>
-
-          <p>
-            <%= activity.content %>
-          </p>
-
-      <%= link_to 'Edit', edit_activity_path(activity) %> |
-      <%= link_to 'Show', activities_path %>
-
+          <%= render_activity(activity, :layout => "layouts/activity_wrapper") %>
       <% end %>
     </div>
   </div>

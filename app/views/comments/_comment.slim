@@ -1,0 +1,9 @@
+.activity.comment
+  .body
+    .title
+      =' timeago comment.created_at, class: "timeago pull-right"
+    .details
+      .avatar
+        = image_tag avatar_url(comment.user), width: "30", height: "30", title: comment.user.name
+
+      = comment.comment

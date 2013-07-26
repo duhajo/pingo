@@ -14,7 +14,6 @@ class User < ActiveRecord::Base
   attr_accessible :login, :name, :email, :password, :password_confirmation, :remember_me, :skill_list, :country, :city, :district, :latitude, :longitude, :radius
   has_many :jobs_workers
   has_many :jobs, :through => :jobs_workers
-  has_many :activities
 		 
   geocoded_by :address
   after_validation :geocode, :if => :address_changed?

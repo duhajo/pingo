@@ -1,10 +1,12 @@
 class ApplicationController < ActionController::Base
+  include PublicActivity::StoreController
+  include ActionView::Helpers::TextHelper
+  protect_from_forgery
+  force_ssl
   
   helper :all # include all helpers, all the time  
   helper_method :my_jobs
   
-  protect_from_forgery
-  force_ssl
   private
   
   def auth_user

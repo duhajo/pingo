@@ -1,0 +1,4 @@
+= simple_form_for [@job, @comment] do |f|
+  = f.input :comment, label: false, :input_html => {:maxlength => 15, :rows => 4, :cols => 50}
+  .form-actions
+    = f.button :submit, class: 'btn-success pull-right'

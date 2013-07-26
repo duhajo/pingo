@@ -46,7 +46,9 @@ class JobsController < ApplicationController
     end
     @jobs = Job.find_all_by_parent_id(@job.id)
     @parent_jobs = @job.ancestors
-    @activities = @job.activities.all
+    @activities = PublicActivity::Activity.order("created_at DESC").where(trackable_type: "Job", trackable_id: @job).all
+    @comment = Comment.new
+    @comments = @job.comments
     @json = @job.to_gmaps4rails
     @workers = User.joins(:jobs_workers)
     .where('jobs_workers.job_id' => @job.id)

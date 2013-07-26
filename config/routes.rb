@@ -1,21 +1,21 @@
 Duhajo::Application.routes.draw do
+
   devise_for :users, :controllers => { :sessions => "users/sessions", :registrations => "users/registrations" }
 
   resources :activities
+
   resources :users do
     collection do
       get :tag
     end
-    resources :activities
+    resources :comments
   end
   
   resources :jobs do
     collection do
       get :tag
     end
-    resources :activities do
-      resources :activities
-    end
+    resources :comments, only: [:create, :update, :edit, :destroy]
   end
   resources :tags
   
