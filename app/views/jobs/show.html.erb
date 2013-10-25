@@ -1,4 +1,4 @@
-<div id="job-view"<% if @job.status == 3 || user_signed_in? %>class="closed"<% end %>>
+<div id="job-view"<% if @job.status == 3 || user_signed_in? && @job.parent_id.nil? %>class="closed"<% end %>>
   <% if user_signed_in? && @job.status != 3 %>
     <% content_for :actionbar do %>
       <ul class="actions">
@@ -58,7 +58,13 @@
           <div id="job-meta">
             <div id="job-deadline">
               <span class="icon"><!----></span>
-              <span class="icon-label" title="<%= @job.deadline.to_formatted_s(:long) %>"><%=  distance_of_time_in_words(@job.deadline, Time.now, true) %></span><span class="clear"></span></div>
+              <span class="icon-label" title="<%= @job.deadline.to_formatted_s(:long) %>">
+                <%=  distance_of_time_in_words(Time.now, @job.deadline, true) %>
+                <% if @job.deadline < DateTime.now %>
+                  ago
+                <% end %>
+              </span>
+              <span class="clear"></span></div>
             <div id="job-location">
               <span class="icon"><!----></span><span class="icon-label">
                   <% #gmaps("map_options" => { "auto_zoom" => false, "zoom" => 8},"markers" => { "data" => @json }) %>
@@ -142,12 +148,8 @@
   <p id="notice"><%= notice %></p>
   <div id="content-tabs">
     <div id="sub-navigation">
-      <ul>
-        <li><a href="#job-tasks">Unteraufgaben (<%= @jobs.size %>) </a></li>
-        <li class="last"><a href="#job-activities">Aktivit&auml;ten (<%= @activities.size %>)</a></li>
-      </ul>
-    </div>
-    <div class="content-box" id="job-tasks">
+    <div class="content-box left" id="job-tasks">
+        <h2>Unteraufgaben (<%= @jobs.size %>)</h2>
         <% @jobs.each do |job|%>
           <div class="job-container">
             <div class="job">
@@ -168,7 +170,7 @@
               <span class="clear"></span>
             </div>
             <%
-              likeClass = "likes-button icon"
+              likeClass = "likes-button like icon"
               if user_signed_in?
                 if current_user.voted_up_on? job
                   likeClass << " voted"
@@ -190,7 +192,8 @@
         <% end %>
         <%= button_to 'Add Subtask', :action => "new" %>
     </div>
-    <div class="content-box" id="job-activities">
+    <div class="content-box right" id="job-activities">
+      <h2>Aktivit&auml;ten</h2>
       <%= render :partial => "comments/form" %>
 
       <% @activities.each do |activity| %>
