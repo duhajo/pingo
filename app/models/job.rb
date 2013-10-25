@@ -1,6 +1,6 @@
 class Job < ActiveRecord::Base
-  include PublicActivity::Model
-  tracked
+  include PublicActivity::Common
+  #tracked owner: Proc.new{ |controller, model| controller.current_user }
   acts_as_commentable
   acts_as_nested_set
   acts_as_votable
@@ -9,11 +9,6 @@ class Job < ActiveRecord::Base
   attr_accessible :deadline, :description, :parent_id, :title, :skill_list, :country, :city, :street
   has_many :jobs_workers, :dependent => :destroy
   has_many :users, :through => :jobs_workers
-  
-  tracked :owner => proc {|controller, model| controller.current_user}, # set owner to current_user by default (check app/controllers/application_controller.rb)
-          :params => {
-            :summary => proc {|controller, model| controller.truncate(model.title, length: 30)} # by default save truncated summary of the post's body
-          }
 
   geocoded_by :address
   after_validation :geocode, :if => :address_changed?
