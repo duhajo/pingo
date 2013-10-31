@@ -10,6 +10,9 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+#notification
+gem "gritter", "1.0.3"
+
 gem "jquery-rails"
 gem "jquery-ui-rails"
 gem 'awesome_nested_set'

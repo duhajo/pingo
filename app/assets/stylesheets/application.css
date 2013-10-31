@@ -10,6 +10,7 @@
  *
  *= require_self
  *= require magnific-popup
+ *= require gritter
  *= require_tree .
  *= require vendor
 */

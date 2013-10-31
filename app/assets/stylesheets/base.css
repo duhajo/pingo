@@ -1,4 +1,4 @@
-/* 
+/*
     Document   : base
     Created on : 08.06.2013, 13:00:39
     Author     : Psyphant
@@ -11,13 +11,13 @@
   src: "<%= asset_path('fonts/LilGrotesk-Regular.otf') %>" format('opentype');
   font-weight: normal;
   font-style: normal;
-} 
+}
 
 body {
   font-family: 'LilGrotesk', Arial, Sans-Serif;
   font-size: 18px;
   line-height: 28px;
-} 
+}
 
 ul {
   list-style: none outside none;
@@ -31,11 +31,11 @@ a {
 }
 
 /** HIDING FOCUSRING */
-a:active, a, li { 
-	outline: none; 
+a:active, a, li {
+	outline: none;
 }
-a:focus { 
-	-moz-outline-style: none; 
+a:focus {
+	-moz-outline-style: none;
 }
 a:-moz-any-link:focus {
 	outline: none;
@@ -117,7 +117,7 @@ h2 {
   display: block;
 }
 
-#profile .text-arrow {  
+#profile .text-arrow {
   display: inline-block;
   float: right;
   text-align: right;
@@ -407,3 +407,42 @@ abbr.timeago{
 .clear { clear: both; }
 .overflow { overflow: hidden; }
 .left { float: left; }
+
+
+
+.jbar{
+    height:50px;
+    width:100%;
+    position:fixed;
+    text-align:center;
+    left:0px;
+    z-index:9999999;
+    margin:0px;
+    padding:0px;
+    filter:progid:DXImageTransform.Microsoft.Alpha(opacity=92);
+    opacity: 0.92;
+    -moz-opacity: 0.92;
+    -moz-box-shadow: #555 0px 0px 5px;
+    box-shadow: #555 0px 0px 5px;
+}
+
+.jbar-top{
+    top:0px;
+}
+
+.jbar-bottom{
+    bottom:0px;
+}
+
+.jbar-content{
+    line-height:46px;
+    font-size: 18px;
+}
+
+.jbar-top a.jbar-cross{
+    top:8px;
+}
+
+.jbar-bottom a.jbar-cross{
+    bottom:8px;
+}

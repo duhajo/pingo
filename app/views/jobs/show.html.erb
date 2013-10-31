@@ -127,7 +127,7 @@
                 <li id="likes" <% if @job.likes.size == 0 %> class="hidden" <% end %>>
                   <span class="plus">+</span><span class="icon"></span><span class="icon-label likes-number">
                     <a href="#" title="
-                       <%= #ToDo -> dynamisch per JS laden 
+                       <%= #ToDo -> dynamisch per JS laden
                        @job.votes.up.by_type(User).voters.map{|v| v.name}.join(", ")%>
                        " rel="tipsy"><%= @job.likes.size %></a>
                   </span>
@@ -145,7 +145,7 @@
     $( "#content-tabs" ).tabs();
   });
   </script>
-  <p id="notice"><%= notice %></p>
+  <%= js add_gritter(flash[:notice], :title => notice, :image => :success) %>
   <div id="content-tabs">
     <div id="sub-navigation">
     <div class="content-box left" id="job-tasks">
@@ -175,7 +175,7 @@
                 if current_user.voted_up_on? job
                   likeClass << " voted"
                 end
-              end 
+              end
               if job.likes.size == 0
                 likeClass << " no-votes"
               end

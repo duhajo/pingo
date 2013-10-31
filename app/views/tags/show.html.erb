@@ -30,12 +30,12 @@
                   <span class="clear"></span>
                 </div>
                 <%
-                  likeClass = "like icon"
+                  likeClass = "likes-button like icon"
                   if user_signed_in?
                     if current_user.voted_up_on? job
                       likeClass << " voted"
                     end
-                  end 
+                  end
                   if job.likes.size == 0
                     likeClass << " no-votes"
                   end

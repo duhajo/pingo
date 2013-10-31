@@ -5,7 +5,7 @@ class JobsController < ApplicationController
   # GET /jobs
   # GET /jobs.json
   def index
-  
+
   if params[:search].present?
     if current_user
       @radius = User.find(current_user.id).radius
@@ -66,7 +66,7 @@ class JobsController < ApplicationController
        @parent_job = Job.find(params[:id])
     end
     @job = Job.new
-    
+
     respond_to do |format|
        format.html # new.html.erb
        format.json { render json: @job }
@@ -131,7 +131,7 @@ class JobsController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
+
   def support
     @job = Job.find(params[:id])
     if params[:support]
@@ -143,35 +143,35 @@ class JobsController < ApplicationController
     else
       @job.users.delete(current_user)
     end
-    
+
     respond_to do |format|
       format.html { redirect_to @job }
       format.json { head :no_content }
     end
   end
-  
+
   def get_tags()
     @job = Job.find(params[:id])
     @tags = @job.tag_counts_on(:skills, :limit => 5, :order => "count desc")
   end
-  
+
   def set_status
     @job = Job.find(params[:id])
     @managers = JobsWorker.where(:job_id => @job.id).where('jobs_workers.isCreator' => true).where(:user_id => current_user.id)
     unless @managers.empty?
       @job.status = params[:status]
       @job.save()
-    end   
-    
+    end
+
     respond_to do |format|
-      format.html { 
+      format.html {
         render :partial => 'status', :job => @job, :manager => @managers
       }
       format.json { head :no_content }
       format.js {}
     end
   end
-  
+
   def like
     @job = Job.find(params[:id])
     if current_user
@@ -182,8 +182,8 @@ class JobsController < ApplicationController
         current_user.dislikes @job
         @job.save()
       end
-    end  
-    
+    end
+
     respond_to do |format|
       format.json { render :json => @job.likes.size }
     end

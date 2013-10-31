@@ -12,7 +12,7 @@
       <div id="logo">
         <%= link_to image_tag("logo.png"), root_path %></a>
       </div>
-      <div id="profile">  
+      <div id="profile">
         <%if user_signed_in? %>
           <a href="/myprofile">
             <span class="profile-avatar"><%= image_tag avatar_url(current_user), alt: "?" %></span>
@@ -43,7 +43,7 @@
         <% else %>
           <%= link_to "Anmelden", new_user_session_path%> oder <%= link_to "Registrieren", new_user_registration_path%>
         <% end %>
-        
+
       </div>
     </div>
     <div id="main">

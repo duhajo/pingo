@@ -1,10 +1,10 @@
 class UsersController < ApplicationController
-  
+
   def index
     @users = User.all
     @tags = User.tag_counts_on(:skills)
   end
-  
+
   def my_profile
     @user = User.find(current_user.id)
   end
@@ -19,18 +19,18 @@ class UsersController < ApplicationController
       format.json { render json: @user }
     end
   end
-  
+
   # GET /users/1/edit
   def edit
     @user = User.find(params[:id])
   end
-  
+
   def update
     @user = User.find(params[:id])
     params[:user].delete(:password) if params[:user][:password].blank?
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.html { redirect_to :myprofile, notice: 'Your profile successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -38,5 +38,5 @@ class UsersController < ApplicationController
       end
     end
   end
-  
+
 end

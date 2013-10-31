@@ -10,6 +10,7 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
+        @job.create_activity key: "job.commented", owner: current_user, params: {comment: @comment.comment}
         format.html { redirect_to @job, notice: 'Comment was successfully created.' }
       else
         format.html { render action: "new" }
