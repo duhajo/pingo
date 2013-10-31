@@ -164,18 +164,18 @@ h2 {
   text-align: right;
 }
 
-#my-job-sidebar {
+#my-jobs-sidebar {
   margin-top: 50px;
 }
 
-#my-job-sidebar h2 {
+#my-jobs-sidebar h2 {
   color: #C3C3C3;
   font-size: 14px;
   font-weight: normal;
   text-transform: uppercase;
 }
 
-#my-job-sidebar ul ul {
+#my-jobs-sidebar ul ul {
   margin-left: 5px;
 }
 
@@ -230,7 +230,7 @@ h2 {
 #main-navigation #search {
   float: left;
   margin-left: 20px;
-  margin-top: 25px;
+  margin-top: 12px;
 }
 
 #main-navigation #search label {
@@ -238,7 +238,12 @@ h2 {
   display: block;
   float: left;
   height: 32px;
+  margin-top: 10px;
   width: 32px;
+}
+
+#main-navigation #search #search-form {
+  float: left;
 }
 
 #main-navigation #search input {

@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(:version => 20130726114400) do
 
   create_table "jobs", :force => true do |t|
     t.string   "title"
-    t.string   "description"
+    t.text     "description"
     t.date     "deadline"
     t.integer  "parent_id"
     t.integer  "lft"

@@ -1,13 +1,12 @@
 class Job < ActiveRecord::Base
   include PublicActivity::Common
-  #tracked owner: Proc.new{ |controller, model| controller.current_user }
   acts_as_commentable
   acts_as_nested_set
   acts_as_votable
   acts_as_taggable
   acts_as_taggable_on :skills
   attr_accessible :deadline, :description, :parent_id, :title, :skill_list, :country, :city, :street
-  has_many :jobs_workers, :dependent => :destroy
+  has_many :jobs_workers, dependent: :delete_all
   has_many :users, :through => :jobs_workers
 
   geocoded_by :address
@@ -43,5 +42,13 @@ class Job < ActiveRecord::Base
   
   def address_changed?
     :country_changed? or :city_changed? or :street_changed?
+  end
+
+  def self.search(search)
+    if search
+      find(:all, :conditions => ['title LIKE ?', "%#{search}%"])
+    else
+      find(:all)
+    end
   end
 end

@@ -2,7 +2,7 @@ class CreateJobs < ActiveRecord::Migration
   def self.up
     create_table :jobs do |t|
       t.string :title
-      t.string :description
+      t.text :description
       t.date :deadline
       t.integer :parent_id
       t.integer :lft

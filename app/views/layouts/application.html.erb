@@ -37,16 +37,8 @@
             	<li id="logout"><%= link_to "Abmelden", '/logout'%></li>
           	</ul>
           </ul>
-          <div id="my-job-sidebar">
-            <h2>Meine Aufgaben</h2>
-            <% @my_jobs = my_jobs %>
-            <%if @my_jobs.empty? %>
-              <span>Es sind noch keine Jobs vorhanden.</span>
-            <% else %>
-              <%= sorted_nested_li(@my_jobs, :title) do |job| %>
-                <%= link_to job.title, job %>
-              <% end %>
-            <% end %>
+          <div id="my-jobs-sidebar">
+            <%= render :partial => "myjobs", :my_jobs => @my_jobs %>
           </div>
         <% else %>
           <%= link_to "Anmelden", new_user_session_path%> oder <%= link_to "Registrieren", new_user_registration_path%>
@@ -62,7 +54,11 @@
           <li <%=cp("users")%>><%= link_to t('main_nav_workers'), users_path%></li>
           <li <%=cp("tags")%>><%= link_to t('main_nav_tags'), tags_path%></a></li>
         </ul>
-        <div id="search"><label for="search"><!-- --></label><input name="search" type="search" placeholder="Durchsuchen" /></div>
+        <div id="search"><label for="search"><!-- --></label>
+	        <%= form_tag(searches_path, :method => "get", id: "search-form") do %>
+		         <%= text_field_tag :search, params[:search], placeholder: "Search Jobs" %>
+	        <% end %>
+	      </div>
       </div>
       <div id="content-container">
         <div id="actionbar">

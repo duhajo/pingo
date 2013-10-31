@@ -90,7 +90,11 @@ class JobsController < ApplicationController
 
     respond_to do |format|
       if @job.save
-	@job.create_activity :create, owner: current_user
+        if @job.parent_id
+	        @job.create_activity :create_child, params: {job: Job.find(@job.parent_id)}, owner: current_user
+	      else
+          @job.create_activity :create, owner: current_user
+	      end
         format.html { redirect_to @job, notice: 'Job was successfully created.' }
         format.json { render json: @job, status: :created, location: @job }
       else

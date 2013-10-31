@@ -1,7 +1,8 @@
 Duhajo::Application.routes.draw do
 
   devise_for :users, :controllers => { :sessions => "users/sessions", :registrations => "users/registrations" }
-
+  
+  resources :searches, :only => [:index]
   resources :activities
 
   resources :users do
