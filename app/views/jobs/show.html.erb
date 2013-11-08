@@ -53,7 +53,13 @@
               <% end %>
               <span class="clear"></span>
             </div>
-            <div id="job-description"><%if @job.description.empty?%>Noch keine Beschreibung vorhanden...<%else%><%= @job.description %><%end%></div>
+            <div id="job-description">
+            <%if @job.description.empty?%>
+              Noch keine Beschreibung vorhanden...
+            <%else%>
+              <div class="job-description-preview"><%= truncate(@job.description, length: 250) %></div>
+              <div class="job-description-full" style="display:none;"><%=@job.description%></div>
+            <%end%></div>
           </div>
           <div id="job-meta">
             <div id="job-deadline">
@@ -66,16 +72,26 @@
               </span>
               <span class="clear"></span></div>
             <div id="job-location">
-              <span class="icon"><!----></span><span class="icon-label">
-                  <% #gmaps("map_options" => { "auto_zoom" => false, "zoom" => 8},"markers" => { "data" => @json }) %>
-                  <%=@job.address%>
-                  <br /><a href="#popup-zur-karte">Wo genau?</a>
+              <span class="icon"><!----></span>
+              <span class="icon-label">
+              <% if @job.latitude.nil? && @job.longitude.nil? %>
+                Keine Adresse definiert.
+              <% else %>
+                <%=@job.address%>
+                <br />
+                <%= link_to_modal 'Karte anzeigen', { :action => :map_for_job }, :remote => true %>
+              <% end %>
               </span>
               <span class="clear"></span>
             </div>
           </div>
           <div id="job-more-details">
-            <div class="splitter"><a href="#" title="Hier können die Jobdetails dann mal ausgeklappt werden">Jobdetails</a></div>
+            <div class="splitter" id="splitter-open">
+            <%= link_to_function 'Jobdetails', "$('.job-description-preview').hide();$('.job-description-full').show();$('#splitter-close').show();$(this).parent().hide();" %>
+            </div>
+            <div class="splitter" id="splitter-close" style="display:none;">
+            <%= link_to_function 'Weniger', "$('.job-description-full').hide();$('.job-description-preview').show();$('#splitter-open').show();$(this).parent().hide();" %>
+            </div>
           </div>
       </div>
       <div id="job-interactions">

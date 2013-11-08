@@ -49,7 +49,6 @@ class JobsController < ApplicationController
     @activities = PublicActivity::Activity.order("created_at DESC").where(trackable_type: "Job", trackable_id: @job).all
     @comment = Comment.new
     @comments = @job.comments
-    @json = @job.to_gmaps4rails
     @workers = User.joins(:jobs_workers)
     .where('jobs_workers.job_id' => @job.id)
     .select("name, id, email, isCreator").to_a
@@ -186,6 +185,15 @@ class JobsController < ApplicationController
 
     respond_to do |format|
       format.json { render :json => @job.likes.size }
+    end
+  end
+
+  def map_for_job
+    @job = Job.find(params[:id])
+    respond_to do |format|
+      format.html {
+        render :partial => 'map', :lat => @job.latitude, :long => @job.longitude
+      }
     end
   end
 end

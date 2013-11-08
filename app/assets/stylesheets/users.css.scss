@@ -9,6 +9,21 @@
   margin-right: 10px;
 }
 
+.worker-profile {
+  overflow: hidden;
+  line-height: 45px;
+  margin-bottom: 15px;
+}
+
+.worker-profile .profile-avatar {
+  float: left;
+  padding-right: 15px;
+}
+
+.worker-profile .profile-name {
+  clear: both;
+}
+
 .profile-avatar img {
   background-color: #FFFFFF;
   border-radius: 500px 500px 500px 500px;

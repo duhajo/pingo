@@ -11,21 +11,19 @@ class Job < ActiveRecord::Base
 
   geocoded_by :address
   after_validation :geocode, :if => :address_changed?
-  
-  acts_as_gmappable validation: false
 
   def gmaps4rails_address
-    "#{self.street}, #{self.city}, #{self.country}" 
+    "#{self.street}, #{self.city}, #{self.country}"
   end
-  
+
   scope :by_join_date, order("created_at DESC")
 
   def address
     @address = ""
-    unless street.empty? 
+    unless street.empty?
       @address << street
     end
-    unless city.empty? 
+    unless city.empty?
       if @address != ""
         @address << ", "
       end
@@ -39,7 +37,7 @@ class Job < ActiveRecord::Base
     end
     return @address
   end
-  
+
   def address_changed?
     :country_changed? or :city_changed? or :street_changed?
   end

@@ -35,7 +35,7 @@ $(document).ready ->
           init_status()
         false
     init_status()
-    
+
   $("#like-button").click ->
     $.ajax(
       type: "PUT"
@@ -66,3 +66,15 @@ $(document).ready ->
         likeButton.addClass "voted"
     false
   $('a[rel=tipsy]').tipsy({gravity: 's', opacity: 1})
+
+@initMap = (long, lat, zoom) ->
+  map = new OpenLayers.Map("map")
+  map.addLayer new OpenLayers.Layer.OSM()
+  projection_wgs = new OpenLayers.Projection("EPSG:4326") # WGS 1984
+  projection_smp = new OpenLayers.Projection("EPSG:900913") # Spherical Mercator
+  position = new OpenLayers.LonLat(long, lat).transform(projection_wgs, projection_smp)
+  markers = new OpenLayers.Layer.Markers("Markers")
+  map.addLayer markers
+  markers.addMarker new OpenLayers.Marker(position)
+  map.setCenter position, zoom
+  map

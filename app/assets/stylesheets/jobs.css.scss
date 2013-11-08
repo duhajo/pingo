@@ -95,7 +95,7 @@
   float: left;
   margin: 0;
 }
-  
+
 #job #job-title #job-status {
   float: right;
   text-align: center;
@@ -130,7 +130,7 @@
 #job #job-status.rights .button:hover span.now, #job #job-status .button span.new {
   display: none;
 }
-  
+
 #job #job-status.rights .button:hover span.new {
   display: block;
 }
@@ -151,6 +151,7 @@
 }
 
 #job #job-details #job-description {
+  margin-right: 15px;
   margin-top: 15px;
 }
 
@@ -168,7 +169,8 @@
 #job #job-meta .icon-label {
   float: left;
   line-height: 20px;
-  margin-left: 15px;
+  margin-left: 5%;
+  width: 82%;
 }
 
 #job #job-deadline .icon-label {

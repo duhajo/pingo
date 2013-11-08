@@ -1,0 +1,17 @@
+<div class="similar-workers">
+  <h2>Arbeiter mit dem Tag</h2>
+  <% if @workers.empty? %>
+     Sorry, keine Arbeiter mit diesem Tag gefunden!
+  <% else %>
+    <div class="workers-list">
+      <ul>
+        <% @workers.each do |worker|%>
+          <li class="worker-profile">
+            <span class="profile-avatar"><%= link_to image_tag(avatar_url(worker), alt: "?"), worker, :title => worker.name, :rel => "tipsy" %></span>
+            <span class="profile-name"><%= link_to worker.name, worker %></span>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+</div>

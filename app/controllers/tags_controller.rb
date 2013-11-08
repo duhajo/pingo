@@ -6,10 +6,10 @@ class TagsController < ApplicationController
 
   def show
     @tag = Tag.find(params[:id])
-    
+
     @workers = User.tagged_with(@tag.name)
     @jobs = Job.tagged_with(@tag.name)
-    
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @tag }

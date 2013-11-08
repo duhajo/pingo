@@ -446,3 +446,12 @@ abbr.timeago{
 .jbar-bottom a.jbar-cross{
     bottom:8px;
 }
+
+#map {
+  height: 300px;
+}
+
+#map .olControlAttribution {
+  bottom: 5px;
+  font-size: 12px;
+}

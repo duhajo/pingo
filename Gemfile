@@ -8,13 +8,13 @@ group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
+  gem "jquery-rails"
+  gem "jquery-ui-rails"
+  gem 'jquery-modal-rails'
 end
 
 #notification
 gem "gritter", "1.0.3"
-
-gem "jquery-rails"
-gem "jquery-ui-rails"
 gem 'awesome_nested_set'
 
 #To use tagging
@@ -23,7 +23,7 @@ gem 'devise'
 
 # To use Geolocations
 gem "geocoder"
-gem 'gmaps4rails'
+gem 'openlayers-rails'
 
 # To use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.0.0'

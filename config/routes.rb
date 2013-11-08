@@ -1,7 +1,7 @@
 Duhajo::Application.routes.draw do
 
   devise_for :users, :controllers => { :sessions => "users/sessions", :registrations => "users/registrations" }
-  
+
   resources :searches, :only => [:index]
   resources :activities
 
@@ -11,7 +11,7 @@ Duhajo::Application.routes.draw do
     end
     resources :comments
   end
-  
+
   resources :jobs do
     collection do
       get :tag
@@ -19,12 +19,13 @@ Duhajo::Application.routes.draw do
     resources :comments, only: [:create, :update, :edit, :destroy]
   end
   resources :tags
-  
+
   match "dashboard" => "dashboard#index"
-  
+
   match "jobs/:id/new" => "jobs#new"
   match "jobs/:id/support" => "jobs#support"
   match "jobs/:id/set_status" => "jobs#set_status"
+  match "jobs/:id/map_for_job" => "jobs#map_for_job"
   put 'jobs/:id/like' => 'jobs#like', :as => 'like_job'
 
   # Sample of named route:
@@ -53,7 +54,7 @@ Duhajo::Application.routes.draw do
   #       get 'recent', :on => :collection
   #     end
   #   end
-  
+
   # Sample resource route within a namespace:
   #   namespace :admin do
   #     # Directs /admin/products/* to Admin::ProductsController
@@ -66,12 +67,12 @@ Duhajo::Application.routes.draw do
     get "/logout", :to => "users/sessions#destroy", :as => :logout
     get "/myprofile", :to => "users#my_profile", :as => :myprofile
   end
-  
+
   root :to => "jobs#index"
   authenticate :user do
     root :to => "dashboard#index"
   end
-  
+
 
   # See how all your routes lay out with "rake routes"
 
