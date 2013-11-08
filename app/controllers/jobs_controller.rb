@@ -190,9 +190,11 @@ class JobsController < ApplicationController
 
   def map_for_job
     @job = Job.find(params[:id])
+    @lat = @job.latitude
+    @long = @job.longitude
     respond_to do |format|
       format.html {
-        render :partial => 'map', :lat => @job.latitude, :long => @job.longitude
+        render :partial => 'map', :lat => @lat, :long => @long
       }
     end
   end
