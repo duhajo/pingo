@@ -1,13 +1,13 @@
 <% content_for :actionbar do %>
-  <ul>
-    <li><%= link_to 'Abbrechen', jobs_path %></li>
+  <ul class="actions">
     <li><%= link_to "Entfernen", @job, :method => :delete, :confirm => "Are you sure ?"%></li>
+    <li><%= link_to 'Abbrechen', jobs_path %></li>
   </ul>
 <% end %>
 
-<h1>Editing job</h1>
+<h1>Job bearbeiten</h1>
 
-<%= form_for @job do |f| %>
+<%= form_for(@job) do |f| %>
   <% if @job.errors.any? %>
     <div class="error_messages">
       <h2>Form is invalid</h2>
@@ -18,35 +18,55 @@
       </ul>
     </div>
   <% end %>
-  <div class="field">
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
+  <div class="content-box left">
+    <div class="field">
+      <%= f.label :title %><br />
+      <%= f.text_field :title %>
+    </div>
+    <div class="area">
+      <%= f.label :description %><br />
+      <%= f.text_area :description, size: "40x10" %>
+    </div>
+    <div class="field">
+      Hier kommt noch die Option für Manager hin, andere Manager hinzuzügen.
+    </div>
   </div>
-  <div class="area">
-    <%= f.label :description %><br />
-    <%= f.text_area :description, size: "40x10" %>
+  <div class="content-box right">
+    <div class="field">
+      <%= f.label :skill_list, "Tags (separated by commas)" %><br />
+      <%= f.text_field :skill_list %>
+    </div>
+    <% if @job.deadline.nil?
+      @setDeadline = true %>
+    <div id="show-deadline-link">
+      <%= link_to 'Deadline setzen', '#',
+            :onclick => 'showDeadline()'%>
+    </div>
+    <% end %>
+    <div id="deadline-field" class="field" <% if @setDeadline %> style="display: none;" <% end %>>
+      <%= f.label :deadline %><br />
+      <%= f.date_select :deadline, {:include_blank => true, :default => nil} %>
+    </div>
+    <% if @job.latitude.nil? && @job.longitude.nil?
+      @setPlace = true %>
+    <div id="show-place-link">
+      <%= link_to 'Ort setzen', '#',
+            :onclick => 'showPlace()'%>
+    </div>
+    <% end %>
+    <div id="place-field" <% if @setPlace %> style="display: none;" <% end %>>
+      <div class="field">
+        <%= f.label :country %><br />
+        <%= f.text_field :country %>
+      </div>
+      <div class="field">
+        <%= f.label :city %><br />
+        <%= f.text_field :city %>
+      </div>
+      <div class="field">
+        <%= f.label :street %><br />
+        <%= f.text_field :street %>
+      </div>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :deadline %><br />
-    <%= f.date_select :deadline %>
-  </div>
-  <div class="field">
-    <%= f.label :skill_list, "Tags (separated by commas)" %><br />
-    <%= f.text_field :skill_list %>
-  </div>
-  <div class="field">
-    <%= f.label :country %><br />
-    <%= f.text_field :country %>
-  </div>
-  <div class="field">
-    <%= f.label :city %><br />
-    <%= f.text_field :city %>
-  </div>
-  <div class="field">
-    <%= f.label :street %><br />
-    <%= f.text_field :street %>
-  </div>
-  <div class="actions"><%= f.submit %></div>
 <% end %>
-
-Hier kommt noch die Option für Manager hin, andere Manager hinzuzügen.

@@ -158,70 +158,62 @@
       </div>
     </div>
   </div>
-
-  <script>
-  $(function() {
-    $( "#content-tabs" ).tabs();
-  });
-  </script>
   <%= js add_gritter(flash[:notice], :title => notice, :image => :success) %>
   <div id="content-tabs">
-    <div id="sub-navigation">
     <div class="content-box left" id="job-tasks">
-        <h2>Unteraufgaben (<%= @jobs.size %>)</h2>
-        <% @jobs.each do |job|%>
-          <div class="job-container"
-          <% if job.status == 3 %>closed<% elsif job.status == 2 %>in-work<% else %>open<% end %>">
-            <div class="job">
-              <div class="job-details">
-                <div class="job-title"><h3><%= link_to job.title, job %>
-                <% if job.deadline < DateTime.now %>
-                  <span class="expired">(expired)</span>
-                <% end %></h3></div>
-                <div class="job-tags">
-                  <ul>
-                  <% job.tag_counts_on(:skills, :limit => 5, :order => "count desc").each do |tag| %>
-                    <li><%= link_to tag.name, { :action => :tag, :id => tag.name } %></li>
-                  <% end %>
-                  </ul>
-                  <span class="clear"></span>
-                </div>
+      <h2>Unteraufgaben (<%= @jobs.size %>)</h2>
+      <% @jobs.each do |job|%>
+        <div class="job-container"
+        <% if job.status == 3 %>closed<% elsif job.status == 2 %>in-work<% else %>open<% end %>">
+          <div class="job">
+            <div class="job-details">
+              <div class="job-title"><h3><%= link_to job.title, job %>
+              <% if !job.deadline.nil? && job.deadline < DateTime.now %>
+                <span class="expired">(expired)</span>
+              <% end %></h3></div>
+              <div class="job-tags">
+                <ul>
+                <% job.tag_counts_on(:skills, :limit => 5, :order => "count desc").each do |tag| %>
+                  <li><%= link_to tag.name, { :action => :tag, :id => tag.name } %></li>
+                <% end %>
+                </ul>
+                <span class="clear"></span>
               </div>
-              <div class="job-interactions">
-                <div class="job-fav"></div>
-              </div>
-              <span class="clear"></span>
             </div>
-            <%
-              likeClass = "likes-button like icon"
-              if user_signed_in?
-                if current_user.voted_up_on? job
-                  likeClass << " voted"
-                end
-              end
-              if job.likes.size == 0
-                likeClass << " no-votes"
-              end
-            %>
-            <div class="job-likes">
-              <% if user_signed_in? %>
-                <%= link_to '', like_job_path(job), :class => likeClass, :method => :put, :remote => true, :"data-id" => job.id%>
-              <% else %>
-                <%= link_to '', login_path, :class => "like icon no-login"%>
-              <% end %>
-              <div class="likes-number <% if job.likes.size == 0 %>hidden<%end%>"><%= job.likes.size %></div>
+            <div class="job-interactions">
+              <div class="job-fav"></div>
             </div>
+            <span class="clear"></span>
           </div>
-        <% end %>
-        <%= button_to 'Add Subtask', :action => "new" %>
-    </div>
-    <div class="content-box right" id="job-activities">
-      <h2>Aktivit&auml;ten</h2>
-      <%= render :partial => "comments/form" %>
-
-      <% @activities.each do |activity| %>
-          <%= render_activity(activity, :layout => "layouts/activity_wrapper") %>
+          <%
+            likeClass = "likes-button like icon"
+            if user_signed_in?
+              if current_user.voted_up_on? job
+                likeClass << " voted"
+              end
+            end
+            if job.likes.size == 0
+              likeClass << " no-votes"
+            end
+          %>
+          <div class="job-likes">
+            <% if user_signed_in? %>
+              <%= link_to '', like_job_path(job), :class => likeClass, :method => :put, :remote => true, :"data-id" => job.id%>
+            <% else %>
+              <%= link_to '', login_path, :class => "like icon no-login"%>
+            <% end %>
+            <div class="likes-number <% if job.likes.size == 0 %>hidden<%end%>"><%= job.likes.size %></div>
+          </div>
+        </div>
       <% end %>
-    </div>
+      <%= button_to 'Add Subtask', :action => "new" %>
+  </div>
+  <div class="content-box right" id="job-activities">
+    <h2>Aktivit&auml;ten</h2>
+    <%= render :partial => "comments/form" %>
+
+    <% @activities.each do |activity| %>
+        <%= render_activity(activity, :layout => "layouts/activity_wrapper") %>
+    <% end %>
   </div>
 </div>
