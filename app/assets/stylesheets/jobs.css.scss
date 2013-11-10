@@ -8,15 +8,30 @@
   overflow: hidden;
   padding: 8px 8px 8px 0;
   position: relative;
+
+  .job {
+    background-color: #FFFFFF;
+    border: 1px solid #E4E4E4;
+    box-shadow: 0 1px 0 0 #E6E6E6;
+    height: 60px;
+    padding: 5px;
+    position: relative;
+  }
+
+  .job-likes {
+    background-image: url("icons/like-bg.png");
+    height: 78px;
+    position: absolute;
+    right: 90px;
+    top: 5px;
+    width: 70px;
+  }
 }
 
-.job {
-  background-color: #FFFFFF;
-  border: 1px solid #E4E4E4;
-  box-shadow: 0 1px 0 0 #E6E6E6;
-  height: 60px;
-  padding: 5px;
-  position: relative;
+.job-container.closed {
+  .job-title {
+    text-decoration: line-through;
+  }
 }
 
 .job .job-title h3 {
@@ -29,15 +44,6 @@
   bottom: 10px;
   left: 10px;
   position: absolute;
-}
-
-.job-container  .job-likes {
-  background-image: url("icons/like-bg.png");
-  height: 78px;
-  position: absolute;
-  right: 90px;
-  top: 5px;
-  width: 70px;
 }
 
 .job-container .like.icon, .job-container .like.voted:hover {
@@ -188,11 +194,10 @@
   height: 30px;
   line-height: 30px;
   text-align: center;
-}
-
-#job #job-more-details .splitter {
-  border-bottom: 1px solid #dadada;
-  height: 16px;
+  .splitter {
+    border-bottom: 1px solid #dadada;
+    height: 16px;
+  }
 }
 
 #job #job-more-details .splitter a {

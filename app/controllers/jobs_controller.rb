@@ -46,7 +46,11 @@ class JobsController < ApplicationController
     end
     @jobs = Job.find_all_by_parent_id(@job.id)
     @parent_jobs = @job.ancestors
-    @activities = PublicActivity::Activity.order("created_at DESC").where(trackable_type: "Job", trackable_id: @job).all
+    @job_ids = Array.new << @job.id
+    @jobs.each do |job|
+      @job_ids << job.id
+    end
+    @activities = PublicActivity::Activity.order("created_at DESC").all(:conditions => {trackable_type: "Job", trackable_id: [@job_ids] })
     @comment = Comment.new
     @comments = @job.comments
     @workers = User.joins(:jobs_workers)

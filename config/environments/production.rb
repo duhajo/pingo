@@ -1,6 +1,10 @@
 Duhajo::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
+  require 'jquery/modal/rails'
+  require 'jquery/modal/filters'
+  require 'jquery/modal/helpers'
+
   # Code is not reloaded between requests
   config.cache_classes = true
 
@@ -19,7 +23,7 @@ Duhajo::Application.configure do
 
   # Generate digests for assets URLs
   config.assets.digest = true
-  
+
   config.assets.initialize_on_precompile = false
 
   # Defaults to nil and saved in location specified by config.assets.prefix
