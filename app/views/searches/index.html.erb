@@ -4,7 +4,7 @@
     <% else %>
       <div id="list-jobs">
         <% @jobs.each do |job|%>
-          <div class="job-container">
+          <div class="job-container <% if job.status == 3 %>closed<% elsif job.status == 2 %>in-work<% else %>open<% end %>">
             <div class="job">
               <div class="job-details">
                 <div class="job-title"><h3><%= link_to job.title, job %></h3></div>
@@ -28,7 +28,7 @@
                 if current_user.voted_up_on? job
                   likeClass << " voted"
                 end
-              end 
+              end
               if job.likes.size == 0
                 likeClass << " no-votes"
               end

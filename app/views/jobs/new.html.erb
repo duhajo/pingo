@@ -1,10 +1,16 @@
-<h1>Neuer Job</h1>
+<% content_for :actionbar do %>
+  <ul class="actions">
+    <li><%= link_to 'Erstellen', "#", :onclick => "sendForm('new_job');" %></li>
+    <li><%= link_to 'Abbrechen', jobs_path %></li>
+  </ul>
+<% end %>
+
+<h1>Neuer Job <% if not @parent_job.nil? %>für "<%= @parent_job.title %>"<% end %></h1>
 
 <%= form_for(@job) do |f| %>
   <% if @job.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@job.errors.count, "error") %> prohibited this job from being saved:</h2>
-
       <ul>
       <% @job.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
@@ -13,41 +19,48 @@
     </div>
   <% end %>
   <% if not @parent_job.nil? %>
-    für: <%= @parent_job.title %>
     <%= f.hidden_field :parent_id, value: @parent_job.id %>
-    <hr />
   <% end %>
-  <div class="field">
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
+  <div class="content-box left">
+    <div class="field">
+      <%= f.label :title %><br />
+      <%= f.text_field :title %>
+    </div>
+    <div class="area">
+      <%= f.label :description %><br />
+      <%= f.text_area :description, size: "40x10" %>
+    </div>
   </div>
-  <div class="area">
-    <%= f.label :description %><br />
-    <%= f.text_area :description, size: "40x10" %>
-  </div>
-  <div class="field">
-    <%= f.label :deadline %><br />
-    <%= f.date_select :deadline %>
-  </div>
-  <div class="field">
-    <%= f.label :skill_list, "Tags (separated by commas)" %><br />
-    <%= f.text_field :skill_list %>
-  </div>
-  <div class="field">
-    <%= f.label :country %><br />
-    <%= f.text_field :country %>
-  </div>
-  <div class="field">
-    <%= f.label :city %><br />
-    <%= f.text_field :city %>
-  </div>
-  <div class="field">
-    <%= f.label :street %><br />
-    <%= f.text_field :street %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="content-box right">
+    <div class="field">
+      <%= f.label :skill_list, "Tags (separated by commas)" %><br />
+      <%= f.text_field :skill_list %>
+    </div>
+    <div id="show-deadline-link">
+      <%= link_to 'Deadline setzen', '#',
+            :onclick => 'showDeadline()'%>
+    </div>
+    <div id="deadline-field" class="field" style="display: none;">
+      <%= f.label :deadline %><br />
+      <%= f.date_select :deadline, {:include_blank => true, :default => nil} %>
+    </div>
+    <div id="show-place-link">
+      <%= link_to 'Ort setzen', '#',
+            :onclick => 'showPlace()'%>
+    </div>
+    <div id="place-field" style="display: none;">
+      <div class="field">
+        <%= f.label :country %><br />
+        <%= f.text_field :country %>
+      </div>
+      <div class="field">
+        <%= f.label :city %><br />
+        <%= f.text_field :city %>
+      </div>
+      <div class="field">
+        <%= f.label :street %><br />
+        <%= f.text_field :street %>
+      </div>
+    </div>
   </div>
 <% end %>
-
-<%= link_to 'Back', jobs_path %>

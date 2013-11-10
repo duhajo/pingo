@@ -78,3 +78,14 @@ $(document).ready ->
   markers.addMarker new OpenLayers.Marker(position)
   map.setCenter position, zoom
   map
+
+@showDeadline = () ->
+  $("#show-deadline-link").hide()
+  $("#deadline-field").show()
+
+@showPlace = () ->
+  $("#show-place-link").hide()
+  $("#place-field").show()
+
+@sendForm = (formId) ->
+  $("#"+formId).submit()

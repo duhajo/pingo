@@ -11,7 +11,7 @@
         <div class="jobs-list">
           <% unless @jobs.empty? %>
             <% @jobs.each do |job|%>
-              <div class="job-container">
+              <div class="job-container <% if job.status == 3 %>closed<% elsif job.status == 2 %>in-work<% else %>open<% end %>">
                 <div class="job">
                   <div class="job-details">
                     <div class="job-title"><h3><%= link_to job.title, job %></h3></div>

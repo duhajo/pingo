@@ -16,6 +16,38 @@
     height: 60px;
     padding: 5px;
     position: relative;
+
+    .job-title h3 {
+      font-size: 18px;
+      font-weight: normal;
+      margin: 0 0 0 6px;
+    }
+
+    .job-tags {
+      bottom: 10px;
+      left: 10px;
+      position: absolute;
+    }
+  }
+
+  .like.icon, .like.voted:hover {
+    background-position: -124px -4px;
+    float: none;
+    margin: 5px 16px 0;
+  }
+
+  .like:hover,.like.voted {
+    background-position: -124px -44px;
+  }
+
+  .like.icon.no-votes {
+    margin: 15px 16px 0;
+  }
+
+  .likes-number {
+    padding-right: 5px;
+    text-align: center;
+    color: #3f81b9;
   }
 
   .job-likes {
@@ -26,6 +58,7 @@
     top: 5px;
     width: 70px;
   }
+
 }
 
 .job-container.closed {
@@ -34,36 +67,10 @@
   }
 }
 
-.job .job-title h3 {
-  font-size: 18px;
-  font-weight: normal;
-  margin: 0 0 0 6px;
-}
-
-.job .job-tags {
-  bottom: 10px;
-  left: 10px;
-  position: absolute;
-}
-
-.job-container .like.icon, .job-container .like.voted:hover {
-  background-position: -124px -4px;
-  float: none;
-  margin: 5px 16px 0;
-}
-
-.job-container .like:hover, .job-container .like.voted {
-  background-position: -124px -44px;
-}
-
-.job-container .like.icon.no-votes {
-  margin: 15px 16px 0;
-}
-
-.job-container .likes-number {
-  padding-right: 5px;
-  text-align: center;
-  color: #3f81b9;
+.job-container.in-work {
+  .job-title {
+    font-style: italic;
+  }
 }
 
 #job-breadcrumb {
@@ -75,17 +82,17 @@
   line-height: 40px;
   margin: 0 20px;
   padding: 5px;
-}
 
-#job-breadcrumb .icon {
-  background-position: -80px 0;
-  height: 40px;
-  width: 40px;
-}
+  .icon {
+    background-position: -80px 0;
+    height: 40px;
+    width: 40px;
+  }
 
-#job-breadcrumb li {
-  float: left;
-  margin-left: 10px;
+  li {
+    float: left;
+    margin-left: 10px;
+  }
 }
 
 #job {
@@ -95,178 +102,172 @@
   color: #707070;
   font-size: 14px;
   padding: 10px 20px;
-}
 
-#job h1, #job h2 {
-  float: left;
-  margin: 0;
-}
+  h1, h2 {
+    float: left;
+    margin: 0;
+  }
 
-#job #job-title #job-status {
-  float: right;
-  text-align: center;
-}
+  #job-title #job-status {
+    float: right;
+    text-align: center;
 
-#job #job-title #job-status .button {
-  border-radius: 4px;
-  display: block;
-  font-size: 18px;
-  width: 100px;
-  padding: 8px;
-}
+    #status-open, .rights #status-closed:hover {
+      background-color: #dc007c;
+      border-bottom: 2px solid #9d4a79;
+      color: #FFFFFF;
+    }
 
-#job #job-title #job-status #status-open, #job #job-title #job-status.rights #status-closed:hover {
-  background-color: #dc007c;
-  border-bottom: 2px solid #9d4a79;
-  color: #FFFFFF;
-}
+    #status-in-work, .rights #status-open:hover {
+      background-color: #8dda55;
+      border-bottom: 2px solid #70b142;
+      color: #FFFFFF;
+    }
 
-#job #job-title #job-status #status-in-work, #job #job-title #job-status.rights #status-open:hover {
-  background-color: #8dda55;
-  border-bottom: 2px solid #70b142;
-  color: #FFFFFF;
-}
+    #status-closed, .rights #status-in-work:hover {
+      background-color: #f7f7f7;
+      border-bottom: 2px solid #bebebe;
+      color: #707070;
+    }
 
-#job #job-title #job-status #status-closed, #job #job-title #job-status.rights #status-in-work:hover {
-  background-color: #f7f7f7;
-  border-bottom: 2px solid #bebebe;
-  color: #707070;
-}
+    .rights .button:hover span.now, .button span.new {
+      display: none;
+    }
 
-#job #job-status.rights .button:hover span.now, #job #job-status .button span.new {
-  display: none;
-}
+    .rights .button:hover span.new {
+      display: block;
+    }
 
-#job #job-status.rights .button:hover span.new {
-  display: block;
-}
+    .button {
+      border-radius: 4px;
+      display: block;
+      font-size: 18px;
+      width: 100px;
+      padding: 8px;
+    }
+  }
 
-#job #job-details {
-  clear: both;
-  overflow: hidden;
-}
+  #job-details, #job-interactions {
+    clear: both;
+    overflow: hidden;
+    #job-info, #job-meta, #job-results, #job-workers {
+      margin-top: 15px;
+      float: left;
+      width: 60%;
+    }
+    #job-meta, #job #job-workers {
+      width: 40%;
 
-#job #job-details #job-info, #job #job-details #job-meta, #job #job-results, #job #job-workers {
-  margin-top: 15px;
-  float: left;
-  width: 60%;
-}
+      #job-deadline, #job-location {
+        min-height: 40px;
+        margin-bottom: 15px;
 
-#job #job-details #job-meta, #job #job-workers {
-  width: 40%;
-}
+        .icon {
+          height: 40px;
+          width: 40px;
+        }
 
-#job #job-details #job-description {
-  margin-right: 15px;
-  margin-top: 15px;
-}
+        .icon-label {
+          padding-top: 5px;
+        }
+      }
+      #job-deadline .icon {
+        background-position: -40px 0;
+      }
 
-#job #job-meta #job-deadline, #job #job-meta #job-location {
-  min-height: 40px;
-  margin-bottom: 15px;
-}
+      #job-location .icon {
+        background-position: 0 0;
+      }
 
-#job #job-deadline .icon {
-  background-position: -40px 0;
-  height: 40px;
-  width: 40px;
-}
+      .icon-label {
+        float: left;
+        line-height: 20px;
+        margin-left: 5%;
+        width: 82%;
+      }
+    }
+    #job-description {
+      margin-right: 15px;
+      margin-top: 15px;
+    }
+  }
 
-#job #job-meta .icon-label {
-  float: left;
-  line-height: 20px;
-  margin-left: 5%;
-  width: 82%;
-}
+  #job-more-details {
+    clear: both;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    .splitter {
+      border-bottom: 1px solid #dadada;
+      height: 16px;
 
-#job #job-deadline .icon-label {
-  padding-top: 5px;
-}
+      a {
+        background-color: #55A0DA;
+        border-bottom: 2px solid #367FB7;
+        border-radius: 2px 2px 2px 2px;
+        color: #FFFFFF;
+        display: block;
+        font-size: 14px;
+        height: 25px;
+        line-height: 25px;
+        margin: 0 auto;
+        padding: 0 10px;
+        transition: background-color 0.3s ease 0s, border-color 0.3s ease 0s, color 0.3s ease 0s;
+        width: 70px;
 
-#job #job-location .icon {
-  background-position: 0 0;
-  height: 40px;
-  width: 40px;
-}
+        :hover {
+          background-color: #FFFFFF;
+          border-bottom: 2px solid #dc007c;
+          color: #dc007c;
+        }
+      }
+    }
+  }
+  #likes {
+    .plus {
+      float: left;
+      margin: 0 10px;
+    }
 
-#job #job-more-details {
-  clear: both;
-  height: 30px;
-  line-height: 30px;
-  text-align: center;
-  .splitter {
-    border-bottom: 1px solid #dadada;
-    height: 16px;
+    .icon {
+      background-position: -124px -4px;
+    }
+
+    .icon-label a {
+      font-size: 16px;
+      margin-left: 10px;
+    }
   }
 }
 
-#job #job-more-details .splitter a {
-  background-color: #55A0DA;
-  border-bottom: 2px solid #367FB7;
-  border-radius: 2px 2px 2px 2px;
-  color: #FFFFFF;
-  display: block;
-  font-size: 14px;
-  height: 25px;
-  line-height: 25px;
-  margin: 0 auto;
-  padding: 0 10px;
-  transition: background-color 0.3s ease 0s, border-color 0.3s ease 0s, color 0.3s ease 0s;
-  width: 70px;
-}
-
-#job #job-more-details .splitter a :hover {
-  background-color: #FFFFFF;
-  border-bottom: 2px solid #dc007c;
-  color: #dc007c;
-}
-
-#job #job-interactions {
-  overflow: hidden;
-}
-
-#job #likes .plus {
-  float: left;
-  margin: 0 10px;
-}
-
-#job #likes .icon {
-  background-position: -124px -4px;
-}
-
-#job #likes .icon-label a {
-  font-size: 16px;
-  margin-left: 10px;
-}
 
 /******** Job Tags **********/
 
 .job-tags {
   overflow: hidden;
-}
+  li {
+    float: left;
+    margin-right: 10px;
 
-.job-tags li {
-  float: left;
-  margin-right: 10px;
-}
+    a, a:active, a:visited {
+      background-color: #55A0DA;
+      border-bottom: 2px solid #367FB7;
+      border-radius: 3px;
+      color: #FFFFFF;
+      display: block;
+      font-size: 16px;
+      height: 12px;
+      line-height: 11px;
+      padding: 5px;
+      transition: background-color 0.3s ease 0s, border-color 0.3s ease 0s, color 0.3s ease 0s;
+    }
 
-.job-tags a, .job-tags a:active, .job-tags a:visited {
-  background-color: #55A0DA;
-  border-bottom: 2px solid #367FB7;
-  border-radius: 3px;
-  color: #FFFFFF;
-  display: block;
-  font-size: 16px;
-  height: 12px;
-  line-height: 11px;
-  padding: 5px;
-  transition: background-color 0.3s ease 0s, border-color 0.3s ease 0s, color 0.3s ease 0s;
-}
-
-.job-tags li a:hover {
-  background-color: #FFFFFF;
-  border-bottom: 2px solid #dc007c;
-  color: #dc007c;
+    a:hover {
+      background-color: #FFFFFF;
+      border-bottom: 2px solid #dc007c;
+      color: #dc007c;
+    }
+  }
 }
 
 .workers-list , .jobs-list {
@@ -278,8 +279,8 @@
   clear: both;
   overflow: hidden;
   padding: 10px 0;
-}
 
-.worker .left {
-  margin-right: 20px;
+  .left {
+    margin-right: 20px;
+  }
 }

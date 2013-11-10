@@ -62,6 +62,7 @@
             <%end%></div>
           </div>
           <div id="job-meta">
+            <% if not @job.deadline.nil? %>
             <div id="job-deadline">
               <span class="icon"><!----></span>
               <span class="icon-label" title="<%= @job.deadline.to_formatted_s(:long) %>">
@@ -70,20 +71,20 @@
                   ago
                 <% end %>
               </span>
-              <span class="clear"></span></div>
+              <span class="clear"></span>
+            </div>
+            <% end %>
+            <% if !@job.latitude.nil? && !@job.longitude.nil? %>
             <div id="job-location">
               <span class="icon"><!----></span>
               <span class="icon-label">
-              <% if @job.latitude.nil? && @job.longitude.nil? %>
-                Keine Adresse definiert.
-              <% else %>
                 <%=@job.address%>
                 <br />
                 <%= link_to_modal 'Karte anzeigen', { :action => :map_for_job }, :remote => true %>
-              <% end %>
               </span>
               <span class="clear"></span>
             </div>
+            <% end %>
           </div>
           <div id="job-more-details">
             <div class="splitter" id="splitter-open">
@@ -167,7 +168,8 @@
     <div class="content-box left" id="job-tasks">
         <h2>Unteraufgaben (<%= @jobs.size %>)</h2>
         <% @jobs.each do |job|%>
-          <div class="job-container">
+          <div class="job-container"
+          <% if job.status == 3 %>closed<% elsif job.status == 2 %>in-work<% else %>open<% end %>">
             <div class="job">
               <div class="job-details">
                 <div class="job-title"><h3><%= link_to job.title, job %></h3></div>
