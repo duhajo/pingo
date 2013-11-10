@@ -28,7 +28,11 @@ $(function() {
           <div class="job-container <% if job.status == 3 %>closed<% elsif job.status == 2 %>in-work<% else %>open<% end %>">
             <div class="job">
               <div class="job-details">
-                <div class="job-title"><h3><%= link_to job.title, job %></h3></div>
+                <div class="job-title"><h3><%= link_to job.title, job %>
+                <% if job.deadline < DateTime.now %>
+                  <span class="expired">(expired)</span>
+                <% end %></h3>
+                </div>
                 <div class="job-tags">
                   <ul>
                   <% job.tag_counts_on(:skills, :limit => 5, :order => "count desc").each do |tag| %>

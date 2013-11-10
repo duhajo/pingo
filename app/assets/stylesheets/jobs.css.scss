@@ -21,6 +21,10 @@
       font-size: 18px;
       font-weight: normal;
       margin: 0 0 0 6px;
+
+      .expired {
+        font-size: 12px;
+      }
     }
 
     .job-tags {
@@ -150,17 +154,19 @@
   #job-details, #job-interactions {
     clear: both;
     overflow: hidden;
+
     #job-info, #job-meta, #job-results, #job-workers {
-      margin-top: 15px;
+      margin-top: 10px;
       float: left;
       width: 60%;
     }
-    #job-meta, #job #job-workers {
+
+    #job-meta, #job-workers {
       width: 40%;
 
       #job-deadline, #job-location {
         min-height: 40px;
-        margin-bottom: 15px;
+        margin-bottom: 10px;
 
         .icon {
           height: 40px;
@@ -168,8 +174,13 @@
         }
 
         .icon-label {
+          float: left;
+          line-height: 20px;
+          margin-left: 5%;
           padding-top: 5px;
+          width: 82%;
         }
+
       }
       #job-deadline .icon {
         background-position: -40px 0;
@@ -178,14 +189,8 @@
       #job-location .icon {
         background-position: 0 0;
       }
-
-      .icon-label {
-        float: left;
-        line-height: 20px;
-        margin-left: 5%;
-        width: 82%;
-      }
     }
+
     #job-description {
       margin-right: 15px;
       margin-top: 15px;
