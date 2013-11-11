@@ -87,5 +87,5 @@ $(document).ready ->
   $("#show-place-link").hide()
   $("#place-field").show()
 
-@sendForm = (formId) ->
-  $("#"+formId).submit()
+@sendForm = (formClass) ->
+  $("form."+formClass).submit()

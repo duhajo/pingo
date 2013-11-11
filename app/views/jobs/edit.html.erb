@@ -1,5 +1,6 @@
 <% content_for :actionbar do %>
   <ul class="actions">
+    <li><%= link_to 'Speichern', "#", :onclick => "sendForm('edit_job');" %></li>
     <li><%= link_to "Entfernen", @job, :method => :delete, :confirm => "Are you sure ?"%></li>
     <li><%= link_to 'Abbrechen', jobs_path %></li>
   </ul>
