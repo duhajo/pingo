@@ -1,6 +1,8 @@
 class JobsController < ApplicationController
 
   before_filter :authenticate_user!, :only => :new
+  protect_from_forgery :except => :index
+  uploads_nicedit_image :upload_action_name
 
   # GET /jobs
   # GET /jobs.json

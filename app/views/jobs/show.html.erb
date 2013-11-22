@@ -53,12 +53,12 @@
               <% end %>
               <span class="clear"></span>
             </div>
-            <div id="job-description">
+            <div id="job-description" class="html-content">
             <%if @job.description.empty?%>
               Noch keine Beschreibung vorhanden...
             <%else%>
-              <div class="job-description-preview"><%= truncate(@job.description, length: 250) %></div>
-              <div class="job-description-full" style="display:none;"><%=@job.description%></div>
+              <div class="job-description-preview"><%= truncate_html @job.description, :length => 15 %></div>
+              <div class="job-description-full" style="display:none;"><%=@job.description.html_safe%></div>
             <%end%></div>
           </div>
           <div id="job-meta">

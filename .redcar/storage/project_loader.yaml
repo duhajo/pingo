@@ -1,0 +1,5 @@
+--- 
+open_files: 
+  - app/views/layouts/application.html.erb
+  - app/views/jobs/edit.html.erb
+  - app/assets/javascripts/jobs.js.coffee

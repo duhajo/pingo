@@ -1,6 +1,6 @@
 <% content_for :actionbar do %>
   <ul class="actions">
-    <li><%= link_to 'Speichern', "#", :onclick => "sendForm('edit_job');" %></li>
+    <li><%= link_to 'Speichern', "#", :onclick => "nicEditors.findEditor('job_description').saveContent();sendForm('edit_job'); return false;" %></li>
     <li><%= link_to "Entfernen", @job, :method => :delete, :confirm => "Are you sure ?"%></li>
     <li><%= link_to 'Abbrechen', jobs_path %></li>
   </ul>
@@ -24,9 +24,9 @@
       <%= f.label :title %><br />
       <%= f.text_field :title %>
     </div>
-    <div class="area">
+    <div class="area html-content">
       <%= f.label :description %><br />
-      <%= f.text_area :description, size: "40x10" %>
+      <%= f.resizable_text_area :description %>
     </div>
     <div class="field">
       Hier kommt noch die Option für Manager hin, andere Manager hinzuzügen.

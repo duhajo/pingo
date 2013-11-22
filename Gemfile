@@ -45,3 +45,4 @@ gem 'country_select'
 gem 'journey'
 gem 'arel'
 gem 'kaminari'
+gem "truncate_html"
