@@ -38,6 +38,7 @@ GEM
     awesome_nested_set (2.1.6)
       activerecord (>= 3.0.0)
     bcrypt-ruby (3.0.1)
+    bcrypt-ruby (3.0.1-x86-mingw32)
     builder (3.0.4)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -83,6 +84,8 @@ GEM
     multi_json (1.8.2)
     mysql2 (0.3.14)
     nokogiri (1.6.0)
+      mini_portile (~> 0.5.0)
+    nokogiri (1.6.0-x86-mingw32)
       mini_portile (~> 0.5.0)
     openlayers-rails (0.0.3)
       railties (>= 3.1)
@@ -168,6 +171,7 @@ GEM
 
 PLATFORMS
   ruby
+  x86-mingw32
 
 DEPENDENCIES
   acts-as-taggable-on

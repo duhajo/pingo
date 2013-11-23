@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130726114400) do
+ActiveRecord::Schema.define(:version => 20131123145918) do
 
   create_table "activities", :force => true do |t|
     t.integer  "trackable_id"
@@ -110,6 +110,7 @@ ActiveRecord::Schema.define(:version => 20130726114400) do
     t.string   "city"
     t.string   "district"
     t.integer  "radius"
+    t.string   "locale"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

@@ -9,8 +9,14 @@ class ApplicationController < ActionController::Base
   
   private
   
+  before_filter :set_locale
+  
   def auth_user
     redirect_to new_user_registration_url unless user_signed_in?
+  end
+  
+  def set_locale
+    I18n.locale = user_signed_in? ? current_user.locale.to_sym : I18n.default_locale
   end
   
   def my_jobs

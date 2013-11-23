@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   acts_as_taggable_on :skills
   attr_accessor   :login
   attr_accessible :login, :name, :email, :password, :password_confirmation, :remember_me, :skill_list,
-                  :country, :city, :district, :latitude, :longitude, :radius
+                  :country, :city, :district, :latitude, :longitude, :radius, :locale
   has_many :jobs_workers, dependent: :delete_all
   has_many :jobs, :through => :jobs_workers
 

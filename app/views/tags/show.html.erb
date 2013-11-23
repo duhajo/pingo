@@ -8,7 +8,7 @@
     <div class="content-box left">
       <div class="linked-jobs">
         <h2>Jobs</h2>
-        <div class="jobs-list">
+        <div class="jobs list">
           <% unless @jobs.empty? %>
             <% @jobs.each do |job|%>
               <div class="job-container <% if job.status == 3 %>closed<% elsif job.status == 2 %>in-work<% else %>open<% end %>">
@@ -63,7 +63,7 @@
       <div class="linked-workers">
         <h2>Arbeiter</h2>
         <% unless @workers.empty? %>
-          <div class="workers-list">
+          <div class="workers list">
             <% @workers.each do |worker| %>
               <div class="worker">
                 <div class="left"><span class="profile-avatar"><%= link_to image_tag(avatar_url(worker), alt: "?"), worker %></span></div>

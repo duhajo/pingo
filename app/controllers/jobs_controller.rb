@@ -17,9 +17,10 @@ class JobsController < ApplicationController
     else
       @near_jobs = Job.near(params[:search], @radius, :order => :distance)
     end
-    @jobs = Job.find_all_by_parent_id(nil);
+    @jobs = Job.find_all_by_parent_id(nil)
   else
-    @jobs = Job.find_all_by_parent_id(nil);
+    @jobs = Job.find_all_by_parent_id(nil)
+    @jobs_voted = Job.joins("LEFT JOIN `votes` ON votes.votable_id = jobs.id").select("jobs.id, status, title, deadline, COUNT(votes.votable_id) as votes_count").where("votes.vote_flag" => true).group("votes.votable_id").order("votes_count desc,votes.updated_at desc,jobs.updated_at desc").all()
   end
 
     #respond_to do |format|

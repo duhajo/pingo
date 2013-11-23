@@ -20,6 +20,10 @@
     <%= f.text_field :email %>
   </div>
   <div class="field">
+    <%= f.label :locale, "Sprache" %><br />
+    <%= f.select :locale, I18n.available_locales %>
+  </div>
+  <div class="field">
     <%= f.label :skill_list, "Tags (separated by commas)" %><br />
     <%= f.text_field :skill_list %>
   </div>

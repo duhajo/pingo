@@ -12,20 +12,64 @@ $(function() {
 	  </ul>
 	</div>
   <div class="content-box" id="all">
-	  <ul>
-	  <% @users.each do |user|%>
-	  <li><%= link_to user.name, user %></li>
-	  <% end %>
-	  </ul>
-
-	  <% tag_cloud(@tags, %w(tag1 tag2 tag3 tag4 tag5 tag6 tag7 tag8 tag9 tag10)) do |tag, css_class| %>
-	    <%= link_to tag.name, { :action => :tag, :id => tag.id }, :class => css_class %>
-	  <% end %>
+    <div class="content-box left">
+      <h2>Arbeiterübersicht</h2>
+      <div class="workers list">
+        <% @users.each do |worker|%>
+        <div class="worker">
+          <div class="left">
+            <span class="profile-avatar"><%= link_to image_tag(avatar_url(worker), alt: "?"), worker, :title => worker.name, :rel => "tipsy" %></span>
+          </div>
+          <div class="right"><%= link_to worker.name, worker %></div>
+        </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="content-box right">
+      <h2>Tags</h2>
+      <div class="tags list">
+        <% tag_cloud(@tags, %w(tag1 tag2 tag3 tag4 tag5 tag6 tag7 tag8 tag9 tag10)) do |tag, css_class| %>
+          <%= link_to tag.name, { :action => :tag, :id => tag.id }, :class => css_class %>
+        <% end %>
+      </div>
+    </div>
   </div>
   <div class="content-box" id="similar">
-    Hier werden dir mal ähnliche Nutzer angezeigt (auf Basis der Schlagworte).
+    <% if @similar_users.empty? %>
+      Sorry, keine Übereinstimmungen gefunden!
+    <% else %>
+      <h2>Ähnliche Nutzer anhand von Tags</h2>
+      <div class="workers list">
+          <% @similar_users.each do |worker|%>
+            <div class="worker">
+              <div class="left">
+                <span class="profile-avatar"><%= link_to image_tag(avatar_url(worker), alt: "?"), worker, :title => worker.name, :rel => "tipsy" %></span>
+              </div>
+              <div class="right"><%= link_to worker.name, worker %></div>
+            </div>
+          <% end %>
+      </div>
+    <% end %>
   </div>
   <div class="content-box" id="local">
-    Funktion noch nicht verfügbar.
+    <%= form_tag '/users#local', :method => :get do %>
+      <p>
+        <%= text_field_tag :search, params[:search] %>
+        <%= submit_tag "Search Near", :name => nil %>
+      </p>
+    <% end %>
+    <% if (params[:search]) %>
+      <%if @near_users.empty? %>
+        <%= t('workers_no_workers') %>
+      <% else %>
+        <div id="jobs list">
+          <% @near_users.each do |worker|%>
+            <%= link_to worker.name, worker %>
+          <% end %>
+        </div>
+      <% end %>
+    <% else %>
+        <%= t("workers_near_search_info") %>
+    <% end %>
   </div>
 </div>
