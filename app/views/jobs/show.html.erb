@@ -82,7 +82,7 @@
               <span class="icon-label">
                 <%=@job.address%>
                 <br />
-                <%= link_to_modal 'Karte anzeigen', { :action => :map_for_job }, :remote => true %>
+                <%= link_to_modal 'Karte anzeigen', { :action => :map_for_job }, :remote => true, :id => "show-map-button" , :"data-lat" => @job.latitude, :"data-long" => @job.longitude %>
               </span>
               <span class="clear"></span>
             </div>
@@ -103,7 +103,13 @@
           <div class="preview-list results">Das Feature gibt es noch nicht :)</div>
         </div>
         <div id="job-workers">
-          <h2>Arbeiter</h2>
+          <h2 class="with-buttons">Arbeiter 
+          <%if @user_role == 3 %>
+            <span class="right">
+              <%= link_to_modal 'Verwalten', { :action => :show_manager_list }, :remote => true, :id => "edit-manager-button", :class => "button"%>
+            </span>
+          <% end %>
+          </h2>
           <div class="preview-list workers">
             <ul>
               <% if @workers.empty? && @user_role != 2 && current_user %>

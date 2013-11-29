@@ -6,68 +6,66 @@
   </ul>
 <% end %>
 
-<h1>Job bearbeiten</h1>
-
-<%= form_for(@job) do |f| %>
-  <% if @job.errors.any? %>
-    <div class="error_messages">
-      <h2>Form is invalid</h2>
-      <ul>
-        <% for message in @job.errors.full_messages %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+<div id="job-edit" data-id="<%=@job.id%>">
+  <h1>Job bearbeiten</h1>
+  <%= simple_form_for(@job) do |f| %>
+    <% if @job.errors.any? %>
+      <div class="error_messages">
+        <h2>Form is invalid</h2>
+        <ul>
+          <% for message in @job.errors.full_messages %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="content-box left">
+      <div class="field">
+        <%= f.label :title %><br />
+        <%= f.text_field :title %>
+      </div>
+      <div class="area html-content">
+        <%= f.label :description %><br />
+        <%= f.resizable_text_area :description %>
+      </div>
+    </div>
+    <div class="content-box right">
+      <div class="field">
+        <%= f.label :skill_list, "Tags (separated by commas)" %><br />
+        <%= f.text_field :skill_list %>
+      </div>
+      <% if @job.deadline.nil?
+        @setDeadline = true %>
+      <div id="show-deadline-link">
+        <%= link_to 'Deadline setzen', '#',
+              :onclick => 'showDeadline(); return false;'%>
+      </div>
+      <% end %>
+      <div id="deadline-field" class="field" <% if @setDeadline %> style="display: none;" <% end %>>
+        <%= f.label :deadline %><br />
+        <%= f.date_select :deadline, {:include_blank => true, :default => nil} %>
+      </div>
+      <% if @job.latitude.nil? && @job.longitude.nil?
+        @setPlace = true %>
+      <div id="show-place-link">
+        <%= link_to 'Ort setzen', '#',
+              :onclick => 'showPlace(); return false;'%>
+      </div>
+      <% end %>
+      <div id="place-field" <% if @setPlace %> style="display: none;" <% end %>>
+        <div class="field">
+          <%= f.label :country %><br />
+          <%= f.text_field :country %>
+        </div>
+        <div class="field">
+          <%= f.label :city %><br />
+          <%= f.text_field :city %>
+        </div>
+        <div class="field">
+          <%= f.label :street %><br />
+          <%= f.text_field :street %>
+        </div>
+      </div>
     </div>
   <% end %>
-  <div class="content-box left">
-    <div class="field">
-      <%= f.label :title %><br />
-      <%= f.text_field :title %>
-    </div>
-    <div class="area html-content">
-      <%= f.label :description %><br />
-      <%= f.resizable_text_area :description %>
-    </div>
-    <div class="field">
-      Hier kommt noch die Option für Manager hin, andere Manager hinzuzügen.
-    </div>
-  </div>
-  <div class="content-box right">
-    <div class="field">
-      <%= f.label :skill_list, "Tags (separated by commas)" %><br />
-      <%= f.text_field :skill_list %>
-    </div>
-    <% if @job.deadline.nil?
-      @setDeadline = true %>
-    <div id="show-deadline-link">
-      <%= link_to 'Deadline setzen', '#',
-            :onclick => 'showDeadline()'%>
-    </div>
-    <% end %>
-    <div id="deadline-field" class="field" <% if @setDeadline %> style="display: none;" <% end %>>
-      <%= f.label :deadline %><br />
-      <%= f.date_select :deadline, {:include_blank => true, :default => nil} %>
-    </div>
-    <% if @job.latitude.nil? && @job.longitude.nil?
-      @setPlace = true %>
-    <div id="show-place-link">
-      <%= link_to 'Ort setzen', '#',
-            :onclick => 'showPlace()'%>
-    </div>
-    <% end %>
-    <div id="place-field" <% if @setPlace %> style="display: none;" <% end %>>
-      <div class="field">
-        <%= f.label :country %><br />
-        <%= f.text_field :country %>
-      </div>
-      <div class="field">
-        <%= f.label :city %><br />
-        <%= f.text_field :city %>
-      </div>
-      <div class="field">
-        <%= f.label :street %><br />
-        <%= f.text_field :street %>
-      </div>
-    </div>
-  </div>
-<% end %>
+</div>

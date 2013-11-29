@@ -9,6 +9,7 @@ Duhajo::Application.routes.draw do
     collection do
       get :tag
     end
+    get :autocomplete_user, :on => :collection
     resources :comments
   end
 
@@ -26,6 +27,8 @@ Duhajo::Application.routes.draw do
   match "jobs/:id/support" => "jobs#support"
   match "jobs/:id/set_status" => "jobs#set_status"
   match "jobs/:id/map_for_job" => "jobs#map_for_job"
+  match "jobs/:id/show_manager_list" => "jobs#show_manager_list"
+  match "jobs/:id/edit_manager_list" => "jobs#edit_manager_list"
   put 'jobs/:id/like' => 'jobs#like', :as => 'like_job'
 
   # Sample of named route:

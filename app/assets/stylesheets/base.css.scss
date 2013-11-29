@@ -48,6 +48,25 @@ a:-moz-any-link:focus {
 	outline: none;
 }
 
+a.button {
+  background-color: #55A0DA;
+  border-bottom: 2px solid #367FB7;
+  border-radius: 3px;
+  color: #FFFFFF;
+  display: block;
+  font-size: 16px;
+  height: 12px;
+  line-height: 11px;
+  padding: 5px;
+  transition: background-color 0.3s ease 0s, border-color 0.3s ease 0s, color 0.3s ease 0s;
+} 
+
+a.button:hover {
+  background-color: #FFFFFF;
+  border-bottom: 2px solid #DC007C;
+  color: #DC007C;
+}
+
 h1, h2 {
   color: #3f81b9;
   font-weight: normal;
@@ -59,6 +78,10 @@ h1 {
 
 h2 {
   font-size: 18px;
+}
+
+h2 .right {
+  float: right;
 }
 
 .icon {

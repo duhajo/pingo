@@ -17,6 +17,14 @@ class UsersController < ApplicationController
       end
     end
   end
+  
+  def autocomplete_user
+    users = User.select("id, name").where("name LIKE ?", "%#{params[:name]}%")
+    result = users.collect do |u|
+      {id: u.id, value: u.name}
+    end
+    render json: result
+  end
 
   def my_profile
     @user = User.find(current_user.id)

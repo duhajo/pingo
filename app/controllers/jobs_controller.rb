@@ -43,7 +43,7 @@ class JobsController < ApplicationController
       else
         @user_role = 1 #keine role
       end
-      @is_manager = JobsWorker.where(:job_id => @job.id).where('jobs_workers.isCreator' => true)
+      @is_manager = JobsWorker.where(:job_id => @job.id).where('jobs_workers.isCreator' => true).to_a
     else
       @user_role = 0
     end
@@ -86,6 +86,7 @@ class JobsController < ApplicationController
   # GET /jobs/1/edit
   def edit
     @job = Job.find(params[:id])
+    @managers = User.joins(:jobs_workers).select("users.id, name, email").where("jobs_workers.job_id" => @job.id).where("jobs_workers.isCreator" => true).to_a
   end
 
   # POST /jobs
@@ -114,10 +115,9 @@ class JobsController < ApplicationController
   # PUT /jobs/1.json
   def update
     @job = Job.find(params[:id])
-
     respond_to do |format|
-      if @job.update_attributes(params[:job])
-        format.html { redirect_to @job, notice: 'Job was successfully updated.' }
+      if @job.update_attributes(params[:job].except(:user_list, :manager_ids))
+        format.html { redirect_to @job, notice: 'Job was successfully updated.'}
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -156,7 +156,7 @@ class JobsController < ApplicationController
     end
   end
 
-  def get_tags()
+  def get_tags
     @job = Job.find(params[:id])
     @tags = @job.tag_counts_on(:skills, :limit => 5, :order => "count desc")
   end
@@ -203,6 +203,45 @@ class JobsController < ApplicationController
       format.html {
         render :partial => 'map', :lat => @lat, :long => @long
       }
+    end
+  end
+
+  def show_manager_list
+    @job = Job.find(params[:id])
+    unless JobsWorker.where(:job_id => @job.id).where('jobs_workers.isCreator' => true).where(:user_id => current_user.id).to_a.empty?
+      @user_is_manager = true
+    end
+    @managers = User.joins(:jobs_workers).select("users.id, name, email").where("jobs_workers.job_id" => @job.id).where("jobs_workers.isCreator" => true).to_a
+    respond_to do |format|
+      format.html {
+        render :partial => 'manager_list'
+      }
+    end
+  end
+  
+  def edit_manager_list 
+    @job = Job.find(params[:id])
+    @user_id = params[:user_id].to_i
+
+    if(params[:remove] && params[:remove] == "true")
+      @job.jobs_workers.where(:user_id => @user_id).update_all(:isCreator => 0)
+    else
+      @job_worker = @job.jobs_workers.where(:user_id => @user_id)
+      if(@job_worker.empty?)
+        JobsWorker.where('jobs_workers.job_id' => @job.id).where('jobs_workers.user_id' => @user_id).where('jobs_workers.isCreator' => true).first_or_create()        
+      else 
+        @job_worker.update_all(:isCreator => 1)
+      end
+    end
+    
+    unless JobsWorker.where(:job_id => @job.id).where('jobs_workers.isCreator' => true).where(:user_id => current_user.id).to_a.empty?
+      @user_is_manager = true
+    end
+    
+    @managers = User.joins(:jobs_workers).select("users.id, name, email").where("jobs_workers.job_id" => @job.id).where("jobs_workers.isCreator" => true).to_a
+    
+    respond_to do |format|
+      format.js
     end
   end
 end

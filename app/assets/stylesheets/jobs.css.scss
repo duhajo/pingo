@@ -111,6 +111,10 @@
     float: left;
     margin: 0;
   }
+  
+  h2.with-buttons {
+    width: 100%;
+  }
 
   #job-title #job-status {
     float: right;
@@ -143,11 +147,10 @@
     }
 
     .button {
-      border-radius: 4px;
-      display: block;
       font-size: 18px;
+      height: auto;
+      line-height: inherit;
       width: 100px;
-      padding: 8px;
     }
   }
 
@@ -283,4 +286,48 @@
   .left {
     margin-right: 20px;
   }
+}
+
+.ui-autocomplete {
+  background-color: #FFFFFF;
+  border-color: #E5E5E5;
+  border-style: none solid solid;
+  border-width: 0 1px 1px;
+  cursor: default;
+  display: block;
+  list-style: none outside none;
+  margin: 0;
+  outline: medium none;
+  padding: 2px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  z-index: 100;
+  
+  .ui-menu-item {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    
+    a {
+      cursor: pointer;
+      display: block;
+      font-weight: normal;
+      line-height: 1.5;
+      min-height: 0;
+      padding: 2px 0.4em;
+      text-decoration: none;
+    }
+  }
+}
+
+.ui-helper-hidden-accessible {
+  border: 0 none;
+  clip: rect(0px, 0px, 0px, 0px);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
 }

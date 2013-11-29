@@ -1,9 +1,0 @@
-<h2>Meine Aufgaben</h2>
-<% @my_jobs = my_jobs %>
-<%if @my_jobs.empty? %>
-  <span>Es sind noch keine Jobs vorhanden.</span>
-<% else %>
-  <%= sorted_nested_li(@my_jobs, :title) do |job| %>
-    <%= link_to job.title, job %>
-  <% end %>
-<% end %>
