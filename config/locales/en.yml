@@ -12,3 +12,11 @@ en:
   
   workers_no_workers: "There are no workers available. Sorry!"
   workers_near_search_info: "Find available workers in your area. Type in a street or city."
+  
+  gflash:
+    titles:
+      notice: "Custom notice title"
+      success: "Success"
+      warning: "Warning"
+      error: "Error"
+      progress: "Progress"

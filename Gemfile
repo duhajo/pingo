@@ -38,7 +38,7 @@ gem 'sunspot_rails'
 gem 'acts_as_votable', '~> 0.5.0'
 gem 'magnific-popup-rails'
 gem 'public_activity'
-gem 'acts_as_commentable', '3.0.1'
+gem 'acts_as_commentable_with_threading'
 gem "slim-rails"
 gem 'simple_form'
 gem 'country_select'

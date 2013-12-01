@@ -55,7 +55,7 @@ class JobsController < ApplicationController
     end
     @activities = PublicActivity::Activity.order("created_at DESC").all(:conditions => {trackable_type: "Job", trackable_id: [@job_ids] })
     @comment = Comment.new
-    @comments = @job.comments
+    @comments = @job.comment_threads
     @workers = User.joins(:jobs_workers)
     .where('jobs_workers.job_id' => @job.id)
     .select("name, id, email, isCreator").to_a

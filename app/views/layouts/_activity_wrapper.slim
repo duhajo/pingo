@@ -14,4 +14,10 @@
           = image_tag avatar_url(a.owner), width: "30", height: "30"
         - else
           = image_tag "http://i0.wp.com/a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-140.png", width: "30", height: "30"
-      = yield
+      .content
+        = yield
+    - if a.key == "job.commented"
+      .thread
+        =' content_for :thread
+      .answer-editor
+        =' content_for :editor

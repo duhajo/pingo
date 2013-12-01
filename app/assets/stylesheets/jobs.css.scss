@@ -147,6 +147,7 @@
     }
 
     .button {
+      display: block;
       font-size: 18px;
       height: auto;
       line-height: inherit;
@@ -206,7 +207,6 @@
     line-height: 30px;
     text-align: center;
     .splitter {
-      border-bottom: 1px solid #dadada;
       height: 16px;
 
       a {

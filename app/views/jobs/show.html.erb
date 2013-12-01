@@ -57,7 +57,7 @@
             <%if @job.description.empty?%>
               Noch keine Beschreibung vorhanden...
             <%else%>
-              <div class="job-description-preview"><%= truncate_html @job.description, :length => 15 %></div>
+              <div class="job-description-preview"><%= truncate_html @job.description, :length => 50 %></div>
               <div class="job-description-full" style="display:none;"><%=@job.description.html_safe%></div>
             <%end%></div>
           </div>
@@ -89,12 +89,16 @@
             <% end %>
           </div>
           <div id="job-more-details">
+            <% if @job.description.html_safe.length > 50 %>
             <div class="splitter" id="splitter-open">
             <%= link_to_function 'Jobdetails', "$('.job-description-preview').hide();$('.job-description-full').show();$('#splitter-close').show();$(this).parent().hide();" %>
             </div>
             <div class="splitter" id="splitter-close" style="display:none;">
             <%= link_to_function 'Weniger', "$('.job-description-full').hide();$('.job-description-preview').show();$('#splitter-open').show();$(this).parent().hide();" %>
             </div>
+            <% else %>
+              <div class="splitter"></div>
+            <% end %>
           </div>
       </div>
       <div id="job-interactions">
@@ -164,7 +168,7 @@
       </div>
     </div>
   </div>
-  <%= js add_gritter(flash[:notice], :title => notice, :image => :success) %>
+  <%= gflash %>
   <div id="content-tabs">
     <div class="content-box left" id="job-tasks">
       <h2>Unteraufgaben (<%= @jobs.size %>)</h2>
@@ -216,10 +220,18 @@
   </div>
   <div class="content-box right" id="job-activities">
     <h2>Aktivit&auml;ten</h2>
-    <%= render :partial => "comments/form" %>
+    <%if user_signed_in?%>
+      <%= render :partial => "comments/form" %>
+    <% else %>
+      Du bist nicht angemeldet <%= link_to 'einloggen?', login_path, :class => "button"%>
+    <% end %>
 
     <% @activities.each do |activity| %>
-        <%= render_activity(activity, :layout => "layouts/activity_wrapper") %>
+        <% if activity.key == "job.commented" %>
+          <%= render_activity(activity, :layout => "layouts/activity_wrapper") %>
+        <% else %>
+          <%= render_activity(activity, :layout => "layouts/activity_wrapper") %>
+        <% end %>
     <% end %>
   </div>
 </div>

@@ -230,3 +230,11 @@ de:
   
   workers_no_workers: "Keinen Arbeiter gefunden. Sorry!"
   workers_near_search_info: "Suche nach einem Arbeiter, indem du einen Ort oder eine Straße angibst."
+  
+  gflash:
+    titles:
+      notice: ""
+      success: "Erfolgreich"
+      warning: "Warnung"
+      error: "Fehler"
+      progress: "In Arbeit"

@@ -17,7 +17,9 @@ Duhajo::Application.routes.draw do
     collection do
       get :tag
     end
-    resources :comments, only: [:create, :update, :edit, :destroy]
+    resources :comments, only: [:create, :reply, :update, :edit, :destroy] do
+      match "reply" => "comments#reply"
+    end
   end
   resources :tags
 

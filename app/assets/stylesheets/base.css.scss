@@ -53,7 +53,6 @@ a.button {
   border-bottom: 2px solid #367FB7;
   border-radius: 3px;
   color: #FFFFFF;
-  display: block;
   font-size: 16px;
   height: 12px;
   line-height: 11px;
@@ -91,6 +90,10 @@ h2 .right {
   float: left;
   height: 32px;
   width: 32px;
+}
+
+.splitter {
+  border-bottom: 1px solid #dadada;
 }
 
 #sidebar {

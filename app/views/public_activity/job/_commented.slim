@@ -3,4 +3,24 @@
   =' whose?(a.owner, a.trackable)
   = link_to_trackable a.trackable, a.trackable_type
 
-= p[:comment]
+= p[:body]
+
+- single_content_for :thread do
+  - @comment = Comment.find_by_id(p[:id].to_s)
+  - if @comment.has_children?
+    .answers[id = "answers_#{p[:id]}"]
+      - @comment.children.each do |comment|
+        .splitter
+        .answer
+          .meta-info.details 
+            - user = User.find_by_id(comment.user_id)
+            .avatar
+              =' image_tag avatar_url(user), width: "30", height: "30"
+            .name
+              =' link_to user.name, user
+          .content
+            = comment.body
+
+- single_content_for :editor do 
+  .answer-editor[id = "answer-editor_#{p[:id]}"]
+    = link_to("Reply", "/jobs/"+a.trackable_id.to_s+"/comments/"+p[:id].to_s+"/reply", :remote => true)
