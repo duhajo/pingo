@@ -39,7 +39,9 @@
     <% end %>
     <div id="job" data-id="<%=@job.id%>">
       <div id="job-title"><h1><%= @job.title %></h1>
-        <%= render :partial => "status", :job => @job, :manager => @user_role %>
+        <div id="job-status-container">
+          <%= render :partial => "status", :job => @job, :manager => @user_role %>
+        </div>
       </div>
       <div id="job-details">
           <div id="job-info">

@@ -72,7 +72,7 @@ $(function() {
     <% end %>
   </div>
   <div class="content-box" id="popular">
-    <%if @jobs_voted.empty? %>
+    <%if @jobs_voted.nil? %>
       <%= t('jobs_no_jobs') %>
     <% else %>
       <div id="list-jobs">

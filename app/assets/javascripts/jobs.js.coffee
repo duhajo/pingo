@@ -44,6 +44,7 @@ $(document).ready ->
       initAutocomplete()
 
   $(".open-popup-link").magnificPopup type: "inline", midClick: true
+
   hasRight = $("#job-status").hasClass("rights")
   if hasRight
     init_status = ->
@@ -53,7 +54,7 @@ $(document).ready ->
           data:
             status: 2
         ).success (data) ->
-          $("#job-status").html data
+          $("#job-status-container").html data
           init_status()
         false
 
@@ -63,8 +64,8 @@ $(document).ready ->
           data:
             status: 3
         ).success (data) ->
-          $("#job-status").html data
-          $(".actions").css "display", "none"
+          $("#job-status-container").html data
+          $("#actionbar .actions").css "display", "none"
           init_status()
         false
 
@@ -74,8 +75,8 @@ $(document).ready ->
           data:
             status: 1
         ).success (data) ->
-          $("#job-status").html data
-          $(".actions").css "display", "block"
+          $("#job-status-container").html data
+          $("#actionbar .actions").css "display", "block"
           init_status()
         false
     init_status()
