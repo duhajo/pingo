@@ -29,24 +29,28 @@ class JobsController < ApplicationController
     #end
   end
 
+  def get_user_role(job)
+    if current_user
+      if job.users.find_by_id(current_user.id)
+        unless JobsWorker.where(:job_id => job.id).where('jobs_workers.isCreator' => true).where(:user_id => current_user.id).to_a.empty?
+          return 3 #manager
+        else
+          return 2 #worker
+        end
+      else
+        return 1 #keine role
+      end
+    else
+      return 0
+    end
+  end
+  
   # GET /jobs/1
   # GET /jobs/1.json
   def show
     @job = Job.find(params[:id])
-    if current_user
-      if @job.users.find_by_id(current_user.id)
-        unless JobsWorker.where(:job_id => @job.id).where('jobs_workers.isCreator' => true).where(:user_id => current_user.id).to_a.empty?
-          @user_role = 3 #manager
-        else
-          @user_role = 2 #worker
-        end
-      else
-        @user_role = 1 #keine role
-      end
-      @is_manager = JobsWorker.where(:job_id => @job.id).where('jobs_workers.isCreator' => true).to_a
-    else
-      @user_role = 0
-    end
+    @user_role = get_user_role(@job)
+    @is_manager = JobsWorker.where(:job_id => @job.id).where('jobs_workers.isCreator' => true).to_a
     @jobs = Job.find_all_by_parent_id(@job.id)
     @parent_jobs = @job.ancestors
     @job_ids = Array.new << @job.id
@@ -163,6 +167,7 @@ class JobsController < ApplicationController
 
   def set_status
     @job = Job.find(params[:id])
+    @user_role = get_user_role(@job)
     @managers = JobsWorker.where(:job_id => @job.id).where('jobs_workers.isCreator' => true).where(:user_id => current_user.id)
     unless @managers.empty?
       @job.status = params[:status]

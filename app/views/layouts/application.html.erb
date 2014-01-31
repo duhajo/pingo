@@ -1,75 +1,81 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>Duhajo</title>
-  <%= stylesheet_link_tag "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body data-controller="<%= controller_name %>" data-action="<%= action_name %>">
-  <div id="duhajo">
-    <div id="sidebar">
-      <div id="logo">
-        <%= link_to image_tag("logo.png"), root_path %></a>
-      </div>
-      <div id="profile">
-        <%if user_signed_in? %>
-          <a href="/myprofile">
-            <span class="profile-avatar"><%= image_tag avatar_url(current_user), alt: "?" %></span>
-          </a>
-          <ul aria-haspopup="true" class="profile-menu">
-            <li class="more-actions">
-              <a href="/myprofile">
-                <span class="profile-name">Mein Profil</span>
-                <span class="text-arrow"></span>
-              </a>
-            </li>
-            <li class="more-actions open hidden">
-              <a href="/myprofile">
-                <span class="profile-name"><%= current_user.name %></span>
-                <span class="text-arrow"></span>
-              </a>
-            </li>
-          	<ul class="profile-menu-list">
-          		<li id="editprofile">
-                <a href="/users/<%= current_user.id %>/edit">Profil bearbeiten</a>
-              </li>
-            	<li id="logout"><%= link_to "Abmelden", '/logout'%></li>
-          	</ul>
-          </ul>
-          <div id="my-jobs-sidebar">
-            <%= render :partial => "myjobs", :my_jobs => @my_jobs %>
-          </div>
-        <% else %>
-          <%= link_to "Anmelden", new_user_session_path%> oder <%= link_to "Registrieren", new_user_registration_path%>
-        <% end %>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <title><%= content_for?(:title) ? yield(:title) : "foundation-rails" %></title>
+
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "vendor/modernizr" %>
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body data-controller="<%= controller_name %>" data-action="<%= action_name %>">
+    <div id="duhajo">
+      <div id="sidebar">
+        <div id="logo">
+          <%= link_to image_tag("logo.png"), root_path %></a>
+        </div>
+        <div id="profile">
+          <%if user_signed_in? %>
+            <a href="/myprofile">
+              <span class="profile-avatar"><%= image_tag avatar_url(current_user), alt: "?" %></span>
+            </a>
+            <ul aria-haspopup="true" class="profile-menu">
+              <li class="more-actions">
+                <a href="/myprofile">
+                  <span class="profile-name">Mein Profil</span>
+                  <span class="text-arrow"></span>
+                </a>
+              </li>
+              <li class="more-actions open hidden">
+                <a href="/myprofile">
+                  <span class="profile-name"><%= current_user.name %></span>
+                  <span class="text-arrow"></span>
+                </a>
+              </li>
+              <ul class="profile-menu-list">
+                <li id="editprofile">
+                  <a href="/users/<%= current_user.id %>/edit">Profil bearbeiten</a>
+                </li>
+                <li id="logout"><%= link_to "Abmelden", '/logout'%></li>
+              </ul>
+            </ul>
+            <div id="my-jobs-sidebar">
+              <%= render :partial => "myjobs", :my_jobs => @my_jobs %>
+            </div>
+          <% else %>
+            <%= link_to "Anmelden", new_user_session_path%> oder <%= link_to "Registrieren", new_user_registration_path%>
+          <% end %>
+
+        </div>
+      </div>
+      <div id="main">
+        <div id="main-navigation">
+          <ul>
+            <li <%=cp("dashboard")%>><%= link_to t('main_nav_dashboard'), dashboard_path%></li>
+            <li <%=cp("jobs")%>><%= link_to t('main_nav_jobs'), jobs_path%></li>
+            <li <%=cp("users")%>><%= link_to t('main_nav_workers'), users_path%></li>
+            <li <%=cp("tags")%>><%= link_to t('main_nav_tags'), tags_path%></a></li>
+          </ul>
+          <div id="search"><label for="search"><!-- --></label>
+            <%= form_tag(searches_path, :method => "get", id: "search-form") do %>
+               <%= text_field_tag :search, params[:search], placeholder: "Search Jobs" %>
+            <% end %>
+          </div>
+        </div>
+        <div id="content-container">
+          <div id="actionbar">
+            <%= yield :actionbar %>
+          </div>
+          <div id="content-wrapper">
+            <%= yield %>
+            <%= yield :scripts %>
+          </div>
+        </div>
       </div>
     </div>
-    <div id="main">
-      <div id="main-navigation">
-        <ul>
-          <li <%=cp("dashboard")%>><%= link_to t('main_nav_dashboard'), dashboard_path%></li>
-          <li <%=cp("jobs")%>><%= link_to t('main_nav_jobs'), jobs_path%></li>
-          <li <%=cp("users")%>><%= link_to t('main_nav_workers'), users_path%></li>
-          <li <%=cp("tags")%>><%= link_to t('main_nav_tags'), tags_path%></a></li>
-        </ul>
-        <div id="search"><label for="search"><!-- --></label>
-	        <%= form_tag(searches_path, :method => "get", id: "search-form") do %>
-		         <%= text_field_tag :search, params[:search], placeholder: "Search Jobs" %>
-	        <% end %>
-	      </div>
-      </div>
-      <div id="content-container">
-        <div id="actionbar">
-          <%= yield :actionbar %>
-        </div>
-        <div id="content-wrapper">
-          <%= yield %>
-          <%= yield :scripts %>
-        </div>
-      </div>
-    </div>
-  </div>
-</body>
+    <%= javascript_include_tag "application" %>
+  </body>
 </html>

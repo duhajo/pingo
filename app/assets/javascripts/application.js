@@ -20,3 +20,4 @@
 //= require gritter
 //= require openlayers-rails
 //= require_tree .
+$(function(){ $(document).foundation(); });
