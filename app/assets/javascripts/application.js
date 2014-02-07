@@ -19,5 +19,6 @@
 //= require magnific-popup
 //= require gritter
 //= require openlayers-rails
+//= require foundation
 //= require_tree .
 $(function(){ $(document).foundation(); });

@@ -22,6 +22,8 @@ Duhajo::Application.routes.draw do
     end
   end
   resources :tags
+  
+  resources :places
 
   match "dashboard" => "dashboard#index"
 

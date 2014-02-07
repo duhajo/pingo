@@ -1,6 +1,6 @@
 module ApplicationHelper
   def cp(*controller)
-    "class=active" if controller.include?(params[:controller])
+    "active" if controller.include?(params[:controller])
   end
 
   def avatar_url(user)

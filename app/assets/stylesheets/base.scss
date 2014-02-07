@@ -1,0 +1,323 @@
+/*
+    Document   : base
+    Created on : 08.06.2013, 13:00:39
+    Author     : Psyphant
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+@font-face {
+  font-family: 'Roboto';
+  src: "<%= asset_path('fonts/Roboto-Regular.ttf') %>" format('TrueType');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'RobotoLight';
+  src: "<%= asset_path('fonts/Roboto-Light.ttf') %>" format('TrueType');
+  font-weight: normal;
+  font-style: normal;
+}
+
+ul {
+  list-style: none outside none;
+}
+
+.html-content ul {
+  list-style-type: disc;
+  list-style-position: inside;
+  margin-left: 0;
+  padding-left: 20px;
+}
+
+/** HIDING FOCUSRING */
+a:active, a, li {
+	outline: none;
+}
+a:focus {
+	-moz-outline-style: none;
+}
+a:-moz-any-link:focus {
+	outline: none;
+}
+
+.splitter {
+  border-bottom: 1px solid #dadada;
+}
+
+#topbar #header-logo {
+  img {
+    vertical-align: top;
+  }
+}
+
+#topbar #profile {
+  padding: 15px;
+  position: relative;
+}
+
+#topbar .profile-menu {
+  float: right;
+  height: 32px;
+  line-height: 32px;
+  list-style: none outside none;
+  margin: 0;
+  padding: 0;
+  width: 150px;
+}
+
+.hidden {
+  display: none;
+}
+
+.circle-button a {
+  background-color: #55A0DA;
+  border-bottom: 2px solid #367FB7;
+  border-radius: 150px 150px 150px 150px;
+  color: #FFFFFF;
+  font-size: 28px;
+  height: 46px;
+  line-height: 40px;
+  text-align: center;
+  width: 48px;
+}
+
+.white-popup {
+  position: relative;
+  background: #FFFFFF;
+  padding: 20px;
+  width: auto;
+  max-width: 500px;
+  margin: 20px auto;
+}
+
+abbr.timeago{
+  border: none;
+  cursor: default;
+  color: #BBB;
+  font-weight: normal;
+  font-size: 12px;
+}
+
+.activity {
+  margin-bottom: 1em;
+  padding-left: 45px;
+  position: relative;
+}
+
+.activity .mega-icon {
+  position: absolute;
+  top: 14px;
+  left: 0;
+  width: 32px;
+  height: 32px;
+  padding: 3px;
+  color: #BBB;
+  background-position: center center;
+  background-size: 32px auto;
+  background-repeat: no-repeat;
+}
+
+.activity .body {
+  overflow: hidden;
+  padding: 0 0 1em 0;
+}
+
+.activity .title {
+  padding: 0 0 .25em 0;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.activity .details .avatar {
+  border: 1px solid #D0D0D0;
+  padding: 2px;
+  background-color: white;
+  float: left;
+  line-height: 0;
+  margin-right: .7em;
+}
+
+.activity .message{
+  display: inline;
+  color: #666;
+  font-size: 13px;
+}
+
+.clear { clear: both; }
+
+.jbar{
+    height:50px;
+    width:100%;
+    position:fixed;
+    text-align:center;
+    left:0px;
+    z-index:9999999;
+    margin:0px;
+    padding:0px;
+    filter:progid:DXImageTransform.Microsoft.Alpha(opacity=92);
+    opacity: 0.92;
+    -moz-opacity: 0.92;
+    -moz-box-shadow: #555 0px 0px 5px;
+    box-shadow: #555 0px 0px 5px;
+}
+
+.jbar-top{
+    top:0px;
+}
+
+.jbar-bottom{
+    bottom:0px;
+}
+
+.jbar-content{
+    line-height:46px;
+    font-size: 18px;
+}
+
+.jbar-top a.jbar-cross{
+    top:8px;
+}
+
+.jbar-bottom a.jbar-cross{
+    bottom:8px;
+}
+
+#map {
+  height: 300px;
+}
+
+#map .olControlAttribution {
+  bottom: 5px;
+  font-size: 12px;
+}
+
+.center {
+  text-align: center;
+}
+
+
+/** Neue Stile **/
+
+h1, h2, h3, h4 {
+  margin: 0;
+}
+
+form label {
+  text-align: left;
+}
+
+.left {
+  float: left;
+}
+  
+.left {
+  float: right;
+}
+
+.overflow {
+  overflow: hidden;
+}
+
+.icon {
+  background-image: url("icons/iconssprite.png");
+  background-size: 192px 96px;
+  display: block;
+  height: 32px;
+  width: 32px;
+}
+
+.icon.large {
+  height: 48px;
+  width: 48px;
+}
+
+.icon.center {
+  margin: 0 auto;
+}
+
+.icon-label {
+  display: block;
+  font-size: rem-calc(14);
+}
+
+.active .icon-label, a:hover .icon-label {
+  color: $tertiary-color;
+}
+
+.button {
+  background-color: $secondary-color;
+  border-radius: 5px;
+}
+
+.sec-button {
+  @include button(rem-calc(12) ,#FFFFFF, true, false, false, false);
+  border: 1px solid #6A7279;
+  color: #353F47;
+}
+
+.small-link {
+  font-size: rem-calc(14);
+}
+
+body[data-controller='sessions'] #main-navigation, body[data-controller='registrations'] #main-navigation {
+  display: none;
+}
+
+#topbar {
+  border-bottom: 2px solid #3180BD;
+  
+  .profile-avatar img {
+    border: 2px solid #FFFFFF;
+    border-radius: 50px;
+    width: 48px;
+  }
+}
+
+#main-navigation {
+  padding-bottom: 5px;
+  
+  .icon.large {
+    height: 42px;
+  }
+  
+  a:hover .icon.dashboard, .active .icon.dashboard {
+    background-position: 0 -48px;
+  }
+  
+  .icon.jobs {
+    background-position: -48px 0;
+  }
+  
+  a:hover .icon.jobs, .active .icon.jobs {
+    background-position: -48px -48px;
+  }
+  
+  .icon.workers {
+    background-position: -96px 0;
+  }
+  
+  a:hover .icon.workers, .active .icon.workers {
+    background-position: -96px -48px;
+  }
+  
+  .icon.places {
+    background-position: -144px 0;
+  }
+  
+  a:hover .icon.places, .active .icon.places {
+    background-position: -144px -48px;
+  }
+}
+
+.white-panel {
+  background-color: #FFFFFF;
+  border: 1px solid #E4E4E4;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.07);
+}
+
+#login-page, #registration-page {
+  border-top: 0 none;
+  padding: 30px;
+}

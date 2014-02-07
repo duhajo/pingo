@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
   end
   
   def my_jobs
-    @my_jobs = Job.joins("LEFT JOIN `jobs_workers` ON jobs.id = jobs_workers.job_id").where('jobs_workers.user_id' => @current_user.id)
+    @my_jobs = Job.joins("LEFT JOIN `jobs_workers` ON jobs.id = jobs_workers.job_id").where('jobs_workers.user_id' => @current_user.id).to_a
   end
   
 end

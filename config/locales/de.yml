@@ -223,7 +223,7 @@ de:
   main_nav_dashboard: "Dashboard"
   main_nav_jobs: "Jobs"
   main_nav_workers: "Arbeiter"
-  main_nav_tags: "Tags"
+  main_nav_places: "Orte"
 
   jobs_no_jobs: "Keinen Job gefunden. Sorry!"
   jobs_near_search_info: "Suche nach einem Job, indem du einen Ort oder eine Straße angibst."
