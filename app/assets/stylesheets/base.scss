@@ -14,7 +14,14 @@
 }
 
 @font-face {
-  font-family: 'RobotoLight';
+  font-family: 'Roboto-Medium';
+  src: "<%= asset_path('fonts/Roboto-Medium.ttf') %>" format('TrueType');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto-Light';
   src: "<%= asset_path('fonts/Roboto-Light.ttf') %>" format('TrueType');
   font-weight: normal;
   font-style: normal;
@@ -261,6 +268,11 @@ form label {
   font-size: rem-calc(14);
 }
 
+.content.white {
+  background-color: #FFFFFF;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.07);
+}
+
 body[data-controller='sessions'] #main-navigation, body[data-controller='registrations'] #main-navigation {
   display: none;
 }
@@ -277,6 +289,7 @@ body[data-controller='sessions'] #main-navigation, body[data-controller='registr
 
 #main-navigation {
   padding-bottom: 5px;
+  position: relative;
   
   .icon.large {
     height: 42px;

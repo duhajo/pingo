@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131130142312) do
+ActiveRecord::Schema.define(:version => 20140209172411) do
 
   create_table "activities", :force => true do |t|
     t.integer  "trackable_id"
@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(:version => 20131130142312) do
     t.string   "street"
     t.boolean  "gmaps"
     t.integer  "status"
+    t.integer  "type"
   end
 
   create_table "jobs_workers", :id => false, :force => true do |t|

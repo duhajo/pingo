@@ -1,4 +1,5 @@
 class Job < ActiveRecord::Base
+  self.inheritance_column = nil
   include PublicActivity::Common
   acts_as_commentable
   acts_as_nested_set

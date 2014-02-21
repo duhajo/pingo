@@ -18,7 +18,7 @@
           <nav class="top-bar hide-for-small" data-topbar>
             <section class="top-bar-section row">
               <!-- Right Nav Section -->
-              <div class="small-2 large-4 columns">
+              <div class="small-4 large-4 columns">
                 <ul>
                   <li class="has-dropdown">
                     <%= form_tag(searches_path, :method => "get", id: "search-form") do %>
@@ -38,7 +38,7 @@
               </div>
 
               <!-- Left Nav Section -->
-              <div class="small-6 large-4 columns">
+              <div class="small-4 large-4 columns">
                 <ul class="right">
                 <%if user_signed_in? %>
                     <li class="has-dropdown">
@@ -83,25 +83,25 @@
             <div class="row">
               <div class="large-8 small-centered center columns">
                 <ul class="row">
-                  <li class="large-3 columns <%=cp("dashboard")%>">
+                  <li class="small-3 columns <%=cp("dashboard")%>">
                     <a href="<%=dashboard_path%>">
                       <span class="icon large center dashboard"></span>
                       <span class="icon-label"><%= t('main_nav_dashboard')%></span>
                     </a>
                   </li>
-                  <li class="large-3 columns <%=cp("jobs")%>">
+                  <li class="small-3 columns <%=cp("jobs")%>">
                     <a href="<%=jobs_path%>">
                       <span class="icon large center jobs"></span>
                       <span class="icon-label"><%= t('main_nav_jobs')%></span>
                     </a>
                   </li>
-                  <li class="large-3 columns <%=cp("users")%>">
+                  <li class="small-3 columns <%=cp("users")%>">
                     <a href="<%=users_path%>">
                       <span class="icon large center workers"></span>
                       <span class="icon-label"><%= t('main_nav_workers')%></span>
                     </a>
                   </li>
-                  <li class="large-3 columns <%=cp("places")%>">
+                  <li class="small-3 columns <%=cp("places")%>">
                     <a href="<%=places_path%>">
                       <span class="icon large center places"></span>
                       <span class="icon-label"><%= t('main_nav_places')%></span>
@@ -113,9 +113,6 @@
           </div>
           <div class="full-width content-area">
             <div id="content-container">
-              <!--<div id="actionbar">
-                <%= yield :actionbar %>
-              </div>-->
               <div id="content-wrapper">
                 <%= yield %>
                 <%= yield :scripts %>
