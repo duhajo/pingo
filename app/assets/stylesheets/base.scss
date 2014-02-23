@@ -271,6 +271,10 @@ form label {
 .content.white {
   background-color: #FFFFFF;
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.07);
+
+  &.simple {
+    border: 1px solid #ebebeb;
+  }
 }
 
 body[data-controller='sessions'] #main-navigation, body[data-controller='registrations'] #main-navigation {
@@ -330,7 +334,36 @@ body[data-controller='sessions'] #main-navigation, body[data-controller='registr
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.07);
 }
 
+.blue-title {
+  background-color: $secondary-color;
+  padding: rem-calc(15);
+  
+  a, h2 {
+    color: #FFFFFF;
+  }
+}
+
+.breadcrumb-bar {
+  padding: rem-calc(15);
+  ul {
+    margin: 0;
+    li:before {
+      font-size: rem-calc(15);
+      font-weight: 300;
+    }
+    li:last-child:after {
+      color: #AAAAAA;
+      content: ">";
+      font-size: rem-calc(15);
+      font-weight: 300;
+      margin: 0 0.75rem;
+      position: relative;
+      top: 1px;
+    }
+  }
+}
+
 #login-page, #registration-page {
   border-top: 0 none;
-  padding: 30px;
+  padding: rem-calc(30);
 }

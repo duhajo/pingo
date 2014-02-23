@@ -7,7 +7,7 @@
       <ul id="list-categories" class="small-block-grid-2 medium-block-grid-3 large-block-grid-4">
         <% @categories.each do |categorie| %>
           <li>
-            <div><%=categorie.title %></div>
+            <div><%= link_to categorie.title, categorie %></div>
             <div>
               <ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4">
                 <% categorie.tag_counts_on(:skills, :limit => 5, :order => "count desc").each do |tag| %>
@@ -28,12 +28,12 @@
       <ul id="list-jobs" class="small-block-grid-2 medium-block-grid-3 large-block-grid-4">
         <li>
           <% @jobs.each do |job| %>
-            <div><%=job.title %></div>
+            <div><%= link_to job.title, job %></div>
           <% end %>
         </li>
         <li>
           <% @offers.each do |offer| %>
-            <div><%=offer.title %></div>
+            <div><%= link_to offer.title, offer %></div>
           <% end %>
         </li>
       </ul>

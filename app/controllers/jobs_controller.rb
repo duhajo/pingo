@@ -54,7 +54,10 @@ class JobsController < ApplicationController
     @job = Job.find(params[:id])
     @user_role = get_user_role(@job)
     @is_manager = JobsWorker.where(:job_id => @job.id).where('jobs_workers.isCreator' => true).to_a
-    @jobs = Job.find_all_by_parent_id(@job.id)
+    
+    @jobs = Job.where('parent_id' => @job.id).where('type' => 1)
+    @offers = Job.where('parent_id' => @job.id).where('type' => 2)
+    
     @parent_jobs = @job.ancestors
     @job_ids = Array.new << @job.id
     @jobs.each do |job|
