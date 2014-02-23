@@ -77,6 +77,15 @@ ActiveRecord::Schema.define(:version => 20140209172411) do
 
   add_index "jobs_workers", ["job_id", "user_id"], :name => "index_jobs_workers_on_job_id_and_user_id"
 
+  create_table "mercury_images", :force => true do |t|
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
+
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"
     t.integer  "taggable_id"
