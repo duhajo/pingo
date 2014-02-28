@@ -1,114 +1,85 @@
 <% if @job.type == 0 %>
-<div class="breadcrumb-bar">
-  <ul class="breadcrumbs">
-    <li><%= link_to 'Kategorienübersicht', :action => "index" %></li>
-  </ul>
-</div>
-<div class="content white simple" id="categorie-view">
-  <div id="categorie-details" class="row">
-    <h1 class="title categorie">Kategorie: <%= @job.title %></h1>
-    <div class="medium-3 columns">Bild</div>
-    <div class="medium-5 columns"><%=  @job.description %></div>
-    <div class="medium-4 columns"><h2>Meist verwendete Schlagworte</h2></div>
-  </div>
-  <div class="blue-title">
-    <h2>Eingeordnete Jobs <% if user_signed_in? %>(<%= link_to 'Neuer Job', :action => "new" %>)<% end %></h2>
-  </div>
-    <%if @jobs.empty? && @offers.empty? %>
-      <%= t('jobs_no_jobs') %>
-    <% else %>
-      <ul id="list-jobs" class="small-block-grid-1 medium-block-grid-2 large-block-grid-2">
-        <li>
-          <h3>Aufgaben</h3>
-          <%if @jobs.empty? %>
-            <%= t('jobs_no_jobs') %>
-          <% else %>
-            <% @jobs.each do |job| %>
-              <div><%= link_to job.title, job %></div>
-            <% end %>
-          <% end %>
-        </li>
-        <li>
-          <h3>Angebote</h3>
-          <%if @offers.empty? %>
-            <%= t('jobs_no_jobs') %>
-          <% else %>
-            <% @offers.each do |offer| %>
-              <div><%= link_to offer.title, offer %></div>
-            <% end %>
-          <% end %>
-        </li>
-      </ul>
-    <% end %>
-  </div>
-</div>
-<% else %>
-<div class="breadcrumb-bar">
-  <ul class="breadcrumbs">
-    <% if !@job.parent_id.nil? %>
+  <div class="breadcrumb-bar">
+    <ul class="breadcrumbs">
       <li><%= link_to 'Kategorienübersicht', :action => "index" %></li>
-      <% @parent_jobs.each.with_index do |job,index| %>
-        <% break if (job.id == @job.id)%>
-        <li><%= link_to job.title, job %></li>
-        <% unless @parent_jobs[index+1].nil? %>
-          <li>&raquo;</li>
-        <% end %>
-      <%end%>
-    <%else%>
-      <li><%= link_to 'Jobübersicht', :action => "index" %></li>
-    <%end%>     
-  </ul>
-</div>
-<div class="content white simple" id="job-view"<% if @job.status == 3 || user_signed_in? && @job.parent_id.nil? %>class="closed"<% end %>>
-    <% if user_signed_in? && @job.status != 3 %>
-      <% content_for :actionbar do %>
-        <ul class="actions">
-          <li><%= link_to 'Aufgabe anlegen', :action => "new" %></li>
-          <li><%= link_to 'Like', like_job_path(@job), :id => "like-button", :method => :put, :remote => true%></li>
-          <li><% unless @user_role > 1%>
-                <% if !@is_manager.empty? %>
-                  <%= link_to 'Support', :action => "support", :support => true %>
-                <%else%>
-                  <%= link_to 'Managen!', :action => "support", :support => true, :manager => true %>
-                <%end%>
-              <%else%>
-                <%= link_to 'Keine Zeit mehr!', :action => "support" %>
-              <%end%>
+    </ul>
+  </div>
+  <div class="content white simple" id="categorie-view">
+    <div id="categorie-details" class="row space">
+      <h1 class="title categorie">Kategorie: <%= @job.title %></h1>
+      <div class="medium-3 columns">Bild</div>
+      <div class="medium-5 columns">
+        <div id="job-description" class="html-content">
+          <%if @job.description.empty?%>
+            Noch keine Beschreibung vorhanden...
+          <%else%>
+            <div class="job-description-preview"><%= truncate_html @job.description, :length => 50 %></div>
+            <div class="job-description-full" style="display:none;"><%=@job.description.html_safe%></div>
+          <%end%>
+        </div>
+      </div>
+      <div class="medium-4 columns"><h2>Meist verwendete Schlagworte</h2></div>
+    </div>
+    <div class="blue-title">
+      <h2>Eingeordnete Jobs <% if user_signed_in? %>(<%= link_to 'Neuer Job', :action => "new" %>)<% end %></h2>
+    </div>
+      <div id="job-subjobs" class="space">
+      <%if @jobs.empty? && @offers.empty? %>
+        <%= t('jobs_no_jobs') %>
+      <% else %>
+        <ul id="list-jobs" class="small-block-grid-1 medium-block-grid-2 large-block-grid-2">
+          <li>
+            <h3>Aufgaben</h3>
+            <%if @jobs.empty? %>
+              <%= t('jobs_no_jobs') %>
+            <% else %>
+              <% @jobs.each do |job| %>
+                <div><%= link_to job.title, job %></div>
+              <% end %>
+            <% end %>
           </li>
-          <% if @user_role == 3 %>
-            <li><%= link_to 'Edit', edit_job_path(@job) %></li>
-          <% end %>
+          <li>
+            <h3>Angebote</h3>
+            <%if @offers.empty? %>
+              <%= t('jobs_no_jobs') %>
+            <% else %>
+              <% @offers.each do |offer| %>
+                <div><%= link_to offer.title, offer %></div>
+              <% end %>
+            <% end %>
+          </li>
         </ul>
       <% end %>
-    <% end %>
-    <div>
-      <div id="job" data-id="<%=@job.id%>">
-        <div id="job-title"><h1><%= @job.title %></h1>
-          <div id="job-status-container">
-            <%= render :partial => "status", :job => @job, :manager => @user_role %>
-          </div>
-        </div>
-        <div id="job-details">
-            <div id="job-info">
-              <div class="job-tags">
-                <% if not @job.skill_list.empty? %>
-                  <ul>
-                    <% @job.tag_counts_on(:skills, :limit => 5, :order => "count desc").each do |tag| %>
-                      <li><%= link_to tag.name, { :controller => :tags, :action => :show, :id => tag.id } %></li>
-                    <% end %>
-                  </ul>
-                <% end %>
-                <span class="clear"></span>
-              </div>
-              <div id="job-description" class="html-content">
-              <%if @job.description.empty?%>
-                Noch keine Beschreibung vorhanden...
-              <%else%>
-                <div class="job-description-preview"><%= truncate_html @job.description, :length => 50 %></div>
-                <div class="job-description-full" style="display:none;"><%=@job.description.html_safe%></div>
-              <%end%></div>
-            </div>
+    </div>
+  </div>
+<% else %>
+  <div class="breadcrumb-bar">
+    <ul class="breadcrumbs">
+      <% if !@job.parent_id.nil? %>
+        <li><%= link_to 'Kategorienübersicht', :action => "index" %></li>
+        <% @parent_jobs.each.with_index do |job,index| %>
+          <% break if (job.id == @job.id)%>
+          <li><%= link_to job.title, job %></li>
+          <% unless @parent_jobs[index+1].nil? %>
+            <li>&raquo;</li>
+          <% end %>
+        <%end%>
+      <%else%>
+        <li><%= link_to 'Jobübersicht', :action => "index" %></li>
+      <%end%>     
+    </ul>
+  </div>
+
+  <div class="row content white simple <% if @job.status == 3 || user_signed_in? && @job.parent_id.nil? %>closed<% end %>" id="job-view" data-id="<%=@job.id%>">
+    <div id="job-specification-area" class="medium-8 columns">
+      <div id="job-details" class="space">
+        <h1 class="title job">Aufgabe: <%= @job.title %></h1>
+        <div class="row">
+          <div id="job-meta-wrapper" class="medium-8 columns">
             <div id="job-meta">
+              <div id="job-status-wrapper">
+                <%= render :partial => "status", :job => @job, :manager => @user_role %>
+              </div>
               <% if not @job.deadline.nil? %>
               <div id="job-deadline">
                 <span class="icon"><!----></span>
@@ -124,36 +95,37 @@
               </div>
               <% end %>
               <% if !@job.latitude.nil? && !@job.longitude.nil? %>
-              <div id="job-location">
-                <span class="icon"><!----></span>
-                <span class="icon-label">
-                  <%=@job.address%>
-                  <br />
-                  <%= link_to_modal 'Karte anzeigen', { :action => :map_for_job }, :remote => true, :id => "show-map-button" , :"data-lat" => @job.latitude, :"data-long" => @job.longitude %>
-                </span>
+                <div id="job-location">
+                  <span class="icon"><!----></span>
+                  <span class="icon-label">
+                    <%=@job.address%>
+                    <br />
+                    <%= link_to_modal 'Karte anzeigen', { :action => :map_for_job }, :remote => true, :id => "show-map-button" , :"data-lat" => @job.latitude, :"data-long" => @job.longitude %>
+                  </span>
+                  <span class="clear"></span>
+                </div>
+              <% end %>
+              <div class="job-tags">
+                <% if not @job.skill_list.empty? %>
+                  <ul>
+                    <% @job.tag_counts_on(:skills, :limit => 5, :order => "count desc").each do |tag| %>
+                      <li><%= link_to tag.name, { :controller => :tags, :action => :show, :id => tag.id } %></li>
+                    <% end %>
+                  </ul>
+                <% end %>
                 <span class="clear"></span>
               </div>
-              <% end %>
             </div>
-            <div id="job-more-details">
-              <% if @job.description.html_safe.length > 50 %>
-              <div class="splitter" id="splitter-open">
-              <%= link_to_function 'Jobdetails', "$('.job-description-preview').hide();$('.job-description-full').show();$('#splitter-close').show();$(this).parent().hide();" %>
-              </div>
-              <div class="splitter" id="splitter-close" style="display:none;">
-              <%= link_to_function 'Weniger', "$('.job-description-full').hide();$('.job-description-preview').show();$('#splitter-open').show();$(this).parent().hide();" %>
-              </div>
-              <% else %>
-                <div class="splitter"></div>
-              <% end %>
+            <div id="job-description" class="html-content">
+              <%if @job.description.empty?%>
+                Noch keine Beschreibung vorhanden...
+              <%else%>
+                <div class="job-description-preview"><%= truncate_html @job.description, :length => 50 %></div>
+                <div class="job-description-full" style="display:none;"><%=@job.description.html_safe%></div>
+              <%end%>
             </div>
-        </div>
-        <div id="job-interactions">
-          <div id="job-results">
-            <h2>Ergebnisse</h2>
-            <div class="preview-list results">Das Feature gibt es noch nicht :)</div>
           </div>
-          <div id="job-workers">
+          <div class="job-workers-wrapper" class="medium-4 columns">
             <h2 class="with-buttons">Arbeiter 
             <%if @user_role == 3 %>
               <span class="right">
@@ -209,70 +181,49 @@
                     </span>
                   </li>
               </ul>
-              <span class="clear"></span>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <%= gflash %>
-    <div id="content-tabs">
-      <div class="content-box left" id="job-tasks">
-        <h2>Unteraufgaben (<%= @jobs.size %>)</h2>
-        <% @jobs.each do |job|%>
-          <div class="job-container"
-          <% if job.status == 3 %>closed<% elsif job.status == 2 %>in-work<% else %>open<% end %>">
-            <div class="job">
-              <div class="job-details">
-                <div class="job-title"><h3><%= link_to job.title, job %>
-                <% if !job.deadline.nil? && job.deadline < DateTime.now %>
-                  <span class="expired">(expired)</span>
-                <% end %></h3></div>
-                <div class="job-tags">
-                  <ul>
-                  <% job.tag_counts_on(:skills, :limit => 5, :order => "count desc").each do |tag| %>
-                    <li><%= link_to tag.name, { :action => :tag, :id => tag.name } %></li>
-                  <% end %>
-                  </ul>
-                  <span class="clear"></span>
-                </div>
-              </div>
-              <div class="job-interactions">
-                <div class="job-fav"></div>
-              </div>
-              <span class="clear"></span>
-            </div>
-            <%
-              likeClass = "likes-button like icon"
-              if user_signed_in?
-                if current_user.voted_up_on? job
-                  likeClass << " voted"
-                end
-              end
-              if job.likes.size == 0
-                likeClass << " no-votes"
-              end
-            %>
-            <div class="job-likes">
-              <% if user_signed_in? %>
-                <%= link_to '', like_job_path(job), :class => likeClass, :method => :put, :remote => true, :"data-id" => job.id%>
+      <div class="blue-title">
+        <h2>Eingeordnete Jobs <% if user_signed_in? %>(<%= link_to 'Neuer Job', :action => "new" %>)<% end %></h2>
+      </div>
+      <div id="job-subjobs" class="space">
+        <%if @jobs.empty? && @offers.empty? %>
+          <%= t('jobs_no_jobs') %>
+        <% else %>
+          <ul id="list-jobs" class="small-block-grid-1 medium-block-grid-2 large-block-grid-2">
+            <li>
+              <h3>Aufgaben</h3>
+              <%if @jobs.empty? %>
+                <%= t('jobs_no_jobs') %>
               <% else %>
-                <%= link_to '', login_path, :class => "like icon no-login"%>
+                <% @jobs.each do |job| %>
+                  <div><%= link_to job.title, job %></div>
+                <% end %>
               <% end %>
-              <div class="likes-number <% if job.likes.size == 0 %>hidden<%end%>"><%= job.likes.size %></div>
-            </div>
-          </div>
+            </li>
+            <li>
+              <h3>Angebote</h3>
+              <%if @offers.empty? %>
+                <%= t('jobs_no_jobs') %>
+              <% else %>
+                <% @offers.each do |offer| %>
+                  <div><%= link_to offer.title, offer %></div>
+                <% end %>
+              <% end %>
+            </li>
+          </ul>
         <% end %>
-        <%= button_to 'Add Subtask', :action => "new" %>
+      </div>
     </div>
-    <div class="content-box right" id="job-activities">
-      <h2>Aktivit&auml;ten</h2>
+    <div id=job-activities-area" class="medium-4 columns space">
+      <h1 class="title">Aktivit&auml;ten</h1>
       <%if user_signed_in?%>
         <%= render :partial => "comments/form" %>
       <% else %>
         Du bist nicht angemeldet <%= link_to 'einloggen?', login_path, :class => "button"%>
       <% end %>
-
       <% @activities.each do |activity| %>
           <% if activity.key == "job.commented" %>
             <%= render_activity(activity, :layout => "layouts/activity_wrapper") %>
@@ -282,4 +233,5 @@
       <% end %>
     </div>
   </div>
+  <%= gflash %>
 <% end %>

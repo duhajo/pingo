@@ -31,7 +31,7 @@ $experimental: true;
 // $include-html-grid-classes: $include-html-classes;
 
 $row-width: rem-calc(1700);
-// $column-gutter: rem-calc(30);
+$column-gutter: rem-calc(0);
 // $total-columns: 12;
 
 // We use these to control various global styles
