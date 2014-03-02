@@ -5,7 +5,7 @@
     </ul>
   </div>
   <div class="content white simple" id="categorie-view">
-    <div id="categorie-details" class="row space">
+    <div id="categorie-details" class="row full-width space">
       <h1 class="title categorie">Kategorie: <%= @job.title %></h1>
       <div class="medium-3 columns">Bild</div>
       <div class="medium-5 columns">
@@ -70,7 +70,7 @@
     </ul>
   </div>
 
-  <div class="row content white simple <% if @job.status == 3 || user_signed_in? && @job.parent_id.nil? %>closed<% end %>" id="job-view" data-id="<%=@job.id%>">
+  <div class="row content white simple full-width <% if @job.status == 3 || user_signed_in? && @job.parent_id.nil? %>closed<% end %>" id="job-view" data-id="<%=@job.id%>">
     <div id="job-specification-area" class="medium-8 columns">
       <div id="job-details" class="space">
         <h1 class="title job">Aufgabe: <%= @job.title %></h1>

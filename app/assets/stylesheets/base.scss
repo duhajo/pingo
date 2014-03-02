@@ -230,6 +230,11 @@ form label {
   overflow: hidden;
 }
 
+#duhajo .full-width { 
+  width: 100%;
+  max-width: inherit; 
+}
+
 .icon {
   background-image: url("icons/iconssprite.png");
   background-size: 192px 96px;
