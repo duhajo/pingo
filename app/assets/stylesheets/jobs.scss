@@ -1,0 +1,44 @@
+#job-view {
+  position: relative;
+  #job-activities-area {
+    border-left: 1px solid #EBEBEB;
+    bottom: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+}
+
+#job-details {
+  #job-status {
+    float: left;
+
+    #status-open, .rights #status-closed:hover {
+      background-color: #dc007c;
+      color: #FFFFFF;
+    }
+
+    #status-in-work, .rights #status-open:hover {
+      background-color: #7aba4b;
+      color: #FFFFFF;
+    }
+
+    #status-closed, .rights #status-in-work:hover {
+      background-color: #f7f7f7;
+      color: #707070;
+    }
+
+    .rights .button:hover span.now, .button span.new {
+      display: none;
+    }
+
+    .rights .button:hover span.new {
+      display: block;
+    }
+  }
+  
+  #job-deadline {
+    height: rem-calc(38);
+    line-height: rem-calc(38);
+  }
+}

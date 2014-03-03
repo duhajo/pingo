@@ -27,6 +27,14 @@
   font-style: normal;
 }
 
+html {
+  height: 100%;
+  
+  body {
+    height: 100%;
+  }
+}
+
 ul {
   list-style: none outside none;
 }
@@ -208,6 +216,10 @@ abbr.timeago{
   padding: rem-calc(15);
 }
 
+.top-margin {
+  margin-top: rem-calc(15);
+}
+
 /** Neue Stile **/
 
 h1, h2, h3, h4 {
@@ -264,6 +276,10 @@ form label {
 .button {
   background-color: $secondary-color;
   border-radius: 5px;
+  &.small {
+    padding: rem-calc(8);
+    margin: 0 0 rem-calc(8) 0;
+  }
 }
 
 .sec-button {

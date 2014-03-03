@@ -55,34 +55,36 @@
 <% else %>
   <div class="breadcrumb-bar">
     <ul class="breadcrumbs">
-      <% if !@job.parent_id.nil? %>
+      <% if !@job.parent_id.nil? && Job.find(@job.parent_id).type == 0 %>
         <li><%= link_to 'Kategorienübersicht', :action => "index" %></li>
-        <% @parent_jobs.each.with_index do |job,index| %>
-          <% break if (job.id == @job.id)%>
-          <li><%= link_to job.title, job %></li>
-          <% unless @parent_jobs[index+1].nil? %>
-            <li>&raquo;</li>
-          <% end %>
-        <%end%>
       <%else%>
         <li><%= link_to 'Jobübersicht', :action => "index" %></li>
-      <%end%>     
+      <%end%> 
+      <% @parent_jobs.each.with_index do |job,index| %>
+        <% break if (job.id == @job.id)%>
+        <li><%= link_to job.title, job %></li>
+      <%end%>
     </ul>
   </div>
 
   <div class="row content white simple full-width <% if @job.status == 3 || user_signed_in? && @job.parent_id.nil? %>closed<% end %>" id="job-view" data-id="<%=@job.id%>">
     <div id="job-specification-area" class="medium-8 columns">
       <div id="job-details" class="space">
-        <h1 class="title job">Aufgabe: <%= @job.title %></h1>
+        <h1 class="title job">Aufgabe: <%= @job.title %> 
+          <% if @user_role == 3 && user_signed_in?%>
+          (<%= link_to 'Edit', edit_job_path(@job) %>)
+        <% end %></h1>
         <div class="row">
-          <div id="job-meta-wrapper" class="medium-8 columns">
-            <div id="job-meta">
-              <div id="job-status-wrapper">
+          <div id="job-meta-wrapper" class="medium-8 columns top-margin">
+            <div id="job-meta" class="row">
+              <% if (!@job.latitude.nil? && !@job.longitude.nil?) && !@job.deadline.nil?
+                @lessColumns = "medium-4" else @lessColumns = "medium-6" end %>
+              <div id="job-status-wrapper" class="<%= @lessColumns %> columns">
                 <%= render :partial => "status", :job => @job, :manager => @user_role %>
               </div>
               <% if not @job.deadline.nil? %>
-              <div id="job-deadline">
-                <span class="icon"><!----></span>
+              <div id="job-deadline" class="<%= @lessColumns %> columns left">
+                <span class="left"><!----></span>
                 <span class="icon-label" title="<%= @job.deadline.to_formatted_s(:long) %>">
                   <%=  distance_of_time_in_words(Time.now, @job.deadline, true) %>
                   <% if @job.deadline < DateTime.now %>
@@ -91,12 +93,11 @@
                     to go
                   <% end %>
                 </span>
-                <span class="clear"></span>
               </div>
               <% end %>
               <% if !@job.latitude.nil? && !@job.longitude.nil? %>
-                <div id="job-location">
-                  <span class="icon"><!----></span>
+                <div id="job-location" class="<%= @lessColumns %> columns">
+                  <span class="icon left"><!----></span>
                   <span class="icon-label">
                     <%=@job.address%>
                     <br />
@@ -105,24 +106,23 @@
                   <span class="clear"></span>
                 </div>
               <% end %>
-              <div class="job-tags">
-                <% if not @job.skill_list.empty? %>
-                  <ul>
-                    <% @job.tag_counts_on(:skills, :limit => 5, :order => "count desc").each do |tag| %>
-                      <li><%= link_to tag.name, { :controller => :tags, :action => :show, :id => tag.id } %></li>
-                    <% end %>
-                  </ul>
-                <% end %>
-                <span class="clear"></span>
-              </div>
             </div>
-            <div id="job-description" class="html-content">
+            <div id="job-description" class="html-content top-margin">
               <%if @job.description.empty?%>
                 Noch keine Beschreibung vorhanden...
               <%else%>
                 <div class="job-description-preview"><%= truncate_html @job.description, :length => 50 %></div>
                 <div class="job-description-full" style="display:none;"><%=@job.description.html_safe%></div>
               <%end%>
+            </div>
+            <div class="job-tags top-margin">
+              <% if not @job.skill_list.empty? %>
+                <ul>
+                  <% @job.tag_counts_on(:skills, :limit => 5, :order => "count desc").each do |tag| %>
+                    <li><%= link_to tag.name, { :controller => :tags, :action => :show, :id => tag.id } %></li>
+                  <% end %>
+                </ul>
+              <% end %>
             </div>
           </div>
           <div class="job-workers-wrapper" class="medium-4 columns">
@@ -217,7 +217,7 @@
         <% end %>
       </div>
     </div>
-    <div id=job-activities-area" class="medium-4 columns space">
+    <div id="job-activities-area" class="medium-4 columns space">
       <h1 class="title">Aktivit&auml;ten</h1>
       <%if user_signed_in?%>
         <%= render :partial => "comments/form" %>

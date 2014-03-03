@@ -1,27 +1,19 @@
-<% content_for :actionbar do %>
-  <ul class="actions">
-    <li><%= link_to 'Erstellen', "#", :onclick => "nicEditors.findEditor('job_description').saveContent();sendForm('new_job');return false;" %></li>
-    <li><%= link_to 'Abbrechen', jobs_path %></li>
-  </ul>
-<% end %>
-
-<h1>Neuer Job <% if not @parent_job.nil? %>für "<%= @parent_job.title %>"<% end %></h1>
-
-<%= form_for(@job) do |f| %>
-  <% if @job.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@job.errors.count, "error") %> prohibited this job from being saved:</h2>
-      <ul>
-      <% @job.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <% if not @parent_job.nil? %>
-    <%= f.hidden_field :parent_id, value: @parent_job.id %>
-  <% end %>
-  <div class="content-box left">
+<div class="row large-6 medium-8 large-centered medium-centered columns center white-panel space" id="new-job-page">
+  <h1>Neuer Job <% if not @parent_job.nil? %>für "<%= @parent_job.title %>"<% end %></h1>
+  <%= form_for(@job) do |f| %>
+    <% if @job.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@job.errors.count, "error") %> prohibited this job from being saved:</h2>
+        <ul>
+        <% @job.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <% if not @parent_job.nil? %>
+      <%= f.hidden_field :parent_id, value: @parent_job.id %>
+    <% end %>
     <div class="field">
       <%= f.label :title %><br />
       <%= f.text_field :title %>
@@ -30,8 +22,6 @@
       <%= f.label :description %><br />
       <%= f.resizable_text_area :description %>
     </div>
-  </div>
-  <div class="content-box right">
     <div class="field">
       <%= f.label :skill_list, "Tags (separated by commas)" %><br />
       <%= f.text_field :skill_list %>
@@ -62,5 +52,9 @@
         <%= f.text_field :street %>
       </div>
     </div>
-  </div>
-<% end %>
+    <div class="clearfix top-margin">
+      <%= link_to 'Abbrechen', jobs_path, :class => "sec-button button left" %>
+      <%= link_to 'Erstellen', "#", :onclick => "nicEditors.findEditor('job_description').saveContent();sendForm('new_job');return false;", :class => "button right" %>
+    </div>
+  <% end %>
+</div>

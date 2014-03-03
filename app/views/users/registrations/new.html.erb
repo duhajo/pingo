@@ -18,7 +18,7 @@
       <%= f.password_field :password_confirmation %></div>
 
       <div><%= f.label :locale, "Sprache" %><br />
-      <%= f.select :locale, I18n.available_locales %>
+      <%= f.select :locale, I18n.available_locales %></div>
 
       <div class="clearfix">
           <%- if controller_name != 'sessions' %>
