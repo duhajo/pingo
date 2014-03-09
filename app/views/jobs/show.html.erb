@@ -117,7 +117,7 @@
             </div>
             <div class="job-tags top-margin">
               <% if not @job.skill_list.empty? %>
-                <ul>
+                <ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4">
                   <% @job.tag_counts_on(:skills, :limit => 5, :order => "count desc").each do |tag| %>
                     <li><%= link_to tag.name, { :controller => :tags, :action => :show, :id => tag.id } %></li>
                   <% end %>
@@ -129,7 +129,7 @@
             <h2 class="with-buttons">Arbeiter 
             <%if @user_role == 3 %>
               <span class="right">
-                <%= link_to_modal 'Verwalten', { :action => :show_manager_list }, :remote => true, :id => "edit-manager-button", :class => "button"%>
+                <%= link_to_modal 'Verwalten', { :action => :show_manager_list }, :remote => true, :id => "edit-manager-button", :class => "button small"%>
               </span>
             <% end %>
             </h2>
