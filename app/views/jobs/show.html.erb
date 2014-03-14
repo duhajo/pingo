@@ -117,9 +117,9 @@
             </div>
             <div class="job-tags top-margin">
               <% if not @job.skill_list.empty? %>
-                <ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4">
+                <ul class="small-block-grid-4 medium-block-grid-6 large-block-grid-8 tag-list">
                   <% @job.tag_counts_on(:skills, :limit => 5, :order => "count desc").each do |tag| %>
-                    <li><%= link_to tag.name, { :controller => :tags, :action => :show, :id => tag.id } %></li>
+                    <li><%= link_to tag.name, { :controller => :tags, :action => :show, :id => tag.id }, :class => "tag" %></li>
                   <% end %>
                 </ul>
               <% end %>

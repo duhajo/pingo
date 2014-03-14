@@ -1,0 +1,46 @@
+/*
+    Document   : fonts
+    Created on : 08.06.2013, 13:00:39
+    Author     : Psyphant
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+@font-face {
+    font: {
+       family: 'Roboto';
+       weight: 'normal';
+       style: 'normal';
+    }
+    src: asset-url('Roboto-Regular.eot', font);
+    src: asset-url('Roboto-Regular.eot', font) format('embedded-opentype'),
+         asset-url('Roboto-Regular.woff', font) format('woff'),
+         asset-url('Roboto-Regular.ttf', font) format('truetype'),
+         asset-url('Roboto-Regular.svg#RobotoRegular', font) format('svg')
+}
+
+@font-face {
+    font: {
+       family: 'RobotoLight';
+       weight: '100';
+       style: 'normal';
+    }
+    src: asset-url('Roboto-Light.eot', font);
+    src: asset-url('Roboto-Light.eot', font) format('embedded-opentype'),
+         asset-url('Roboto-Light.woff', font) format('woff'),
+         asset-url('Roboto-Light.ttf', font) format('truetype'),
+         asset-url('Roboto-Light.svg#RobotoLight', font) format('svg')
+}
+
+@font-face {
+    font: {
+       family: 'RobotoMedium';
+       weight: '300';
+       style: 'normal';
+    }
+    src: asset-url('Roboto-Medium.eot', font);
+    src: asset-url('Roboto-Medium.eot', font) format('embedded-opentype'),
+         asset-url('Roboto-Medium.woff', font) format('woff'),
+         asset-url('Roboto-Medium.ttf', font) format('truetype'),
+         asset-url('Roboto-Medium.svg#RobotoMedium', font) format('svg')
+}

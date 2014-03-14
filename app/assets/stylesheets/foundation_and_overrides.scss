@@ -37,7 +37,7 @@ $column-gutter: rem-calc(0);
 // We use these to control various global styles
 $body-bg: #f7f7f7;
 // $body-font-color: #666666;
-$body-font-family: 'Roboto', Arial, Sans-Serif;
+$body-font-family: 'Roboto';//, Arial, Sans-Serif;
 // $body-font-weight: normal;
 // $body-font-style: normal;
 
@@ -54,6 +54,7 @@ $primary-color: #353f47;
 $secondary-color: #55a0da;
 $tertiary-color: #b109ff;
 $quaternary-color: #666666;
+$quinary-color: #e6ebf0;
 // $alert-color: #f04124;
 // $success-color: #43AC6A;
 // $warning-color: #f08a24;
@@ -1085,7 +1086,7 @@ $topbar-link-bg-hover: #3180BD;
 // $include-open-sans: true;
 
 // We use these to control header font styles
-$header-font-family: join("Roboto-Medium", $body-font-family);
+$header-font-family: "RobotoMedium";
 //$header-font-weight: 300;
 // $header-font-style: normal;
 $header-font-color: $quaternary-color;

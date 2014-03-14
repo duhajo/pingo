@@ -6,27 +6,6 @@
         Purpose of the stylesheet follows.
 */
 
-@font-face {
-  font-family: 'Roboto';
-  src: "<%= asset_path('fonts/Roboto-Regular.ttf') %>" format('TrueType');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Roboto-Medium';
-  src: "<%= asset_path('fonts/Roboto-Medium.ttf') %>" format('TrueType');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Roboto-Light';
-  src: "<%= asset_path('fonts/Roboto-Light.ttf') %>" format('TrueType');
-  font-weight: normal;
-  font-style: normal;
-}
-
 html {
   height: 100%;
   
@@ -119,50 +98,48 @@ abbr.timeago{
   margin-bottom: 1em;
   padding-left: 45px;
   position: relative;
-}
+  .mega-icon {
+    position: absolute;
+    top: 14px;
+    left: 0;
+    width: 32px;
+    height: 32px;
+    padding: 3px;
+    color: #BBB;
+    background-position: center center;
+    background-size: 32px auto;
+    background-repeat: no-repeat;
+  }
 
-.activity .mega-icon {
-  position: absolute;
-  top: 14px;
-  left: 0;
-  width: 32px;
-  height: 32px;
-  padding: 3px;
-  color: #BBB;
-  background-position: center center;
-  background-size: 32px auto;
-  background-repeat: no-repeat;
-}
+  .body {
+    overflow: hidden;
+    padding: 0 0 1em 0;
+  }
 
-.activity .body {
-  overflow: hidden;
-  padding: 0 0 1em 0;
-}
-
-.activity .title {
-  padding: 0 0 .25em 0;
-  font-weight: bold;
-  font-size: 14px;
-}
-
-.activity .details .avatar {
-  border: 1px solid #D0D0D0;
-  padding: 2px;
-  background-color: white;
-  float: left;
-  line-height: 0;
-  margin-right: .7em;
-}
-
-.activity .message{
-  display: inline;
-  color: #666;
-  font-size: 13px;
+  .title {
+    padding: 0 0 .25em 0;
+    font-size: 14px;
+  }
+  
+  .details .avatar {
+    border: 1px solid #D0D0D0;
+    padding: 2px;
+    background-color: white;
+    float: left;
+    line-height: 0;
+    margin-right: .7em;
+  }
+  
+  .message{
+    display: inline;
+    color: #666;
+    font-size: 13px;
+  }
 }
 
 .clear { clear: both; }
 
-.jbar{
+.jbar {
     height:50px;
     width:100%;
     position:fixed;
@@ -176,36 +153,34 @@ abbr.timeago{
     -moz-opacity: 0.92;
     -moz-box-shadow: #555 0px 0px 5px;
     box-shadow: #555 0px 0px 5px;
-}
 
-.jbar-top{
+  .jbar-top{
     top:0px;
-}
+    .jbar-cross{
+      top:8px;
+    }
+  }
 
-.jbar-bottom{
+  .jbar-bottom{
     bottom:0px;
-}
+    a.jbar-cross{
+      bottom:8px;
+    }
+  }
 
-.jbar-content{
-    line-height:46px;
-    font-size: 18px;
-}
-
-.jbar-top a.jbar-cross{
-    top:8px;
-}
-
-.jbar-bottom a.jbar-cross{
-    bottom:8px;
+  .jbar-content{
+      line-height:46px;
+      font-size: 18px;
+  }
 }
 
 #map {
   height: 300px;
-}
-
-#map .olControlAttribution {
-  bottom: 5px;
-  font-size: 12px;
+  
+  .olControlAttribution {
+    bottom: 5px;
+    font-size: 12px;
+  }
 }
 
 .center {
@@ -267,6 +242,15 @@ form label {
 .icon-label {
   display: block;
   font-size: rem-calc(14);
+}
+
+.tag-list {
+  .tag {
+    background-color: $quinary-color;
+    border-radius: 3px;
+    font-size: rem-calc(12);
+    padding: rem-calc(6);
+  }
 }
 
 .active .icon-label, a:hover .icon-label {

@@ -9,9 +9,9 @@
           <li>
             <div><%= link_to categorie.title, categorie %></div>
             <div>
-              <ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4">
+              <ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4 tag-list">
                 <% categorie.tag_counts_on(:skills, :limit => 5, :order => "count desc").each do |tag| %>
-                  <li><%= link_to tag.name, { :controller => :tags, :action => :show, :id => tag.id } %></li>
+                  <li><%= link_to tag.name, { :controller => :tags, :action => :show, :id => tag.id }, :class => "tag" %></li>
                 <% end %>
               </ul>
             </div>

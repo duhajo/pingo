@@ -1,11 +1,14 @@
 #job-view {
-  position: relative;
+
+  
+  #job-specification-area {
+    border-right: 1px solid #EBEBEB;
+    margin-left: 1px;
+  }
+  
   #job-activities-area {
     border-left: 1px solid #EBEBEB;
-    bottom: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
+    margin-left: -1px;
   }
 }
 
