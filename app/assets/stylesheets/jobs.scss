@@ -1,6 +1,5 @@
 #job-view {
 
-  
   #job-specification-area {
     border-right: 1px solid #EBEBEB;
     margin-left: 1px;
@@ -43,5 +42,17 @@
   #job-deadline {
     height: rem-calc(38);
     line-height: rem-calc(38);
+  }
+}
+
+#edit-job-page {
+  @media #{$medium-only} {
+    select.medium-4 {
+      margin-right: 1%;
+      width: 32.666%;
+      &:last-child {
+        margin-right: 0;
+      }
+    }
   }
 }

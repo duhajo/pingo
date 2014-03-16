@@ -18,13 +18,6 @@ ul {
   list-style: none outside none;
 }
 
-.html-content ul {
-  list-style-type: disc;
-  list-style-position: inside;
-  margin-left: 0;
-  padding-left: 20px;
-}
-
 /** HIDING FOCUSRING */
 a:active, a, li {
 	outline: none;
@@ -34,10 +27,6 @@ a:focus {
 }
 a:-moz-any-link:focus {
 	outline: none;
-}
-
-.splitter {
-  border-bottom: 1px solid #dadada;
 }
 
 #topbar #header-logo {
@@ -65,18 +54,6 @@ a:-moz-any-link:focus {
   display: none;
 }
 
-.circle-button a {
-  background-color: #55A0DA;
-  border-bottom: 2px solid #367FB7;
-  border-radius: 150px 150px 150px 150px;
-  color: #FFFFFF;
-  font-size: 28px;
-  height: 46px;
-  line-height: 40px;
-  text-align: center;
-  width: 48px;
-}
-
 .white-popup {
   position: relative;
   background: #FFFFFF;
@@ -94,94 +71,7 @@ abbr.timeago{
   font-size: 12px;
 }
 
-.activity {
-  margin-bottom: 1em;
-  padding-left: 45px;
-  position: relative;
-  .mega-icon {
-    position: absolute;
-    top: 14px;
-    left: 0;
-    width: 32px;
-    height: 32px;
-    padding: 3px;
-    color: #BBB;
-    background-position: center center;
-    background-size: 32px auto;
-    background-repeat: no-repeat;
-  }
-
-  .body {
-    overflow: hidden;
-    padding: 0 0 1em 0;
-  }
-
-  .title {
-    padding: 0 0 .25em 0;
-    font-size: 14px;
-  }
-  
-  .details .avatar {
-    border: 1px solid #D0D0D0;
-    padding: 2px;
-    background-color: white;
-    float: left;
-    line-height: 0;
-    margin-right: .7em;
-  }
-  
-  .message{
-    display: inline;
-    color: #666;
-    font-size: 13px;
-  }
-}
-
 .clear { clear: both; }
-
-.jbar {
-    height:50px;
-    width:100%;
-    position:fixed;
-    text-align:center;
-    left:0px;
-    z-index:9999999;
-    margin:0px;
-    padding:0px;
-    filter:progid:DXImageTransform.Microsoft.Alpha(opacity=92);
-    opacity: 0.92;
-    -moz-opacity: 0.92;
-    -moz-box-shadow: #555 0px 0px 5px;
-    box-shadow: #555 0px 0px 5px;
-
-  .jbar-top{
-    top:0px;
-    .jbar-cross{
-      top:8px;
-    }
-  }
-
-  .jbar-bottom{
-    bottom:0px;
-    a.jbar-cross{
-      bottom:8px;
-    }
-  }
-
-  .jbar-content{
-      line-height:46px;
-      font-size: 18px;
-  }
-}
-
-#map {
-  height: 300px;
-  
-  .olControlAttribution {
-    bottom: 5px;
-    font-size: 12px;
-  }
-}
 
 .center {
   text-align: center;

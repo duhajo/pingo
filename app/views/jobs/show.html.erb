@@ -6,7 +6,10 @@
   </div>
   <div class="content white simple" id="categorie-view">
     <div id="categorie-details" class="row full-width space">
-      <h1 class="title categorie">Kategorie: <%= @job.title %></h1>
+      <h1 class="title categorie">Kategorie: <%= @job.title %>
+      <% if @user_role == 3 && user_signed_in?%>
+        (<%= link_to 'Edit', edit_job_path(@job) %>)
+      <% end %></h1>
       <div class="medium-3 columns">Bild</div>
       <div class="medium-5 columns">
         <div id="job-description" class="html-content">
@@ -99,9 +102,7 @@
                 <div id="job-location" class="<%= @lessColumns %> columns">
                   <span class="icon left"><!----></span>
                   <span class="icon-label">
-                    <%=@job.address%>
-                    <br />
-                    <%= link_to_modal 'Karte anzeigen', { :action => :map_for_job }, :remote => true, :id => "show-map-button" , :"data-lat" => @job.latitude, :"data-long" => @job.longitude %>
+                    <%= link_to_modal @job.address, { :action => :map_for_job }, :remote => true, :id => "show-map-button" , :"data-lat" => @job.latitude, :"data-long" => @job.longitude %>
                   </span>
                   <span class="clear"></span>
                 </div>
@@ -111,8 +112,14 @@
               <%if @job.description.empty?%>
                 Noch keine Beschreibung vorhanden...
               <%else%>
-                <div class="job-description-preview"><%= truncate_html @job.description, :length => 50 %></div>
-                <div class="job-description-full" style="display:none;"><%=@job.description.html_safe%></div>
+                <div class="job-description-preview"><%= truncate_html @job.description, :length => 50 %>
+                  <% if @job.description.html_safe.length > 50 %>
+                    <%= link_to_function 'Alles lesen', "$('.job-description-preview').hide();$('.job-description-full').show();$('#splitter-close').show();$(this).parent().hide();" %>
+                  <% end %>
+                </div>
+                <div class="job-description-full" style="display:none;"><%=@job.description.html_safe%>
+                  <%= link_to_function 'Weniger', "$('.job-description-full').hide();$('.job-description-preview').show();$('#splitter-open').show();$(this).parent().hide();" %>
+                </div>
               <%end%>
             </div>
             <div class="job-tags top-margin">

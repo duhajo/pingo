@@ -1,0 +1,64 @@
+/*
+    Document   : misc
+    Created on : 15.03.2014, 16:05:39
+    Author     : Psyphant
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+.html-content {
+  margin-bottom: rem-calc(15);
+  .nicEdit-main {
+    text-align: left;
+  }
+  ul {
+    list-style-type: disc;
+    list-style-position: inside;
+    margin-left: 0;
+    padding-left: 20px;
+  }
+}
+
+.jbar {
+    height:50px;
+    width:100%;
+    position:fixed;
+    text-align:center;
+    left:0px;
+    z-index:9999999;
+    margin:0px;
+    padding:0px;
+    filter:progid:DXImageTransform.Microsoft.Alpha(opacity=92);
+    opacity: 0.92;
+    -moz-opacity: 0.92;
+    -moz-box-shadow: #555 0px 0px 5px;
+    box-shadow: #555 0px 0px 5px;
+
+  .jbar-top{
+    top:0px;
+    .jbar-cross{
+      top:8px;
+    }
+  }
+
+  .jbar-bottom{
+    bottom:0px;
+    a.jbar-cross{
+      bottom:8px;
+    }
+  }
+
+  .jbar-content{
+      line-height:46px;
+      font-size: 18px;
+  }
+}
+
+#map {
+  height: 300px;
+  
+  .olControlAttribution {
+    bottom: 5px;
+    font-size: 12px;
+  }
+}
