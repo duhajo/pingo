@@ -43,8 +43,8 @@
                 <%if user_signed_in? %>
                     <li class="has-dropdown">
                       <a href="/myprofile" class="overflow">
-                        <span class="profile-avatar small-5 columns"><%= image_tag avatar_url(current_user), alt: "?" %></span>
-                        <span class="profile-name small-7 columns"><%= current_user.name %></span>
+                        <span class="profile-avatar small-4 columns"><%= image_tag avatar_url(current_user), alt: "?" %></span>
+                        <span class="profile-name small-offset-1 small-7 columns"><%= current_user.name %></span>
                       </a>
                       <ul class="dropdown">
                         <li class="profile">

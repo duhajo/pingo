@@ -55,13 +55,14 @@ $secondary-color: #55a0da;
 $tertiary-color: #b109ff;
 $quaternary-color: #666666;
 $quinary-color: #e6ebf0;
+$senary-color: #2d5b7f;
 // $alert-color: #f04124;
 // $success-color: #43AC6A;
 // $warning-color: #f08a24;
 // $info-color: #a0d3e8;
 
 // We use these to make sure border radius matches unless we want it different.
-$global-radius: 5px;
+$global-radius: 3px;
 $global-rounded: 1000px;
 
 // We use these to control inset shadow shiny edges and depressions.
@@ -208,10 +209,10 @@ $crumb-slash: ">";
 // $include-html-button-classes: $include-html-classes;
 
 // We use these to build padding for buttons.
-$button-tny: rem-calc(9);
-$button-sml: rem-calc(10);
-$button-med: rem-calc(12);
-$button-lrg: rem-calc(14);
+$button-tny: rem-calc(3);
+$button-sml: rem-calc(5);
+$button-med: rem-calc(8);
+$button-lrg: rem-calc(10);
 
 // We use this to control the display property.
 // $button-display: inline-block;
@@ -221,8 +222,8 @@ $button-lrg: rem-calc(14);
 // $button-font-family: $body-font-family;
 // $button-font-color: #fff;
 // $button-font-color-alt: #333;
-// $button-font-tny: rem-calc(11);
-// $button-font-sml: rem-calc(13);
+$button-font-tny: rem-calc(12);
+$button-font-sml: rem-calc(14);
 // $button-font-med: rem-calc(16);
 // $button-font-lrg: rem-calc(20);
 // $button-font-weight: normal;
@@ -1042,7 +1043,7 @@ $topbar-dropdown-bg: $secondary-color;
 // $topbar-link-weight: normal;
 // $topbar-link-font-size: rem-calc(13);
 // $topbar-link-hover-lightness: -10%; // Darken by 10%
-$topbar-link-bg-hover: #3180BD;
+$topbar-link-bg-hover: $senary-color;
 // $topbar-link-bg-active: $primary-color;
 // $topbar-link-bg-active-hover: scale-color($primary-color, $lightness: -14%);
 // $topbar-link-font-family: $body-font-family;
@@ -1086,8 +1087,8 @@ $topbar-link-bg-hover: #3180BD;
 // $include-open-sans: true;
 
 // We use these to control header font styles
-$header-font-family: "RobotoMedium";
-//$header-font-weight: 300;
+$header-font-family: "RobotoBold";
+// $header-font-weight: 300;
 // $header-font-style: normal;
 $header-font-color: $quaternary-color;
 // $header-line-height: 1.4;
@@ -1096,9 +1097,9 @@ $header-font-color: $quaternary-color;
 // $header-text-rendering: optimizeLegibility;
 
 // We use these to control header font sizes
-$h1-font-size: rem-calc(24);
-$h2-font-size: rem-calc(22);
-$h3-font-size: rem-calc(18);
+$h1-font-size: rem-calc(20);
+$h2-font-size: rem-calc(20);
+$h3-font-size: rem-calc(16);
 // $h4-font-size: rem-calc(23);
 // $h5-font-size: rem-calc(18);
 // $h6-font-size: 1rem;
@@ -1143,7 +1144,7 @@ $h3-font-size: rem-calc(18);
 
 // We use these to style lists
 // $list-style-position: outside;
-// $list-side-margin: 1.1rem;
+$list-side-margin: 0rem;
 // $list-ordered-side-margin: 1.4rem;
 // $list-side-margin-no-bullet: 0;
 // $list-nested-margin: rem-calc(20);

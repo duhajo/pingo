@@ -81,13 +81,13 @@
           <div id="job-meta-wrapper" class="medium-8 columns top-margin">
             <div id="job-meta" class="row">
               <% if (!@job.latitude.nil? && !@job.longitude.nil?) && !@job.deadline.nil?
-                @lessColumns = "medium-4" else @lessColumns = "medium-6" end %>
-              <div id="job-status-wrapper" class="<%= @lessColumns %> columns">
+                @lessColumns = "large-4" else @lessColumns = "large-6" end %>
+              <div id="job-status-wrapper" class="large-3 columns">
                 <%= render :partial => "status", :job => @job, :manager => @user_role %>
               </div>
               <% if not @job.deadline.nil? %>
               <div id="job-deadline" class="<%= @lessColumns %> columns left">
-                <span class="left"><!----></span>
+                <span class="icon left"><!----></span>
                 <span class="icon-label" title="<%= @job.deadline.to_formatted_s(:long) %>">
                   <%=  distance_of_time_in_words(Time.now, @job.deadline, true) %>
                   <% if @job.deadline < DateTime.now %>
@@ -124,7 +124,8 @@
             </div>
             <div class="job-tags top-margin">
               <% if not @job.skill_list.empty? %>
-                <ul class="small-block-grid-4 medium-block-grid-6 large-block-grid-8 tag-list">
+                <ul class="tag-list overflow">
+                  <li><span class="icon small left"></span></li>
                   <% @job.tag_counts_on(:skills, :limit => 5, :order => "count desc").each do |tag| %>
                     <li><%= link_to tag.name, { :controller => :tags, :action => :show, :id => tag.id }, :class => "tag" %></li>
                   <% end %>
@@ -132,14 +133,14 @@
               <% end %>
             </div>
           </div>
-          <div class="job-workers-wrapper" class="medium-4 columns">
-            <h2 class="with-buttons">Arbeiter 
-            <%if @user_role == 3 %>
-              <span class="right">
-                <%= link_to_modal 'Verwalten', { :action => :show_manager_list }, :remote => true, :id => "edit-manager-button", :class => "button small"%>
-              </span>
-            <% end %>
-            </h2>
+          <div id="job-workers-wrapper" class="medium-4 columns space">
+            <h3 class="with-buttons">Beteiligte 
+              <%if @user_role == 3 %>
+                <span class="right">
+                  <%= link_to_modal 'Verwalten', { :action => :show_manager_list }, :remote => true, :id => "edit-manager-button", :class => "button small"%>
+                </span>
+              <% end %>
+            </h3>
             <div class="preview-list workers">
               <ul>
                 <% if @workers.empty? && @user_role != 2 && current_user %>
@@ -151,11 +152,12 @@
                 <% end %>
                 <% @workers.each.with_index do |worker, index| %>
                   <li>
+                    <span class="profile-avatar
                     <% title = worker.name
                     if(worker.isCreator == 1)
                       title << " (Manager)"
-                    end %>
-                    <span class="profile-avatar"><%= link_to image_tag(avatar_url(worker), alt: "?"), worker, :title => title, :rel => "tipsy" %></span>
+                    %>
+                    manager<% end %>"><%= link_to image_tag(avatar_url(worker), alt: "?"), worker, :title => title, :rel => "tipsy" %></span>
                   </li>
                   <% if index == 2 && (@workers.size - index) > 1%>
                     <li id="more-members">
@@ -225,7 +227,7 @@
       </div>
     </div>
     <div id="job-activities-area" class="medium-4 columns space">
-      <h1 class="title">Aktivit&auml;ten</h1>
+      <h2 class="title">Aktivit&auml;ten</h2>
       <%if user_signed_in?%>
         <%= render :partial => "comments/form" %>
       <% else %>

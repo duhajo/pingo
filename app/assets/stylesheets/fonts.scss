@@ -44,3 +44,16 @@
          asset-url('Roboto-Medium.ttf', font) format('truetype'),
          asset-url('Roboto-Medium.svg#RobotoMedium', font) format('svg')
 }
+
+@font-face {
+    font: {
+       family: 'RobotoBold';
+       weight: 'bold';
+       style: 'normal';
+    }
+    src: asset-url('Roboto-Bold.eot', font);
+    src: asset-url('Roboto-Bold.eot', font) format('embedded-opentype'),
+         asset-url('Roboto-Bold.woff', font) format('woff'),
+         asset-url('Roboto-Bold.ttf', font) format('truetype'),
+         asset-url('Roboto-Bold.svg#RobotoBold', font) format('svg')
+}

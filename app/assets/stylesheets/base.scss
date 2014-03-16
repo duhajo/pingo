@@ -78,17 +78,25 @@ abbr.timeago{
 }
 
 .space {
-  padding: rem-calc(15);
+  padding: rem-calc(18);
 }
 
 .top-margin {
-  margin-top: rem-calc(15);
+  margin-top: rem-calc(18);
 }
 
 /** Neue Stile **/
 
 h1, h2, h3, h4 {
   margin: 0;
+}
+
+h2 {
+  font-family: "RobotoMedium";
+}
+
+h3 {
+  font-family: "Roboto";
 }
 
 form label {
@@ -114,32 +122,38 @@ form label {
 
 .icon {
   background-image: url("icons/iconssprite.png");
-  background-size: 192px 96px;
+  background-size: 192px 224px;
   display: block;
   height: 32px;
   width: 32px;
-}
 
-.icon.large {
-  height: 48px;
-  width: 48px;
-}
+  &.large {
+    height: 48px;
+    width: 48px;
+  }
 
-.icon.center {
-  margin: 0 auto;
+  &.center {
+    margin: 0 auto;
+  }
 }
-
+  
 .icon-label {
   display: block;
   font-size: rem-calc(14);
 }
 
 .tag-list {
+  .icon {
+    background-position: -96px -96px;
+    margin: rem-calc(4) rem-calc(12) rem-calc(4) 0;
+  }
   .tag {
     background-color: $quinary-color;
     border-radius: 3px;
     font-size: rem-calc(12);
     padding: rem-calc(6);
+    float: left;
+    margin: rem-calc(4) rem-calc(12) rem-calc(4) 0;
   }
 }
 
@@ -149,10 +163,13 @@ form label {
 
 .button {
   background-color: $secondary-color;
-  border-radius: 5px;
+  border-radius: $global-radius;
   &.small {
-    padding: rem-calc(8);
     margin: 0 0 rem-calc(8) 0;
+  }
+  
+  &:hover, &:active {
+    background-color: $senary-color;
   }
 }
 
@@ -183,9 +200,18 @@ body[data-controller='sessions'] #main-navigation, body[data-controller='registr
   border-bottom: 2px solid #3180BD;
   
   .profile-avatar img {
-    border: 2px solid #FFFFFF;
+    border-color: #FFFFFF;
+  }
+}
+
+.profile-avatar {
+  img {
+    border: 2px solid transparent;
     border-radius: 50px;
-    width: 48px;
+    width: 42px;
+  }
+  &.manager img {
+    border-color: $secondary-color;
   }
 }
 
