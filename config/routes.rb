@@ -27,7 +27,7 @@ Duhajo::Application.routes.draw do
 
   match "dashboard" => "dashboard#index"
 
-  match "jobs/:id/new" => "jobs#new"
+  match "jobs/:id/new" => "jobs#new", :as => 'new_subjob'
   match "jobs/:id/support" => "jobs#support"
   match "jobs/:id/set_status" => "jobs#set_status"
   match "jobs/:id/map_for_job" => "jobs#map_for_job"

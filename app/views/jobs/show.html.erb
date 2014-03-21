@@ -6,10 +6,10 @@
   </div>
   <div class="content white simple" id="categorie-view">
     <div id="categorie-details" class="row full-width space">
-      <h1 class="title categorie">Kategorie: <%= @job.title %>
-      <% if @user_role == 3 && user_signed_in?%>
-        (<%= link_to 'Edit', edit_job_path(@job) %>)
-      <% end %></h1>
+      <h1 class="title categorie overflow">
+        <% if @user_role == 3 && user_signed_in?%><span class="icon-label left"><%end%>Kategorie: <%= @job.title %><% if @user_role == 3 && user_signed_in? %></span> 
+        <a href="<%=edit_job_path(@job)%>" class="header-actions left"><span class="icon edit"><!-- edit categorie --></span></a><% end %>
+      </h1>
       <div class="medium-3 columns">Bild</div>
       <div class="medium-5 columns">
         <div id="job-description" class="html-content">
@@ -24,7 +24,10 @@
       <div class="medium-4 columns"><h2>Meist verwendete Schlagworte</h2></div>
     </div>
     <div class="blue-title">
-      <h2>Eingeordnete Jobs <% if user_signed_in? %>(<%= link_to 'Neuer Job', :action => "new" %>)<% end %></h2>
+      <h2 class="overflow">
+        <% if user_signed_in? %><span class="icon-label left"><%end%>Eingeordnete Jobs <% if user_signed_in? %></span> 
+        <a href="<%=new_subjob_path(:id => @job.id)%>" class="header-actions left"><span class="icon contrast add"><!-- Add new job --></span></a><% end %>
+      </h2>
     </div>
       <div id="job-subjobs" class="space">
       <%if @jobs.empty? && @offers.empty? %>
@@ -73,10 +76,10 @@
   <div class="row content white simple full-width <% if @job.status == 3 || user_signed_in? && @job.parent_id.nil? %>closed<% end %>" id="job-view" data-id="<%=@job.id%>">
     <div id="job-specification-area" class="medium-8 columns">
       <div id="job-details" class="space">
-        <h1 class="title job">Aufgabe: <%= @job.title %> 
-          <% if @user_role == 3 && user_signed_in?%>
-          (<%= link_to 'Edit', edit_job_path(@job) %>)
-        <% end %></h1>
+        <h1 class="title job overflow">
+          <% if @user_role == 3 && user_signed_in?%><span class="icon-label left"><%end%>Aufgabe: <%= @job.title %><% if @user_role == 3 && user_signed_in? %></span> 
+          <a href="<%=edit_job_path(@job)%>" class="header-actions left"><span class="icon edit"><!-- edit categorie --></span></a><% end %>
+        </h1>
         <div class="row">
           <div id="job-meta-wrapper" class="medium-8 columns top-margin">
             <div id="job-meta" class="row">
@@ -195,7 +198,10 @@
         </div>
       </div>
       <div class="blue-title">
-        <h2>Eingeordnete Jobs <% if user_signed_in? %>(<%= link_to 'Neuer Job', :action => "new" %>)<% end %></h2>
+        <h2 class="overflow">
+          <% if user_signed_in? %><span class="icon-label left"><%end%>Eingeordnete Jobs <% if user_signed_in? %></span> 
+          <a href="<%=new_subjob_path(:id => @job.id)%>" class="header-actions left"><span class="icon contrast add"><!-- Add new job --></span></a><% end %>
+        </h2>
       </div>
       <div id="job-subjobs" class="space">
         <%if @jobs.empty? && @offers.empty? %>

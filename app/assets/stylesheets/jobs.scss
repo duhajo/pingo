@@ -5,51 +5,55 @@
     margin-left: 1px;
     
     #job-details {
-      .icon-label {
-        line-height: 21px;
-        padding-left: 32px;
-        padding-top: 4px;
-      }
+  
+      #job-meta-wrapper {
 
-      #job-status {
-        float: left;
+        .icon-label {
+          line-height: 21px;
+          padding-left: 32px;
+          padding-top: 4px;
+        }
+      
+        #job-status {
+          float: left;
 
-        #status-open, .rights #status-closed:hover {
-          background-color: #dc007c;
-          color: #FFFFFF;
+          #status-open, .rights #status-closed:hover {
+            background-color: #dc007c;
+            color: #FFFFFF;
+          }
+
+          #status-in-work, .rights #status-open:hover {
+            background-color: #7aba4b;
+            color: #FFFFFF;
+          }
+
+          #status-closed, .rights #status-in-work:hover {
+            background-color: #f7f7f7;
+            color: #707070;
+          }
+
+          .rights .button:hover span.now, .button span.new {
+            display: none;
+          }
+
+          .rights .button:hover span.new {
+            display: block;
+          }
         }
 
-        #status-in-work, .rights #status-open:hover {
-          background-color: #7aba4b;
-          color: #FFFFFF;
+        #job-deadline {
+          height: rem-calc(38);
+          line-height: rem-calc(38);
+          .icon {
+            background-position: -32px -96px;
+          } 
         }
 
-        #status-closed, .rights #status-in-work:hover {
-          background-color: #f7f7f7;
-          color: #707070;
+        #job-location {
+          .icon {
+            background-position: -64px -96px;
+          } 
         }
-
-        .rights .button:hover span.now, .button span.new {
-          display: none;
-        }
-
-        .rights .button:hover span.new {
-          display: block;
-        }
-      }
-
-      #job-deadline {
-        height: rem-calc(38);
-        line-height: rem-calc(38);
-        .icon {
-          background-position: -32px -96px;
-        } 
-      }
-
-      #job-location {
-        .icon {
-          background-position: -64px -96px;
-        } 
       }
 
       #job-workers-wrapper {

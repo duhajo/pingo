@@ -1,6 +1,9 @@
 <div class="content white">
   <div class="catgories-overview space">
-    <h1>Kategorieübersicht <% if user_signed_in? %><%= link_to 'Neuer Job', new_job_path %><% end %></h1>
+    <h1>
+      <% if user_signed_in? %><span class="icon-label left"><%end%>Kategorieübersicht<% if user_signed_in? %></span> 
+      <a href="<%=new_job_path%>" class="header-actions left"><span class="icon add"><!-- Add new categorie --></span></a><% end %>
+    </h1>
     <%if @categories.empty? %>
       <%= t('no_categories_definied') %>
     <% else %>
@@ -21,22 +24,27 @@
     <% end %>
   </div>
   <div class="jobs-overview space">
-    <h1>Nicht eingeordnete Jobs <% if user_signed_in? %><%= link_to 'Neuer Job', new_job_path %><% end %></h1>
-    <%if @jobs.empty? %>
-      <%= t('no_jobs') %>
-    <% else %>
-      <ul id="list-jobs" class="small-block-grid-2 medium-block-grid-3 large-block-grid-4">
-        <li>
-          <% @jobs.each do |job| %>
-            <div><%= link_to job.title, job %></div>
-          <% end %>
-        </li>
-        <li>
-          <% @offers.each do |offer| %>
-            <div><%= link_to offer.title, offer %></div>
-          <% end %>
-        </li>
-      </ul>
-    <% end %>
+    <h1>
+      <% if user_signed_in? %><span class="icon-label left"><%end%>Nicht eingeordnete Jobs<% if user_signed_in? %></span> 
+      <a href="<%=new_job_path%>" class="header-actions left"><span class="icon add"><!-- Add new categorie --></span></a><% end %>
+    </h1>
+    <div class="unassigned-jobs-content clear">
+      <%if @jobs.empty? %>
+        <%= t('no_jobs') %>
+      <% else %>
+        <ul id="list-jobs" class="small-block-grid-2 medium-block-grid-3 large-block-grid-4">
+          <li>
+            <% @jobs.each do |job| %>
+              <div><%= link_to job.title, job %></div>
+            <% end %>
+          </li>
+          <li>
+            <% @offers.each do |offer| %>
+              <div><%= link_to offer.title, offer %></div>
+            <% end %>
+          </li>
+        </ul>
+      <% end %>
+    </div>
   </div>
 </div>

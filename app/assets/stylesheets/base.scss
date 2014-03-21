@@ -89,6 +89,13 @@ abbr.timeago{
 
 h1, h2, h3, h4 {
   margin: 0;
+  .icon-label {
+    font-size: inherit;
+  }
+  
+  .header-actions {
+    margin-left: rem-calc(6);
+  }
 }
 
 h2 {
@@ -103,14 +110,6 @@ form label {
   text-align: left;
 }
 
-.left {
-  float: left;
-}
-  
-.left {
-  float: right;
-}
-
 .overflow {
   overflow: hidden;
 }
@@ -122,7 +121,7 @@ form label {
 
 .icon {
   background-image: url("icons/iconssprite.png");
-  background-size: 192px 224px;
+  background-size: 192px 256px;
   display: block;
   height: 32px;
   width: 32px;
@@ -134,6 +133,35 @@ form label {
 
   &.center {
     margin: 0 auto;
+  }
+  
+  &.add {
+    background-position: -128px -128px;
+    &.contrast {
+      background-position: -128px -192px;
+    }
+  }
+  
+  &.edit {
+    background-position: -160px -128px;
+    &.contrast {
+      background-position: -160px -192px;
+    }
+  }
+  
+}
+
+a:hover .icon.add {
+  background-position: -128px -160px;
+  &.contrast {
+    background-position: -128px -224px;
+  }
+}
+
+a:hover .icon.edit {
+  background-position: -160px -160px;
+  &.contrast {
+    background-position: -128px -192px;
   }
 }
   
