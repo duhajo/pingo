@@ -227,6 +227,8 @@ de:
 
   jobs_no_jobs: "Keinen Job gefunden. Sorry!"
   jobs_near_search_info: "Suche nach einem Job, indem du einen Ort oder eine Straße angibst."
+  jobs_edit_header: "Job bearbeiten"
+  jobs_edit_header_categorie: "Kategorie bearbeiten"
   
   workers_no_workers: "Keinen Arbeiter gefunden. Sorry!"
   workers_near_search_info: "Suche nach einem Arbeiter, indem du einen Ort oder eine Straße angibst."

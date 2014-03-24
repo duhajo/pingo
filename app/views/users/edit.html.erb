@@ -1,62 +1,68 @@
-<h1>Edit my profile</h1>
+<div class="form row large-6 medium-8 large-centered medium-centered columns center white-panel space" id="edit-user-page" data-id="<%=@user.id%>">
+  <h1>Edit my profile</h1>
 
-<%= form_for @user do |f| %>
-  <% if @user.errors.any? %>
-    <div class="error_messages">
-      <h2>Form is invalid</h2>
-      <ul>
-        <% for message in @user.errors.full_messages %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+  <%= form_for @user do |f| %>
+    <% if @user.errors.any? %>
+      <div class="error_messages">
+        <h2>Form is invalid</h2>
+        <ul>
+          <% for message in @user.errors.full_messages %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="row">
+      <div class="field medium-6 columns">
+        <%= f.label :name %>
+        <%= f.text_field :name %>
+      </div>
+      <div class="field medium-6 columns">
+        <%= f.label :email %>
+        <%= f.text_field :email %>
+      </div>
     </div>
-  <% end %>
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.text_field :email %>
-  </div>
-  <div class="field">
-    <%= f.label :locale, "Sprache" %><br />
-    <%= f.select :locale, I18n.available_locales %>
-  </div>
-  <div class="field">
-    <%= f.label :skill_list, "Tags (separated by commas)" %><br />
-    <%= f.text_field :skill_list %>
-  </div>
+    <div class="field">
+      <%= f.label :locale, "Sprache" %>
+      <%= f.select :locale, I18n.available_locales %>
+    </div>
+    <div class="field">
+      <%= f.label :skill_list, "Tags (separated by commas)" %>
+      <%= f.text_field :skill_list %>
+    </div>
 
-  <div id="locationFields" style="display: none;">
-    <div class="field">
-      <%= f.label :country %><br />
-      <%= f.text_field :country %>
+    <div class="field <% if (@user.latitude.nil? && @user.longitude.nil?) %>hidden<%end%>" id="radiusField">
+      <%= f.label :radius, "Radius (in km für Jobempfehlungen)"%> 
+      <%= f.text_field :radius %>
     </div>
-    <div class="field">
-      <%= f.label :city %><br />
-      <%= f.text_field :city %>
-    </div>
-    <div class="field">
-      <%= f.label :district %><br />
-      <%= f.text_field :district %>
-    </div>
-  </div>
-  <div id="coordFields" style="display: none;">
-    <div id="status"></div>
-    <%= f.text_field :latitude %><%= f.text_field :longitude %>
-  </div>
   
-  <a href="javascript: getPositionManually();" id="openLocationFields">Ort manuell eintragen</a> oder
-  <a href="javascript: getLocation();">Position ermitteln</a> 
-  <br />
-  <br />
-  <div class="field">
-    <%= f.label :radius %> in km für Jobempfehlungen<br />
-    <%= f.text_field :radius %>
-  </div>
-  
-  <div class="actions"><%= f.submit %></div>
+    <div id="locationFields" class="row hidden">
+      <div class="field medium-4 columns">
+        <%= f.label :country %>
+        <%= f.text_field :country %>
+      </div>
+      <div class="field medium-4 columns">
+        <%= f.label :city %>
+        <%= f.text_field :city %>
+      </div>
+      <div class="field medium-4 columns">
+        <%= f.label :district %>
+        <%= f.text_field :district %>
+      </div>
+    </div>
+    <div id="coordFields" style="display: none;">
+      <div id="status"></div>
+      <%= f.text_field :latitude %><%= f.text_field :longitude %>
+    </div>
+
+    <a href="javascript: getPositionManually();" id="openLocationFields">Ort manuell eintragen</a> oder
+    <a href="javascript: getLocation();">Position ermitteln</a> 
+    
+    <div class="clearfix top-margin">
+      <%= link_to 'Abbrechen', jobs_path, :class => "sec-button button left" %>
+      <%= link_to 'Speichern', "#", :onclick => "sendForm('edit_user');return false;", :class => "button right" %>
+    </div>
+</div>
 <% end %>
   <script type="text/javascript">
     function getLocation() {
@@ -64,12 +70,11 @@
         var s = $('#status');
 
         // im FF wird die Funktion scheinbar mehrfach aufgerufen - einmal reicht
-        if(s.hasClass('success')) {
-                return
-        }
+        if(s.hasClass('success')) { return }
         $('#coordFields').show();
         $('#locationFields').hide();
         $('#openLocationFields').show();
+        $('#radiusField').show();
         s.text("Deine Position konnte ermittelt werden!");
         s.addClass('success');
         $("#user_latitude").val(position.coords.latitude);
@@ -80,19 +85,20 @@
       }
 
       function error(msg) {
-              $('#status').text = typeof msg == 'string' ? msg : "error";							
+        $('#status').text = typeof msg == 'string' ? msg : "error";							
       }
 
       if (navigator.geolocation) {
-              var watchId = navigator.geolocation.getCurrentPosition(success, error);
+        var watchId = navigator.geolocation.getCurrentPosition(success, error);
       } else {
-              $('#status').text = "Sorry your browser does not support geolocation."
+        $('#status').text = "Sorry your browser does not support geolocation."
       }
       
     }
     function getPositionManually() {    
-        $('#locationFields').show();
-        $('#openLocationFields').hide();
-        $('#coordFields').hide();
+      $('#locationFields').show();
+      $('#openLocationFields').hide();
+      $('#coordFields').hide();
+      $('#radiusField').show();
     }
   </script>

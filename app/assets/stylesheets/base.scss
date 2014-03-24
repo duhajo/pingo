@@ -106,8 +106,33 @@ h3 {
   font-family: "Roboto";
 }
 
-form label {
-  text-align: left;
+form {
+  @media #{$medium-up} {
+    .medium-4 {
+      margin-right: 1%;
+      width: 32.666%;
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+    .medium-6 {
+      margin-right: 1%;
+      width: 49%;
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+  
+  label {
+    text-align: left;
+  }
+}
+
+.form {
+  h1 {
+    margin-bottom: rem-calc(12);
+  }
 }
 
 .overflow {
@@ -202,7 +227,7 @@ a:hover .icon.edit {
 }
 
 .sec-button {
-  @include button(rem-calc(12) ,#FFFFFF, true, false, false, false);
+  @include button(rem-calc(7) ,#FFFFFF, true, false, false, false);
   border: 1px solid #6A7279;
   color: #353F47;
 }
