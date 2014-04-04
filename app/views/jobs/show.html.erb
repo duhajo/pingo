@@ -21,7 +21,13 @@
           <%end%>
         </div>
       </div>
-      <div class="medium-4 columns"><h2>Meist verwendete Schlagworte</h2></div>
+      <div class="medium-4 columns"><h2>Meist verwendete Schlagworte</h2>
+        <div class="tag-list">
+          <% tag_cloud(@most_used_tags, %w(css1 css2 css3 css4)) do |tag, css_class| %>
+            <%= link_to tag.name, { :action => :tag, :id => tag.name }, :class => css_class + " tag" %>
+          <% end %>
+        </div>
+      </div>
     </div>
     <div class="blue-title">
       <h2 class="overflow">

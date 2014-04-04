@@ -55,12 +55,13 @@ class JobsController < ApplicationController
     @user_role = get_user_role(@job)
     @is_manager = JobsWorker.where(:job_id => @job.id).where('jobs_workers.isCreator' => true).to_a
     
-    @jobs = Job.where('parent_id' => @job.id).where('type' => 1)
-    @offers = Job.where('parent_id' => @job.id).where('type' => 2)
+    @all_jobs = Job.where('parent_id' => @job.id)
+    @jobs = @all_jobs.where('type' => 1)
+    @offers = @all_jobs.where('type' => 2)
     
     @parent_jobs = @job.ancestors
     @job_ids = Array.new << @job.id
-    @jobs.each do |job|
+    @all_jobs.each do |job|
       @job_ids << job.id
     end
     @activities = PublicActivity::Activity.order("created_at DESC").all(:conditions => {trackable_type: "Job", trackable_id: [@job_ids] })
@@ -69,6 +70,10 @@ class JobsController < ApplicationController
     @workers = User.joins(:jobs_workers)
     .where('jobs_workers.job_id' => @job.id)
     .select("name, id, email, isCreator").to_a
+    
+    if @job.type == 0
+      @most_used_tags = @all_jobs.skill_counts
+    end
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @job }
