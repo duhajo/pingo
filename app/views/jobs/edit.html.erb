@@ -6,7 +6,7 @@
       <%= t('jobs_edit_header_categorie') %>
     <% end %>
   </h1>
-  <%= simple_form_for(@job) do |f| %>
+  <%= simple_form_for @job, html: {multipart: true} do |f| %>
     <% if @job.errors.any? %>
       <div class="error_messages">
         <h2>Form is invalid</h2>
@@ -63,6 +63,12 @@
           <%= f.label :street %>
           <%= f.text_field :street %>
         </div>
+      </div>
+    <% else %>
+      <div class="field">
+        <%= image_tag(@job.picture_url) if @job.picture? %>
+        <%= f.file_field :picture %>
+        <%= f.hidden_field :picture_cache %>
       </div>
     <% end %>
     <div class="clearfix top-margin">

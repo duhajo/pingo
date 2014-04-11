@@ -29,25 +29,130 @@ a:-moz-any-link:focus {
 	outline: none;
 }
 
-#topbar #header-logo {
-  img {
-    vertical-align: top;
+#duhajo {
+  height: 100%;
+
+  .full-width { 
+    width: 100%;
+    max-width: inherit; 
   }
-}
+  
+  #topbar #header-logo {
+    img {
+      vertical-align: top;
+    }
+  }
 
-#topbar #profile {
-  padding: 15px;
-  position: relative;
-}
+  #topbar #profile {
+    padding: 15px;
+    position: relative;
+  }
 
-#topbar .profile-menu {
-  float: right;
-  height: 32px;
-  line-height: 32px;
-  list-style: none outside none;
-  margin: 0;
-  padding: 0;
-  width: 150px;
+  #topbar .profile-menu {
+    float: right;
+    height: 32px;
+    line-height: 32px;
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+    width: 150px;
+  }
+  
+  #topbar {
+    border-bottom: 2px solid #3180BD;
+
+    .profile-avatar img {
+      border-color: #FFFFFF;
+    }
+  }
+
+  .profile-avatar {
+    img {
+      border: 2px solid transparent;
+      border-radius: 50px;
+      width: 42px;
+    }
+    &.manager img {
+      border-color: $secondary-color;
+    }
+  }
+
+  #main-navigation {
+    padding-bottom: 5px;
+    position: relative;
+
+    .icon.large {
+      height: 42px;
+    }
+
+    a:hover .icon.dashboard, .active .icon.dashboard {
+      background-position: 0 -48px;
+    }
+
+    .icon.jobs {
+      background-position: -48px 0;
+    }
+
+    a:hover .icon.jobs, .active .icon.jobs {
+      background-position: -48px -48px;
+    }
+
+    .icon.workers {
+      background-position: -96px 0;
+    }
+
+    a:hover .icon.workers, .active .icon.workers {
+      background-position: -96px -48px;
+    }
+
+    .icon.places {
+      background-position: -144px 0;
+    }
+
+    a:hover .icon.places, .active .icon.places {
+      background-position: -144px -48px;
+    }
+  }
+
+  .white-panel {
+    background-color: #FFFFFF;
+    border: 1px solid #E4E4E4;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.07);
+  }
+
+  .blue-title {
+    background-color: $secondary-color;
+    padding: rem-calc(15);
+
+    a, h2 {
+      color: #FFFFFF;
+    }
+  }
+
+  .breadcrumb-bar {
+    padding: rem-calc(15);
+    ul {
+      margin: 0;
+      li:before {
+        font-size: rem-calc(15);
+        font-weight: 300;
+      }
+      li:last-child:after {
+        color: #AAAAAA;
+        content: ">";
+        font-size: rem-calc(15);
+        font-weight: 300;
+        margin: 0 0.75rem;
+        position: relative;
+        top: 1px;
+      }
+    }
+  }
+
+  #login-page, #registration-page {
+    border-top: 0 none;
+    padding: rem-calc(30);
+  }
 }
 
 .hidden {
@@ -137,11 +242,6 @@ form {
 
 .overflow {
   overflow: hidden;
-}
-
-#duhajo .full-width { 
-  width: 100%;
-  max-width: inherit; 
 }
 
 .icon {
@@ -249,98 +349,3 @@ body[data-controller='sessions'] #main-navigation, body[data-controller='registr
   display: none;
 }
 
-#topbar {
-  border-bottom: 2px solid #3180BD;
-  
-  .profile-avatar img {
-    border-color: #FFFFFF;
-  }
-}
-
-.profile-avatar {
-  img {
-    border: 2px solid transparent;
-    border-radius: 50px;
-    width: 42px;
-  }
-  &.manager img {
-    border-color: $secondary-color;
-  }
-}
-
-#main-navigation {
-  padding-bottom: 5px;
-  position: relative;
-  
-  .icon.large {
-    height: 42px;
-  }
-  
-  a:hover .icon.dashboard, .active .icon.dashboard {
-    background-position: 0 -48px;
-  }
-  
-  .icon.jobs {
-    background-position: -48px 0;
-  }
-  
-  a:hover .icon.jobs, .active .icon.jobs {
-    background-position: -48px -48px;
-  }
-  
-  .icon.workers {
-    background-position: -96px 0;
-  }
-  
-  a:hover .icon.workers, .active .icon.workers {
-    background-position: -96px -48px;
-  }
-  
-  .icon.places {
-    background-position: -144px 0;
-  }
-  
-  a:hover .icon.places, .active .icon.places {
-    background-position: -144px -48px;
-  }
-}
-
-.white-panel {
-  background-color: #FFFFFF;
-  border: 1px solid #E4E4E4;
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.07);
-}
-
-.blue-title {
-  background-color: $secondary-color;
-  padding: rem-calc(15);
-  
-  a, h2 {
-    color: #FFFFFF;
-  }
-}
-
-.breadcrumb-bar {
-  padding: rem-calc(15);
-  ul {
-    margin: 0;
-    li:before {
-      font-size: rem-calc(15);
-      font-weight: 300;
-    }
-    li:last-child:after {
-      color: #AAAAAA;
-      content: ">";
-      font-size: rem-calc(15);
-      font-weight: 300;
-      margin: 0 0.75rem;
-      position: relative;
-      top: 1px;
-    }
-  }
-}
-
-#login-page, #registration-page {
-  border-top: 0 none;
-  padding: rem-calc(30);
-}

@@ -6,9 +6,11 @@ class Job < ActiveRecord::Base
   acts_as_votable
   acts_as_taggable
   acts_as_taggable_on :skills
-  attr_accessible :deadline, :description, :parent_id, :title, :skill_list, :country, :city, :street
+  attr_accessible :deadline, :description, :parent_id, :title, :skill_list, :country, :city, :street, :type, :picture, :picture_cache
   has_many :jobs_workers, dependent: :delete_all
   has_many :users, :through => :jobs_workers
+  
+  mount_uploader :picture, PictureUploader
 
   geocoded_by :address
   after_validation :geocode, :if => :address_changed?

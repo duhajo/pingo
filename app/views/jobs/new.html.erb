@@ -17,7 +17,7 @@
     <div class="field">
       <%= f.label :title %><br />
       <%= f.text_field :title %>
-    </div>ki
+    </div>
     <div class="area html-content">
       <%= f.label :description %><br />
       <%= f.resizable_text_area :description %>
@@ -25,6 +25,10 @@
     <div class="field">
       <%= f.label :skill_list, "Tags (separated by commas)" %><br />
       <%= f.text_field :skill_list %>
+    </div>
+    <div class="field">
+      <%= f.label :type, "Typ (0 = Kategorie, 1 = Suche, 2 = Angebot)" %><br />
+      <%= f.text_field :type %>
     </div>
     <div id="show-deadline-link">
       <%= link_to 'Deadline setzen', '#',
@@ -51,6 +55,11 @@
         <%= f.label :street %><br />
         <%= f.text_field :street %>
       </div>
+    </div>
+    <div class="field">
+      <%= image_tag(@job.picture_url) if @job.picture? %>
+      <%= f.file_field :picture %>
+      <%= f.hidden_field :picture_cache %>
     </div>
     <div class="clearfix top-margin">
       <%= link_to 'Abbrechen', jobs_path, :class => "sec-button button left" %>

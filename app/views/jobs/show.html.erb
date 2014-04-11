@@ -10,7 +10,9 @@
         <% if @user_role == 3 && user_signed_in?%><span class="icon-label left"><%end%>Kategorie: <%= @job.title %><% if @user_role == 3 && user_signed_in? %></span> 
         <a href="<%=edit_job_path(@job)%>" class="header-actions left"><span class="icon edit"><!-- edit categorie --></span></a><% end %>
       </h1>
-      <div class="medium-3 columns">Bild</div>
+      <div class="medium-3 columns">
+        <%= image_tag @job.picture_url if @job.picture? %>
+      </div>
       <div class="medium-5 columns">
         <div id="job-description" class="html-content">
           <%if @job.description.empty?%>

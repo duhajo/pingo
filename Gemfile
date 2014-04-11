@@ -1,53 +1,58 @@
-source 'https://rubygems.org'
+source "https://rubygems.org"
 
-gem 'rails', '3.2.13'
+gem "rails", "3.2.13"
 
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
-  gem 'uglifier', '>= 1.0.3'
+  gem "sass-rails",   "~> 3.2.3"
+  gem "coffee-rails", "~> 3.2.1"
+  gem "uglifier", ">= 1.0.3"
 end
 
-gem 'foundation-rails'
+gem "foundation-rails"
 group :development do
-  gem 'rails_layout'
+  gem "rails_layout"
 end
 
 #jquery
 gem "jquery-rails"
 gem "jquery-ui-rails"
-gem 'jquery-modal-rails'
+gem "jquery-modal-rails"
 
 #notification
 gem "gritter", "1.0.3"
-gem 'awesome_nested_set'
+gem "awesome_nested_set"
 
 #To use tagging
-gem 'acts-as-taggable-on'
-gem 'devise'
+gem "acts-as-taggable-on"
+gem "devise"
 
 # To use Geolocations
 gem "geocoder"
-gem 'openlayers-rails'
+gem "openlayers-rails"
 
 # To use ActiveModel has_secure_password
-gem 'bcrypt-ruby', '~> 3.0.0'
+gem "bcrypt-ruby", "~> 3.0.0"
 
-gem 'mysql2'
+gem "mysql2"
 
 # Search Engine
-gem 'sunspot_rails'
+gem "sunspot_rails"
 
-gem 'acts_as_votable', '~> 0.5.0'
-gem 'magnific-popup-rails'
-gem 'public_activity'
-gem 'acts_as_commentable_with_threading'
+gem "acts_as_votable", "~> 0.5.0"
+gem "magnific-popup-rails"
+gem "public_activity"
+gem "acts_as_commentable_with_threading"
 gem "slim-rails"
-gem 'simple_form'
-gem 'country_select'
-gem 'journey'
-gem 'arel'
-gem 'kaminari'
+gem "simple_form"
+gem "country_select"
+gem "journey"
+gem "arel"
+gem "kaminari"
 gem "truncate_html"
+
+#upload files
+gem "carrierwave"
+gem "rmagick"
+gem "mini_magick"

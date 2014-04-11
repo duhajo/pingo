@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140209172411) do
+ActiveRecord::Schema.define(:version => 20140411130421) do
 
   create_table "activities", :force => true do |t|
     t.integer  "trackable_id"
@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(:version => 20140209172411) do
     t.boolean  "gmaps"
     t.integer  "status"
     t.integer  "type"
+    t.string   "picture"
   end
 
   create_table "jobs_workers", :id => false, :force => true do |t|
@@ -76,15 +77,6 @@ ActiveRecord::Schema.define(:version => 20140209172411) do
   end
 
   add_index "jobs_workers", ["job_id", "user_id"], :name => "index_jobs_workers_on_job_id_and_user_id"
-
-  create_table "mercury_images", :force => true do |t|
-    t.string   "image_file_name"
-    t.string   "image_content_type"
-    t.integer  "image_file_size"
-    t.datetime "image_updated_at"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
-  end
 
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"
