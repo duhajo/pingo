@@ -1,5 +1,5 @@
 <div class="content white">
-  <div class="catgories-overview space">
+  <div id="catgories-overview" class="space">
     <h1>
       <% if user_signed_in? %><span class="icon-label left"><%end%>Kategorieübersicht<% if user_signed_in? %></span> 
       <a href="<%=new_job_path%>" class="header-actions left"><span class="icon add"><!-- Add new categorie --></span></a><% end %>
@@ -9,14 +9,18 @@
     <% else %>
       <ul id="list-categories" class="small-block-grid-2 medium-block-grid-3 large-block-grid-4">
         <% @categories.each do |categorie| %>
-          <li>
-            <div><%= link_to categorie.title, categorie %></div>
-            <div>
+          <li class="category">
+            <div class="category-head"><%= link_to categorie.title, categorie %></div>
+            <div class="category-body">
+              <% if categorie.picture? %>
+                <%= link_to image_tag(categorie.picture_url), categorie %>
+              <% else %>
               <ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4 tag-list">
                 <% categorie.tag_counts_on(:skills, :limit => 5, :order => "count desc").each do |tag| %>
                   <li><%= link_to tag.name, { :controller => :tags, :action => :show, :id => tag.id }, :class => "tag" %></li>
                 <% end %>
               </ul>
+              <% end %>
             </div>
           </li>
         <% end %>

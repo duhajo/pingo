@@ -1,3 +1,26 @@
+#catgories-overview {
+  .category {
+    max-width: 242px;
+    .category-head {
+      background-color: $secondary-color;
+      padding: rem-calc(5) rem-calc(8);
+      a {
+        color: #FFFFFF;
+        display: block;
+        width: 100%;
+      }
+    }
+    .category-body {
+      border-color: $secondary-color;
+      border-style: solid;
+      border-width: 0px 1px 1px;
+      .tag-list {
+        padding: rem-calc(8);
+      }
+    }
+  }
+}
+
 #job-view {
 
   #job-specification-area {
