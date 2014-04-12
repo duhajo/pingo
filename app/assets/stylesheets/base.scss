@@ -31,36 +31,38 @@ a:-moz-any-link:focus {
 
 #duhajo {
   height: 100%;
+  
+  .inner-wrap {
+    height: 100%;
+  }
 
   .full-width { 
     width: 100%;
     max-width: inherit; 
   }
   
-  #topbar #header-logo {
-    img {
-      vertical-align: top;
-    }
-  }
-
-  #topbar #profile {
-    padding: 15px;
-    position: relative;
-  }
-
-  #topbar .profile-menu {
-    float: right;
-    height: 32px;
-    line-height: 32px;
-    list-style: none outside none;
-    margin: 0;
-    padding: 0;
-    width: 150px;
-  }
-  
   #topbar {
     border-bottom: 2px solid #3180BD;
-
+    
+    #search-wrapper {
+      #search-box {
+        float: none;
+        margin: rem-calc(10) 0 0 rem-calc(20);
+        #search-input {
+          border: 0 none;
+          box-shadow: 0 2px 1px 0 #488EC4;
+          font-size: rem-calc(15);
+          max-width: 350px;
+        }
+      }
+    }
+    
+    #header-logo {
+      img {
+        vertical-align: top;
+      }
+    }
+  
     .profile-avatar img {
       border-color: #FFFFFF;
     }
@@ -183,17 +185,23 @@ abbr.timeago{
 }
 
 .space {
-  padding: rem-calc(18);
+  padding: rem-calc(20);
 }
 
 .top-margin {
-  margin-top: rem-calc(18);
+  margin-top: rem-calc(20);
+}
+
+.bottom-margin {
+  margin-bottom: rem-calc(20);
 }
 
 /** Neue Stile **/
 
 h1, h2, h3, h4 {
   margin: 0;
+  overflow: hidden;
+  
   .icon-label {
     font-size: inherit;
   }

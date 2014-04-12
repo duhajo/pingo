@@ -1,8 +1,8 @@
 <div class="content white">
   <div id="catgories-overview" class="space">
-    <h1>
+    <h1 class="bottom-margin overflow">
       <% if user_signed_in? %><span class="icon-label left"><%end%>Kategorieübersicht<% if user_signed_in? %></span> 
-      <a href="<%=new_job_path%>" class="header-actions left"><span class="icon add"><!-- Add new categorie --></span></a><% end %>
+      <a href="<%=new_job_path%>/category" class="header-actions left"><span class="icon add"><!-- Add new categorie --></span></a><% end %>
     </h1>
     <%if @categories.empty? %>
       <%= t('no_categories_definied') %>
@@ -28,7 +28,7 @@
     <% end %>
   </div>
   <div class="jobs-overview space">
-    <h1>
+    <h1 class="bottom-margin overflow">
       <% if user_signed_in? %><span class="icon-label left"><%end%>Nicht eingeordnete Jobs<% if user_signed_in? %></span> 
       <a href="<%=new_job_path%>" class="header-actions left"><span class="icon add"><!-- Add new categorie --></span></a><% end %>
     </h1>

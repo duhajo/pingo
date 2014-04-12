@@ -86,6 +86,9 @@ class JobsController < ApplicationController
     if params[:id]
        @parent_job = Job.find(params[:id])
     end
+    
+    @type = 0 if params[:type].present?
+    
     @job = Job.new
 
     respond_to do |format|
