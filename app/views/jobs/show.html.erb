@@ -125,8 +125,8 @@
               <%if @job.description.empty?%>
                 Noch keine Beschreibung vorhanden...
               <%else%>
-                <div class="job-description-preview"><%= truncate_html @job.description, :length => 50 %>
-                  <% if @job.description.html_safe.length > 50 %>
+                <div class="job-description-preview"><%= truncate_html @job.description, :length => 150 %>
+                  <% if @job.description.html_safe.length > 150 %>
                     <%= link_to_function 'Alles lesen', "$('.job-description-preview').hide();$('.job-description-full').show();$('#splitter-close').show();$(this).parent().hide();" %>
                   <% end %>
                 </div>
@@ -135,7 +135,7 @@
                 </div>
               <%end%>
             </div>
-            <div class="job-tags top-margin">
+            <div id="job-tags" class="top-margin">
               <% if not @job.skill_list.empty? %>
                 <ul class="tag-list overflow">
                   <li><span class="icon small left"></span></li>
@@ -143,6 +143,28 @@
                     <li><%= link_to tag.name, { :controller => :tags, :action => :show, :id => tag.id }, :class => "tag" %></li>
                   <% end %>
                 </ul>
+              <% end %>
+            </div>
+            <div id="job-files" class="top-margin">
+              <h3 class="overflow with-buttons">
+                <span class="icon-label left">Anhänge </span> 
+                <% if @user_role == 3 && user_signed_in?%><a href="#" data-dropdown="file-upload" class="header-actions left"><span class="icon add"><!-- Add new file --></span></a><%end%>
+              </h3>
+              <ul id="file-upload" class="f-dropdown" data-dropdown-content>
+                <li class="uploader">
+                  <a href="#" class="upload-button">Computer</a>
+                  <%= simple_form_for JobsFiles.new, :url => { :action => :new_file }, html: {multipart: true, id: "file-upload-form"} do |f| %>
+                    <%= f.file_field :file, id: "file-upload-input" %>
+                  <% end %>
+                  <script type="text/javascript">
+                    document.getElementById("file-upload-input").onchange = function() {
+                      document.getElementById("file-upload-form").submit();
+                    };
+                  </script>
+                </li>
+              </ul>
+              <% @job_files.each do |file| %>
+              <a href="<%=file.file%>"><%=file.file%></a><br />
               <% end %>
             </div>
           </div>

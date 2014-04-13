@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140411130421) do
+ActiveRecord::Schema.define(:version => 20140413122049) do
 
   create_table "activities", :force => true do |t|
     t.integer  "trackable_id"
@@ -67,6 +67,18 @@ ActiveRecord::Schema.define(:version => 20140411130421) do
     t.integer  "type"
     t.string   "picture"
   end
+
+  create_table "jobs_files", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "job_id"
+    t.string   "file"
+    t.string   "title"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "jobs_files", ["job_id", "user_id"], :name => "index_jobs_files_on_job_id_and_user_id"
 
   create_table "jobs_workers", :id => false, :force => true do |t|
     t.integer  "user_id"

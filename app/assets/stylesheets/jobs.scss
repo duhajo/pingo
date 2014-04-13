@@ -40,7 +40,6 @@
 
         .icon-label {
           line-height: 21px;
-          padding-left: 32px;
           padding-top: 4px;
         }
       
@@ -83,6 +82,29 @@
           .icon {
             background-position: -64px -96px;
           } 
+        }
+        
+        #job-description {
+          font-size: rem-calc(14);
+          line-height: rem-calc(21);;
+        }
+        
+        #job-files {
+          .uploader {
+            form {
+              bottom: 0;
+              left: 0;
+              position: absolute;
+              top: 0;
+              width: 100%;
+            }
+            #file-upload-input {
+              margin: 0;
+              opacity: 0;
+              padding: 0;
+              width: 100%;
+            }
+          }
         }
       }
 

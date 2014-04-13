@@ -20,20 +20,22 @@ class User < ActiveRecord::Base
   
   def address
     @address = ""
-    unless district.empty?
-      @address << district
-    end
-    unless city.empty?
-      if @address != ""
-        @address << ", "
+    unless district.nil? && city.nil? && country.nil?
+      unless district.empty?
+        @address << district
       end
-      @address << city
-    end
-    unless country.empty?
-      if @address != ""
-        @address << ", "
+      unless city.empty?
+        if @address != ""
+          @address << ", "
+        end
+        @address << city
       end
-      @address << country
+      unless country.empty?
+        if @address != ""
+          @address << ", "
+        end
+        @address << country
+      end
     end
     return @address
   end

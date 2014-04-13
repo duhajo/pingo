@@ -23,20 +23,22 @@ class Job < ActiveRecord::Base
 
   def address
     @address = ""
-    unless street.empty?
-      @address << street
-    end
-    unless city.empty?
-      if @address != ""
-        @address << ", "
+    unless street.nil? && city.nil? && country.nil?
+      unless street.empty?
+        @address << street
       end
-      @address << city
-    end
-    unless country.empty?
-      if @address != ""
-        @address << ", "
+      unless city.empty?
+        if @address != ""
+          @address << ", "
+        end
+        @address << city
       end
-      @address << country
+      unless country.empty?
+        if @address != ""
+          @address << ", "
+        end
+        @address << country
+      end
     end
     return @address
   end

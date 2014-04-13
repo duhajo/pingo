@@ -52,6 +52,7 @@ class JobsController < ApplicationController
   # GET /jobs/1.json
   def show
     @job = Job.find(params[:id])
+    @job_files = JobsFiles.find_all_by_job_id(@job.id)
     @user_role = get_user_role(@job)
     @is_manager = JobsWorker.where(:job_id => @job.id).where('jobs_workers.isCreator' => true).to_a
     
@@ -94,6 +95,22 @@ class JobsController < ApplicationController
     respond_to do |format|
        format.html # new.html.erb
        format.json { render json: @job }
+    end
+  end
+  
+  # GET /jobs/new
+  # GET /jobs/new.json
+  def new_file
+    @job = Job.find(params[:id])
+    @job_file = JobsFiles.new(params[:jobs_files])
+    @job_file.user_id = current_user.id
+    @job_file.job_id = @job.id
+
+    respond_to do |format|
+      if @job_file.save
+        format.html { redirect_to @job, notice: 'Job was successfully created.' }
+        format.json { render json: @job, status: :created, location: @job }
+      end
     end
   end
 
