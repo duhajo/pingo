@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title><%= content_for?(:title) ? yield(:title) : "foundation-rails" %></title>
+    <title><%= content_for?(:title) ? yield(:title) : "Duhajo" %></title>
 
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "vendor/modernizr" %>
@@ -12,66 +12,112 @@
   </head>
 
   <body data-controller="<%= controller_name %>" data-action="<%= action_name %>">
-    <div id="duhajo">
-      <div id="sidebar">
-        <div id="logo">
-          <%= link_to image_tag("logo.png"), root_path %></a>
-        </div>
-        <div id="profile">
-          <%if user_signed_in? %>
-            <a href="/myprofile">
-              <span class="profile-avatar"><%= image_tag avatar_url(current_user), alt: "?" %></span>
-            </a>
-            <ul aria-haspopup="true" class="profile-menu">
-              <li class="more-actions">
-                <a href="/myprofile">
-                  <span class="profile-name">Mein Profil</span>
-                  <span class="text-arrow"></span>
-                </a>
-              </li>
-              <li class="more-actions open hidden">
-                <a href="/myprofile">
-                  <span class="profile-name"><%= current_user.name %></span>
-                  <span class="text-arrow"></span>
-                </a>
-              </li>
-              <ul class="profile-menu-list">
-                <li id="editprofile">
-                  <a href="/users/<%= current_user.id %>/edit">Profil bearbeiten</a>
-                </li>
-                <li id="logout"><%= link_to "Abmelden", '/logout'%></li>
-              </ul>
-            </ul>
-            <div id="my-jobs-sidebar">
-              <%= render :partial => "myjobs", :my_jobs => @my_jobs %>
-            </div>
-          <% else %>
-            <%= link_to "Anmelden", new_user_session_path%> oder <%= link_to "Registrieren", new_user_registration_path%>
-          <% end %>
+    <div id="duhajo" class="off-canvas-wrap">
+      <div class="inner-wrap">
+        <div id="topbar" class="contain-to-grid sticky">
+          <nav class="top-bar full-width hide-for-small" data-topbar>
+            <section class="top-bar-section row">
+              <!-- Right Nav Section -->
+              <div class="small-4 large-4 columns" id="search-wrapper">
+                <ul>
+                  <li id="search-box" class="has-dropdown">
+                    <%= form_tag(searches_path, :method => "get", id: "search-form") do %>
+                      <%= text_field_tag :search, params[:search], placeholder: "Search Jobs", id: "search-input" %>
+                    <% end %>
+                    <%if user_signed_in? %>
+                      <ul class="dropdown">
+                        <li><%= render :partial => "myjobs", :my_jobs => @my_jobs %></li>
+                      </ul>
+                    <% end %>
+                  </li>
+                </ul>
+              </div>
 
-        </div>
-      </div>
-      <div id="main">
-        <div id="main-navigation">
-          <ul>
-            <li <%=cp("dashboard")%>><%= link_to t('main_nav_dashboard'), dashboard_path%></li>
-            <li <%=cp("jobs")%>><%= link_to t('main_nav_jobs'), jobs_path%></li>
-            <li <%=cp("users")%>><%= link_to t('main_nav_workers'), users_path%></li>
-            <li <%=cp("tags")%>><%= link_to t('main_nav_tags'), tags_path%></a></li>
-          </ul>
-          <div id="search"><label for="search"><!-- --></label>
-            <%= form_tag(searches_path, :method => "get", id: "search-form") do %>
-               <%= text_field_tag :search, params[:search], placeholder: "Search Jobs" %>
-            <% end %>
+              <div class="small-4 large-4 columns center" id="header-logo">
+                <%= link_to image_tag("logo.png"), root_path %>
+              </div>
+
+              <!-- Left Nav Section -->
+              <div class="small-4 large-4 columns">
+                <ul class="right">
+                <%if user_signed_in? %>
+                    <li class="has-dropdown">
+                      <a href="/myprofile" class="overflow">
+                        <span class="profile-avatar small-4 columns"><%= image_tag avatar_url(current_user), alt: "?" %></span>
+                        <span class="profile-name small-offset-1 small-7 columns"><%= current_user.name %></span>
+                      </a>
+                      <ul class="dropdown">
+                        <li class="profile">
+                          <a href="/myprofile">
+                            <span><!-- leer --></span>
+                          </a>
+                        </li>
+                        <li id="editprofile"><a href="/users/<%= current_user.id %>/edit">Profil bearbeiten</a></li>
+                        <li id="logout"><%= link_to "Abmelden", '/logout'%></li>
+                      </ul>
+                    </li>
+                <% else %>
+                  <li>
+                    <%= link_to "Anmelden", new_user_session_path%>
+                  </li>
+                  <li><%= link_to "Registrieren", new_user_registration_path%></li>
+                <% end %>
+                </ul>
+              </div>
+            </section>
+          </nav>
+          <nav class="tab-bar show-for-small">
+            <a class="left-off-canvas-toggle menu-icon">
+              <span>Duhajo</span>
+            </a>
+          </nav>
+          <aside class="left-off-canvas-menu">
+            <ul class="off-canvas-list">
+              <li><label class="first">Duhajo</label></li>
+              <li><%= link_to "Home", root_path %></li>
+            </ul>
+          </aside>
+        </div>      
+        <div id="main">
+          <div class="full-width navigation-area white-panel" id="main-navigation">
+            <div class="row">
+              <div class="large-8 small-centered center columns">
+                <ul class="row">
+                  <li class="small-3 columns <%=cp("dashboard")%>">
+                    <a href="<%=dashboard_path%>">
+                      <span class="icon large center dashboard"></span>
+                      <span class="icon-label"><%= t('main_nav_dashboard')%></span>
+                    </a>
+                  </li>
+                  <li class="small-3 columns <%=cp("jobs")%>">
+                    <a href="<%=jobs_path%>">
+                      <span class="icon large center jobs"></span>
+                      <span class="icon-label"><%= t('main_nav_jobs')%></span>
+                    </a>
+                  </li>
+                  <li class="small-3 columns <%=cp("users")%>">
+                    <a href="<%=users_path%>">
+                      <span class="icon large center workers"></span>
+                      <span class="icon-label"><%= t('main_nav_workers')%></span>
+                    </a>
+                  </li>
+                  <li class="small-3 columns <%=cp("places")%>">
+                    <a href="<%=places_path%>">
+                      <span class="icon large center places"></span>
+                      <span class="icon-label"><%= t('main_nav_places')%></span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
-        </div>
-        <div id="content-container">
-          <div id="actionbar">
-            <%= yield :actionbar %>
-          </div>
-          <div id="content-wrapper">
-            <%= yield %>
-            <%= yield :scripts %>
+          <div class="full-width content-area">
+            <div id="content-container">
+              <div id="content-wrapper">
+                <%= yield %>
+                <%= yield :scripts %>
+              </div>
+            </div>
           </div>
         </div>
       </div>

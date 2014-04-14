@@ -3,19 +3,6 @@ class UsersController < ApplicationController
   def index
     @users = User.all
     @tags = User.tag_counts_on(:skills)
-    if current_user
-      @similar_users = current_user.find_related_skills.to_a
-    end
-    if params[:search].present?
-      if current_user
-        @radius = User.find(current_user.id).radius
-      end
-      if(@radius.nil?)
-        @near_users = User.near(params[:search], 10, :order => :distance)
-      else
-        @near_users = User.near(params[:search], @radius, :order => :distance)
-      end
-    end
   end
   
   def autocomplete_user

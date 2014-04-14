@@ -1,0 +1,359 @@
+/*
+    Document   : base
+    Created on : 08.06.2013, 13:00:39
+    Author     : Psyphant
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+html {
+  height: 100%;
+  
+  body {
+    height: 100%;
+  }
+}
+
+ul {
+  list-style: none outside none;
+}
+
+/** HIDING FOCUSRING */
+a:active, a, li {
+	outline: none;
+}
+a:focus {
+	-moz-outline-style: none;
+}
+a:-moz-any-link:focus {
+	outline: none;
+}
+
+#duhajo {
+  height: 100%;
+  
+  .inner-wrap {
+    height: 100%;
+  }
+
+  .full-width { 
+    width: 100%;
+    max-width: inherit; 
+  }
+  
+  #topbar {
+    border-bottom: 2px solid #3180BD;
+    
+    #search-wrapper {
+      #search-box {
+        float: none;
+        margin: rem-calc(10) 0 0 rem-calc(20);
+        #search-input {
+          border: 0 none;
+          box-shadow: 0 2px 1px 0 #488EC4;
+          font-size: rem-calc(15);
+          max-width: 350px;
+        }
+      }
+    }
+    
+    #header-logo {
+      img {
+        vertical-align: top;
+      }
+    }
+  
+    .profile-avatar img {
+      border-color: #FFFFFF;
+    }
+  }
+
+  .profile-avatar {
+    img {
+      border: 2px solid transparent;
+      border-radius: 50px;
+      width: 42px;
+    }
+    &.manager img {
+      border-color: $secondary-color;
+    }
+  }
+
+  #main-navigation {
+    padding-bottom: 5px;
+    position: relative;
+
+    .icon.large {
+      height: 42px;
+    }
+
+    a:hover .icon.dashboard, .active .icon.dashboard {
+      background-position: 0 -48px;
+    }
+
+    .icon.jobs {
+      background-position: -48px 0;
+    }
+
+    a:hover .icon.jobs, .active .icon.jobs {
+      background-position: -48px -48px;
+    }
+
+    .icon.workers {
+      background-position: -96px 0;
+    }
+
+    a:hover .icon.workers, .active .icon.workers {
+      background-position: -96px -48px;
+    }
+
+    .icon.places {
+      background-position: -144px 0;
+    }
+
+    a:hover .icon.places, .active .icon.places {
+      background-position: -144px -48px;
+    }
+  }
+
+  .white-panel {
+    background-color: #FFFFFF;
+    border: 1px solid #E4E4E4;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.07);
+  }
+
+  .blue-title {
+    background-color: $secondary-color;
+    padding: rem-calc(15);
+
+    a, h2 {
+      color: #FFFFFF;
+    }
+  }
+
+  .breadcrumb-bar {
+    padding: rem-calc(15);
+    ul {
+      margin: 0;
+      li:before {
+        font-size: rem-calc(15);
+        font-weight: 300;
+      }
+      li:last-child:after {
+        color: #AAAAAA;
+        content: ">";
+        font-size: rem-calc(15);
+        font-weight: 300;
+        margin: 0 0.75rem;
+        position: relative;
+        top: 1px;
+      }
+    }
+  }
+
+  #login-page, #registration-page {
+    border-top: 0 none;
+    padding: rem-calc(30);
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+.white-popup {
+  position: relative;
+  background: #FFFFFF;
+  padding: 20px;
+  width: auto;
+  max-width: 500px;
+  margin: 20px auto;
+}
+
+abbr.timeago{
+  border: none;
+  cursor: default;
+  color: #BBB;
+  font-weight: normal;
+  font-size: 12px;
+}
+
+.clear { clear: both; }
+
+.center {
+  text-align: center;
+}
+
+.space {
+  padding: rem-calc(20);
+}
+
+.top-margin {
+  margin-top: rem-calc(20);
+}
+
+.bottom-margin {
+  margin-bottom: rem-calc(20);
+}
+
+/** Neue Stile **/
+
+h1, h2, h3, h4 {
+  margin: 0;
+  overflow: hidden;
+  
+  .icon-label {
+    font-size: inherit;
+  }
+  
+  .header-actions {
+    margin-left: rem-calc(6);
+  }
+}
+
+h2 {
+  font-family: "RobotoMedium";
+}
+
+h3 {
+  font-family: "Roboto";
+}
+
+form {
+  @media #{$medium-up} {
+    .medium-4 {
+      margin-right: 1%;
+      width: 32.666%;
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+    .medium-6 {
+      margin-right: 1%;
+      width: 49%;
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+  
+  label {
+    text-align: left;
+  }
+}
+
+.form {
+  h1 {
+    margin-bottom: rem-calc(12);
+  }
+}
+
+.overflow {
+  overflow: hidden;
+}
+
+.icon {
+  background-image: url("icons/iconssprite.png");
+  background-size: 192px 256px;
+  display: block;
+  height: 32px;
+  width: 32px;
+
+  &.large {
+    height: 48px;
+    width: 48px;
+  }
+
+  &.center {
+    margin: 0 auto;
+  }
+  
+  &.add {
+    background-position: -128px -128px;
+    &.contrast {
+      background-position: -128px -192px;
+    }
+  }
+  
+  &.edit {
+    background-position: -160px -128px;
+    &.contrast {
+      background-position: -160px -192px;
+    }
+  }
+  
+}
+
+a:hover .icon.add {
+  background-position: -128px -160px;
+  &.contrast {
+    background-position: -128px -224px;
+  }
+}
+
+a:hover .icon.edit {
+  background-position: -160px -160px;
+  &.contrast {
+    background-position: -128px -192px;
+  }
+}
+  
+.icon-label {
+  display: block;
+  font-size: rem-calc(14);
+}
+
+.tag-list {
+  .icon {
+    background-position: -96px -96px;
+    margin: rem-calc(4) rem-calc(12) rem-calc(4) 0;
+  }
+  .tag {
+    background-color: $quinary-color;
+    border-radius: 3px;
+    font-size: rem-calc(12);
+    padding: rem-calc(6);
+    float: left;
+    margin: rem-calc(4) rem-calc(12) rem-calc(4) 0;
+  }
+}
+
+.active .icon-label, a:hover .icon-label {
+  color: $tertiary-color;
+}
+
+.button {
+  background-color: $secondary-color;
+  border-radius: $global-radius;
+  &.small {
+    margin: 0 0 rem-calc(8) 0;
+  }
+  
+  &:hover, &:active {
+    background-color: $senary-color;
+  }
+}
+
+.sec-button {
+  @include button(rem-calc(7) ,#FFFFFF, true, false, false, false);
+  border: 1px solid #6A7279;
+  color: #353F47;
+}
+
+.small-link {
+  font-size: rem-calc(14);
+}
+
+.content.white {
+  background-color: #FFFFFF;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.07);
+
+  &.simple {
+    border: 1px solid #ebebeb;
+  }
+}
+
+body[data-controller='sessions'] #main-navigation, body[data-controller='registrations'] #main-navigation {
+  display: none;
+}
+

@@ -1,8 +1,8 @@
-<h2>Meine Aufgaben</h2>
+<span>Meine Aufgaben</span>
 <%if my_jobs.empty? %>
   <span>Es sind noch keine Jobs vorhanden.</span>
 <% else %>
-  <%= sorted_nested_li(my_jobs, :title) do |job| %>
-    <%= link_to job.title, job %>
+  <% my_jobs.each do |job| %>
+    <li><%= link_to job.title, job %></li>
   <% end %>
 <% end %>

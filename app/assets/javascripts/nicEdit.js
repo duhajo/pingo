@@ -320,7 +320,7 @@ var nicEditor = bkClass.extend({
 
 	panelInstance : function(e,o) {
 		e = this.checkReplace($BK(e));
-		var panelElm = new bkElement('DIV').setStyle({width : (parseInt(e.getStyle('width')) || e.clientWidth)+'px'}).appendBefore(e);
+		var panelElm = new bkElement('DIV').appendBefore(e);
 		this.setPanel(panelElm);
 		return this.addInstance(e,o);
 	},
@@ -416,17 +416,16 @@ var nicEditorInstance = bkClass.extend({
 		this.elm = this.e = e;
 		this.options = options || {};
 
-		newX = parseInt(e.getStyle('width')) || e.clientWidth;
 		newY = parseInt(e.getStyle('height')) || e.clientHeight;
 		this.initialHeight = newY-8;
 
 		var isTextarea = (e.nodeName.toLowerCase() == "textarea");
 		if(isTextarea || this.options.hasPanel) {
 			var ie7s = (bkLib.isMSIE && !((typeof document.body.style.maxHeight != "undefined") && document.compatMode == "CSS1Compat"))
-			var s = {width: newX+'px', border : '1px solid #ccc', borderTop : 0, overflowY : 'auto', overflowX: 'hidden' };
+			var s = {border : '1px solid #ccc', borderTop : 0, overflowY : 'auto', overflowX: 'hidden' };
 			s[(ie7s) ? 'height' : 'maxHeight'] = (this.ne.options.maxHeight) ? this.ne.options.maxHeight+'px' : null;
 			this.editorContain = new bkElement('DIV').setStyle(s).appendBefore(e);
-			var editorElm = new bkElement('DIV').setStyle({width : (newX-8)+'px', margin: '4px', minHeight : newY+'px'}).addClass('main').appendTo(this.editorContain);
+			var editorElm = new bkElement('DIV').setStyle({margin: '4px', minHeight : newY+'px'}).addClass('main').appendTo(this.editorContain);
 
 			e.setStyle({display : 'none'});
 
@@ -589,7 +588,7 @@ var nicEditorIFrameInstance = nicEditorInstance.extend({
 
 		this.elmFrame = new bkElement('iframe').setAttributes({'src' : 'javascript:;', 'frameBorder' : 0, 'allowTransparency' : 'true', 'scrolling' : 'no'}).setStyle({height: '100px', width: '100%'}).addClass('frame').appendTo(this.elm);
 
-		if(this.copyElm) { this.elmFrame.setStyle({width : (this.elm.offsetWidth-4)+'px'}); }
+		//if(this.copyElm) { this.elmFrame.setStyle({width : (this.elm.offsetWidth-4)+'px'}); }
 
 		var styleList = ['font-size','font-family','font-weight','color'];
 		for(itm in styleList) {

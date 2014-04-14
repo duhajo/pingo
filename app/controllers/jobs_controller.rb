@@ -8,25 +8,28 @@ class JobsController < ApplicationController
   # GET /jobs.json
   def index
 
-  if params[:search].present?
-    if current_user
-      @radius = User.find(current_user.id).radius
-    end
-    if(@radius.nil?)
-      @near_jobs = Job.near(params[:search], 10, :order => :distance)
-    else
-      @near_jobs = Job.near(params[:search], @radius, :order => :distance)
-    end
-    @jobs = Job.find_all_by_parent_id(nil)
-  else
-    @jobs = Job.find_all_by_parent_id(nil)
-    @jobs_voted = Job.joins("LEFT JOIN `votes` ON votes.votable_id = jobs.id").select("jobs.id, status, title, deadline, COUNT(votes.votable_id) as votes_count").where("votes.vote_flag" => true).group("votes.votable_id").order("votes_count desc,votes.updated_at desc,jobs.updated_at desc").all()
-  end
-
+  #if params[:search].present?
+  #  if current_user
+  #    @radius = User.find(current_user.id).radius
+  #  end
+  #  if(@radius.nil?)
+  #    @near_jobs = Job.near(params[:search], 10, :order => :distance)
+  #  else
+  #    @near_jobs = Job.near(params[:search], @radius, :order => :distance)
+  #  end
+  #  @jobs = Job.find_all_by_parent_id(nil)
+  #else
+  #  @jobs = Job.find_all_by_parent_id(nil)
+  #  @jobs_voted = Job.joins("LEFT JOIN `votes` ON votes.votable_id = jobs.id").select("jobs.id, status, title, deadline, COUNT(votes.votable_id) as votes_count").where("votes.vote_flag" => true).group("votes.votable_id").order("votes_count desc,votes.updated_at desc,jobs.updated_at desc").all()
+  #end
+    
     #respond_to do |format|
     #  format.html # index.html.erb
     #  format.json { render json: @jobs }
     #end
+    @jobs = Job.where('parent_id' => nil).where('type' => 1)
+    @offers = Job.where('parent_id' => nil).where('type' => 2)
+    @categories = Job.find_all_by_type(0)
   end
 
   def get_user_role(job)
@@ -49,12 +52,17 @@ class JobsController < ApplicationController
   # GET /jobs/1.json
   def show
     @job = Job.find(params[:id])
+    @job_files = JobsFiles.find_all_by_job_id(@job.id)
     @user_role = get_user_role(@job)
     @is_manager = JobsWorker.where(:job_id => @job.id).where('jobs_workers.isCreator' => true).to_a
-    @jobs = Job.find_all_by_parent_id(@job.id)
+    
+    @all_jobs = Job.where('parent_id' => @job.id)
+    @jobs = @all_jobs.where('type' => 1)
+    @offers = @all_jobs.where('type' => 2)
+    
     @parent_jobs = @job.ancestors
     @job_ids = Array.new << @job.id
-    @jobs.each do |job|
+    @all_jobs.each do |job|
       @job_ids << job.id
     end
     @activities = PublicActivity::Activity.order("created_at DESC").all(:conditions => {trackable_type: "Job", trackable_id: [@job_ids] })
@@ -63,6 +71,10 @@ class JobsController < ApplicationController
     @workers = User.joins(:jobs_workers)
     .where('jobs_workers.job_id' => @job.id)
     .select("name, id, email, isCreator").to_a
+    
+    if @job.type == 0
+      @most_used_tags = @all_jobs.skill_counts
+    end
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @job }
@@ -75,11 +87,30 @@ class JobsController < ApplicationController
     if params[:id]
        @parent_job = Job.find(params[:id])
     end
+    
+    @type = 0 if params[:type].present?
+    
     @job = Job.new
 
     respond_to do |format|
        format.html # new.html.erb
        format.json { render json: @job }
+    end
+  end
+  
+  # GET /jobs/new
+  # GET /jobs/new.json
+  def new_file
+    @job = Job.find(params[:id])
+    @job_file = JobsFiles.new(params[:jobs_files])
+    @job_file.user_id = current_user.id
+    @job_file.job_id = @job.id
+
+    respond_to do |format|
+      if @job_file.save
+        format.html { redirect_to @job, notice: 'Job was successfully created.' }
+        format.json { render json: @job, status: :created, location: @job }
+      end
     end
   end
 

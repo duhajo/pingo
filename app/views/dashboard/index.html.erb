@@ -1,16 +1,14 @@
- <script>
-$(function() {
-	$( "#content-tabs" ).tabs();
-});
-</script>
-<div id="content-tabs">
-	<div id="sub-navigation">
-	  <ul>
-	    <li><a href="#recommendations">Empfehlungen</a></li>
-	    <li><a href="#activities">Aktivit&auml;ten</a></li>
-	  </ul>
-	</div>
-  <div class="content-box" id="recommendations">
+<div class="row">
+  <div class="large-6 columns space" id="activities">
+    <%if !@my_activities.empty? %>
+	      <% @my_activities.each do |activity|%>
+          <%= render_activity(activity, :layout => "layouts/activity_wrapper") %>
+	      <% end %>
+    <% else %>
+      Beteilige dich an Jobs, um hier Aktivit&auml;ten zu sehen.
+    <% end %>
+  </div>
+  <div class="large-6 columns space" id="recommendations">
     <%if @recommendations.empty? && @near_jobs.nil? %>
       Es konnten keine Empfehlungen f&uuml;r dich gefunden werden.
     <% else %>
@@ -30,15 +28,6 @@ $(function() {
 	        <% end %>
 	      </ul>
 	    <% end %>
-    <% end %>
-  </div>
-  <div class="content-box" id="activities">
-    <%if !@my_activities.empty? %>
-	      <% @my_activities.each do |activity|%>
-          <%= render_activity(activity, :layout => "layouts/activity_wrapper") %>
-	      <% end %>
-    <% else %>
-      Beteilige dich an Jobs, um hier Aktivit&auml;ten zu sehen.
     <% end %>
   </div>
 </div>

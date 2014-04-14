@@ -9,27 +9,11 @@
   margin-right: 10px;
 }
 
-.worker-profile {
-  overflow: hidden;
-  line-height: 45px;
-  margin-bottom: 15px;
-}
-
-.worker-profile .profile-avatar {
-  float: left;
-  padding-right: 15px;
-}
-
-.worker-profile .profile-name {
-  clear: both;
-}
-
-.profile-avatar img {
-  background-color: #FFFFFF;
-  border-radius: 500px 500px 500px 500px;
-  display: block;
-  height: 48px;
-  line-height: 45px;
-  text-align: center;
-  width: 48px;
+.user {
+  .user-name {
+    font-size: rem-calc(15);
+  }
+  .user-address{
+    font-size: rem-calc(12);
+  }
 }

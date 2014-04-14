@@ -1,13 +1,16 @@
 class Job < ActiveRecord::Base
+  self.inheritance_column = nil
   include PublicActivity::Common
   acts_as_commentable
   acts_as_nested_set
   acts_as_votable
   acts_as_taggable
   acts_as_taggable_on :skills
-  attr_accessible :deadline, :description, :parent_id, :title, :skill_list, :country, :city, :street
+  attr_accessible :deadline, :description, :parent_id, :title, :skill_list, :country, :city, :street, :type, :picture, :picture_cache
   has_many :jobs_workers, dependent: :delete_all
   has_many :users, :through => :jobs_workers
+  
+  mount_uploader :picture, PictureUploader
 
   geocoded_by :address
   after_validation :geocode, :if => :address_changed?
@@ -20,20 +23,22 @@ class Job < ActiveRecord::Base
 
   def address
     @address = ""
-    unless street.empty?
-      @address << street
-    end
-    unless city.empty?
-      if @address != ""
-        @address << ", "
+    unless street.nil? && city.nil? && country.nil?
+      unless street.empty?
+        @address << street
       end
-      @address << city
-    end
-    unless country.empty?
-      if @address != ""
-        @address << ", "
+      unless city.empty?
+        if @address != ""
+          @address << ", "
+        end
+        @address << city
       end
-      @address << country
+      unless country.empty?
+        if @address != ""
+          @address << ", "
+        end
+        @address << country
+      end
     end
     return @address
   end

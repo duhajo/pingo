@@ -1,147 +1,54 @@
-<% if user_signed_in? %>
-
-  <% content_for :actionbar do %>
-    <ul>
-      <li><%= link_to 'Neuer Job', new_job_path %></li>
-    </ul>
-  <% end %>
-<% end %>
-<script>
-$(function() {
-	$( "#content-tabs" ).tabs();
-});
-</script>
-<div id="content-tabs">
-  <div id="sub-navigation">
-    <ul>
-      <li><a href="#all">Alle</a></li>
-      <li><a href="#popular">Popul&auml;r</a></li>
-      <li><a href="#local">Lokal</a></li>
-    </ul>
-  </div>
-  <div class="content-box" id="all">
-    <%if @jobs.empty? %>
-      <%= t('jobs_no_jobs') %>
+<div class="content white">
+  <div id="catgories-overview" class="space">
+    <h1 class="bottom-margin overflow">
+      <% if user_signed_in? %><span class="icon-label left"><%end%>Kategorieübersicht<% if user_signed_in? %></span> 
+      <a href="<%=new_job_path%>/category" class="header-actions left"><span class="icon add"><!-- Add new categorie --></span></a><% end %>
+    </h1>
+    <%if @categories.empty? %>
+      <%= t('no_categories_definied') %>
     <% else %>
-      <div id="list-jobs">
-        <% @jobs.each do |job|%>
-          <div class="job-container <% if job.status == 3 %>closed<% elsif job.status == 2 %>in-work<% else %>open<% end %>">
-            <div class="job">
-              <div class="job-details">
-                <div class="job-title"><h3><%= link_to job.title, job %>
-                <% if !job.deadline.nil? && job.deadline < DateTime.now %>
-                  <span class="expired">(expired)</span>
-                <% end %></h3>
-                </div>
-                <div class="job-tags">
-                  <ul>
-                  <% job.tag_counts_on(:skills, :limit => 5, :order => "count desc").each do |tag| %>
-                    <li><%= link_to tag.name, { :controller => :tags, :action => :show, :id => tag.id } %></li>
-                  <% end %>
-                  </ul>
-                  <span class="clear"></span>
-                </div>
-              </div>
-              <div class="job-interactions">
-                <div class="job-fav"></div>
-              </div>
-              <span class="clear"></span>
-            </div>
-            <%
-              likeClass = "likes-button like icon"
-              if user_signed_in?
-                if current_user.voted_up_on? job
-                  likeClass << " voted"
-                end
-              end
-              if job.likes.size == 0
-                likeClass << " no-votes"
-              end
-            %>
-            <div class="job-likes">
-              <% if user_signed_in? %>
-                <%= link_to '', like_job_path(job), :class => likeClass, :method => :put, :remote => true, :"data-id" => job.id%>
+      <ul id="list-categories" class="small-block-grid-2 medium-block-grid-3 large-block-grid-4">
+        <% @categories.each do |categorie| %>
+          <li class="category">
+            <div class="category-head"><%= link_to categorie.title, categorie %></div>
+            <div class="category-body">
+              <% if categorie.picture? %>
+                <%= link_to image_tag(categorie.picture_url), categorie %>
               <% else %>
-                <%= link_to '', login_path, :class => "like icon no-login"%>
+              <ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4 tag-list">
+                <% categorie.tag_counts_on(:skills, :limit => 5, :order => "count desc").each do |tag| %>
+                  <li><%= link_to tag.name, { :controller => :tags, :action => :show, :id => tag.id }, :class => "tag" %></li>
+                <% end %>
+              </ul>
               <% end %>
-              <div class="likes-number <% if job.likes.size == 0 %>hidden<%end%>"><%= job.likes.size %></div>
             </div>
-          </div>
+          </li>
         <% end %>
-      </div>
+      </ul>
     <% end %>
   </div>
-  <div class="content-box" id="popular">
-    <%if @jobs_voted.nil? %>
-      <%= t('jobs_no_jobs') %>
-    <% else %>
-      <div id="list-jobs">
-        <% @jobs_voted.each do |job|%>
-          <div class="job-container <% if job.status == 3 %>closed<% elsif job.status == 2 %>in-work<% else %>open<% end %>">
-            <div class="job">
-              <div class="job-details">
-                <div class="job-title"><h3><%= link_to job.title, job %>
-                <% if !job.deadline.nil? && job.deadline < DateTime.now %>
-                  <span class="expired">(expired)</span>
-                <% end %></h3>
-                </div>
-                <div class="job-tags">
-                  <ul>
-                  <% job.tag_counts_on(:skills, :limit => 5, :order => "count desc").each do |tag| %>
-                    <li><%= link_to tag.name, { :controller => :tags, :action => :show, :id => tag.id } %></li>
-                  <% end %>
-                  </ul>
-                  <span class="clear"></span>
-                </div>
-              </div>
-              <div class="job-interactions">
-                <div class="job-fav"></div>
-              </div>
-              <span class="clear"></span>
-            </div>
-            <%
-              likeClass = "likes-button like icon"
-              if user_signed_in?
-                if current_user.voted_up_on? job
-                  likeClass << " voted"
-                end
-              end
-              if job.likes.size == 0
-                likeClass << " no-votes"
-              end
-            %>
-            <div class="job-likes">
-              <% if user_signed_in? %>
-                <%= link_to '', like_job_path(job), :class => likeClass, :method => :put, :remote => true, :"data-id" => job.id%>
-              <% else %>
-                <%= link_to '', login_path, :class => "like icon no-login"%>
-              <% end %>
-              <div class="likes-number <% if job.likes.size == 0 %>hidden<%end%>"><%= job.likes.size %></div>
-            </div>
-          </div>
-        <% end %>
-      </div>
-    <% end %>
-  </div>
-  <div class="content-box" id="local">
-    <%= form_tag '/jobs#local', :method => :get do %>
-        <p>
-          <%= text_field_tag :search, params[:search] %>
-          <%= submit_tag "Search Near", :name => nil %>
-        </p>
-      <% end %>
-      <% if (params[:search]) %>
-        <%if @near_jobs.empty? %>
-          <%= t('jobs_no_jobs') %>
-        <% else %>
-          <div id="list-jobs">
-            <% @near_jobs.each do |job|%>
-              <%= link_to job.title, job %>
+  <div class="jobs-overview space">
+    <h1 class="bottom-margin overflow">
+      <% if user_signed_in? %><span class="icon-label left"><%end%>Nicht eingeordnete Jobs<% if user_signed_in? %></span> 
+      <a href="<%=new_job_path%>" class="header-actions left"><span class="icon add"><!-- Add new categorie --></span></a><% end %>
+    </h1>
+    <div class="unassigned-jobs-content clear">
+      <%if @jobs.empty? %>
+        <%= t('no_jobs') %>
+      <% else %>
+        <ul id="list-jobs" class="small-block-grid-2 medium-block-grid-3 large-block-grid-4">
+          <li>
+            <% @jobs.each do |job| %>
+              <div><%= link_to job.title, job %></div>
             <% end %>
-          </div>
-        <% end %>
-    <% else %>
-        <%= t("jobs_near_search_info") %>
-    <% end %>
+          </li>
+          <li>
+            <% @offers.each do |offer| %>
+              <div><%= link_to offer.title, offer %></div>
+            <% end %>
+          </li>
+        </ul>
+      <% end %>
+    </div>
   </div>
 </div>

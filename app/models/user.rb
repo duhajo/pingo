@@ -14,8 +14,30 @@ class User < ActiveRecord::Base
   geocoded_by :address
   after_validation :geocode, :if => :address_changed?
 
+  def gmaps4rails_address
+    "#{self.district}, #{self.city}, #{self.country}"
+  end
+  
   def address
-    [district, city, country].compact.join(', ')
+    @address = ""
+    unless district.nil? && city.nil? && country.nil?
+      unless district.empty?
+        @address << district
+      end
+      unless city.empty?
+        if @address != ""
+          @address << ", "
+        end
+        @address << city
+      end
+      unless country.empty?
+        if @address != ""
+          @address << ", "
+        end
+        @address << country
+      end
+    end
+    return @address
   end
 
   def address_changed?

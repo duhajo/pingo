@@ -5,10 +5,13 @@ en:
   main_nav_dashboard: "Dashboard"
   main_nav_jobs: "Jobs"
   main_nav_workers: "Workers"
-  main_nav_tags: "Tags"
+  main_nav_places: "Places"
 
   jobs_no_jobs: "There are no jobs available. Sorry!"
   jobs_near_search_info: "Find available Jobs in your area. Type in a street or city."
+  jobs_edit_header: "Edit Job"
+  jobs_edit_header_categorie: "Edit Category"
+  
   
   workers_no_workers: "There are no workers available. Sorry!"
   workers_near_search_info: "Find available workers in your area. Type in a street or city."

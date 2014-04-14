@@ -1,7 +1,7 @@
 require File.expand_path('../boot', __FILE__)
 
-require 'rails/all'
-require 'devise'
+require "rails/all"
+require "devise"
 require "active_record/railtie"
 require "action_controller/railtie"
 require "action_mailer/railtie"
@@ -59,12 +59,16 @@ module Duhajo
     # parameters by using an attr_accessible or attr_protected declaration.
     config.active_record.whitelist_attributes = true
 
+    config.assets.compile = true
+    
     # Enable the asset pipeline
     config.assets.enabled = true
+
+    config.assets.paths << "#{Rails.root}/app/assets/fonts"
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
-    config.assets.initialize_on_precompile = false
+    config.assets.initialize_on_precompile = true
   end
 end
