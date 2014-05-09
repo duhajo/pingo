@@ -53,6 +53,13 @@ class JobsController < ApplicationController
   def show
     @job = Job.find(params[:id])
     @job_files = JobsFiles.find_all_by_job_id(@job.id)
+
+    @file_others , @file_images = [], []
+    @job_files.each do |attachment|
+      @file_images << attachment if ((attachment.file.content_type || "").split("/").first == 'image')
+      @file_others << attachment if ((attachment.file.content_type || "").split("/").first != 'image')
+    end
+
     @user_role = get_user_role(@job)
     @is_manager = JobsWorker.where(:job_id => @job.id).where('jobs_workers.isCreator' => true).to_a
     

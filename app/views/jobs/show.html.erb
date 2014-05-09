@@ -163,17 +163,29 @@
                   </script>
                 </li>
               </ul>
-              <% @job_files.each do |file| %>
-              <a href="<%=file.file%>"><%=file.file%></a><br />
-              <% end %>
+              <div class="top-margin">
+                <div class="row">
+                  <div class="job-file-images medium-6 columns">
+                    <% @file_images.each do |file| %>
+                      <%= link_to image_tag(file.file.thumb.url), file.file.url %>
+                    <% end %>
+                  </div>
+                  <div class="job-files-list medium-6 columns">
+                    <% @file_others.each do |file| %>
+                      <a href="<%=file.file%>"><%=file.file.file.filename %>(<%=file.file.size%>)</a><br />
+                    <% end %>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <div id="job-workers-wrapper" class="medium-4 columns space">
-            <h3 class="with-buttons">Beteiligte 
+            <h3 class="overflow with-buttons">
+              <span class="icon-label left">Beteiligte</span>
               <%if @user_role == 3 %>
-                <span class="right">
-                  <%= link_to_modal 'Verwalten', { :action => :show_manager_list }, :remote => true, :id => "edit-manager-button", :class => "button small"%>
-                </span>
+                  <%= link_to_modal :show_manager_list, :remote => true, id: "edit-manager-button", class: "header-actions left" do %>
+                      <span class="icon edit"><!-- edit categorie --></span>
+                  <%end%>
               <% end %>
             </h3>
             <div class="preview-list workers">
