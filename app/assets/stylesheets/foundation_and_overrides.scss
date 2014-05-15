@@ -1016,8 +1016,8 @@ $button-round: $global-rounded;
 // $include-html-top-bar-classes: $include-html-classes;
 
 // Background color for the top bar
- $topbar-bg-color: #55a0da;
-// $topbar-bg: $topbar-bg-color;
+ $topbar-bg-color: $secondary-color;
+ $topbar-bg: $topbar-bg-color;
 
 // Height and margin
  $topbar-height: 65px;
@@ -1030,7 +1030,7 @@ $button-round: $global-rounded;
 // Style the top bar dropdown elements
 $topbar-dropdown-bg: $secondary-color;
 // $topbar-dropdown-link-color: #fff;
-// $topbar-dropdown-link-bg: #333;
+$topbar-dropdown-link-bg: $secondary-color;
 // $topbar-dropdown-link-weight: normal;
 // $topbar-dropdown-toggle-size: 5px;
 // $topbar-dropdown-toggle-color: #fff;
@@ -1050,11 +1050,11 @@ $topbar-link-bg-hover: $senary-color;
 
 // $topbar-button-font-size: 0.75rem;
 
-// $topbar-dropdown-label-color: #777;
+$topbar-dropdown-label-color: #fff;
 // $topbar-dropdown-label-text-transform: uppercase;
 // $topbar-dropdown-label-font-weight: bold;
 // $topbar-dropdown-label-font-size: rem-calc(10);
-// $topbar-dropdown-label-bg: #333;
+$topbar-dropdown-label-bg: $senary-color;
 
 // Top menu icon styles
 // $topbar-menu-link-transform: uppercase;
@@ -1092,8 +1092,8 @@ $header-font-family: "RobotoBold";
 // $header-font-style: normal;
 $header-font-color: $quaternary-color;
 // $header-line-height: 1.4;
-// $header-top-margin: .2rem;
-// $header-bottom-margin: .5rem;
+$header-top-margin: .2rem;
+$header-bottom-margin: .5rem;
 // $header-text-rendering: optimizeLegibility;
 
 // We use these to control header font sizes

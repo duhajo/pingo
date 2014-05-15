@@ -1,6 +1,6 @@
-<span>Meine Aufgaben</span>
+<label>Meine Aufgaben</label>
 <%if my_jobs.empty? %>
-  <span>Es sind noch keine Jobs vorhanden.</span>
+  <li>Es sind noch keine Jobs vorhanden.</li>
 <% else %>
   <% my_jobs.each do |job| %>
     <li><%= link_to job.title, job %></li>

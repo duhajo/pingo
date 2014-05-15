@@ -1,0 +1,13 @@
+- single_content_for :action do
+  ' uploaded a file to
+  = link_to a.trackable.title, a.trackable
+
+= p[:body]
+
+- single_content_for :file do
+  - if p[:file]
+    - file = JobsFiles.find_by_id(p[:file])
+    - if ((file.file.content_type || "").split("/").first == 'image')
+      = link_to image_tag(file.file.thumb.url), file.file.url
+    - else
+      = link_to file.file.file.filename, file.file.url

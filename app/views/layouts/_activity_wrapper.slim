@@ -21,3 +21,6 @@
         =' content_for :thread
       .answer-editor
         =' content_for :editor
+    - if a.key == "job.upload_file"
+      .file-details
+        =' content_for :file

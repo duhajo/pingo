@@ -115,6 +115,7 @@ class JobsController < ApplicationController
 
     respond_to do |format|
       if @job_file.save
+        @job.create_activity :upload_file, params: {file: @job_file.id}, owner: current_user
         format.html { redirect_to @job, notice: 'Job was successfully created.' }
         format.json { render json: @job, status: :created, location: @job }
       end
