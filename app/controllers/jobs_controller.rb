@@ -185,9 +185,14 @@ class JobsController < ApplicationController
     @job = Job.find(params[:id])
     if params[:support]
       if params[:manager]
-        JobsWorker.where('jobs_workers.job_id' => @job.id).where('jobs_workers.user_id' => current_user.id).where('jobs_workers.isCreator' => true).first_or_create()
+        @current_worker = @job.jobs_workers.where(:user_id => current_user.id)
+        if @current_worker.empty?
+          @job.jobs_workers.where(:user_id => current_user.id).where(:isCreator => true).first_or_create()
+        else
+          @current_worker.update_all(:isCreator => 1)
+        end
       else
-        JobsWorker.where('jobs_workers.job_id' => @job.id).where('jobs_workers.user_id' => current_user.id).first_or_create()
+        @job.jobs_workers.where(:user_id => current_user.id).first_or_create()
       end
     else
       @job.users.delete(current_user)
@@ -244,9 +249,8 @@ class JobsController < ApplicationController
     @lat = @job.latitude
     @long = @job.longitude
     respond_to do |format|
-      format.html {
-        render :partial => 'map', :lat => @lat, :long => @long
-      }
+      format.html { redirect_to root_path }
+      format.js { render :action => 'map', :lat => @lat, :long => @long }
     end
   end
 
@@ -257,9 +261,8 @@ class JobsController < ApplicationController
     end
     @managers = User.joins(:jobs_workers).select("users.id, name, email").where("jobs_workers.job_id" => @job.id).where("jobs_workers.isCreator" => true).to_a
     respond_to do |format|
-      format.html {
-        render :partial => 'manager_list'
-      }
+      format.html { redirect_to root_path }
+      format.js
     end
   end
   
@@ -272,8 +275,8 @@ class JobsController < ApplicationController
     else
       @job_worker = @job.jobs_workers.where(:user_id => @user_id)
       if(@job_worker.empty?)
-        JobsWorker.where('jobs_workers.job_id' => @job.id).where('jobs_workers.user_id' => @user_id).where('jobs_workers.isCreator' => true).first_or_create()        
-      else 
+        JobsWorker.where('jobs_workers.job_id' => @job.id).where('jobs_workers.user_id' => @user_id).where('jobs_workers.isCreator' => true).first_or_create()
+      else
         @job_worker.update_all(:isCreator => 1)
       end
     end

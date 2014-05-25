@@ -2,6 +2,22 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 de:
+  main_nav_dashboard: "Dashboard"
+  main_nav_jobs: "Jobs"
+  main_nav_workers: "Arbeiter"
+  main_nav_places: "Orte"
+
+  jobs_no_jobs: "Keinen Job gefunden. Sorry!"
+  jobs_no_description: "Es ist noch keine Beschreibung vorhanden."
+  jobs_near_search_info: "Suche nach einem Job, indem du einen Ort oder eine Straße angibst."
+  jobs_edit_header: "Job bearbeiten"
+  jobs_edit_header_categorie: "Kategorie bearbeiten"
+  jobs_categorie_no_tags: "Es sind noch keine Tags vorhanden."
+
+  workers_no_workers: "Keinen Arbeiter gefunden. Sorry!"
+  workers_near_search_info: "Suche nach einem Arbeiter, indem du einen Ort oder eine Straße angibst."
+
+# Defaults
   date:
     formats:
       default: "%d.%m.%Y"
@@ -219,20 +235,7 @@ de:
 
       full_messages:
         format: "%{attribute} %{message}"
-    
-  main_nav_dashboard: "Dashboard"
-  main_nav_jobs: "Jobs"
-  main_nav_workers: "Arbeiter"
-  main_nav_places: "Orte"
 
-  jobs_no_jobs: "Keinen Job gefunden. Sorry!"
-  jobs_near_search_info: "Suche nach einem Job, indem du einen Ort oder eine Straße angibst."
-  jobs_edit_header: "Job bearbeiten"
-  jobs_edit_header_categorie: "Kategorie bearbeiten"
-  
-  workers_no_workers: "Keinen Arbeiter gefunden. Sorry!"
-  workers_near_search_info: "Suche nach einem Arbeiter, indem du einen Ort oder eine Straße angibst."
-  
   gflash:
     titles:
       notice: ""

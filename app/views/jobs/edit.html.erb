@@ -1,80 +1,94 @@
-<div class="form row large-6 medium-8 large-centered medium-centered columns center white-panel space" id="edit-job-page" data-id="<%=@job.id%>">
-  <h1>
-    <% if @job.type != 0 %>
-      <%= t('jobs_edit_header') %>
-    <% else %>
-      <%= t('jobs_edit_header_categorie') %>
-    <% end %>
-  </h1>
-  <%= simple_form_for @job, html: {multipart: true} do |f| %>
-    <% if @job.errors.any? %>
-      <div class="error_messages">
-        <h2>Form is invalid</h2>
-        <ul>
-          <% for message in @job.errors.full_messages %>
-            <li><%= message %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-    <div class="field">
-      <%= f.label :title %>
-      <%= f.text_field :title %>
-    </div>
-    <div class="area html-content">
-      <%= f.label :description %>
-      <%= f.resizable_text_area :description %>
-    </div>
-    <div class="field">
-      <%= f.label :skill_list, "Tags (separated by commas)" %>
-      <%= f.text_field :skill_list %>
-    </div>
-    <% if @job.type != 0 %>
-      <% if @job.deadline.nil?
-        @setDeadline = true %>
-      <div id="show-deadline-link">
-        <%= link_to 'Deadline setzen', '#',
-              :onclick => 'showDeadline(); return false;'%>
-      </div>
+<div class="container">
+  <div id="edit-job-page" class="form col-md-6 col-md-offset-3 white-panel clear-top" data-id="<%= @job.id %>">
+    <h1>
+      <% if @job.type != 0 %>
+          <%= t('jobs_edit_header') %>
+      <% else %>
+          <%= t('jobs_edit_header_categorie') %>
       <% end %>
-      <div id="deadline-field" class="field" <% if @setDeadline %> style="display: none;" <% end %>>
-        <%= f.label :deadline %>
-        <div class="row">
-          <%= f.date_select :deadline, {:include_blank => true, :default => nil}, html_options = { class: "medium-4 columns"} %>
+    </h1>
+    <%= simple_form_for @job, html: {multipart: true} do |f| %>
+        <% if @job.errors.any? %>
+            <div class="error_messages">
+              <h2>Form is invalid</h2>
+              <ul>
+                <% for message in @job.errors.full_messages %>
+                    <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+        <% end %>
+        <div class="form-group">
+          <%= f.label :title %>
+          <%= f.text_field :title, :class => "form-control" %>
         </div>
-      </div>
-      <% if @job.latitude.nil? && @job.longitude.nil?
-        @setPlace = true %>
-      <div id="show-place-link">
-        <%= link_to 'Ort setzen', '#',
-              :onclick => 'showPlace(); return false;'%>
-      </div>
-      <% end %>
-      <div id="place-field" <% if @setPlace %> style="display: none;" <% end %>>
-        <div class="field">
-          <%= f.label :country %>
-          <%= f.text_field :country %>
+        <div class="form-group area html-content">
+          <%= f.label :description %>
+          <%= f.resizable_text_area :description, :class => "form-control" %>
         </div>
-        <div class="field">
-          <%= f.label :city %>
-          <%= f.text_field :city %>
+        <div class="form-group">
+          <%= f.label :skill_list, "Tags (separated by commas)" %>
+          <%= f.text_field :skill_list, :class => "form-control" %>
         </div>
-        <div class="field">
-          <%= f.label :street %>
-          <%= f.text_field :street %>
+        <% if @job.type != 0 %>
+            <div class="form-group">
+              <% if @job.deadline.nil?
+                   @setDeadline = true %>
+                  <div id="show-deadline-link">
+                    <%= link_to 'Deadline setzen', '#',
+                                :onclick => 'showDeadline(); return false;', :class => 'btn btn-default' %>
+                  </div>
+              <% end %>
+              <div id="deadline-field"
+                   <% if @setDeadline %> style="display: none;"
+                   <% end %>>
+                <%= f.label :deadline %>
+                <%= f.text_field :deadline, class: "form-control datepicker" %>
+              </div>
+            </div>
+            <div class="form-group">
+              <% if @job.latitude.nil? && @job.longitude.nil?
+                   @setPlace = true %>
+                  <div id="show-place-link">
+                    <%= link_to 'Ort setzen', '#',
+                                :onclick => 'showPlace(); return false;', :class => 'btn btn-default' %>
+                  </div>
+              <% end %>
+              <div id="place-field"
+                   <% if @setPlace %> style="display: none;"
+                   <% end %>>
+                <div class="form-group">
+                  <%= f.label :country %>
+                  <%= f.text_field :country, :class => "form-control" %>
+                </div>
+                <div class="form-group">
+                  <%= f.label :city %>
+                  <%= f.text_field :city, :class => "form-control" %>
+                </div>
+                <div class="form-group">
+                  <%= f.label :street %>
+                  <%= f.text_field :street, :class => "form-control" %>
+                </div>
+              </div>
+            </div>
+        <% else %>
+            <div class="form-group">
+              <%= image_tag(@job.picture_url) if @job.picture? %>
+              <%= f.file_field :picture, :class => "form-control" %>
+              <%= f.hidden_field :picture_cache %>
+            </div>
+        <% end %>
+        <div class="form-group row">
+          <div class="col-md-4">
+            <%= link_to 'Abbrechen', jobs_path, :class => "btn btn-default" %>
+          </div>
+          <div class="col-md-4 center">
+            <%= link_to "Entfernen", @job, :method => :delete, :confirm => "Are you sure ?", :class => "btn btn-default" %>
+          </div>
+          <div class="col-md-4">
+            <%= link_to 'Speichern', "#", :onclick => "nicEditors.findEditor('job_description').saveContent();sendForm('edit_job');return false;", :class => "btn btn-primary pull-right" %>
+          </div>
         </div>
-      </div>
-    <% else %>
-      <div class="field">
-        <%= image_tag(@job.picture_url) if @job.picture? %>
-        <%= f.file_field :picture %>
-        <%= f.hidden_field :picture_cache %>
-      </div>
     <% end %>
-    <div class="clearfix top-margin">
-      <%= link_to 'Abbrechen', jobs_path, :class => "sec-button button left" %>
-      <%= link_to "Entfernen", @job, :method => :delete, :confirm => "Are you sure ?", :class => "sec-button button"%>    
-      <%= link_to 'Speichern', "#", :onclick => "nicEditors.findEditor('job_description').saveContent();sendForm('edit_job');return false;", :class => "button right" %>
-    </div>
-  <% end %>
+  </div>
 </div>

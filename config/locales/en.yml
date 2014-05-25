@@ -8,10 +8,12 @@ en:
   main_nav_places: "Places"
 
   jobs_no_jobs: "There are no jobs available. Sorry!"
+  jobs_no_description: "There is not yet a description."
   jobs_near_search_info: "Find available Jobs in your area. Type in a street or city."
   jobs_edit_header: "Edit Job"
   jobs_edit_header_categorie: "Edit Category"
-  
+
+  jobs_categorie_no_tags: "There are no tags in this category."
   
   workers_no_workers: "There are no workers available. Sorry!"
   workers_near_search_info: "Find available workers in your area. Type in a street or city."

@@ -1,4 +1,5 @@
 = simple_form_for [@job, @comment] do |f|
-  = f.input :body, label: false, :input_html => {:rows => 4, :cols => 40}
-  .form-actions
-    = f.button :submit, class: 'btn-success pull-right'
+  .form-group
+    = f.input :body, label: false, :input_html => {:rows => 2, :cols => 40, :class => "form-control"}
+    .form-actions.text-right.top-margin
+      = f.button :submit, class: 'btn btn-primary'

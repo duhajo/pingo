@@ -10,7 +10,6 @@ group :assets do
   gem "uglifier", ">= 1.0.3"
 end
 
-gem "foundation-rails"
 group :development do
   gem "rails_layout"
 end
@@ -18,7 +17,8 @@ end
 #jquery
 gem "jquery-rails"
 gem "jquery-ui-rails"
-gem "jquery-modal-rails"
+
+gem 'bootstrap-datepicker-rails'
 
 #notification
 gem "gritter", "1.0.3"

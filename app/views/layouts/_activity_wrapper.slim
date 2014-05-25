@@ -4,16 +4,14 @@
     =' timeago a.created_at
     .title
       - if a.owner
+        .avatar
+          = image_tag avatar_url(a.owner), width: "30", height: "30", class: "img-circle"
         =' link_to a.owner.name, a.owner
       - else
         ' someone
+        = image_tag "http://i0.wp.com/a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-140.png", width: "30", height: "30", class: "img-circle"
       =' content_for :action
     .details
-      .avatar
-        - if a.owner
-          = image_tag avatar_url(a.owner), width: "30", height: "30"
-        - else
-          = image_tag "http://i0.wp.com/a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-140.png", width: "30", height: "30"
       .content
         = yield
     - if a.key == "job.commented"

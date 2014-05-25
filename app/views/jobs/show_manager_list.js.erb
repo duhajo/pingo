@@ -1,0 +1,8 @@
+var title       =   '.modal-title',
+    content     =   '.modal-body',
+    modal       =   '#ajax-modal';
+
+//i set the title through a helper function
+$(title).html("Managerliste")
+$(content).html('<%= j render("jobs/show_manager_list") %>');
+$(modal).modal();

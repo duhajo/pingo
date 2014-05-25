@@ -33,11 +33,6 @@
         ).success (data) ->
           initAutocomplete()
 
-$(document).on $.modal.AJAX_COMPLETE, (event) ->
-  if(event.target.id == "show-map-button")
-    mapButton = $("#show-map-button")
-    initMap(mapButton.data('long'), mapButton.data('lat'), 13)
-
 $(document).ready ->
   $("#edit-manager-button").click (e) ->
     $.get @href, (html) ->
@@ -50,33 +45,33 @@ $(document).ready ->
     init_status = ->
       $("#status-open").click ->
         $.ajax(
-          url: "/jobs/"+$('#job').data('id')+"/set_status"
+          url: "/jobs/"+$('#job-view').data('id')+"/set_status"
           data:
             status: 2
         ).success (data) ->
-          $("#job-status-container").html data
+          $("#job-status-wrapper").html data
           init_status()
         false
 
       $("#status-in-work").click ->
         $.ajax(
-          url: "/jobs/"+$('#job').data('id')+"/set_status"
+          url: "/jobs/"+$('#job-view').data('id')+"/set_status"
           data:
             status: 3
         ).success (data) ->
-          $("#job-status-container").html data
-          $("#actionbar .actions").css "display", "none"
+          $("#job-status-wrapper").html data
+          $(".header-actions").css "display", "none"
           init_status()
         false
 
       $("#status-closed").click ->
         $.ajax(
-          url: "/jobs/"+$('#job').data('id')+"/set_status"
+          url: "/jobs/"+$('#job-view').data('id')+"/set_status"
           data:
             status: 1
         ).success (data) ->
-          $("#job-status-container").html data
-          $("#actionbar .actions").css "display", "block"
+          $("#job-status-wrapper").html data
+          $(".header-actions").css "display", "inline-block"
           init_status()
         false
     init_status()
@@ -84,7 +79,7 @@ $(document).ready ->
   $("#like-button").click ->
     $.ajax(
       type: "PUT"
-      url: "/jobs/"+$('#job').data('id')+"/like"
+      url: "/jobs/"+$('#job-view').data('id')+"/like"
     ).success (data) ->
       if data == 1
         $("#likes").css "display", "block"
@@ -110,19 +105,6 @@ $(document).ready ->
       else
         likeButton.addClass "voted"
     false
-  $('a[rel=tipsy]').tipsy({gravity: 's', opacity: 1})
-
-@initMap = (long, lat, zoom) ->
-  map = new OpenLayers.Map("map")
-  map.addLayer new OpenLayers.Layer.OSM()
-  projection_wgs = new OpenLayers.Projection("EPSG:4326") # WGS 1984
-  projection_smp = new OpenLayers.Projection("EPSG:900913") # Spherical Mercator
-  position = new OpenLayers.LonLat(long, lat).transform(projection_wgs, projection_smp)
-  markers = new OpenLayers.Layer.Markers("Markers")
-  map.addLayer markers
-  markers.addMarker new OpenLayers.Marker(position)
-  map.setCenter position, zoom
-  map
 
 @showDeadline = () ->
   $("#show-deadline-link").hide()
@@ -131,9 +113,6 @@ $(document).ready ->
 @showPlace = () ->
   $("#show-place-link").hide()
   $("#place-field").show()
-
-@sendForm = (formClass) ->
-  $("form."+formClass).submit()
 
 @initAutocomplete = () ->
     $('.user_with_autocomplete').autocomplete

@@ -13,12 +13,9 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.ui.autocomplete
-//= require jquery.ui.tabs
-//= require jquery.ui.tooltip
-//= require jquery.modal
 //= require magnific-popup
 //= require gritter
 //= require openlayers-rails
-//= require foundation
+//= require bootstrap.min
+//= require bootstrap-datepicker
 //= require_tree .
-$(function(){ $(document).foundation(); });

@@ -1,30 +1,34 @@
 <div class="content white">
-  <div id="catgories-overview" class="space">
-    <h1 class="bottom-margin overflow">
-      <% if user_signed_in? %><span class="icon-label left"><%end%>Kategorieübersicht<% if user_signed_in? %></span> 
-      <a href="<%=new_job_path%>/category" class="header-actions left"><span class="icon add"><!-- Add new categorie --></span></a><% end %>
+  <div id="catgories-overview" class="side-space overflow">
+    <h1>
+      <% if user_signed_in? %><span class="icon-label"><%end%>Kategorieübersicht<% if user_signed_in? %></span>
+      <a href="<%=new_job_path%>/category" class="header-actions"><span class="icon add"><!-- Add new categorie --></span></a><% end %>
     </h1>
     <%if @categories.empty? %>
       <%= t('no_categories_definied') %>
     <% else %>
-      <ul id="list-categories" class="small-block-grid-2 medium-block-grid-3 large-block-grid-4">
-        <% @categories.each do |categorie| %>
-          <li class="category">
-            <div class="category-head"><%= link_to categorie.title, categorie %></div>
-            <div class="category-body">
-              <% if categorie.picture? %>
-                <%= link_to image_tag(categorie.picture_url), categorie %>
-              <% else %>
-              <ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4 tag-list">
-                <% categorie.tag_counts_on(:skills, :limit => 5, :order => "count desc").each do |tag| %>
-                  <li><%= link_to tag.name, { :controller => :tags, :action => :show, :id => tag.id }, :class => "tag" %></li>
-                <% end %>
-              </ul>
-              <% end %>
-            </div>
-          </li>
-        <% end %>
-      </ul>
+        <div id="list-categories" class="container-fluid nospace">
+            <% @categories.each_slice(4) do |slice| -%>
+                <div class="row top-margin">
+                  <% slice.each do |category| -%>
+                      <div class="category col-md-3">
+                        <div class="category-head"><%= link_to category.title, category %></div>
+                        <div class="category-body">
+                          <% if category.picture? %>
+                              <%= link_to image_tag(category.picture_url), category %>
+                          <% else %>
+                              <ul class="tag-list">
+                                <% category.tag_counts_on(:skills, :limit => 5, :order => "count desc").each do |tag| %>
+                                    <li><%= link_to tag.name, { :controller => :tags, :action => :show, :id => tag.id }, :class => "tag" %></li>
+                                <% end %>
+                              </ul>
+                          <% end %>
+                        </div>
+                      </div>
+                  <% end -%>
+                </div>
+            <% end -%>
+        </div>
     <% end %>
   </div>
   <div class="jobs-overview space">

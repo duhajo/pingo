@@ -1,0 +1,26 @@
+<div id="job-manager-list" data-id="<%=@job.id%>">
+  <% if @user_is_manager %>
+    <%= simple_form_for(@job) do |f| %>
+      <%= f.input :user_list, label: false, placeholder: "Suche den gewünschten Arbeiter",input_html: {
+        value: '', class: 'user_with_autocomplete form-control', 'data-autocompleteUrl' => autocomplete_user_users_path
+      }%>
+      <%= f.hidden_field "manager_ids", :value => @managers.map(&:id).join(",") %>
+    <% end %>
+  <% end %>
+  <% @managers.each do |worker| %>
+    <div class="worker row top-margin">
+      <div class="worker-details profile-avatar col-md-8">
+        <%= link_to  worker, :title => worker.name, :id => "manager_"+worker.id.to_s, :rel => "tipsy" do %>
+            <%= image_tag(avatar_url(worker), alt: "?", class: "img-circle")%>
+            <span class="profile-name"><%=worker.name%></span>
+        <%end%>
+      </div>
+      <div class="worker-actions col-md-4 text-right">
+          <% if @user_is_manager %>
+            <a href="javascript:;" class="btn btn-default" onclick="removeManager(<%=worker.id%>);return false;">Recht entziehen</a>
+          <% end %>
+    </div>
+    </div>
+  <%  end %>
+  <%= @test %>
+</div>

@@ -1,5 +1,11 @@
 if(<%=@user_id%> == <%=current_user.id%>){
   location.reload();
 } else {
-  $(".modal.current").html("<%= escape_javascript( render(:partial => 'manager_list') ) %>").append("<a class='close-modal' rel='modal:close' href='#close-modal'>Close</a>");
+    var title       =   '.modal-title',
+            content     =   '.modal-body',
+            modal       =   '#ajax-modal';
+
+    $(title).html("Managerliste")
+    $(content).html('<%= j render("jobs/show_manager_list") %>');
+    $(modal).modal();
 }

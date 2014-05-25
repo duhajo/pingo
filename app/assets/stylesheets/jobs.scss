@@ -2,8 +2,8 @@
   .category {
     max-width: 242px;
     .category-head {
-      background-color: $secondary-color;
-      padding: rem-calc(5) rem-calc(8);
+      background-color: $brand-secondary;
+      padding: 10px 8px;
       a {
         color: #FFFFFF;
         display: block;
@@ -11,17 +11,22 @@
       }
     }
     .category-body {
-      border-color: $secondary-color;
+      border-color: $brand-secondary;
       border-style: solid;
       border-width: 0px 1px 1px;
       .tag-list {
-        padding: rem-calc(8);
+        padding: 15px;
       }
     }
   }
 }
 
 #categorie-view {
+
+  .title {
+    margin-top: 0;
+  }
+
   #job-picture {
     padding-right: rem-calc(8);
     max-width: 242px;
@@ -33,40 +38,45 @@
   #job-specification-area {
     border-right: 1px solid #EBEBEB;
     margin-left: 1px;
-    
+
     #job-details {
-  
+
       #job-meta-wrapper {
 
         .icon-label {
           line-height: 21px;
           padding-top: 4px;
         }
-      
+
         #job-status {
           float: left;
 
-          #status-open, .rights #status-closed:hover {
+          #status-open,
+          &.rights #status-closed.btn:hover {
             background-color: #dc007c;
             color: #FFFFFF;
           }
 
-          #status-in-work, .rights #status-open:hover {
+          #status-in-work,
+          &.rights #status-open.btn:hover {
             background-color: #7aba4b;
             color: #FFFFFF;
           }
 
-          #status-closed, .rights #status-in-work:hover {
+          #status-closed,
+          &.rights #status-in-work.btn:hover {
             background-color: #f7f7f7;
             color: #707070;
           }
 
-          .rights .button:hover span.now, .button span.new {
-            display: none;
-          }
-
-          .rights .button:hover span.new {
-            display: block;
+          &.rights{
+            .btn:hover span.now,
+            .btn .new {
+              display: none;
+            }
+            .btn:hover span.new {
+              display: block;
+            }
           }
         }
 
@@ -75,34 +85,44 @@
           line-height: rem-calc(38);
           .icon {
             background-position: -32px -96px;
-          } 
+          }
         }
 
         #job-location {
           .icon {
             background-position: -64px -96px;
-          } 
+          }
         }
-        
+
         #job-description {
           font-size: rem-calc(14);
           line-height: rem-calc(21);;
         }
-        
+
         #job-files {
-          .uploader {
-            form {
-              bottom: 0;
-              left: 0;
-              position: absolute;
-              top: 0;
-              width: 100%;
+          #file-upload {
+            top: auto;
+            .uploader {
+              form {
+                bottom: 0;
+                left: 0;
+                position: absolute;
+                top: 0;
+                width: 100%;
+              }
+              #file-upload-input {
+                cursor: pointer;
+                margin: 0;
+                opacity: 0;
+                padding: 0;
+                width: 100%;
+              }
             }
-            #file-upload-input {
-              margin: 0;
-              opacity: 0;
-              padding: 0;
-              width: 100%;
+          }
+
+          .job-file-images {
+            a {
+              display: inline-block;
             }
           }
         }
@@ -110,32 +130,53 @@
 
       #job-workers-wrapper {
         border-left: 1px solid #EBEBEB;
-        
+
         h3 {
           line-height: rem-calc(28);
         }
       }
     }
   }
-  
+
   #job-activities-area {
     border-left: 1px solid #EBEBEB;
     margin-left: -1px;
     margin-top: rem-calc(45);
-    
+
     h2 {
       margin-bottom: rem-calc(18);
     }
   }
 }
 
-#edit-job-page {
-  @media #{$medium-up} {
-    select.medium-4 {
-      margin-right: 1%;
-      width: 32.666%;
-      &:last-child {
-        margin-right: 0;
+#list-jobs {
+  h3 {
+    margin-top: 0;
+  }
+
+  .list {
+    &.tasks {
+      .job-box {
+        border-color: $brand-secondary;
+      }
+    }
+
+    &.offers {
+      .job-box {
+        border-color: darkgreen;
+      }
+    }
+
+    .job-box {
+
+      border: 1px solid $brand-secondary;
+      padding: 0 10px;
+
+      .title a {
+        font-size: $font-size-base;
+        line-height: 2;
+        display: block;
+        width: 100%;
       }
     }
   }
