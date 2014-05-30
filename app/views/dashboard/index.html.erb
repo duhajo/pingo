@@ -1,35 +1,37 @@
 <div class="container-fluid">
-  <div class="col-md-6 space" id="activities">
-    <h1>Aktivit&auml;ten</h1>
-    <%if !@my_activities.empty? %>
-	      <% @my_activities.each do |activity|%>
-          <%= render_activity(activity, :layout => "layouts/activity_wrapper") %>
-	      <% end %>
-    <% else %>
-      Beteilige dich an Jobs, um hier Aktivit&auml;ten zu sehen.
-    <% end %>
-  </div>
-  <div class="col-md-6 space" id="recommendations">
-    <h1>Empfehlungen</h1>
-    <%if @recommendations.empty? && @near_jobs.nil? %>
-      Es konnten keine Empfehlungen f&uuml;r dich gefunden werden.
-    <% else %>
-	    <%if !@recommendations.empty? %>
-	      Empfohlene Jobs per Tags:
-	      <ul>
-	        <% @recommendations.each do |recommendation|%>
-	        <li><%= link_to recommendation.title, recommendation %></li>
-	        <% end %>
-	      </ul>
-	    <% end %>
-	    <%if !@near_jobs.nil? %>
-	      Empfohlene Jobs per N&auml;he:
-	      <ul>
-	        <% @near_jobs.each do |job|%>
-	        <li><%= link_to job.title, job %></li>
-	        <% end %>
-	      </ul>
-	    <% end %>
-    <% end %>
+  <div class="row">
+    <div class="col-md-6 space" id="activities">
+      <h1>Aktivit&auml;ten</h1>
+      <% if !@my_activities.empty? %>
+          <% @my_activities.each do |activity| %>
+              <%= render_activity(activity, :layout => "layouts/activity_wrapper") %>
+          <% end %>
+      <% else %>
+          Beteilige dich an Jobs, um hier Aktivit&auml;ten zu sehen.
+      <% end %>
+    </div>
+    <div class="col-md-6 space" id="recommendations">
+      <h1>Empfehlungen</h1>
+      <% if @recommendations.empty? && @near_jobs.nil? %>
+          Es konnten keine Empfehlungen f&uuml;r dich gefunden werden.
+      <% else %>
+          <% if !@recommendations.empty? %>
+              Empfohlene Jobs per Tags:
+              <ul>
+                <% @recommendations.each do |recommendation| %>
+                    <li><%= link_to recommendation.title, recommendation %></li>
+                <% end %>
+              </ul>
+          <% end %>
+          <% if !@near_jobs.nil? %>
+              Empfohlene Jobs per N&auml;he:
+              <ul>
+                <% @near_jobs.each do |job| %>
+                    <li><%= link_to job.title, job %></li>
+                <% end %>
+              </ul>
+          <% end %>
+      <% end %>
+    </div>
   </div>
 </div>

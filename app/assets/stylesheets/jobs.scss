@@ -1,6 +1,9 @@
 #catgories-overview {
   .category {
+    display: inline-block;
     max-width: 242px;
+    padding: 15px;
+
     .category-head {
       background-color: $brand-secondary;
       padding: 10px 8px;

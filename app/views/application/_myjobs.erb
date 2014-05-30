@@ -1,6 +1,6 @@
-<label>Meine Aufgaben</label>
+<li role="presentation" class="dropdown-header">Meine Aufgaben</li>
 <%if my_jobs.empty? %>
-  <li>Es sind noch keine Jobs vorhanden.</li>
+  <li role="presentation" class="disabled">Es sind noch keine Jobs vorhanden.</li>
 <% else %>
   <% my_jobs.each do |job| %>
     <li><%= link_to job.title, job %></li>

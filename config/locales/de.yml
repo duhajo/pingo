@@ -14,6 +14,9 @@ de:
   jobs_edit_header_categorie: "Kategorie bearbeiten"
   jobs_categorie_no_tags: "Es sind noch keine Tags vorhanden."
 
+  jobs_supply: "Angebot"
+  jobs_demand: "Nachfrage"
+
   workers_no_workers: "Keinen Arbeiter gefunden. Sorry!"
   workers_near_search_info: "Suche nach einem Arbeiter, indem du einen Ort oder eine Straße angibst."
 

@@ -15,86 +15,90 @@
 <div id="duhajo">
   <nav id="topbar" class="navbar-default navbar-inverse" role="navigation">
     <section class="container-fluid">
-      <!-- Left Nav Section -->
-      <div class="col-sm-4 col-md-4" id="search-wrapper">
-        <ul>
-          <%= form_tag(searches_path, :method => "get", id: "search-form") do %>
-              <li id="search-box" class="dropdown">
-                <%= text_field_tag :search, params[:search], placeholder: "Search Jobs", id: "search-input", class: "form-control dropdown-toggle", data: {:toggle => "dropdown"} %>
-                <% if user_signed_in? %>
-                    <ul class="dropdown-menu">
-                      <li><%= render :partial => "myjobs", :my_jobs => @my_jobs %></li>
-                    </ul>
-                <% end %>
-              </li>
-          <% end %>
-        </ul>
-      </div>
+      <div class="row">
+        <!-- Left Nav Section -->
+        <div id="search-wrapper" class="col-xs-4">
+          <ul id="search-box">
+            <%= form_tag(searches_path, :method => "get", id: "search-form") do %>
+                <li class="dropdown">
+                  <%= text_field_tag :search, params[:search], placeholder: "Search Jobs", id: "search-input", class: "form-control dropdown-toggle", data: {:toggle => "dropdown"} %>
+                  <% if user_signed_in? %>
+                      <ul class="dropdown-menu">
+                        <%= render :partial => "myjobs", :my_jobs => @my_jobs %>
+                      </ul>
+                  <% end %>
+                </li>
+            <% end %>
+          </ul>
+        </div>
 
-      <div class="col-sm-4 col-md-4 center" id="header-logo">
-        <%= link_to image_tag("logo.png"), root_path %>
-      </div>
+        <div id="header-logo" class="navbar-header col-xs-4 center">
+          <%= link_to image_tag("logo.png"), root_path %>
+        </div>
 
-      <!-- Right Nav Section -->
-      <div class="col-sm-4 col-md-4">
-        <ul class="nav navbar-nav navbar-right">
-          <% if user_signed_in? %>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle overflow" data-toggle="dropdown">
-                  <span class="profile-avatar"><%= image_tag avatar_url(current_user), alt: "?", class: "img-circle" %></span>
-                  <span class="profile-name"><%= current_user.name %></span>
-                  <b class="caret"></b>
-                </a>
-                <ul class="dropdown-menu">
-                  <li class="profile">
-                    <a href="/myprofile">
-                      <span>Profil anzeigen</span>
-                    </a>
-                  </li>
-                  <li id="editprofile"><a href="/users/<%= current_user.id %>/edit">Profil bearbeiten</a></li>
-                  <li id="logout"><%= link_to "Abmelden", '/logout' %></li>
-                </ul>
-              </li>
-          <% else %>
-              <li>
-                <%= link_to "Anmelden", new_user_session_path %>
-              </li>
-              <li><%= link_to "Registrieren", new_user_registration_path %></li>
-          <% end %>
-        </ul>
+        <!-- Right Nav Section -->
+        <div id="user-navigation" class="col-xs-4">
+          <ul class="nav navbar-nav navbar-right">
+            <% if user_signed_in? %>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle overflow" data-toggle="dropdown">
+                    <span class="profile-avatar"><%= image_tag avatar_url(current_user), alt: "?", class: "img-circle" %></span>
+                    <span class="profile-name"><%= current_user.name %></span>
+                    <b class="caret"></b>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li class="profile">
+                      <a href="/myprofile">
+                        <span>Profil anzeigen</span>
+                      </a>
+                    </li>
+                    <li id="editprofile"><a href="/users/<%= current_user.id %>/edit">Profil bearbeiten</a></li>
+                    <li id="logout"><%= link_to "Abmelden", '/logout' %></li>
+                  </ul>
+                </li>
+            <% else %>
+                <li>
+                  <%= link_to "Anmelden", new_user_session_path %>
+                </li>
+                <li><%= link_to "Registrieren", new_user_registration_path %></li>
+            <% end %>
+          </ul>
+        </div>
       </div>
     </section>
   </nav>
   <div id="main">
     <div id="main-navigation" class="navigation-area white-panel">
       <div class="container">
-        <div class="col-md-8 col-md-offset-2 center">
-          <ul class="nav row">
-            <li class="col-sm-3 <%= cp("dashboard") %>">
-              <a href="<%= dashboard_path %>">
-                <span class="icon large center dashboard"></span>
-                <span class="icon-label"><%= t('main_nav_dashboard') %></span>
-              </a>
-            </li>
-            <li class="col-sm-3 <%= cp("jobs") %>">
-              <a href="<%= jobs_path %>">
-                <span class="icon large center jobs"></span>
-                <span class="icon-label"><%= t('main_nav_jobs') %></span>
-              </a>
-            </li>
-            <li class="col-sm-3 <%= cp("users") %>">
-              <a href="<%= users_path %>">
-                <span class="icon large center workers"></span>
-                <span class="icon-label"><%= t('main_nav_workers') %></span>
-              </a>
-            </li>
-            <li class="col-sm-3 <%= cp("places") %>">
-              <a href="<%= places_path %>">
-                <span class="icon large center places"></span>
-                <span class="icon-label"><%= t('main_nav_places') %></span>
-              </a>
-            </li>
-          </ul>
+        <div class="row">
+            <div class="col-xs-12 col-md-8 col-md-offset-2 center">
+              <ul class="nav">
+                <li class="col-xs-3 <%= cp("dashboard") %>">
+                  <a href="<%= dashboard_path %>">
+                    <span class="icon large center dashboard"></span>
+                    <span class="icon-label"><%= t('main_nav_dashboard') %></span>
+                  </a>
+                </li>
+                <li class="col-xs-3 <%= cp("jobs") %>">
+                  <a href="<%= jobs_path %>">
+                    <span class="icon large center jobs"></span>
+                    <span class="icon-label"><%= t('main_nav_jobs') %></span>
+                  </a>
+                </li>
+                <li class="col-xs-3 <%= cp("users") %>">
+                  <a href="<%= users_path %>">
+                    <span class="icon large center workers"></span>
+                    <span class="icon-label"><%= t('main_nav_workers') %></span>
+                  </a>
+                </li>
+                <li class="col-xs-3 <%= cp("places") %>">
+                  <a href="<%= places_path %>">
+                    <span class="icon large center places"></span>
+                    <span class="icon-label"><%= t('main_nav_places') %></span>
+                  </a>
+                </li>
+              </ul>
+            </div>
         </div>
       </div>
     </div>

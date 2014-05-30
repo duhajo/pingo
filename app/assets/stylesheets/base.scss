@@ -48,21 +48,21 @@ a:-moz-any-link:focus {
       color: #fff;
     }
 
-    #search-wrapper {
-      padding: rem-calc(10) 0 0 rem-calc(20);
-      #search-box {
-        float: none;
-        #search-input {
-          border: 0 none;
-          box-shadow: 0 2px 1px 0 #488EC4;
-          font-size: $font-size-small;
-          margin-top: 12px;
-          max-width: 350px;
-          top: 0;
-        }
-        li a {
-          line-height: 3.5;
-        }
+    li a {
+      line-height: 3.5;
+    }
+
+    #search-box {
+      float: none;
+      margin: 17px auto;
+
+      #search-input {
+        border: 0 none;
+        box-shadow: 0 2px 1px 0 #488EC4;
+        font-size: $font-size-small;
+        margin-top: 12px;
+        max-width: 350px;
+        top: 0;
       }
     }
 
@@ -72,8 +72,15 @@ a:-moz-any-link:focus {
       }
     }
 
-    .profile-avatar img {
-      border-color: #FFFFFF;
+    #user-navigation {
+      
+      .navbar-nav {
+        margin-bottom: 0;
+        margin-top: 0;
+        .profile-avatar img {
+          border-color: #FFFFFF;
+        }
+      }
     }
   }
 

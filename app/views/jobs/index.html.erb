@@ -1,57 +1,96 @@
 <div class="content white">
   <div id="catgories-overview" class="side-space overflow">
     <h1>
-      <% if user_signed_in? %><span class="icon-label"><%end%>Kategorieübersicht<% if user_signed_in? %></span>
-      <a href="<%=new_job_path%>/category" class="header-actions"><span class="icon add"><!-- Add new categorie --></span></a><% end %>
+      <% if user_signed_in? %><span class="icon-label">
+          <% end %>Kategorieübersicht
+      <% if user_signed_in? %></span>
+          <a href="<%= new_job_path %>/category" class="header-actions"><span class="icon add"><!-- Add new categorie --></span></a>
+      <% end %>
     </h1>
-    <%if @categories.empty? %>
-      <%= t('no_categories_definied') %>
+    <% if @categories.empty? %>
+        <%= t('no_categories_definied') %>
     <% else %>
-        <div id="list-categories" class="container-fluid nospace">
-            <% @categories.each_slice(4) do |slice| -%>
-                <div class="row top-margin">
-                  <% slice.each do |category| -%>
-                      <div class="category col-md-3">
-                        <div class="category-head"><%= link_to category.title, category %></div>
-                        <div class="category-body">
-                          <% if category.picture? %>
-                              <%= link_to image_tag(category.picture_url), category %>
-                          <% else %>
-                              <ul class="tag-list">
-                                <% category.tag_counts_on(:skills, :limit => 5, :order => "count desc").each do |tag| %>
-                                    <li><%= link_to tag.name, { :controller => :tags, :action => :show, :id => tag.id }, :class => "tag" %></li>
-                                <% end %>
-                              </ul>
-                          <% end %>
-                        </div>
-                      </div>
-                  <% end -%>
-                </div>
-            <% end -%>
+        <div id="list-categories" class="row">
+          <% @categories.each do |category| -%>
+            <div class="category">
+              <div class="category-head"><%= link_to category.title, category %></div>
+              <div class="category-body">
+                <% if category.picture? %>
+                    <%= link_to image_tag(category.picture_url), category %>
+                <% else %>
+                    <ul class="tag-list">
+                      <% category.tag_counts_on(:skills, :limit => 5, :order => "count desc").each do |tag| %>
+                          <li><%= link_to tag.name, {:controller => :tags, :action => :show, :id => tag.id}, :class => "tag" %></li>
+                      <% end %>
+                    </ul>
+                <% end %>
+              </div>
+            </div>
+          <% end -%>
         </div>
     <% end %>
   </div>
   <div class="jobs-overview space">
     <h1 class="bottom-margin overflow">
-      <% if user_signed_in? %><span class="icon-label left"><%end%>Nicht eingeordnete Jobs<% if user_signed_in? %></span> 
-      <a href="<%=new_job_path%>" class="header-actions left"><span class="icon add"><!-- Add new categorie --></span></a><% end %>
+      <% if user_signed_in? %><span class="icon-label left">
+          <% end %>Nicht eingeordnete Jobs
+      <% if user_signed_in? %></span>
+          <a href="<%= new_job_path %>" class="header-actions left"><span class="icon add"><!-- Add new categorie --></span></a>
+      <% end %>
     </h1>
+
     <div class="unassigned-jobs-content clear">
-      <%if @jobs.empty? %>
-        <%= t('no_jobs') %>
+      <% if @jobs.empty? && @offers.empty? %>
+          <%= t('jobs_no_jobs') %>
       <% else %>
-        <ul id="list-jobs" class="small-block-grid-2 medium-block-grid-3 large-block-grid-4">
-          <li>
-            <% @jobs.each do |job| %>
-              <div><%= link_to job.title, job %></div>
-            <% end %>
-          </li>
-          <li>
-            <% @offers.each do |offer| %>
-              <div><%= link_to offer.title, offer %></div>
-            <% end %>
-          </li>
-        </ul>
+          <div class="list-jobs">
+            <div class="tasks list right-space col-md-6">
+              <h3><%= t('jobs_demand') %></h3>
+              <% if @jobs.empty? %>
+                  <p><%= t('jobs_no_jobs') %></p>
+              <% else %>
+                  <% @jobs.each do |job| %>
+                      <div class="job-box">
+                        <div class="title"><%= link_to job.title, job %></div>
+                        <% if not job.skill_list.empty? %>
+                            <div class="tag-list overflow">
+                              <% job.tag_counts_on(:skills, :limit => 5, :order => "count desc").each do |tag| %>
+                                  <%= link_to tag.name, {:controller => :tags, :action => :show, :id => tag.id}, :class => "tag" %>
+                              <% end %>
+                            </div>
+                        <% else %>
+                            <div class="description">
+                              <%= truncate_html @job.description, :length => 150 %>
+                            </div>
+                        <% end %>
+                      </div>
+                  <% end %>
+              <% end %>
+            </div>
+            <div class="offers list left-space col-md-6">
+              <h3><%= t('jobs_supply') %></h3>
+              <% if @offers.empty? %>
+                  <%= t('jobs_no_jobs') %>
+              <% else %>
+                  <% @offers.each do |job| %>
+                    <div class="job-box">
+                        <div class="title"><%= link_to job.title, job %></div>
+                        <% if not job.skill_list.empty? %>
+                            <div class="tag-list overflow">
+                              <% job.tag_counts_on(:skills, :limit => 5, :order => "count desc").each do |tag| %>
+                                  <%= link_to tag.name, {:controller => :tags, :action => :show, :id => tag.id}, :class => "tag" %>
+                              <% end %>
+                            </div>
+                        <% else %>
+                            <div class="description">
+                              <%= truncate_html @job.description, :length => 150 %>
+                            </div>
+                        <% end %>
+                      </div>
+                  <% end %>
+              <% end %>
+            </div>
+          </div>
       <% end %>
     </div>
   </div>

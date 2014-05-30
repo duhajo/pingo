@@ -13,6 +13,9 @@ en:
   jobs_edit_header: "Edit Job"
   jobs_edit_header_categorie: "Edit Category"
 
+  jobs_supply: "Supply"
+  jobs_demand: "Demand"
+
   jobs_categorie_no_tags: "There are no tags in this category."
   
   workers_no_workers: "There are no workers available. Sorry!"
