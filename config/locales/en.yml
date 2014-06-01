@@ -7,20 +7,35 @@ en:
   main_nav_workers: "Workers"
   main_nav_places: "Places"
 
+  jobs_overview: "Job Overview"
+  jobs_category: "Category"
+  jobs_category_overview: "Category Overview"
+  jobs_category_no_tags: "There are no tags in this category."
+
   jobs_no_jobs: "There are no jobs available. Sorry!"
-  jobs_no_description: "There is not yet a description."
+  jobs_no_description: "There is not a description yet."
   jobs_near_search_info: "Find available Jobs in your area. Type in a street or city."
   jobs_edit_header: "Edit Job"
-  jobs_edit_header_categorie: "Edit Category"
+  jobs_edit_header_category: "Edit Category"
+
+  jobs_related: "Related Jobs"
+  jobs_not_related: "Not Related Jobs"
 
   jobs_supply: "Supply"
   jobs_demand: "Demand"
-
-  jobs_categorie_no_tags: "There are no tags in this category."
   
   workers_no_workers: "There are no workers available. Sorry!"
   workers_near_search_info: "Find available workers in your area. Type in a street or city."
-  
+
+  dashboard_activities: "Activities"
+  dashboard_no_activities: "You have to participate in jobs to see activities here."
+  dashboard_recommendations: "Recommendation"
+  dashboard_no_recommendations: "Can't find a recommendation for you yet."
+  dashboard_recommendations_on_tags: "Based on your Personal Tags"
+  dashboard_recommendations_on_place: "Based on your Place"
+
+  most_used_tags: "Most Used Tags"
+
   gflash:
     titles:
       notice: "Custom notice title"

@@ -24,7 +24,7 @@
   }
 }
 
-#categorie-view {
+#category-view {
 
   .title {
     margin-top: 0;
@@ -72,7 +72,7 @@
             color: #707070;
           }
 
-          &.rights{
+          &.rights {
             .btn:hover span.now,
             .btn .new {
               display: none;
@@ -80,6 +80,10 @@
             .btn:hover span.new {
               display: block;
             }
+          }
+
+          &.no-rights .btn .new {
+            display: none;
           }
         }
 
@@ -156,31 +160,27 @@
   h3 {
     margin-top: 0;
   }
+}
 
-  .list {
-    &.tasks {
-      .job-box {
-        border-color: $brand-secondary;
-      }
-    }
+.list {
+  &.demands .job-box, .job-box.demand {
+      border-color: $brand-secondary;
+  }
 
-    &.offers {
-      .job-box {
-        border-color: darkgreen;
-      }
-    }
+  &.supplies .job-box, .job-box.supply {
+    border-color: darkgreen;
+  }
 
-    .job-box {
+  .job-box {
 
-      border: 1px solid $brand-secondary;
-      padding: 0 10px;
+    border: 1px solid transparent;
+    padding: 0 10px;
 
-      .title a {
-        font-size: $font-size-base;
-        line-height: 2;
-        display: block;
-        width: 100%;
-      }
+    .title a {
+      font-size: $font-size-base;
+      line-height: 2;
+      display: block;
+      width: 100%;
     }
   }
 }

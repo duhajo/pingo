@@ -2,15 +2,15 @@
   <div id="login-page" class="col-md-6 col-md-offset-3 white-panel">
     <h1>Sign in</h1>
     <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-        <div class="form-group"><%= f.label :login %>
-          <br/>
-          <%= f.text_field :login, :autofocus => true, :class => "form-control" %></div>
+        <div class="form-group">
+          <%= f.label :login %>
+          <%= f.text_field :login, :autofocus => true, :class => "form-control" %>
+        </div>
 
         <div class="form-group">
           <%= f.label :password %>
           <%- if devise_mapping.recoverable? && controller_name != 'passwords' %>
               <%= link_to "Forgot your password?", new_password_path(resource_name), :class => "small-link pull-right" %>
-              <br/>
           <% end -%>
           <%= f.password_field :password, :class => "form-control" %>
         </div>

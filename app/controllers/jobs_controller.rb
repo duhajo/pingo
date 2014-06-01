@@ -27,8 +27,8 @@ class JobsController < ApplicationController
     #  format.html # index.html.erb
     #  format.json { render json: @jobs }
     #end
-    @jobs = Job.where('parent_id' => nil).where('type' => 1)
-    @offers = Job.where('parent_id' => nil).where('type' => 2)
+    @demands = Job.where('parent_id' => nil).where('type' => 1)
+    @supplies = Job.where('parent_id' => nil).where('type' => 2)
     @categories = Job.find_all_by_type(0)
   end
 
@@ -64,8 +64,8 @@ class JobsController < ApplicationController
     @is_manager = JobsWorker.where(:job_id => @job.id).where('jobs_workers.isCreator' => true).to_a
     
     @all_jobs = Job.where('parent_id' => @job.id)
-    @jobs = @all_jobs.where('type' => 1)
-    @offers = @all_jobs.where('type' => 2)
+    @demands = @all_jobs.where('type' => 1)
+    @supplies = @all_jobs.where('type' => 2)
     
     @parent_jobs = @job.ancestors
     @job_ids = Array.new << @job.id

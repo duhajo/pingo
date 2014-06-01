@@ -1,36 +1,62 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-6 space" id="activities">
-      <h1>Aktivit&auml;ten</h1>
+      <h1><%= t('dashboard_activities') %></h1>
       <% if !@my_activities.empty? %>
-          <% @my_activities.each do |activity| %>
-              <%= render_activity(activity, :layout => "layouts/activity_wrapper") %>
-          <% end %>
+        <% @my_activities.each do |activity| %>
+          <%= render_activity(activity, :layout => "layouts/activity_wrapper") %>
+        <% end %>
       <% else %>
-          Beteilige dich an Jobs, um hier Aktivit&auml;ten zu sehen.
+        <%= t('dashboard_no_activities') %>
       <% end %>
     </div>
     <div class="col-md-6 space" id="recommendations">
-      <h1>Empfehlungen</h1>
-      <% if @recommendations.empty? && @near_jobs.nil? %>
-          Es konnten keine Empfehlungen f&uuml;r dich gefunden werden.
+      <h1><%= t('dashboard_recommendations') %></h1>
+      <% if @recommendations.empty? && @near_jobs.empty? %>
+        <%= t('dashboard_no_recommendations') %>
       <% else %>
-          <% if !@recommendations.empty? %>
-              Empfohlene Jobs per Tags:
-              <ul>
-                <% @recommendations.each do |recommendation| %>
-                    <li><%= link_to recommendation.title, recommendation %></li>
+        <% if !@recommendations.empty? %>
+          <h2><%= t('dashboard_recommendations_on_tags') %></h2>
+          <div class="list">
+            <% @recommendations.each do |job| %>
+              <div class="job-box">
+                <div class="title"><%= link_to job.title, job %></div>
+                <% if not job.skill_list.empty? %>
+                  <div class="tag-list overflow">
+                    <% job.tag_counts_on(:skills, :limit => 5, :order => "count desc").each do |tag| %>
+                      <%= link_to tag.name, {:controller => :tags, :action => :show, :id => tag.id}, :class => "tag" %>
+                    <% end %>
+                  </div>
+                <% else %>
+                  <div class="description">
+                    <%= truncate_html job.description, :length => 150 %>
+                  </div>
                 <% end %>
-              </ul>
-          <% end %>
-          <% if !@near_jobs.nil? %>
-              Empfohlene Jobs per N&auml;he:
-              <ul>
-                <% @near_jobs.each do |job| %>
-                    <li><%= link_to job.title, job %></li>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+        <% if !@near_jobs.empty? %>
+          <h2><%= t('dashboard_recommendations_on_place') %></h2>
+          <div class="list">
+            <% @near_jobs.each do |job| %>
+              <div class="job-box <% if job.type == 1 %>demand<%elsif job.type == 1%>supply<%end%>">
+                <div class="title"><%= link_to job.title, job %></div>
+                <% if not job.skill_list.empty? %>
+                  <div class="tag-list overflow">
+                    <% job.tag_counts_on(:skills, :limit => 5, :order => "count desc").each do |tag| %>
+                      <%= link_to tag.name, {:controller => :tags, :action => :show, :id => tag.id}, :class => "tag" %>
+                    <% end %>
+                  </div>
+                <% else %>
+                  <div class="description">
+                    <%= truncate_html job.description, :length => 150 %>
+                  </div>
                 <% end %>
-              </ul>
-          <% end %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
       <% end %>
     </div>
   </div>

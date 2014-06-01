@@ -1,67 +1,106 @@
-<div class="form row large-6 medium-8 large-centered medium-centered columns center white-panel space" id="edit-user-page" data-id="<%=@user.id%>">
-  <h1>Edit my profile</h1>
+<div class="container">
+  <div id="edit-user-page" data-id="<%=@user.id%>" class="col-md-6 col-md-offset-3 white-panel">
+    <h1>Edit my profile</h1>
 
-  <%= form_for @user do |f| %>
-    <% if @user.errors.any? %>
-      <div class="error_messages">
-        <h2>Form is invalid</h2>
-        <ul>
-          <% for message in @user.errors.full_messages %>
-            <li><%= message %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-    <div class="row">
-      <div class="field medium-6 columns">
-        <%= f.label :name %>
-        <%= f.text_field :name %>
-      </div>
-      <div class="field medium-6 columns">
-        <%= f.label :email %>
-        <%= f.text_field :email %>
-      </div>
-    </div>
-    <div class="field">
-      <%= f.label :locale, "Sprache" %>
-      <%= f.select :locale, I18n.available_locales %>
-    </div>
-    <div class="field">
-      <%= f.label :skill_list, "Tags (separated by commas)" %>
-      <%= f.text_field :skill_list %>
-    </div>
+    <%= form_for @user do |f| %>
+      <% if @user.errors.any? %>
+        <div class="error_messages">
+          <h2>Form is invalid</h2>
+          <ul>
+            <% for message in @user.errors.full_messages %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
 
-    <div class="field <% if (@user.latitude.nil? && @user.longitude.nil?) %>hidden<%end%>" id="radiusField">
-      <%= f.label :radius, "Radius (in km für Jobempfehlungen)"%> 
-      <%= f.text_field :radius %>
-    </div>
-  
-    <div id="locationFields" class="row hidden">
-      <div class="field medium-4 columns">
-        <%= f.label :country %>
-        <%= f.text_field :country %>
-      </div>
-      <div class="field medium-4 columns">
-        <%= f.label :city %>
-        <%= f.text_field :city %>
-      </div>
-      <div class="field medium-4 columns">
-        <%= f.label :district %>
-        <%= f.text_field :district %>
-      </div>
-    </div>
-    <div id="coordFields" style="display: none;">
-      <div id="status"></div>
-      <%= f.text_field :latitude %><%= f.text_field :longitude %>
-    </div>
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-6">
+          <%= f.label :name %>
+           <%= f.email_field :name, :autofocus => true, :class => "form-control" %>
+          </div>
 
-    <a href="javascript: getPositionManually();" id="openLocationFields">Ort manuell eintragen</a> oder
-    <a href="javascript: getLocation();">Position ermitteln</a> 
-    
-    <div class="clearfix top-margin">
-      <%= link_to 'Abbrechen', jobs_path, :class => "sec-button button left" %>
-      <%= link_to 'Speichern', "#", :onclick => "sendForm('edit_user');return false;", :class => "button right" %>
-    </div>
+          <div class="col-md-6">
+            <%= f.label :email %>
+            <%= f.email_field :email, :class => "form-control" %>
+          </div>
+        </div>
+      </div>
+<!--
+      <div class="form-group">
+        <%= f.label :password %> <i>(leave blank if you don't want to change it)</i>
+        <%= f.password_field :password, :autocomplete => "off", :class => "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :password_confirmation %>
+        <%= f.password_field :password_confirmation, :class => "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i>
+        <%= f.password_field :current_password, :class => "form-control" %>
+      </div>
+-->
+
+      <div class="form-group">
+        <%= f.label :locale, "Sprache" %>
+        <%= f.select :locale, I18n.available_locales %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :skill_list, "Tags (separated by commas)" %>
+        <%= f.text_field :skill_list, :class => "form-control" %>
+      </div>
+
+      <div class="form-group <% if (@user.latitude.nil? && @user.longitude.nil?) %>hidden<%end%>" id="radiusField">
+        <%= f.label :radius, "Radius (in km für Jobempfehlungen)"%>
+        <%= f.text_field :radius, :class => "form-control" %>
+      </div>
+
+      <h2>Positon</h2>
+
+      <div id="locationFields" class="form-group" style="display: none;">
+        <div class="row">
+          <div class="form-group col-md-4">
+            <%= f.label :country %>
+            <%= f.text_field :country, :class => "form-control" %>
+          </div>
+          <div class="form-group col-md-4">
+            <%= f.label :city %>
+            <%= f.text_field :city, :class => "form-control" %>
+          </div>
+          <div class="form-group col-md-4">
+            <%= f.label :district %>
+            <%= f.text_field :district, :class => "form-control" %>
+          </div>
+        </div>
+      </div>
+      <div id="coordFields" style="display: none;">
+        <div id="status"></div>
+        <div class="form-group">
+          <%= f.text_field :latitude, :class => "form-control" %><%= f.text_field :longitude, :class => "form-control" %>
+        </div>
+      </div>
+
+      <a href="javascript: getPositionManually();" id="openLocationFields">Ort manuell eintragen</a> oder
+      <a href="javascript: getLocation();">Position ermitteln</a>
+
+      <div class="form-group top-margin">
+        <div class="row">
+          <div class="col-md-4">
+            <%= link_to 'Abbrechen', jobs_path, :class => "btn btn-default" %>
+          </div>
+          <div class="col-md-4">
+            <%= link_to 'Delete my account', registration_path(@user), :class => "btn btn-default", :data => { :confirm => "Are you sure?" }, :method => :delete %>
+          </div>
+          <div class="col-md-4">
+            <%= link_to 'Speichern', "#", :onclick => "sendForm('edit_user');return false;", :class => "btn btn-primary pull-right" %>
+          </div>
+        </div>
+      </div>
+  </div>
 </div>
 <% end %>
   <script type="text/javascript">

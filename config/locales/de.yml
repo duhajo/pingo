@@ -7,18 +7,34 @@ de:
   main_nav_workers: "Arbeiter"
   main_nav_places: "Orte"
 
+  jobs_overview: "Job Overview"
+  jobs_category: "Kategorie"
+  jobs_category_overview: "Kategorieübersicht"
+  jobs_category_no_tags: "Es sind noch keine Tags vorhanden."
+
   jobs_no_jobs: "Keinen Job gefunden. Sorry!"
   jobs_no_description: "Es ist noch keine Beschreibung vorhanden."
   jobs_near_search_info: "Suche nach einem Job, indem du einen Ort oder eine Straße angibst."
   jobs_edit_header: "Job bearbeiten"
-  jobs_edit_header_categorie: "Kategorie bearbeiten"
-  jobs_categorie_no_tags: "Es sind noch keine Tags vorhanden."
+  jobs_edit_header_category: "Kategorie bearbeiten"
+
+  jobs_related: "Eingeordnete Jobs"
+  jobs_not_related: "Nicht eingeordnete Jobs"
 
   jobs_supply: "Angebot"
   jobs_demand: "Nachfrage"
 
   workers_no_workers: "Keinen Arbeiter gefunden. Sorry!"
   workers_near_search_info: "Suche nach einem Arbeiter, indem du einen Ort oder eine Straße angibst."
+
+  dashboard_activities: "Aktivitäten"
+  dashboard_no_activities: "Beteilige dich an Jobs, um hier Aktivitäten zu sehen."
+  dashboard_recommendations: "Empfehlungen"
+  dashboard_no_recommendations: "Es konnten keine Empfehlungen für dich gefunden werden."
+  dashboard_recommendations_on_tags: "Basierend auf deine Schlagworte"
+  dashboard_recommendations_on_place: "Basierend auf deinen Ort"
+
+  most_used_tags: "Meist verwendete Schlagworte"
 
 # Defaults
   date:
