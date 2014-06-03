@@ -36,7 +36,7 @@
             <% end %>
           </div>
         <% end %>
-        <% if !@near_jobs.empty? %>
+        <% if !@near_jobs.nil? && !@near_jobs.empty? %>
           <h2><%= t('dashboard_recommendations_on_place') %></h2>
           <div class="list">
             <% @near_jobs.each do |job| %>
