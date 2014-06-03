@@ -40,16 +40,16 @@
     </h1>
 
     <div class="unassigned-jobs-content clear">
-      <% if @jobs.empty? && @offers.empty? %>
+      <% if @demands.empty? && @supplies.empty? %>
           <%= t('jobs_no_jobs') %>
       <% else %>
           <div class="list-jobs">
-            <div class="tasks list right-space col-md-6">
+            <div class="demands list right-space col-md-6">
               <h3><%= t('jobs_demand') %></h3>
-              <% if @jobs.empty? %>
+              <% if @demands.empty? %>
                   <p><%= t('jobs_no_jobs') %></p>
               <% else %>
-                  <% @jobs.each do |job| %>
+                  <% @demands.each do |job| %>
                       <div class="job-box">
                         <div class="title"><%= link_to job.title, job %></div>
                         <% if not job.skill_list.empty? %>
@@ -60,19 +60,19 @@
                             </div>
                         <% else %>
                             <div class="description">
-                              <%= truncate_html @job.description, :length => 150 %>
+                              <%= truncate_html job.description, :length => 150 %>
                             </div>
                         <% end %>
                       </div>
                   <% end %>
               <% end %>
             </div>
-            <div class="offers list left-space col-md-6">
+            <div class="supplies list left-space col-md-6">
               <h3><%= t('jobs_supply') %></h3>
-              <% if @offers.empty? %>
+              <% if @supplies.empty? %>
                   <%= t('jobs_no_jobs') %>
               <% else %>
-                  <% @offers.each do |job| %>
+                  <% @supplies.each do |job| %>
                     <div class="job-box">
                         <div class="title"><%= link_to job.title, job %></div>
                         <% if not job.skill_list.empty? %>
@@ -83,7 +83,7 @@
                             </div>
                         <% else %>
                             <div class="description">
-                              <%= truncate_html @job.description, :length => 150 %>
+                              <%= truncate_html job.description, :length => 150 %>
                             </div>
                         <% end %>
                       </div>
