@@ -4,12 +4,13 @@
 
 .preview-list {
   clear: both;
-}
+  margin: 0;
 
-.preview-list a {
-  display: block;
-  float: left;
-  margin-right: 10px;
+  li {
+    display: block;
+    float: left;
+    margin-right: 10px;
+  }
 }
 
 .user {

@@ -2,6 +2,10 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 de:
+  login: "Anmelden"
+  logout: "Abmelden"
+  register: "Registrieren"
+
   main_nav_dashboard: "Dashboard"
   main_nav_jobs: "Jobs"
   main_nav_workers: "Arbeiter"

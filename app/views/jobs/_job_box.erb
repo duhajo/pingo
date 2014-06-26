@@ -1,0 +1,48 @@
+<div class="job-box <% if job.type == 1 %>demand<%elsif job.type == 1%>supply<%end%>">
+  <div class="title"><%= link_to job.title, job %></div>
+  <% if not job.skill_list.empty? %>
+    <div class="tag-list overflow small">
+      <% job.tag_counts_on(:skills, :limit => 5, :order => "count desc").each do |tag| %>
+        <%= link_to tag.name, {:controller => :tags, :action => :show, :id => tag.id}, :class => "tag" %>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="description">
+      <%= truncate_html job.description.gsub('<br>', ''), :length => 120 %>
+    </div>
+  <% end %>
+  <div class="row job-bottom-line">
+    <div class="col-md-6">
+      <div class="row">
+        <div class="job-status view-only col-sm-4">
+          <%if job.status == 3%>
+            <div class="status-closed" class="btn btn-sm">
+              <span class="now">Geschlossen</span><span class="new">Offen</span>
+            </div>
+          <%elsif job.status == 2 %>
+            <div class="status-in-work btn btn-sm">
+              <span class="now">In Arbeit</span><span class="new">Geschlossen</span>
+            </div>
+          <%else%>
+            <div class="status-open btn btn-sm">
+              <span class="now">Offen</span><span class="new">In Arbeit</span>
+            </div>
+          <%end%>
+        </div>
+        <div class="job-loves col-sm-4">2 Icon</div>
+        <div class="job-activities col-sm-4"><%= job.activities.count%> Icon</div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <ul class="preview-list pull-right">
+        <% job.jobs_workers.joins(:user).select("name, user_id, email, isCreator").each do |worker| %>
+          <%= worker.id %>
+          <li class="worker">
+            <span class="profile-avatar <% if (worker.isCreator == 1) %>manager
+            <% end %>"><%= link_to image_tag(avatar_url(worker), alt: worker.name, :class => "img-circle small" ), worker_path(:id => worker.user_id) %></span>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>

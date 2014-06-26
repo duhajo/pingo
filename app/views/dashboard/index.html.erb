@@ -19,20 +19,7 @@
           <h2><%= t('dashboard_recommendations_on_tags') %></h2>
           <div class="list">
             <% @recommendations.each do |job| %>
-              <div class="job-box">
-                <div class="title"><%= link_to job.title, job %></div>
-                <% if not job.skill_list.empty? %>
-                  <div class="tag-list overflow">
-                    <% job.tag_counts_on(:skills, :limit => 5, :order => "count desc").each do |tag| %>
-                      <%= link_to tag.name, {:controller => :tags, :action => :show, :id => tag.id}, :class => "tag" %>
-                    <% end %>
-                  </div>
-                <% else %>
-                  <div class="description">
-                    <%= truncate_html job.description, :length => 150 %>
-                  </div>
-                <% end %>
-              </div>
+              <%= render :partial => "jobs/job_box", :locals => {:job => job} %>
             <% end %>
           </div>
         <% end %>
@@ -40,20 +27,7 @@
           <h2><%= t('dashboard_recommendations_on_place') %></h2>
           <div class="list">
             <% @near_jobs.each do |job| %>
-              <div class="job-box <% if job.type == 1 %>demand<%elsif job.type == 1%>supply<%end%>">
-                <div class="title"><%= link_to job.title, job %></div>
-                <% if not job.skill_list.empty? %>
-                  <div class="tag-list overflow">
-                    <% job.tag_counts_on(:skills, :limit => 5, :order => "count desc").each do |tag| %>
-                      <%= link_to tag.name, {:controller => :tags, :action => :show, :id => tag.id}, :class => "tag" %>
-                    <% end %>
-                  </div>
-                <% else %>
-                  <div class="description">
-                    <%= truncate_html job.description, :length => 150 %>
-                  </div>
-                <% end %>
-              </div>
+              <%= render :partial => "jobs/job_box", :locals => {:job => job} %>
             <% end %>
           </div>
         <% end %>

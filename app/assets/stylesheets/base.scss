@@ -73,7 +73,7 @@ a:-moz-any-link:focus {
     }
 
     #user-navigation {
-      
+
       .navbar-nav {
         margin-bottom: 0;
         margin-top: 0;
@@ -88,6 +88,10 @@ a:-moz-any-link:focus {
     img {
       border: 2px solid transparent;
       width: 42px;
+
+      &.small {
+        width: 30px;
+      }
     }
     &.manager img {
       border-color: $brand-secondary;
@@ -332,6 +336,7 @@ a:hover .icon.edit {
     margin: rem-calc(4) rem-calc(12) rem-calc(4) 0;
     float: left;
   }
+
   .tag {
     background-color: $brand-quinary;
     border-radius: 3px;
@@ -339,6 +344,12 @@ a:hover .icon.edit {
     padding: 5px;
     float: left;
     margin: 5px 12px 5px 0;
+  }
+  &.small {
+    .tag {
+      font-size: $font-size-small;
+      padding: 3px;
+    }
   }
 }
 

@@ -37,8 +37,11 @@ Duhajo::Application.routes.draw do
   match "jobs/:id/edit_manager_list" => "jobs#edit_manager_list"
   
   match "jobs/:id/new_file" => "jobs#new_file"
-  
+
   put 'jobs/:id/like' => 'jobs#like', :as => 'like_job'
+
+
+  match "worker/:id" => "users#show", :as => 'worker'
 
   # Sample of named route:
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase

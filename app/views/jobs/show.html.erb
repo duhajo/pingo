@@ -63,20 +63,7 @@
               <p><%= t('jobs_no_jobs') %></p>
             <% else %>
               <% @demands.each do |job| %>
-                <div class="job-box">
-                  <div class="title"><%= link_to job.title, job %></div>
-                  <% if not job.skill_list.empty? %>
-                    <div class="tag-list overflow">
-                      <% job.tag_counts_on(:skills, :limit => 5, :order => "count desc").each do |tag| %>
-                        <%= link_to tag.name, {:controller => :tags, :action => :show, :id => tag.id}, :class => "tag" %>
-                      <% end %>
-                    </div>
-                  <% else %>
-                    <div class="description">
-                      <%= truncate_html @job.description, :length => 150 %>
-                    </div>
-                  <% end %>
-                </div>
+                <%= render :partial => "job_box", :locals => {:job => job} %>
               <% end %>
             <% end %>
           </div>
@@ -86,20 +73,7 @@
               <%= t('jobs_no_jobs') %>
             <% else %>
               <% @supplies.each do |job| %>
-                <div class="job-box">
-                  <div class="title"><%= link_to job.title, job %></div>
-                  <% if not job.skill_list.empty? %>
-                    <div class="tag-list overflow">
-                      <% job.tag_counts_on(:skills, :limit => 5, :order => "count desc").each do |tag| %>
-                        <%= link_to tag.name, {:controller => :tags, :action => :show, :id => tag.id}, :class => "tag" %>
-                      <% end %>
-                    </div>
-                  <% else %>
-                    <div class="description">
-                      <%= truncate_html job.description, :length => 150 %>
-                    </div>
-                  <% end %>
-                </div>
+                <%= render :partial => "job_box", :locals => {:job => job} %>
               <% end %>
             <% end %>
           </div>
@@ -328,20 +302,7 @@
               <p><%= t('jobs_no_jobs') %></p>
             <% else %>
               <% @demands.each do |job| %>
-                <div class="job-box">
-                  <div class="title"><%= link_to job.title, job %></div>
-                  <% if not job.skill_list.empty? %>
-                    <div class="tag-list overflow">
-                      <% job.tag_counts_on(:skills, :limit => 5, :order => "count desc").each do |tag| %>
-                        <%= link_to tag.name, {:controller => :tags, :action => :show, :id => tag.id}, :class => "tag" %>
-                      <% end %>
-                    </div>
-                  <% else %>
-                    <div class="description">
-                      <%= truncate_html job.description, :length => 150 %>
-                    </div>
-                  <% end %>
-                </div>
+                <%= render :partial => "job_box", :locals => {:job => job} %>
               <% end %>
             <% end %>
           </div>
@@ -351,20 +312,7 @@
               <%= t('jobs_no_jobs') %>
             <% else %>
               <% @supplies.each do |job| %>
-                <div class="job-box">
-                  <div class="title"><%= link_to job.title, job %></div>
-                  <% if not job.skill_list.empty? %>
-                    <div class="tag-list overflow">
-                      <% job.tag_counts_on(:skills, :limit => 5, :order => "count desc").each do |tag| %>
-                        <%= link_to tag.name, {:controller => :tags, :action => :show, :id => tag.id}, :class => "tag" %>
-                      <% end %>
-                    </div>
-                  <% else %>
-                    <div class="description">
-                      <%= truncate_html job.description, :length => 150 %>
-                    </div>
-                  <% end %>
-                </div>
+                <%= render :partial => "job_box", :locals => {:job => job} %>
               <% end %>
             <% end %>
           </div>
