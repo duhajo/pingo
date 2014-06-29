@@ -279,7 +279,7 @@ form {
 
 .icon {
   background-image: url("icons/iconssprite.png");
-  background-size: 192px 256px;
+  background-size: 256px 256px;
   display: block;
   height: 32px;
   width: 32px;
@@ -307,6 +307,13 @@ form {
     }
   }
 
+  &.love {
+    background-position: -480px -96px;
+  }
+
+  &.activity {
+    background-position: -448px -96px;
+  }
 }
 
 a:hover .icon.add {

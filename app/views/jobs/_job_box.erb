@@ -14,23 +14,23 @@
   <div class="row job-bottom-line">
     <div class="col-md-6">
       <div class="row">
-        <div class="job-status view-only col-sm-4">
+        <div class="job-status view-only col-sm-3">
           <%if job.status == 3%>
             <div class="status-closed" class="btn btn-sm">
-              <span class="now">Geschlossen</span><span class="new">Offen</span>
+              <%= link_to job do %><span class="now">Geschlossen</span><span class="new">Offen</span><% end %>
             </div>
           <%elsif job.status == 2 %>
             <div class="status-in-work btn btn-sm">
-              <span class="now">In Arbeit</span><span class="new">Geschlossen</span>
+              <%= link_to job do %><span class="now">In Arbeit</span><span class="new">Geschlossen</span><% end %>
             </div>
           <%else%>
             <div class="status-open btn btn-sm">
-              <span class="now">Offen</span><span class="new">In Arbeit</span>
+              <%= link_to job do %><span class="now">Offen</span><span class="new">In Arbeit</span><% end %>
             </div>
           <%end%>
         </div>
-        <div class="job-loves col-sm-4">2 Icon</div>
-        <div class="job-activities col-sm-4"><%= job.activities.count%> Icon</div>
+        <!--<div class="job-loves col-sm-4"><span class="icon love"></span></div>-->
+        <div class="job-activities col-sm-4"><%= link_to job do %><span class="icon activity pull-left"></span><span class="icon-label"><%= job.activities.count%></span><% end %></div>
       </div>
     </div>
     <div class="col-md-6">

@@ -155,6 +155,10 @@
     .job-bottom-line {
       font-size: $font-size-small;
       line-height: 2;
+
+      .job-activities {
+        line-height: 2.3;
+      }
     }
   }
 }
@@ -189,7 +193,13 @@
     }
   }
 
-  &.view-only .btn .new {
-    display: none;
+  &.view-only .btn {
+    .new {
+      display: none;
+    }
+
+    a {
+      color: #FFFFFF;
+    }
   }
 }
