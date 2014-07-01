@@ -1,23 +1,8 @@
 var title       =   '.modal-title',
     content     =   '.modal-body',
-    modal       =   '#ajax-modal',
-    long        =   <%=@long%>,
-    lat         =   <%=@lat%>,
-    zoom        =   '13';
+    modal       =   '#ajax-modal';
 
 //i set the title through a helper function
 $(title).html("Karte")
 $(content).html('<%= j render("jobs/map") %>');
 $(modal).modal();
-
-//init map
-var map, markers, position, projection_smp, projection_wgs;
-map = new OpenLayers.Map("map");
-map.addLayer(new OpenLayers.Layer.OSM());
-projection_wgs = new OpenLayers.Projection("EPSG:4326");
-projection_smp = new OpenLayers.Projection("EPSG:900913");
-position = new OpenLayers.LonLat(long, lat).transform(projection_wgs, projection_smp);
-markers = new OpenLayers.Layer.Markers("Markers");
-map.addLayer(markers);
-markers.addMarker(new OpenLayers.Marker(position));
-map.setCenter(position, zoom);

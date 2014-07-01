@@ -250,7 +250,7 @@ class JobsController < ApplicationController
     @long = @job.longitude
     respond_to do |format|
       format.html { redirect_to root_path }
-      format.js { render :action => 'map', :lat => @lat, :long => @long }
+      format.js { render :action => 'map', :job => @job }
     end
   end
 

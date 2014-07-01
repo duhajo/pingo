@@ -385,3 +385,12 @@ body[data-controller='sessions'] #main-navigation, body[data-controller='registr
   display: none;
 }
 
+.map-container {
+  position: relative;
+  #map {
+    width: 100%;
+    min-height: 250px;
+    height: 400px;
+    img { max-width: none; }
+  }
+}

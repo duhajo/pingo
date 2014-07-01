@@ -28,7 +28,8 @@ gem "devise"
 
 # To use Geolocations
 gem "geocoder"
-gem "openlayers-rails"
+gem "mapbox-rails"
+#gem "openlayers-rails"
 
 # To use ActiveModel has_secure_password
 gem "bcrypt-ruby", "~> 3.0.0"

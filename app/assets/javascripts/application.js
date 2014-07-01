@@ -13,9 +13,10 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.ui.autocomplete
+//= require modernizr
 //= require magnific-popup
 //= require gritter
-//= require openlayers-rails
 //= require bootstrap.min
-//= require bootstrap-datepicker
+//= require bootstrap-datepicker/core
+//= require bootstrap-datepicker/locales/bootstrap-datepicker.de
 //= require_tree .
