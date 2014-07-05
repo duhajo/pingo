@@ -7,7 +7,7 @@
   <title><%= content_for?(:title) ? yield(:title) : "Duhajo" %></title>
 
   <%= stylesheet_link_tag "application" %>
-  <%= javascript_include_tag "vendor/modernizr" %>
+  <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 
@@ -108,7 +108,7 @@
     </div>
   </div>
   <%= render 'layouts/modal' %>
+  <%= javascript_include_tag "core" %>
 </div>
-<%= javascript_include_tag "application" %>
 </body>
 </html>

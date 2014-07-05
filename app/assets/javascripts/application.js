@@ -13,10 +13,14 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.ui.autocomplete
-//= require modernizr
+//= require jquery.livequery.min
+//= require jquery.timeago
 //= require magnific-popup
 //= require gritter
 //= require bootstrap.min
 //= require bootstrap-datepicker/core
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.de
-//= require_tree .
+//= require nicEditInit.js.erb
+//= require nicEdit
+//= require modernizr
+//= require mapbox

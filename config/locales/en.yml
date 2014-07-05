@@ -22,6 +22,10 @@ en:
   jobs_edit_header: "Edit Job"
   jobs_edit_header_category: "Edit Category"
 
+  jobs_new: "New Job"
+  jobs_new_job: "New Job for"
+  jobs_new_category: "New Category"
+
   jobs_related: "Related Jobs"
   jobs_not_related: "Not Related Jobs"
 

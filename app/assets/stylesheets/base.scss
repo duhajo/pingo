@@ -43,6 +43,8 @@ a:-moz-any-link:focus {
 
   #topbar {
     border-bottom: 2px solid #3180BD;
+    position: relative;
+    z-index: 2;
 
     a {
       color: #fff;
@@ -100,6 +102,7 @@ a:-moz-any-link:focus {
 
   #main-navigation {
     position: relative;
+    z-index: 2;
 
     .icon.large {
       height: 42px;

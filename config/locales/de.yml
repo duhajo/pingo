@@ -22,6 +22,10 @@ de:
   jobs_edit_header: "Job bearbeiten"
   jobs_edit_header_category: "Kategorie bearbeiten"
 
+  jobs_new: "Neuer Job"
+  jobs_new_job: "Neuer Job für"
+  jobs_new_category: "Neue Kategorie"
+
   jobs_related: "Eingeordnete Jobs"
   jobs_not_related: "Nicht eingeordnete Jobs"
 

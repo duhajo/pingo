@@ -106,6 +106,12 @@ $(document).ready ->
         likeButton.addClass "voted"
     false
 
+@setJobType = (element, counterElem, value) ->
+  $('#job_type').val(value);
+  if !$(element).hasClass "active"
+    $(element).addClass "active"
+    counterElem.removeClass "active"
+
 @showDeadline = () ->
   $("#show-deadline-link").hide()
   $("#deadline-field").show()

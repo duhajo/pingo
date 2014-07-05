@@ -1,12 +1,17 @@
+<%= javascript_include_tag "jobs" %>
 <div class="container">
   <div id="new-job-page" class="form col-md-6 col-md-offset-3 white-panel clear-top" data-id="<%= @job.id %>">
 
     <% if !@type.nil? && @type == 0 %>
-      <h1>Neue Kategorie</h1>
+      <h1><%= t("jobs_new_category") %></h1>
     <% else %>
-      <h1>Neuer Job
-        <% if not @parent_job.nil? %>für "<%= @parent_job.title %>"
-        <% end %></h1>
+      <h1>
+        <% if not @parent_job.nil? %>
+          <%= t("jobs_new_job") %> "<%= @parent_job.title %>"
+        <% else %>
+          <%= t("jobs_new") %>
+        <%end%>
+      </h1>
     <% end %>
 
     <%= form_for(@job) do |f| %>
@@ -29,9 +34,16 @@
         <% if not @type.nil? %>
           <%= f.hidden_field :type, value: @type %>
         <% else %>
-          <%= f.label :type, "Typ (0 = Kategorie, 1 = Suche, 2 = Angebot)" %>
-          <br/>
-          <%= f.text_field :type, class: "form-control" %>
+          <%= f.label :type, "Typ" %>
+          <%= f.hidden_field :type, id: "job_type", value: 1 %>
+          <div class="btn-group btn-group-justified">
+            <div class="btn-group">
+              <button type="button" id="job_type_demand" class="btn btn-default active" onclick="setJobType(this, $('#job_type_supply'), 1);"><%=t('jobs_demand')%></button>
+            </div>
+            <div class="btn-group">
+              <button type="button" id="job_type_supply" class="btn btn-default" onclick="setJobType(this, $('#job_type_demand'), 2);"><%=t('jobs_supply')%></button>
+            </div>
+          </div>
         <% end %>
       </div>
       <div class="form-group">
