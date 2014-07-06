@@ -5,18 +5,9 @@ class PlacesController < ApplicationController
 
     @jobs.each do |job|
       @geojson << {
-          type: 'Feature',
-          geometry: {
-              type: 'Point',
-              coordinates: [job.longitude, job.latitude]
-          },
-          properties: {
-            title: job.title,
-            address: job.street,
-            :'marker-color' => '#00607d',
-            :'marker-symbol' => 'circle',
-            :'marker-size' => 'medium'
-          }
+          longitude: job.longitude,
+          latitude: job.latitude,
+          title: job.title
       }
     end
 

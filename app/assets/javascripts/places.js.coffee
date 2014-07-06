@@ -5,10 +5,18 @@
 @initPlacesMap = () ->
   map = L.mapbox.map("map", "examples.map-20v6611k")
 
-  featureLayer = L.mapbox.featureLayer().loadURL("/places/index.json").addTo(map)
-  featureLayer.on "ready", ->
-    map.fitBounds featureLayer.getBounds()
-    featureLayer.on "click", (e) ->
-      # do something
-      return
-  return
+  $.getJSON "/places/index.json", (data) ->
+    markers = new L.MarkerClusterGroup()
+
+    $.each data, (key, val) ->
+      marker = L.marker(new L.LatLng(val.latitude, val.longitude),
+        icon: L.mapbox.marker.icon(
+          "marker-symbol": "circle"
+          "marker-color": "0044FF"
+        )
+        title: val.title
+      )
+      marker.bindPopup val.title
+      markers.addLayer marker
+    map.addLayer markers
+

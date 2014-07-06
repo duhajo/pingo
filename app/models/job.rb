@@ -1,15 +1,16 @@
 class Job < ActiveRecord::Base
   self.inheritance_column = nil
-  include PublicActivity::Common
   acts_as_commentable
-  acts_as_nested_set
-  acts_as_votable
   acts_as_taggable
   acts_as_taggable_on :skills
+  acts_as_nested_set
+  acts_as_votable
   attr_accessible :deadline, :description, :parent_id, :title, :skill_list, :country, :city, :street, :type, :picture, :picture_cache
   has_many :jobs_workers, dependent: :delete_all
   has_many :users, :through => :jobs_workers
-  
+
+  include PublicActivity::Common
+
   mount_uploader :picture, PictureUploader
 
   geocoded_by :address

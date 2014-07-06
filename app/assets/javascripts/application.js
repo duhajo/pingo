@@ -24,3 +24,4 @@
 //= require nicEdit
 //= require modernizr
 //= require mapbox
+//= require markercluster

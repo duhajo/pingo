@@ -12,10 +12,10 @@
     </div>
     <div class="col-md-6 space" id="recommendations">
       <h1><%= t('dashboard_recommendations') %></h1>
-      <% if @recommendations.empty? && @near_jobs.empty? %>
+      <% if @recommendations.blank? && @near_jobs.blank? %>
         <%= t('dashboard_no_recommendations') %>
       <% else %>
-        <% if !@recommendations.empty? %>
+        <% if !@recommendations.blank? %>
           <h2><%= t('dashboard_recommendations_on_tags') %></h2>
           <div class="list">
             <% @recommendations.each do |job| %>
@@ -23,7 +23,7 @@
             <% end %>
           </div>
         <% end %>
-        <% if !@near_jobs.nil? && !@near_jobs.empty? %>
+        <% if !@near_jobs.blank? %>
           <h2><%= t('dashboard_recommendations_on_place') %></h2>
           <div class="list">
             <% @near_jobs.each do |job| %>

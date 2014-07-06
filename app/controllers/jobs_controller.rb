@@ -140,6 +140,7 @@ class JobsController < ApplicationController
 
     respond_to do |format|
       if @job.save
+        @job.reload
         if @job.parent_id
 	        @job.create_activity :create_child, params: {job: Job.find(@job.parent_id)}, owner: current_user
 	      else
