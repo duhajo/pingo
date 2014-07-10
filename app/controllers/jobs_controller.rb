@@ -242,6 +242,7 @@ class JobsController < ApplicationController
 
     respond_to do |format|
       format.json { render :json => @job.likes.size }
+
     end
   end
 

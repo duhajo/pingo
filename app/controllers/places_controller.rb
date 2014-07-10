@@ -7,7 +7,9 @@ class PlacesController < ApplicationController
       @geojson << {
           longitude: job.longitude,
           latitude: job.latitude,
-          title: job.title
+          title: job.title,
+          job_id: job.id,
+          url: job_path(job.id)
       }
     end
 

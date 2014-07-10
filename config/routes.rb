@@ -33,6 +33,7 @@ Duhajo::Application.routes.draw do
   
   match "jobs/:id/new" => "jobs#new", :as => 'new_subjob'
   match "jobs/:id/support" => "jobs#support"
+  match "jobs/:id/love" => "jobs#like", :as => 'love_job'
   match "jobs/:id/set_status" => "jobs#set_status"
   match "jobs/:id/map_for_job" => "jobs#map_for_job"
   match "jobs/:id/show_manager_list" => "jobs#show_manager_list", :as => "show_manager_list"

@@ -29,7 +29,7 @@
             </div>
           <%end%>
         </div>
-        <!--<div class="job-loves col-sm-4"><span class="icon love"></span></div>-->
+        <%if job.likes.size > 0 %><div class="job-likes col-sm-4"><span class="icon love pull-left"></span><span class="icon-label"><%= job.likes.size %></span></div><%end%>
         <div class="job-activities col-sm-4"><%= link_to job do %><span class="icon activity pull-left"></span><span class="icon-label"><%= job.activities.count%></span><% end %></div>
       </div>
     </div>

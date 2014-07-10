@@ -1,6 +1,12 @@
 <div class="container">
   <div id="login-page" class="col-md-6 col-md-offset-3 white-panel">
     <h1>Sign in</h1>
+    <% if !notice.blank? %>
+      <p class="info bg-warning"><%= notice %></p>
+    <% end %>
+    <% if !alert.blank? %>
+      <p class="info bg-danger"><%= alert %></p>
+    <% end %>
     <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
         <div class="form-group">
           <%= f.label :login %>

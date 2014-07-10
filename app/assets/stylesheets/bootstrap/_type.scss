@@ -120,6 +120,10 @@ cite    { font-style: normal; }
 
 @include bg-variant('.bg-danger', $state-danger-bg);
 
+p.info {
+  padding: 15px;
+}
+
 
 // Page header
 // -------------------------

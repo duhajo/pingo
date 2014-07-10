@@ -40,10 +40,10 @@ $(document).ready ->
 
   $(".open-popup-link").magnificPopup type: "inline", midClick: true
 
-  hasRight = $("#job-status").hasClass("rights")
+  hasRight = $(".job-status").hasClass("rights")
   if hasRight
     init_status = ->
-      $("#status-open").click ->
+      $(".status-open").click ->
         $.ajax(
           url: "/jobs/"+$('#job-view').data('id')+"/set_status"
           data:
@@ -53,25 +53,23 @@ $(document).ready ->
           init_status()
         false
 
-      $("#status-in-work").click ->
+      $(".status-in-work").click ->
         $.ajax(
           url: "/jobs/"+$('#job-view').data('id')+"/set_status"
           data:
             status: 3
         ).success (data) ->
           $("#job-status-wrapper").html data
-          $(".header-actions").css "display", "none"
           init_status()
         false
 
-      $("#status-closed").click ->
+      $(".status-closed").click ->
         $.ajax(
           url: "/jobs/"+$('#job-view').data('id')+"/set_status"
           data:
             status: 1
         ).success (data) ->
           $("#job-status-wrapper").html data
-          $(".header-actions").css "display", "inline-block"
           init_status()
         false
     init_status()
@@ -81,29 +79,8 @@ $(document).ready ->
       type: "PUT"
       url: "/jobs/"+$('#job-view').data('id')+"/like"
     ).success (data) ->
-      if data == 1
-        $("#likes").css "display", "block"
-      if data == 0
-        $("#likes").css "display", "none"
+      setClass $("#like-button"), "my-like"
       $(".likes-number").html data
-    false
-  $(".likes-button").click ->
-    likeButton = $(this)
-    $.ajax(
-      type: "PUT"
-      url: "/jobs/"+likeButton.data('id')+"/like"
-    ).success (data) ->
-      if data == 1
-        likeButton.parent().find(".likes-number").css "display", "block"
-        likeButton.removeClass "no-votes"
-      if data == 0
-        likeButton.parent().find(".likes-number").css "display", "none"
-        likeButton.addClass "no-votes"
-      likeButton.parent().find(".likes-number").html data
-      if likeButton.hasClass("voted")
-        likeButton.removeClass "voted"
-      else
-        likeButton.addClass "voted"
     false
 
 @setJobType = (element, counterElem, value) ->
@@ -139,3 +116,9 @@ Array::remove = (from, to) ->
   rest = @slice((to or from) + 1 or @length)
   @length = (if from < 0 then @length + from else from)
   @push.apply this, rest
+
+@setClass = (container, newClass) ->
+  if !container.hasClass newClass
+    container.addClass newClass
+  else
+    container.removeClass newClass

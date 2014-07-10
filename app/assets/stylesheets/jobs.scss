@@ -37,31 +37,49 @@
 }
 
 #job-view {
+  @extend .container-fluid, .content, .white, .simple, .closed;
 
   #job-specification-area {
+    @extend .col-md-8, .nospace;
     border-right: 1px solid #EBEBEB;
-    margin-left: 1px;
+    margin-left: -15px;
 
     #job-details {
+      @extend .side-space;
 
       #job-meta-wrapper {
+        @extend .col-md-9;
 
         .icon-label {
           line-height: 21px;
           padding-top: 4px;
         }
-
-        #job-deadline {
-          height: rem-calc(38);
-          line-height: rem-calc(38);
-          .icon {
-            background-position: -32px -96px;
+        #job-meta {
+          @extend .row;
+          #job-deadline {
+            height: rem-calc(38);
+            line-height: rem-calc(38);
+            .icon {
+              background-position: -32px -96px;
+            }
           }
-        }
-
-        #job-location {
-          .icon {
-            background-position: -64px -96px;
+  
+          #job-location {
+            .icon {
+              background-position: -64px -96px;
+            }
+          }
+  
+          #job-likes {
+            @extend .pull-right;
+            a.btn {
+              line-height: 2.4;
+              padding: 0 5px;
+              &.my-like {
+                background-color: $brand-senary;
+                color: #ffffff;
+              }
+            }
           }
         }
 
@@ -100,9 +118,11 @@
       }
 
       #job-workers-wrapper {
+        @extend .col-md-3;
         border-left: 1px solid #EBEBEB;
 
         h3 {
+          margin-top: 0;
           line-height: rem-calc(28);
         }
       }
@@ -113,6 +133,7 @@
     border-left: 1px solid #EBEBEB;
     margin-left: -1px;
     margin-top: rem-calc(45);
+    @extend .col-md-4, .side-space;
 
     h2 {
       margin-bottom: rem-calc(18);
@@ -167,21 +188,27 @@
 .job-status {
 
   .status-open,
-  &.rights .status-closed.btn:hover {
+  &.rights .status-closed:hover {
     background-color: #dc007c;
-    color: #FFFFFF;
+    &, a{
+      color: #FFFFFF;
+    }
   }
 
   .status-in-work,
-  &.rights .status-open.btn:hover {
+  &.rights .status-open:hover {
     background-color: #7aba4b;
-    color: #FFFFFF;
+    &, a{
+      color: #FFFFFF;
+    }
   }
 
   .status-closed,
-  &.rights .status-in-work.btn:hover {
+  &.rights .status-in-work:hover {
     background-color: #f7f7f7;
-    color: #707070;
+    &, a{
+      color: #707070;
+    }
   }
 
   &.rights {
@@ -194,13 +221,9 @@
     }
   }
 
-  &.view-only .btn {
+  &.view-only {
     .new {
       display: none;
-    }
-
-    a {
-      color: #FFFFFF;
     }
   }
 }

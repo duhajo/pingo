@@ -2,7 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
-@initPlacesMap = () ->
+@initPlacesMap = ->
   map = L.mapbox.map("map", "examples.map-20v6611k")
 
   $.getJSON "/places/index.json", (data) ->
@@ -16,7 +16,7 @@
         )
         title: val.title
       )
-      marker.bindPopup val.title
+      popupContent = val.title + '<br /><a class="btn btn-primary" href="'+val.url + '">Job anschauen' + '</a>'
+      marker.bindPopup popupContent
       markers.addLayer marker
     map.addLayer markers
-
