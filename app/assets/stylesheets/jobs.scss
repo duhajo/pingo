@@ -37,7 +37,7 @@
 }
 
 #job-view {
-  @extend .container-fluid, .content, .white, .simple, .closed;
+  @extend .container-fluid, .content, .white, .simple;
 
   #job-specification-area {
     @extend .col-md-8, .nospace;
