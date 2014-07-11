@@ -89,7 +89,6 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
-    mapbox-rails (1.6.1.1)
     mime-types (1.25)
     mini_magick (3.7.0)
       subexec (~> 0.2.1)
@@ -207,7 +206,6 @@ DEPENDENCIES
   jquery-ui-rails
   kaminari
   magnific-popup-rails
-  mapbox-rails
   mini_magick
   mysql2
   public_activity
