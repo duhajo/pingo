@@ -93,9 +93,9 @@ $(document).ready ->
   $("#show-deadline-link").hide()
   $("#deadline-field").show()
 
-@showPlace = () ->
-  $("#show-place-link").hide()
-  $("#place-field").show()
+@showLocation = () ->
+  $("#show-location-link").hide()
+  $("#location-field").show()
 
 @initAutocomplete = () ->
     $('.user_with_autocomplete').autocomplete

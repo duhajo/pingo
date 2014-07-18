@@ -13,4 +13,12 @@ class Tag < ActiveRecord::Base
     query << " limit #{options[:limit]}" if options[:limit] != nil
     tags = Tag.find_by_sql(query)
   end
+
+  def self.search(search)
+    if search
+      find(:all, :conditions => ['name LIKE ?', "%#{search}%"])
+    else
+      find(:all)
+    end
+  end
 end

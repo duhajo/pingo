@@ -1,7 +1,10 @@
 de:
+  cancel: "Abbrechen"
+  delete: "Entfernen"
   login: "Anmelden"
   logout: "Abmelden"
   register: "Registrieren"
+  save: "Speichern"
 
   main_nav_dashboard: "Dashboard"
   main_nav_jobs: "Jobs"
@@ -11,7 +14,7 @@ de:
   jobs_overview: "Job Overview"
   jobs_category: "Kategorie"
   jobs_category_overview: "Kategorieübersicht"
-  jobs_category_no_tags: "Es sind noch keine Tags vorhanden."
+  jobs_category_no_tags: "Es sind noch keine Schlagworte vorhanden."
 
   jobs_no_jobs: "Keinen Job gefunden. Sorry!"
   jobs_no_description: "Es ist noch keine Beschreibung vorhanden."
@@ -28,6 +31,18 @@ de:
 
   jobs_supply: "Angebot"
   jobs_demand: "Nachfrage"
+  jobs_found: "Gefundene Jobs"
+
+  job_form_title: "Titel"
+  job_form_description: "Beschreibung"
+  job_form_tags: "Schlagworte (per Komma trennen)"
+  job_form_set_deadline: "Deadline festlegen"
+  job_form_deadline: "Deadline"
+  job_form_set_location: "Ort festlegen"
+  job_form_country: "Land"
+  job_form_city: "Stadt"
+  job_form_street: "Straße"
+  job_form_picture: "Kategorienbild"
 
   workers_no_workers: "Keinen Arbeiter gefunden. Sorry!"
   workers_near_search_info: "Suche nach einem Arbeiter, indem du einen Ort oder eine Straße angibst."
@@ -39,7 +54,10 @@ de:
   dashboard_recommendations_on_tags: "Basierend auf deine Schlagworte"
   dashboard_recommendations_on_place: "Basierend auf deinen Ort"
 
+  tags_not_found: "Es wurden keine Schlagworte gefunden"
   most_used_tags: "Meist verwendete Schlagworte"
+
+  search_no_param: "Die Suche braucht ein Begriff, um zu suchen."
 
 # Defaults
   date:

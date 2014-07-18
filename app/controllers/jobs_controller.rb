@@ -174,6 +174,8 @@ class JobsController < ApplicationController
   # DELETE /jobs/1.json
   def destroy
     @job = Job.find(params[:id])
+    @activities = PublicActivity::Activity.find_by_trackable_id(@job.id)
+    @activities.destroy
     @job.destroy
 
     respond_to do |format|
@@ -242,7 +244,6 @@ class JobsController < ApplicationController
 
     respond_to do |format|
       format.json { render :json => @job.likes.size }
-
     end
   end
 

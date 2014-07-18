@@ -1,6 +1,6 @@
 <%@addionalClass = " "
   if !current_user.nil?
-    if @job.liked_by current_user
+    if current_user.liked? @job
       @addionalClass = " my-like"
     end
   end %>

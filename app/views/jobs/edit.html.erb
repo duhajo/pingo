@@ -20,15 +20,15 @@
             </div>
         <% end %>
         <div class="form-group">
-          <%= f.label :title %>
+          <%= f.label :title, t('job_form_title') %>
           <%= f.text_field :title, :class => "form-control" %>
         </div>
         <div class="form-group area html-content">
-          <%= f.label :description %>
+          <%= f.label :description, t('job_form_description') %>
           <%= f.resizable_text_area :description, :class => "form-control", rows: "4" %>
         </div>
         <div class="form-group">
-          <%= f.label :skill_list, "Tags (separated by commas)" %>
+          <%= f.label :skill_list, t('job_form_tags') %>
           <%= f.text_field :skill_list, :class => "form-control" %>
         </div>
         <% if @job.type != 0 %>
@@ -36,44 +36,45 @@
               <% if @job.deadline.nil?
                    @setDeadline = true %>
                   <div id="show-deadline-link">
-                    <%= link_to 'Deadline setzen', '#',
+                    <%= link_to t('job_form_set_deadline'), '#',
                                 :onclick => 'showDeadline(); return false;', :class => 'btn btn-default' %>
                   </div>
               <% end %>
               <div id="deadline-field"
                    <% if @setDeadline %> style="display: none;"
                    <% end %>>
-                <%= f.label :deadline %>
+                <%= f.label :deadline, t('job_form_deadline') %>
                 <%= f.text_field :deadline, class: "form-control datepicker" %>
               </div>
             </div>
             <div class="form-group">
               <% if @job.latitude.nil? && @job.longitude.nil?
-                   @setPlace = true %>
-                  <div id="show-place-link">
-                    <%= link_to 'Ort setzen', '#',
-                                :onclick => 'showPlace(); return false;', :class => 'btn btn-default' %>
+                   @setLocation = true %>
+                  <div id="show-location-link">
+                    <%= link_to t('job_form_set_location'), '#',
+                                :onclick => 'showLocation(); return false;', :class => 'btn btn-default' %>
                   </div>
               <% end %>
-              <div id="place-field"
-                   <% if @setPlace %> style="display: none;"
+              <div id="location-field" class="form-group row"
+                   <% if @setLocation %> style="display: none;"
                    <% end %>>
-                <div class="form-group">
-                  <%= f.label :country %>
+                <div class="col-md-4">
+                  <%= f.label :country, t('job_form_country') %>
                   <%= f.text_field :country, :class => "form-control" %>
                 </div>
-                <div class="form-group">
-                  <%= f.label :city %>
+                <div class="col-md-4">
+                  <%= f.label :city, t('job_form_city') %>
                   <%= f.text_field :city, :class => "form-control" %>
                 </div>
-                <div class="form-group">
-                  <%= f.label :street %>
+                <div class="col-md-4">
+                  <%= f.label :street, t('job_form_street') %>
                   <%= f.text_field :street, :class => "form-control" %>
                 </div>
               </div>
             </div>
         <% else %>
             <div class="form-group">
+              <%= f.label :picture, t('job_form_picture') %>
               <%= image_tag(@job.picture_url) if @job.picture? %>
               <%= f.file_field :picture, :class => "form-control" %>
               <%= f.hidden_field :picture_cache %>
@@ -81,13 +82,15 @@
         <% end %>
         <div class="form-group row">
           <div class="col-md-4">
-            <%= link_to 'Abbrechen', jobs_path, :class => "btn btn-default" %>
+            <%= link_to t('cancel'), jobs_path, :class => "btn btn-default" %>
           </div>
           <div class="col-md-4 center">
-            <%= link_to "Entfernen", @job, :method => :delete, :confirm => "Are you sure ?", :class => "btn btn-default" %>
+            <% if @job.leaf? %>
+              <%= link_to t('delete'), @job, :method => :delete, :confirm => "Are you sure ?", :class => "btn btn-default" %>
+            <% end %>
           </div>
           <div class="col-md-4">
-            <%= link_to 'Speichern', "#", :onclick => "nicEditors.findEditor('job_description').saveContent();sendForm('edit_job');return false;", :class => "btn btn-primary pull-right" %>
+            <%= link_to t('save'), "#", :onclick => "nicEditors.findEditor('job_description').saveContent();sendForm('edit_job');return false;", :class => "btn btn-primary pull-right" %>
           </div>
         </div>
     <% end %>

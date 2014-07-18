@@ -34,7 +34,7 @@
         <% if not @type.nil? %>
           <%= f.hidden_field :type, value: @type %>
         <% else %>
-          <%= f.label :type, "Typ" %>
+          <%= f.label :type, t('job_form_type') %>
           <%= f.hidden_field :type, id: "job_type", value: 1 %>
           <div class="btn-group btn-group-justified">
             <div class="btn-group">
@@ -47,48 +47,47 @@
         <% end %>
       </div>
       <div class="form-group">
-        <%= f.label :title %>
+        <%= f.label :title, t('job_form_title') %>
         <%= f.text_field :title, class: "form-control" %>
       </div>
       <div class="area html-content form-group">
-        <%= f.label :description %>
+        <%= f.label :description, t('job_form_description') %>
         <%= f.resizable_text_area :description, class: "form-control", rows: "4" %>
       </div>
       <% if @type.nil? && @type != 0 %>
         <div class="form-group">
-          <%= f.label :skill_list, "Tags (separated by commas)" %>
+          <%= f.label :skill_list, t('job_form_tags') %>
           <br/>
           <%= f.text_field :skill_list, class: "form-control" %>
         </div>
         <div class="form-group">
           <div id="show-deadline-link">
-            <%= link_to 'Deadline setzen', '#',
+            <%= link_to t('job_form_set_deadline'), '#',
                         :onclick => 'showDeadline()', class: "btn btn-default" %>
           </div>
           <div id="deadline-field" class="field" style="display: none;">
-            <%= f.label :deadline %>
+            <%= f.label :deadline, t('job_form_deadline') %>
             <br/>
             <%= f.text_field :deadline, class: "form-control datepicker" %>
           </div>
         </div>
         <div class="form-group">
-          <div id="show-place-link">
-            <%= link_to 'Ort setzen', '#',
-                        :onclick => 'showPlace()', class: "btn btn-default" %>
+          <div id="show-location-link">
+            <%= link_to t('job_form_set_location'), '#', :onclick => 'showLocation()', class: "btn btn-default" %>
           </div>
-          <div id="place-field" style="display: none;">
+          <div id="location-field" style="display: none;">
             <div class="form-group">
-              <%= f.label :country %>
+              <%= f.label :country, t('job_form_country') %>
               <br/>
               <%= f.text_field :country, class: "form-control" %>
             </div>
             <div class="form-group">
-              <%= f.label :city %>
+              <%= f.label :city, t('job_form_city') %>
               <br/>
               <%= f.text_field :city, class: "form-control" %>
             </div>
             <div class="form-group">
-              <%= f.label :street %>
+              <%= f.label :street, t('job_form_street') %>
               <br/>
               <%= f.text_field :street, class: "form-control" %>
             </div>
@@ -96,6 +95,7 @@
         </div>
       <% else %>
         <div class="field">
+          <%= f.label :picture, t('job_form_picture') %>
           <%= image_tag(@job.picture_url) if @job.picture? %>
           <%= f.file_field :picture, class: "form-control" %>
           <%= f.hidden_field :picture_cache %>

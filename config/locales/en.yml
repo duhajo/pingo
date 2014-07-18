@@ -1,7 +1,10 @@
 en:
+  cancel: "Cancel"
+  delete: "Delete"
   login: "Login"
   logout: "Logout"
   register: "Sign Up"
+  save: "Save"
 
   main_nav_dashboard: "Dashboard"
   main_nav_jobs: "Jobs"
@@ -28,6 +31,19 @@ en:
 
   jobs_supply: "Supply"
   jobs_demand: "Demand"
+  jobs_found: "Job Results"
+
+  job_form_type: "Type"
+  job_form_title: "Title"
+  job_form_description: "Description"
+  job_form_tags: "Tags (separate by comma)"
+  job_form_set_deadline: "Set Deadline"
+  job_form_deadline: "Deadline"
+  job_form_set_location: "Specify a Location"
+  job_form_country: "Country"
+  job_form_city: "City"
+  job_form_street: "Street"
+  job_form_picture: "Category Picture"
   
   workers_no_workers: "There are no workers available. Sorry!"
   workers_near_search_info: "Find available workers in your area. Type in a street or city."
@@ -39,7 +55,10 @@ en:
   dashboard_recommendations_on_tags: "Based on your Personal Tags"
   dashboard_recommendations_on_place: "Based on your Place"
 
+  tags_not_found: "Can't find a tag"
   most_used_tags: "Most Used Tags"
+
+  search_no_param: "The search needs a term to search for."
 
   gflash:
     titles:
