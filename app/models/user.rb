@@ -5,13 +5,21 @@ class User < ActiveRecord::Base
   acts_as_voter
   acts_as_taggable
   acts_as_taggable_on :skills
-  attr_accessor   :login, :current_password
+  attr_accessor   :login, :current_password, :address
   attr_accessible :login, :name, :email, :password, :password_confirmation, :remember_me, :skill_list,
                   :country, :city, :district, :latitude, :longitude, :radius, :locale, :current_password
   has_many :jobs_workers, dependent: :delete_all
   has_many :jobs, :through => :jobs_workers
 
   geocoded_by :address
+  reverse_geocoded_by :latitude, :longitude do |obj,results|
+    if geo = results.first
+      obj.city    = geo.city
+      obj.country = geo.country_code
+    end
+  end
+
+  after_validation :reverse_geocode
   after_validation :geocode, :if => :address_changed?
 
   def gmaps4rails_address
@@ -50,6 +58,14 @@ class User < ActiveRecord::Base
       where(conditions).where(["lower(name) = :value OR lower(email) = :value", { :value => login.downcase }]).first
     else
       where(conditions).first
+    end
+  end
+
+  def self.search(search)
+    if search
+      find(:all, :conditions => ['name LIKE ?', "%#{search}%"])
+    else
+      find(:all)
     end
   end
 end

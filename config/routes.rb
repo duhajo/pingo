@@ -5,6 +5,7 @@ Duhajo::Application.routes.draw do
   devise_for :users, :controllers => { :sessions => "users/sessions", :registrations => "users/registrations" }
 
   resources :searches, :only => [:index]
+
   resources :activities
 
   resources :users do
@@ -17,6 +18,7 @@ Duhajo::Application.routes.draw do
 
   resources :jobs do
     collection do
+      get :autocomplete_job_title
       get :tag
     end
     resources :comments, only: [:create, :reply, :update, :edit, :destroy] do

@@ -2,38 +2,57 @@
   <div id="workers-overview" class="content white space col-md-8">
     <h1>Arbeiterübersicht</h1>
     <% if @users.empty? %>
-        <%= t('no_users_available') %>
+      <%= t('no_users_available') %>
     <% else %>
-        <div id="list-users">
-          <% @users.each_slice(4) do |slice| -%>
-              <div class="row top-margin">
-                <% slice.each do |user| -%>
-                    <div class="col-md-4">
-                      <div class="user row">
-                        <div class="user-image col-md-3">
-                          <span class="profile-avatar"><%= link_to image_tag(avatar_url(user), alt: "?", class: "img-circle"), user, :title => user.name, :rel => "tipsy" %></span>
-                        </div>
-                        <div class="user-details col-md-9">
-                          <div class="user-name"><%= link_to user.name, user %></div>
-                          <% if !user.latitude.nil? && !user.longitude.nil? %>
-                              <div class="user-address"><%= user.address %></div>
-                          <% end %>
-                          <ul class="tag-list">
-                            <% user.tag_counts_on(:skills, :limit => 5, :order => "count desc").each do |tag| %>
-                                <li><%= link_to tag.name, {:controller => :tags, :action => :show, :id => tag.id}, :class => "tag" %></li>
-                            <% end %>
-                          </ul>
-                        </div>
-                      </div>
+      <div id="list-users">
+        <% @users.each_slice(4) do |slice| -%>
+          <div class="row top-margin">
+            <% slice.each do |user| -%>
+              <div class="col-md-4">
+                <div class="user row">
+                  <div class="user-image col-md-3">
+                    <span class="profile-avatar"><%= link_to image_tag(avatar_url(user), alt: "?", class: "img-circle"), user, :title => user.name, :rel => "tipsy" %></span>
+                  </div>
+                  <div class="user-details col-md-9">
+                    <div class="user-name"><%= link_to user.name, user %></div>
+                    <% if !user.latitude.nil? && !user.longitude.nil? %>
+                        <div class="user-address"><%= user.address %></div>
+                    <% end %>
+                    <ul class="tag-list">
+                      <% user.tag_counts_on(:skills, :limit => 5, :order => "count desc").each do |tag| %>
+                          <li><%= link_to tag.name, {:controller => :tags, :action => :show, :id => tag.id}, :class => "tag" %></li>
+                      <% end %>
+                    </ul>
+                  </div>
+                </div>
 
-                    </div>
-                <% end %>
               </div>
-          <% end %>
+            <% end %>
           </div>
+        <% end %>
+      </div>
+  <% end %>
+  </div>
+  <div id="workers-filter" class="space col-md-4">
+    <%= form_tag users_path, :method => 'get' do %>
+      <%= text_field_tag :search, params[:search], :placeholder => "Suchbegriff", :class => "form-control" %>
     <% end %>
-    </div>
-    <div id="workers-filter" class="space col-md-4">
-      Filterung
-    </div>
-    </div>
+    <h2><%= t('filter_by') %></h2>
+    <% if !@places.to_a.empty? %>
+      <h3><%= t('top_places')%></h3>
+      <ul class="place-list">
+        <% @places.each do |place| %>
+          <li><%= link_to place.city, "#todo: filter place", :class => "place" %></li>
+        <% end %>
+      </ul>
+    <% end %>
+    <% if !@tags.empty? %>
+      <h3><%= t('top_skills')%></h3>
+      <ul class="tag-list">
+        <% @tags.each do |tag| %>
+          <li><%= link_to tag.name, "#todo: filter tag", :class => "tag" %></li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+</div>

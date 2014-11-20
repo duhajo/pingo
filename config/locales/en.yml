@@ -60,6 +60,10 @@ en:
 
   search_no_param: "The search needs a term to search for."
 
+  filter_by: "Filter by"
+  top_places: "Top Places"
+  top_skills: "Top Skills"
+
   gflash:
     titles:
       notice: "Custom notice title"

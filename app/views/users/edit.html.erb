@@ -1,3 +1,4 @@
+<%= javascript_include_tag "users" %>
 <div class="container">
   <div id="edit-user-page" data-id="<%=@user.id%>" class="col-md-6 col-md-offset-3 white-panel">
     <h1>Edit my profile</h1>
@@ -61,7 +62,7 @@
 
       <h2>Positon</h2>
 
-      <div id="locationFields" class="form-group" style="display: none;">
+      <div id="locationFields" class="form-group" <% if @user.address == "" %>style="display: none;"<%end%>>
         <div class="row">
           <div class="form-group col-md-4">
             <%= f.label :country %>
@@ -77,6 +78,7 @@
           </div>
         </div>
       </div>
+
       <div id="coordFields" style="display: none;">
         <div id="status"></div>
         <div class="form-group">
@@ -84,8 +86,8 @@
         </div>
       </div>
 
-      <a href="javascript: getPositionManually();" id="openLocationFields">Ort manuell eintragen</a> oder
-      <a href="javascript: getLocation();">Position ermitteln</a>
+      <% if @user.address == "" %><a href="javascript:;" onclick="getPositionManually();return false;" id="openLocationFields">Ort manuell eintragen</a> oder<% end %>
+      <a href="javascript:;" onclick="getLocation();return false;">Position ermitteln</a>
 
       <div class="form-group top-margin">
         <div class="row">
@@ -103,41 +105,3 @@
   </div>
 </div>
 <% end %>
-  <script type="text/javascript">
-    function getLocation() {
-      function success(position) {							
-        var s = $('#status');
-
-        // im FF wird die Funktion scheinbar mehrfach aufgerufen - einmal reicht
-        if(s.hasClass('success')) { return }
-        $('#coordFields').show();
-        $('#locationFields').hide();
-        $('#openLocationFields').show();
-        $('#radiusField').show();
-        s.text("Deine Position konnte ermittelt werden!");
-        s.addClass('success');
-        $("#user_latitude").val(position.coords.latitude);
-        $("#user_longitude").val(position.coords.longitude);
-
-        
-        navigator.geolocation.clearWatch(watchId);
-      }
-
-      function error(msg) {
-        $('#status').text = typeof msg == 'string' ? msg : "error";							
-      }
-
-      if (navigator.geolocation) {
-        var watchId = navigator.geolocation.getCurrentPosition(success, error);
-      } else {
-        $('#status').text = "Sorry your browser does not support geolocation."
-      }
-      
-    }
-    function getPositionManually() {    
-      $('#locationFields').show();
-      $('#openLocationFields').hide();
-      $('#coordFields').hide();
-      $('#radiusField').show();
-    }
-  </script>

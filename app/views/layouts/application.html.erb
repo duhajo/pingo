@@ -19,15 +19,13 @@
         <!-- Left Nav Section -->
         <div id="search-wrapper" class="col-xs-4">
           <ul id="search-box">
-            <%= form_tag(searches_path, :method => "get", id: "search-form") do %>
+            <%= form_tag(jobs_path, id: "search-form") do %>
                 <li class="dropdown">
-                  <%= text_field_tag :search, params[:search], placeholder: "Search Jobs", id: "search-input", class: "form-control dropdown-toggle", data: {:toggle => "dropdown"} %>
-                  <% if user_signed_in? %>
-                      <ul class="dropdown-menu">
-                        <%= render :partial => "myjobs", :my_jobs => @my_jobs %>
-                      </ul>
-                  <% end %>
+                  <%= autocomplete_field_tag 'search', '', autocomplete_job_title_jobs_path,
+                      :id_element => '#job_search', placeholder: "Search Jobs",
+                      id: "search-input", class: "form-control dropdown-toggle", data: {:toggle => "dropdown"} %>
                 </li>
+              <%= hidden_field_tag 'job_search' %>
             <% end %>
           </ul>
         </div>

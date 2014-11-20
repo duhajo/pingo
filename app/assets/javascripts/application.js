@@ -25,3 +25,4 @@
 //= require modernizr
 //= require mapbox
 //= require markercluster
+//= require autocomplete-rails

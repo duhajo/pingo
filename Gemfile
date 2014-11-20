@@ -18,6 +18,9 @@ group :development do
   gem "rails_layout"
 end
 
+#autocomplete
+gem 'rails3-jquery-autocomplete'
+
 #notification
 gem "gritter", "1.0.3"
 gem "awesome_nested_set"

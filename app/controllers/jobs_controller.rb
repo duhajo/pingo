@@ -4,32 +4,19 @@ class JobsController < ApplicationController
   protect_from_forgery :except => :index
   uploads_nicedit_image :upload_action_name
 
+  autocomplete :job, :title, :full => true
+
   # GET /jobs
   # GET /jobs.json
   def index
-
-  #if params[:search].present?
-  #  if current_user
-  #    @radius = User.find(current_user.id).radius
-  #  end
-  #  if(@radius.nil?)
-  #    @near_jobs = Job.near(params[:search], 10, :order => :distance)
-  #  else
-  #    @near_jobs = Job.near(params[:search], @radius, :order => :distance)
-  #  end
-  #  @jobs = Job.find_all_by_parent_id(nil)
-  #else
-  #  @jobs = Job.find_all_by_parent_id(nil)
-  #  @jobs_voted = Job.joins("LEFT JOIN `votes` ON votes.votable_id = jobs.id").select("jobs.id, status, title, deadline, COUNT(votes.votable_id) as votes_count").where("votes.vote_flag" => true).group("votes.votable_id").order("votes_count desc,votes.updated_at desc,jobs.updated_at desc").all()
-  #end
-    
-    #respond_to do |format|
-    #  format.html # index.html.erb
-    #  format.json { render json: @jobs }
-    #end
-    @demands = Job.where('parent_id' => nil).where('type' => 1)
-    @supplies = Job.where('parent_id' => nil).where('type' => 2)
-    @categories = Job.find_all_by_type(0)
+    if params[:job_id]
+      @job = Job.find(params[:job_id])
+      redirect_to @job
+    else
+      @demands = Job.where('parent_id' => nil).where('type' => 1)
+      @supplies = Job.where('parent_id' => nil).where('type' => 2)
+      @categories = Job.find_all_by_type(0)
+    end
   end
 
   def get_user_role(job)

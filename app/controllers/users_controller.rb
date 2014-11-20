@@ -1,8 +1,9 @@
 class UsersController < ApplicationController
 
   def index
-    @users = User.all
-    @tags = User.tag_counts_on(:skills)
+    @users = User.search(params[:search])
+    @places = User.where("city != ''")
+    @tags = User.tag_counts_on(:skills, :limit => 5, :order => "count desc")
   end
   
   def autocomplete_user

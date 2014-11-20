@@ -1,4 +1,5 @@
 class SearchesController < ApplicationController
+
   def index
     if params[:search]
       @search = params[:search]

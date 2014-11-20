@@ -122,6 +122,8 @@ GEM
       activesupport (= 3.2.13)
       bundler (~> 1.0)
       railties (= 3.2.13)
+    rails3-jquery-autocomplete (1.0.14)
+      rails (>= 3.0)
     rails_layout (1.0.5)
     railties (3.2.13)
       actionpack (= 3.2.13)
@@ -210,6 +212,7 @@ DEPENDENCIES
   mysql2
   public_activity
   rails (= 3.2.13)
+  rails3-jquery-autocomplete
   rails_layout
   rmagick
   sass-rails (~> 3.2.3)
