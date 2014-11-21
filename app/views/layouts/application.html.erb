@@ -21,11 +21,9 @@
           <ul id="search-box">
             <%= form_tag(jobs_path, id: "search-form") do %>
                 <li class="dropdown">
-                  <%= autocomplete_field_tag 'search', '', autocomplete_job_title_jobs_path,
-                      :id_element => '#job_search', placeholder: "Search Jobs",
+                  <%= autocomplete_field_tag 'search', '', autocomplete_job_title_jobs_path, placeholder: "Search Jobs",
                       id: "search-input", class: "form-control dropdown-toggle", data: {:toggle => "dropdown"} %>
                 </li>
-              <%= hidden_field_tag 'job_search' %>
             <% end %>
           </ul>
         </div>

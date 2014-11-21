@@ -98,6 +98,8 @@
     cursor: default;
 }
 .ui-menu {
+    background-color: #ffffff;
+    box-shadow: 0 2px 2px -1px #e4e4e4;
     list-style: none;
     padding: 0;
     margin: 0;
@@ -125,7 +127,7 @@
 }
 .ui-menu .ui-state-focus,
 .ui-menu .ui-state-active {
-    margin: -1px;
+    color: #b109ff;
 }
 
 /* icon support */

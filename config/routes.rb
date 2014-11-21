@@ -8,11 +8,13 @@ Duhajo::Application.routes.draw do
 
   resources :activities
 
+  match "worker/:id" => "users#show", :as => 'worker'
+
   resources :users do
     collection do
+      get :autocomplete_user
       get :tag
     end
-    get :autocomplete_user, :on => :collection
     resources :comments
   end
 
@@ -44,9 +46,6 @@ Duhajo::Application.routes.draw do
   match "jobs/:id/new_file" => "jobs#new_file"
 
   put 'jobs/:id/like' => 'jobs#like', :as => 'like_job'
-
-
-  match "worker/:id" => "users#show", :as => 'worker'
 
   # Sample of named route:
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase

@@ -11,7 +11,7 @@ group :assets do
   gem "jquery-rails"
   gem "jquery-ui-rails"
   gem "jquery-modal-rails"
-  gem 'bootstrap-datepicker-rails'
+  gem "bootstrap-datepicker-rails"
 end
 
 group :development do
@@ -19,7 +19,7 @@ group :development do
 end
 
 #autocomplete
-gem 'rails3-jquery-autocomplete'
+gem "rails3-jquery-autocomplete"
 
 #notification
 gem "gritter", "1.0.3"
