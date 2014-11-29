@@ -2,12 +2,16 @@ class UsersController < ApplicationController
 
   def index
     @users = User.search(params[:search])
+    @users = User.where('city LIKE ?', "%#{params[:city]}%") if params[:city]
+    @users = User.tagged_with(params[:skill]) if params[:skill]
+    @users = @users.to_a
     @places = User.where("city != ''")
-    @tags = User.tag_counts_on(:skills, :limit => 5, :order => "count desc")
+    @tags = User.tag_counts_on(:skills, :limit => 5, :order => 'count desc')
+
   end
   
   def autocomplete_user
-    users = User.select("id, name").where("name LIKE ?", "%#{params[:name]}%")
+    users = User.select('id, name').where('name LIKE ?', "%#{params[:name]}%")
     result = users.collect do |u|
       {id: u.id, value: u.name}
     end
@@ -29,11 +33,6 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET /users/1/edit
-  def edit
-    @user = User.find(params[:id])
-  end
-
   def update
     @user = User.find(params[:id])
     params[:user].delete(:password) if params[:user][:password].blank?
@@ -42,7 +41,7 @@ class UsersController < ApplicationController
         format.html { redirect_to :myprofile, notice: 'Your profile successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { render action: 'edit' }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end

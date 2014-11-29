@@ -25,9 +25,33 @@
   else
     $("#status").text = "Sorry your browser does not support geolocation."
   return
+
 @getPositionManually = ->
   $("#locationFields").show()
   $("#openLocationFields").hide()
   $("#coordFields").hide()
   $("#radiusField").show()
   return
+
+#ToDo: Complex combining filters
+$ ->
+  $("#workers-filter .place-list a").click ->
+    $.ajax
+      type: "get"
+      data:
+        city: this.name
+      dataType: 'script'
+    false
+
+  $("#workers-filter .tag-list a").click ->
+    $.ajax
+      type: "get"
+      data:
+        skill: this.name
+      dataType: 'script'
+    false
+
+  $("#users-search #search").keyup ->
+    $.get $("#users-search").attr("action"), $("#users-search").serialize(), null, "script"
+    false
+return

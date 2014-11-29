@@ -44,6 +44,11 @@ de:
   job_form_street: "Straße"
   job_form_picture: "Kategorienbild"
 
+  worker_overview: "Arbeiterübersicht"
+  filter_by: "Filtern nach"
+  filter_by_name: "Per Namen suchen..."
+  top_places: "Häufige Orte"
+  top_skills: "Häufige Fähigkeiten"
   workers_no_workers: "Keinen Arbeiter gefunden. Sorry!"
   workers_near_search_info: "Suche nach einem Arbeiter, indem du einen Ort oder eine Straße angibst."
 
@@ -58,10 +63,6 @@ de:
   most_used_tags: "Meist verwendete Schlagworte"
 
   search_no_param: "Die Suche braucht ein Begriff, um zu suchen."
-
-  filter_by: "Filtern nach"
-  top_places: "Häufige Orte"
-  top_skills: "Häufige Fähigkeiten"
 
 # Defaults
   date:

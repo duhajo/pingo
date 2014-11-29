@@ -44,7 +44,12 @@ en:
   job_form_city: "City"
   job_form_street: "Street"
   job_form_picture: "Category Picture"
-  
+
+  worker_overview: "Worker Overview"
+  filter_by: "Filter by"
+  filter_by_name: "Searching for name..."
+  top_places: "Top Places"
+  top_skills: "Top Skills"
   workers_no_workers: "There are no workers available. Sorry!"
   workers_near_search_info: "Find available workers in your area. Type in a street or city."
 
@@ -59,10 +64,6 @@ en:
   most_used_tags: "Most Used Tags"
 
   search_no_param: "The search needs a term to search for."
-
-  filter_by: "Filter by"
-  top_places: "Top Places"
-  top_skills: "Top Skills"
 
   gflash:
     titles:
