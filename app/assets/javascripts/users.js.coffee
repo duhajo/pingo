@@ -33,25 +33,58 @@
   $("#radiusField").show()
   return
 
-#ToDo: Complex combining filters
 $ ->
   $("#workers-filter .place-list a").click ->
+    skill = $("#request-params #skill").val()
+    name = $("#request-params #name").val()
+    if city = $("#request-params #city").val() == this.name
+      city = ""
+      $(this).removeClass 'active'
+    else
+      city = this.name
+      $(this).addClass 'active'
     $.ajax
       type: "get"
       data:
-        city: this.name
+        skill: skill,
+        city: city,
+        name: name
       dataType: 'script'
     false
 
   $("#workers-filter .tag-list a").click ->
+    city = $("#request-params #city").val()
+    name = $("#request-params #name").val()
+    skill = $("#request-params #skill").val()
+    if skill == ""
+        skill = @name
+        $(this).addClass 'active'
+    else
+      if skill.indexOf(@name) > -1
+        skill = skill.replace(@name,'').trim()
+        $(this).removeClass 'active'
+      else
+        skill = new Array(skill, @name )
+        $(this).addClass 'active'
+
     $.ajax
       type: "get"
       data:
-        skill: this.name
+        skill: skill,
+        city: city,
+        name: name
       dataType: 'script'
     false
 
-  $("#users-search #search").keyup ->
-    $.get $("#users-search").attr("action"), $("#users-search").serialize(), null, "script"
+  $("#users-search #name").keyup ->
+    city = $("#request-params #city").val()
+    skill = $("#request-params #skill").val()
+    $.ajax
+      type: "get"
+      data:
+        skill: skill,
+        city: city,
+        name: this.value
+      dataType: 'script'
     false
 return

@@ -21,3 +21,11 @@
     font-size: rem-calc(12);
   }
 }
+
+.place-list {
+  .place {
+    &.active {
+      text-decoration: underline;
+    }
+  }
+}

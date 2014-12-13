@@ -27,3 +27,9 @@
 <% else %>
   <%= t("workers_no_workers"); %>
 <% end %>
+
+<%= form_tag '', :id => 'request-params' do %>
+  <%= hidden_field_tag :city, params[:city] %>
+  <%= hidden_field_tag :skill, params[:skill] %>
+  <%= hidden_field_tag :name, params[:name] %>
+<% end %>

@@ -91,3 +91,32 @@ h1 span {
   font-size: 30px; 
   line-height: 40px;
 }
+
+.tag-list {
+  padding: 0;
+
+  .icon {
+    background-position: -96px -96px;
+    margin: rem-calc(4) rem-calc(12) rem-calc(4) 0;
+    float: left;
+  }
+
+  .tag {
+    background-color: $brand-quinary;
+    border-radius: 3px;
+    font-size: $font-size-base;
+    padding: 5px;
+    float: left;
+    margin: 5px 12px 5px 0;
+    &.active {
+      background-color: $brand-primary;
+      color: $brand-quinary;
+    }
+  }
+  &.small {
+    .tag {
+      font-size: $font-size-small;
+      padding: 3px;
+    }
+  }
+}

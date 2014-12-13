@@ -19,6 +19,9 @@ class User < ActiveRecord::Base
     end
   end
 
+  scope :location, ->(location) { where city: location}
+  scope :name_contains, ->(name) { where('name like ?',"%#{name}%")}
+
   after_validation :reverse_geocode
   after_validation :geocode, :if => :address_changed?
 
@@ -61,11 +64,4 @@ class User < ActiveRecord::Base
     end
   end
 
-  def self.search(search)
-    if search
-      where('name LIKE ?', "%#{search}%")
-    else
-      find(:all)
-    end
-  end
 end

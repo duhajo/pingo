@@ -1,10 +1,11 @@
 class UsersController < ApplicationController
 
   def index
-    @users = User.search(params[:search])
-    @users = User.where('city LIKE ?', "%#{params[:city]}%") if params[:city]
-    @users = User.tagged_with(params[:skill]) if params[:skill]
-    @users = @users.to_a
+    @users = User.where(nil)
+    @users = @users.location(params[:city]) if params[:city].present?
+    @users = @users.tagged_with(params[:skill]) if params[:skill].present?
+    @users = @users.name_contains(params[:name]) if params[:name].present?
+
     @places = User.where("city != ''")
     @tags = User.tag_counts_on(:skills, :limit => 5, :order => 'count desc')
 
@@ -20,6 +21,12 @@ class UsersController < ApplicationController
 
   def my_profile
     @user = User.find(current_user.id)
+  end
+
+  def edit
+    if current_user
+      @user = User.find(current_user.id)
+    end
   end
 
   # GET /users/1

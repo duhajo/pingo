@@ -336,31 +336,6 @@ a:hover .icon.edit {
   font-size: $font-size-base;
 }
 
-.tag-list {
-  padding: 0;
-
-  .icon {
-    background-position: -96px -96px;
-    margin: rem-calc(4) rem-calc(12) rem-calc(4) 0;
-    float: left;
-  }
-
-  .tag {
-    background-color: $brand-quinary;
-    border-radius: 3px;
-    font-size: $font-size-base;
-    padding: 5px;
-    float: left;
-    margin: 5px 12px 5px 0;
-  }
-  &.small {
-    .tag {
-      font-size: $font-size-small;
-      padding: 3px;
-    }
-  }
-}
-
 .active .icon-label, a:hover .icon-label {
   color: $brand-tertiary;
 }

@@ -12,7 +12,9 @@
   </div>
   <div id="workers-filter" class="space col-md-4">
     <%= form_tag users_path, :method => 'get', :id => 'users-search' do %>
-      <%= text_field_tag :search, params[:search], :placeholder => t('filter_by_name'), :class => 'form-control' %>
+      <%= hidden_field_tag :skill, params[:skill] %>
+      <%= hidden_field_tag :city, params[:city] %>
+      <%= text_field_tag :name, params[:name], :placeholder => t('filter_by_name'), :class => 'form-control' %>
     <% end %>
     <h2><%= t('filter_by') %></h2>
     <% if !@places.to_a.empty? %>
