@@ -33,58 +33,85 @@
   $("#radiusField").show()
   return
 
-$ ->
-  $("#workers-filter .place-list a").click ->
-    skill = $("#request-params #skill").val()
-    name = $("#request-params #name").val()
-    if city = $("#request-params #city").val() == this.name
-      city = ""
-      $(this).removeClass 'active'
-    else
-      city = this.name
-      $(this).addClass 'active'
+userFilter = (->
+  sendFilter = ->
+    skillFilter.toString() if skillFilter && skillFilter.isArray
     $.ajax
       type: "get"
       data:
-        skill: skill,
-        city: city,
-        name: name
+        skill: skillFilter,
+        city: cityFilter,
+        name: nameFilter
       dataType: 'script'
+    return
+
+  #definitions
+  cityFilter = null
+  skillFilter = null
+  nameFilter = null
+
+  getFilter: (type) ->
+    if type == "city"
+      return cityFilter
+    else if type == "skill"
+      return skillFilter
+    else if type == "name"
+      return nameFilter
+    return
+
+  setFilter: (type, value) ->
+    if type == "city"
+      cityFilter = value
+    else if type == "skill"
+      skillFilter = value
+    else if type == "name"
+      nameFilter = value
+    return sendFilter()
+
+  removeFilter: (type, value) ->
+    if type == "city"
+      cityFilter = null
+    else if type == "skill"
+      skillFilter = null
+    else if type == "name"
+      nameFilter = null
+    return sendFilter()
+)()
+
+$ ->
+  $("#workers-filter .place-list a").click ->
+    city = userFilter.getFilter("city")
+    if city == @name
+      userFilter.removeFilter("city", @name)
+      $(this).removeClass 'active'
+    else
+      userFilter.setFilter("city", @name)
+      $(this).addClass 'active'
     false
 
   $("#workers-filter .tag-list a").click ->
-    city = $("#request-params #city").val()
-    name = $("#request-params #name").val()
-    skill = $("#request-params #skill").val()
-    if skill == ""
-        skill = @name
+    skill = userFilter.getFilter("skill")
+    if skill == null #kein Skillfilter gesetzt
+        userFilter.setFilter("skill", @name)
         $(this).addClass 'active'
     else
-      if skill.indexOf(@name) > -1
-        skill = skill.replace(@name,'').trim()
+      index = skill.indexOf(@name)
+      if skill == @name #Skill ist schon vorhanden
+        userFilter.removeFilter("skill", skill)
+        $(this).removeClass 'active'
+      else if index > -1 #der Skill im Array schon vor? -> ja
+        skill.splice(index, 1) #lösche den Skill raus
+        userFilter.setFilter("skill", skill) #setze ihn neu
         $(this).removeClass 'active'
       else
-        skill = new Array(skill, @name )
+        skill = new Array(skill, @name)
+        userFilter.setFilter("skill", skill)
         $(this).addClass 'active'
-
-    $.ajax
-      type: "get"
-      data:
-        skill: skill,
-        city: city,
-        name: name
-      dataType: 'script'
     false
 
   $("#users-search #name").keyup ->
-    city = $("#request-params #city").val()
-    skill = $("#request-params #skill").val()
-    $.ajax
-      type: "get"
-      data:
-        skill: skill,
-        city: city,
-        name: this.value
-      dataType: 'script'
+    name = userFilter.getFilter("name")
+    if name != @value
+      userFilter.setFilter("name", @value)
     false
 return
