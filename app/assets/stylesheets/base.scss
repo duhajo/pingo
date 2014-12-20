@@ -101,39 +101,6 @@ a:-moz-any-link:focus {
 
   #main-navigation {
     position: relative;
-
-    .icon.large {
-      height: 42px;
-    }
-
-    a:hover .icon.dashboard, .active .icon.dashboard {
-      background-position: 0 -48px;
-    }
-
-    .icon.jobs {
-      background-position: -48px 0;
-    }
-
-    a:hover .icon.jobs, .active .icon.jobs {
-      background-position: -48px -48px;
-    }
-
-    .icon.workers {
-      background-position: -96px 0;
-    }
-
-    a:hover .icon.workers, .active .icon.workers {
-      background-position: -96px -48px;
-    }
-
-    .icon.places {
-      background-position: -144px 0;
-    }
-
-    a:hover .icon.places, .active .icon.places {
-      background-position: -144px -48px;
-    }
-
   }
 
   .white-panel {
@@ -257,14 +224,6 @@ h1, h2, h3, h4 {
     margin-left: rem-calc(6);
     vertical-align: middle;
   }
-}
-
-h2 {
-  font-family: "RobotoMedium";
-}
-
-h3 {
-  font-family: "Roboto";
 }
 
 form {

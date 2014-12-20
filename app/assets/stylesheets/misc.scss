@@ -62,3 +62,43 @@
     font-size: 12px;
   }
 }
+
+.icon.large {
+  height: 42px;
+}
+
+a:hover .icon.dashboard, .active .icon.dashboard {
+  background-position: 0 -48px;
+}
+
+.icon.jobs {
+  background-position: -48px 0;
+}
+
+a:hover .icon.jobs, .active .icon.jobs {
+  background-position: -48px -48px;
+}
+
+.icon.workers {
+  background-position: -96px 0;
+}
+
+a:hover .icon.workers, .active .icon.workers {
+  background-position: -96px -48px;
+}
+
+.icon.places {
+  background-position: -144px 0;
+
+  &.middle {
+    background-position: -160px -96px;
+  }
+}
+
+a:hover .icon.places, .active .icon.places {
+  background-position: -144px -48px;
+}
+
+.icon.skill {
+  background-position: -128px -96px;
+}

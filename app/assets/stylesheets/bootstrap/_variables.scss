@@ -37,7 +37,7 @@ $brand-senary:          #2d5b7f;
 //** Background color for `<body>`.
 $body-bg:               #f7f7f7 !default;
 //** Global text color on `<body>`.
-$text-color:            $gray-dark !default;
+$text-color:            $brand-quaternary !default;
 
 //** Global textual link color.
 $link-color:            $brand-primary !default;
@@ -72,7 +72,7 @@ $line-height-base:        1.428571429 !default; // 20/14
 $line-height-computed:    floor(($font-size-base * $line-height-base)) !default; // ~20px
 
 //** By default, this inherits from the `<body>`.
-$headings-font-family:    "RobotoBold" !default;
+$headings-font-family:    "RobotoMedium" !default;
 $headings-font-weight:    500 !default;
 $headings-line-height:    1.5 !default;
 $headings-color:          inherit !default;

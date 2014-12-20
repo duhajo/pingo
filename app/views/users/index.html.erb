@@ -12,13 +12,11 @@
   </div>
   <div id="workers-filter" class="space col-md-4">
     <%= form_tag users_path, :method => 'get', :id => 'users-search' do %>
-      <%= hidden_field_tag :skill, params[:skill] %>
-      <%= hidden_field_tag :city, params[:city] %>
       <%= text_field_tag :name, params[:name], :placeholder => t('filter_by_name'), :class => 'form-control' %>
     <% end %>
     <h2><%= t('filter_by') %></h2>
     <% if !@places.to_a.empty? %>
-      <h3><%= t('top_places')%></h3>
+      <h3><span class="icon middle places"></span><span class="icon-label"><%= t('top_places')%></span></h3>
       <ul class="place-list">
         <% @places.each do |place| %>
           <li><%= link_to place.city, 'javascript:;', :name => place.city, :class => 'place' %></li>
@@ -26,7 +24,7 @@
       </ul>
     <% end %>
     <% if !@tags.empty? %>
-      <h3><%= t('top_skills')%></h3>
+      <h3><span class="icon middle skill"></span><span class="icon-label"><%= t('top_skills')%></span></h3>
       <ul class="tag-list">
         <% @tags.each do |tag| %>
           <li><%= link_to tag.name, 'javascript:;', :name => tag.name, :class => 'tag' %></li>

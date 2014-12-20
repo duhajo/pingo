@@ -22,10 +22,30 @@
   }
 }
 
-.place-list {
-  .place {
-    &.active {
-      text-decoration: underline;
+#workers-filter {
+
+  h3 {
+    font-size: 16px;
+    .icon {
+      float: left;
+    }
+  }
+
+  ul {
+    margin-left: 32px;
+  }
+
+  .place-list {
+    li {
+      &:first-child {
+        padding-top: 0;
+      }
+      padding: 3px 0;
+      .place {
+        &.active {
+          font-family: "RobotoMedium";
+        }
+      }
     }
   }
 }
