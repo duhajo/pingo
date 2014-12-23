@@ -4,9 +4,9 @@
       @addionalClass = " my-like"
     end
   end %>
-<%= link_to "javascript:;", method: :post, :id => "like-button", :remote => true, :class => "btn btn-default show-tooltip" + @addionalClass,
+<%= link_to "javascript:;", method: :post, :id => "like-button", :remote => true, :class => "show-tooltip" + @addionalClass,
             data: {toggle: "tooltip"}, :title => @job.votes.up.by_type(User).voters.map { |v| v.name }.join(", ") do %>
-  <span class="icon love pull-left"><!----></span>
+  <span class="icon love"><!----></span>
   <span class="icon-label">
     <span class="likes-number">
       <% if @job.likes.size == 0 %>

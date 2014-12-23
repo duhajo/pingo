@@ -22,3 +22,9 @@ $(document).ready ->
 
 $("#search-input").bind "railsAutocomplete.select", (event, data) ->
   window.location.replace "/jobs/"+data.item.id
+
+$("#my-jobs-link").on 'click', ->
+  $('#my-jobs-list').toggleClass "active"
+
+$("#search-input").keyup ->
+  $('#my-jobs-list').removeClass "active"

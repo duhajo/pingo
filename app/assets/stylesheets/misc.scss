@@ -63,42 +63,81 @@
   }
 }
 
-.icon.large {
-  height: 42px;
-}
+.icon {
+  background-image: url("icons/iconssprite.png");
+  background-size: 320px 256px;
+  display: block;
+  height: 32px;
+  width: 32px;
 
-a:hover .icon.dashboard, .active .icon.dashboard {
-  background-position: 0 -48px;
-}
-
-.icon.jobs {
-  background-position: -48px 0;
-}
-
-a:hover .icon.jobs, .active .icon.jobs {
-  background-position: -48px -48px;
-}
-
-.icon.workers {
-  background-position: -96px 0;
-}
-
-a:hover .icon.workers, .active .icon.workers {
-  background-position: -96px -48px;
-}
-
-.icon.places {
-  background-position: -144px 0;
-
-  &.middle {
-    background-position: -160px -96px;
+  &.large {
+    height: 48px;
+    width: 48px;
   }
-}
 
-a:hover .icon.places, .active .icon.places {
-  background-position: -144px -48px;
-}
+  &.center {
+    margin: 0 auto;
+  }
 
-.icon.skill {
-  background-position: -128px -96px;
+  &.add {
+    background-position: -128px -128px;
+    &.contrast {
+      background-position: -128px -192px;
+    }
+  }
+
+  &.edit {
+    background-position: -160px -128px;
+    &.contrast {
+      background-position: -160px -192px;
+    }
+  }
+
+  &.love {
+    background-position: -480px -96px;
+  }
+
+  &.activity {
+    background-position: -448px -96px;
+  }
+
+  &.search {
+    background-position: -575px -127px;
+  }
+
+  &.jobs {
+    background-position: -48px 0;
+  }
+
+  a:hover &.dashboard, .active &.dashboard {
+    background-position: 0 -48px;
+  }
+
+  a:hover &.jobs, .active &.jobs {
+    background-position: -48px -48px;
+  }
+
+  a:hover &.workers, .active &.workers {
+    background-position: -96px -48px;
+  }
+
+  a:hover &.places, .active &.places {
+    background-position: -144px -48px;
+  }
+
+  &.workers {
+    background-position: -96px 0;
+  }
+
+  &.places {
+    background-position: -144px 0;
+
+    &.middle {
+      background-position: -160px -96px;
+    }
+  }
+
+  &.skill {
+    background-position: -128px -96px;
+  }
 }

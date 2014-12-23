@@ -83,31 +83,31 @@ $ ->
     city = userFilter.getFilter("city")
     if city == @name
       userFilter.removeFilter("city", @name)
-      $(this).toggleClass "active"
+      $(@).toggleClass "active"
     else
       $("li a[name="+city+"]").toggleClass "active"
       userFilter.setFilter("city", @name)
-      $(this).toggleClass "active"
+      $(@).toggleClass "active"
     false
 
   $("#workers-filter .tag-list a").click ->
     skill = userFilter.getFilter("skill")
     if skill == null #kein Skillfilter gesetzt
         userFilter.setFilter("skill", @name)
-        $(this).addClass "active"
+        $(@).addClass "active"
     else
       index = skill.indexOf(@name)
       if skill == @name #Skill ist schon vorhanden
         userFilter.removeFilter("skill", skill)
-        $(this).removeClass "active"
+        $(@).removeClass "active"
       else if index > -1 #der Skill im Array schon vor? -> ja
         skill.splice(index, 1) #lösche den Skill raus
         userFilter.setFilter("skill", skill) #setze ihn neu
-        $(this).removeClass "active"
+        $(@).removeClass "active"
       else
         skill = new Array(skill, @name)
         userFilter.setFilter("skill", skill)
-        $(this).addClass "active"
+        $(@).addClass "active"
     false
 
   $("#users-search #name").keyup ->

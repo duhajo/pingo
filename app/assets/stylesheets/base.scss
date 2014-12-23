@@ -45,17 +45,13 @@ a:-moz-any-link:focus {
     border-bottom: 2px solid #3180BD;
     position: relative;
 
-    a {
-      color: #fff;
-    }
-
-    li a {
-      line-height: 3.5;
-    }
-
     #search-box {
       float: none;
       margin: 17px auto;
+
+      #my-jobs-link .icon {
+        position: absolute;
+      }
 
       #search-input {
         border: 0 none;
@@ -63,7 +59,20 @@ a:-moz-any-link:focus {
         font-size: $font-size-small;
         margin-top: 12px;
         max-width: 350px;
+        padding-left: 35px;
         top: 0;
+      }
+
+      #my-jobs-list {
+        display: none;
+        &.active {
+          display: block;
+          left: 0;
+          max-width: 350px;
+          position: absolute;
+          width: 100%;
+          z-index: 2;
+        }
       }
     }
 
@@ -74,12 +83,22 @@ a:-moz-any-link:focus {
     }
 
     #user-navigation {
+      a {
+        color: #ffffff;
+      }
 
       .navbar-nav {
         margin-bottom: 0;
         margin-top: 0;
         .profile-avatar img {
           border-color: #FFFFFF;
+        }
+
+        .dropdown-menu {
+          padding: 0;
+          li a {
+            line-height: 2.5;
+          }
         }
       }
     }
@@ -235,45 +254,6 @@ form {
 
 .overflow {
   overflow: hidden;
-}
-
-.icon {
-  background-image: url("icons/iconssprite.png");
-  background-size: 256px 256px;
-  display: block;
-  height: 32px;
-  width: 32px;
-
-  &.large {
-    height: 48px;
-    width: 48px;
-  }
-
-  &.center {
-    margin: 0 auto;
-  }
-
-  &.add {
-    background-position: -128px -128px;
-    &.contrast {
-      background-position: -128px -192px;
-    }
-  }
-
-  &.edit {
-    background-position: -160px -128px;
-    &.contrast {
-      background-position: -160px -192px;
-    }
-  }
-
-  &.love {
-    background-position: -480px -96px;
-  }
-
-  &.activity {
-    background-position: -448px -96px;
-  }
 }
 
 a:hover .icon.add {

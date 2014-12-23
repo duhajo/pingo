@@ -21,8 +21,12 @@
           <ul id="search-box">
             <%= form_tag(jobs_path, id: "search-form") do %>
                 <li class="dropdown">
+                  <a href="javascript:;" id="my-jobs-link"><span class="search icon"></span></a>
                   <%= autocomplete_field_tag 'search', '', autocomplete_job_title_jobs_path, placeholder: "Search Jobs",
                       id: "search-input", class: "form-control dropdown-toggle", data: {:toggle => "dropdown"} %>
+                  <ul id="my-jobs-list" class="ui-menu">
+                    <%= render :partial => "myjobs", :my_jobs => @my_jobs %>
+                  </ul>
                 </li>
             <% end %>
           </ul>

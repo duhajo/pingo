@@ -1,6 +1,7 @@
 #catgories-overview {
   .category {
     display: inline-block;
+    vertical-align: top;
     max-width: 242px;
     padding: 15px;
 
@@ -17,8 +18,9 @@
       border-color: $brand-secondary;
       border-style: solid;
       border-width: 0px 1px 1px;
+      overflow: hidden;
       .tag-list {
-        padding: 15px;
+        padding: 0 5px;
       }
     }
   }
@@ -72,12 +74,21 @@
   
           #job-likes {
             @extend .pull-right;
-            a.btn {
+            a {
               line-height: 2.4;
               padding: 0 5px;
               &.my-like {
                 background-color: $brand-senary;
                 color: #ffffff;
+              }
+            }
+            #like-button {
+              .icon {
+                background-position: -550px -100px;
+                float: left;
+                height: 21px;
+                margin: 4px 4px 0 0;
+                width: 21px;
               }
             }
           }

@@ -1,8 +1,13 @@
-<li role="presentation" class="dropdown-header">Meine Aufgaben</li>
-<%if my_jobs.empty? %>
-  <li role="presentation" class="disabled">Es sind noch keine Jobs vorhanden.</li>
-<% else %>
-  <% my_jobs.each do |job| %>
-    <li><%= link_to job.title, job %></li>
+<% if user_signed_in? %>
+  <li role="presentation" class="ui-menu-item dropdown-header">Meine Aufgaben</li>
+  <%if my_jobs.empty? %>
+    <li role="presentation" class="ui-menu-item disabled">Es sind noch keine Jobs vorhanden.</li>
+  <% else %>
+    <% my_jobs.each do |job| %>
+      <li class="ui-menu-item"><%= link_to job.title, job %></li>
+    <% end %>
   <% end %>
+
+<% else %>
+  <li role="presentation" class="ui-menu-item disabled">Du bist nicht angemeldet <%= link_to 'einloggen?', login_path, :class => "btn btn-primary" %></li>
 <% end %>
