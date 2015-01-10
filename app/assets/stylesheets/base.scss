@@ -88,10 +88,12 @@ a:-moz-any-link:focus {
       }
 
       .navbar-nav {
-        margin-bottom: 0;
-        margin-top: 0;
         .profile-avatar img {
           border-color: #FFFFFF;
+        }
+        
+        .login, .register {
+          padding-top: 14px;
         }
 
         .dropdown-menu {

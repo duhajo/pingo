@@ -28,3 +28,6 @@ $("#my-jobs-link").on 'click', ->
 
 $("#search-input").keyup ->
   $('#my-jobs-list').removeClass "active"
+  
+$("#search-input").on 'click', ->
+  $('#my-jobs-list').toggleClass "active"

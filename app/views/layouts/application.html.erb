@@ -40,27 +40,25 @@
         <div id="user-navigation" class="col-xs-4">
           <ul class="nav navbar-nav navbar-right">
             <% if user_signed_in? %>
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle overflow" data-toggle="dropdown">
-                    <span class="profile-avatar"><%= image_tag avatar_url(current_user), alt: "?", class: "img-circle" %></span>
-                    <span class="profile-name"><%= current_user.name %></span>
-                    <b class="caret"></b>
-                  </a>
-                  <ul class="dropdown-menu">
-                    <li class="profile">
-                      <a href="/myprofile">
-                        <span>Profil anzeigen</span>
-                      </a>
-                    </li>
-                    <li id="editprofile"><a href="/users/<%= current_user.id %>/edit">Profil bearbeiten</a></li>
-                    <li id="logout"><%= link_to t('logout'), '/logout' %></li>
-                  </ul>
-                </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle overflow" data-toggle="dropdown">
+                  <span class="profile-avatar"><%= image_tag avatar_url(current_user), alt: "?", class: "img-circle" %></span>
+                  <span class="profile-name"><%= current_user.name %></span>
+                  <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                  <li class="profile">
+                    <a href="/myprofile">
+                      <span>Profil anzeigen</span>
+                    </a>
+                  </li>
+                  <li id="editprofile"><a href="/users/<%= current_user.id %>/edit">Profil bearbeiten</a></li>
+                  <li id="logout"><%= link_to t('logout'), '/logout' %></li>
+                </ul>
+              </li>
             <% else %>
-                <li>
-                  <%= link_to t('login'), new_user_session_path %>
-                </li>
-                <li><%= link_to t('register'), new_user_registration_path %></li>
+              <li class="login"><%= link_to t('login'), new_user_session_path %></li>
+              <li class="register"><%= link_to t('register'), new_user_registration_path %></li>
             <% end %>
           </ul>
         </div>
