@@ -23,15 +23,20 @@ en:
   jobs_edit_header_category: "Edit Category"
 
   jobs_new: "New Job"
-  jobs_new_job: "New Job for"
   jobs_new_category: "New Category"
+  jobs_new_resource: "New Resource"
 
   jobs_related: "Related Jobs"
+  jobs_resources_related: "Related Resources"
   jobs_not_related: "Not Related Jobs"
+  jobs_resources_not_related: "Not Related Resources"
 
   jobs_supply: "Supply"
   jobs_demand: "Demand"
   jobs_found: "Job Results"
+
+  jobs_demand_prefix: "Search"
+  jobs_supply_prefix: "Offer"
 
   job_form_type: "Type"
   job_form_title: "Title"
@@ -64,6 +69,8 @@ en:
   most_used_tags: "Most Used Tags"
 
   search_no_param: "The search needs a term to search for."
+
+  for: "for"
 
   gflash:
     titles:

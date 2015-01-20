@@ -7,8 +7,15 @@ class UsersController < ApplicationController
     @users = @users.name_contains(params[:name]) if params[:name].present?
 
     @places = User.where("city != ''")
-    @tags = User.tag_counts_on(:skills, :limit => 5, :order => 'count desc')
+    @places = User.where('city LIKE ?', "%#{params[:city_filter]}%") if params[:city_filter].present?
 
+    @tags = User.tag_counts_on(:skills, :limit => 5, :order => 'count desc')
+    @tags = User.tag_counts_on(:skills, :limit => 10, :order => 'count desc').where('tags.name LIKE ?', "%#{params[:skill_filter]}%") if params[:skill_filter].present?
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
   
   def autocomplete_user

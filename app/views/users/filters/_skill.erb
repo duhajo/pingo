@@ -1,0 +1,12 @@
+<div id="skill-filter">
+  <h3><span class="icon middle skill"></span><span class="icon-label"><%= t('top_skills')%></span></h3>
+  <% if !@tags.empty? %>
+    <ul class="tag-list">
+      <% @tags.each do |tag| %>
+        <li><%= link_to tag.name, 'javascript:;', :name => tag.name, :class => 'tag' %></li>
+      <% end %>
+    </ul>
+  <% else %>
+    Keine Fertigkeiten gefunden.
+  <% end %>
+</div>

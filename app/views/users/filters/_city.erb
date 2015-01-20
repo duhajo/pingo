@@ -1,0 +1,12 @@
+<div id="city-filter">
+  <h3><span class="icon middle places"></span><span class="icon-label"><%= t('top_places')%></span></h3>
+  <% if !@places.to_a.empty? %>
+    <ul class="place-list">
+      <% @places.each do |place| %>
+        <li><%= link_to place.city, 'javascript:;', :name => place.city, :class => 'place' %></li>
+      <% end %>
+    </ul>
+  <% else %>
+    Keine Orte gefunden.
+  <% end %>
+</div>

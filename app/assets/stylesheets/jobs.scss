@@ -1,28 +1,33 @@
-#catgories-overview {
-  .category {
-    display: inline-block;
-    vertical-align: top;
-    max-width: 242px;
-    padding: 15px;
+.category {
+  display: inline-block;
+  vertical-align: top;
+  max-width: 242px;
+  padding: 15px;
 
-    .category-head {
-      background-color: $brand-secondary;
-      padding: 10px 8px;
-      a {
-        color: #FFFFFF;
-        display: block;
-        width: 100%;
-      }
+  .category-head {
+    background-color: $brand-secondary;
+    padding: 10px 8px;
+    a {
+      color: #FFFFFF;
+      display: block;
+      width: 100%;
     }
-    .category-body {
-      border-color: $brand-secondary;
-      border-style: solid;
-      border-width: 0px 1px 1px;
-      overflow: hidden;
-      .tag-list {
-        padding: 0 5px;
-      }
+  }
+  .category-body {
+    border-color: $brand-secondary;
+    border-style: solid;
+    border-width: 0px 1px 1px;
+    overflow: hidden;
+    .tag-list {
+      padding: 0 5px;
     }
+  }
+}
+
+.jobs-overview {
+  @extend .row;
+  .unassigned-jobs-content, .unassigned-resources-content {
+    @extend .col-md-6;
   }
 }
 
@@ -158,37 +163,57 @@
   }
 }
 
-.list {
-  &.demands .job-box, .job-box.demand {
-      border-color: $brand-secondary;
+.job-box {
+  border: 1px solid transparent;
+  margin-bottom: 10px;
+  padding: 0 10px 3px;
+
+  &.job {
+    border-color: $brand-secondary;
+    .prefix {
+      background-color: $brand-secondary;
+    }
   }
 
-  &.supplies .job-box, .job-box.supply {
+  &.demand {
+    border-color: orange;
+    .prefix {
+      background-color: orange;
+      border: 1px solid darkorange;
+      border-radius: 4px;
+      font-size: 12px;
+      margin-right: 5px;
+      padding: 3px;
+    }
+  }
+
+  &.supply {
     border-color: darkgreen;
+    .prefix {
+      background-color: darkgreen;
+      border: 1px solid darkgreen;
+      border-radius: 4px;
+      font-size: 12px;
+      margin-right: 5px;
+      padding: 3px;
+    }
   }
 
-  .job-box {
+  .title a {
+    font-size: $font-size-base;
+    line-height: 2;
+    display: block;
+    width: 100%;
+  }
 
-    border: 1px solid transparent;
-    margin-bottom: 10px;
-    padding: 0 10px 3px;
+  .description {
+    font-size: $font-size-small;
+    padding-bottom: 8px;
+  }
 
-    .title a {
-      font-size: $font-size-base;
-      line-height: 2;
-      display: block;
-      width: 100%;
-    }
-
-    .description {
-      font-size: $font-size-small;
-      padding-bottom: 8px;
-    }
-
-    .job-bottom-line {
-      font-size: $font-size-small;
-      line-height: 2.3;
-    }
+  .job-bottom-line {
+    font-size: $font-size-small;
+    line-height: 2.3;
   }
 }
 

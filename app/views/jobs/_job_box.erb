@@ -1,10 +1,29 @@
+<%if job.type == 1
+    @type_class = 'job'
+  elsif job.type == 2
+    @type_prefix = t('jobs_demand_prefix')
+    @type_class = 'demand'
+  elsif job.type == 3
+    @type_prefix = t('jobs_supply_prefix')
+    @type_class = 'supply'
+end %>
+
+
 <% if job.type == 0 %>
   <div class="job-box category">
-    <div class="title"><%= link_to job.title, job %></div>
+    <div class="title"><%=link_to job.title, job %></div>
   </div>
 <% else %>
-  <div class="job-box <% if job.type == 1 %>demand<%elsif job.type == 2%>supply<%end%>">
-    <div class="title"><%= link_to job.title, job %></div>
+  <div class="job-box <%=@type_class%>">
+    <div class="title">
+      <%=link_to job do
+        if @type_prefix.present?
+          content_tag(:span, @type_prefix, :class => 'prefix') + job.title
+        else
+          job.title
+        end
+      end%>
+    </div>
     <% if not job.skill_list.empty? %>
       <div class="tag-list overflow small">
         <% job.tag_counts_on(:skills, :limit => 5, :order => "count desc").each do |tag| %>

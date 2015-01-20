@@ -34,8 +34,8 @@ Duhajo::Application.routes.draw do
   match "dashboard" => "dashboard#index"
 
   match "jobs/new/:type" => "jobs#new"
-  
-  match "jobs/:id/new" => "jobs#new", :as => 'new_subjob'
+
+  match "jobs/:id/new/:type" => "jobs#new", :as => 'new_sub_job'
   match "jobs/:id/support" => "jobs#support"
   match "jobs/:id/love" => "jobs#like", :as => 'love_job'
   match "jobs/:id/set_status" => "jobs#set_status"

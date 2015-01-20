@@ -23,15 +23,20 @@ de:
   jobs_edit_header_category: "Kategorie bearbeiten"
 
   jobs_new: "Neuer Job"
-  jobs_new_job: "Neuer Job für"
   jobs_new_category: "Neue Kategorie"
+  jobs_new_resource: "Neue Ressource"
 
   jobs_related: "Eingeordnete Jobs"
+  jobs_resources_related: "Eingeordnete Ressourcen"
   jobs_not_related: "Nicht eingeordnete Jobs"
+  jobs_resources_not_related: "Nicht eingeordnete Ressourcen"
 
   jobs_supply: "Angebot"
   jobs_demand: "Nachfrage"
   jobs_found: "Gefundene Jobs"
+
+  jobs_demand_prefix: "Suche"
+  jobs_supply_prefix: "Biete"
 
   job_form_title: "Titel"
   job_form_description: "Beschreibung"
@@ -63,6 +68,8 @@ de:
   most_used_tags: "Meist verwendete Schlagworte"
 
   search_no_param: "Die Suche braucht ein Begriff, um zu suchen."
+
+  for: "für"
 
 # Defaults
   date:

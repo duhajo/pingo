@@ -79,7 +79,7 @@ userFilter = (->
 )()
 
 $ ->
-  $("#workers-filter .place-list a").click ->
+  $("body").delegate "#workers-filter .place-list a", "click", ->
     city = userFilter.getFilter("city")
     if city == @name
       userFilter.removeFilter("city", @name)
@@ -90,7 +90,7 @@ $ ->
       $(@).toggleClass "active"
     false
 
-  $("#workers-filter .tag-list a").click ->
+  $("body").delegate "#workers-filter .tag-list a", "click", ->
     skill = userFilter.getFilter("skill")
     if skill == null #kein Skillfilter gesetzt
         userFilter.setFilter("skill", @name)
@@ -110,9 +110,21 @@ $ ->
         $(@).addClass "active"
     false
 
-  $("#users-search #name").keyup ->
+  $("#users-search #name-search-button").click ->
     name = userFilter.getFilter("name")
-    if name != @value
-      userFilter.setFilter("name", @value)
+    searchValue = $('#users-search #name').val()
+    if name != searchValue
+      userFilter.setFilter("name", searchValue)
+
+  $("#users-search #name").keyup ->
+    $.ajax(
+      type: "get"
+      data:
+        city_filter: @value,
+        skill_filter: @value,
+    ).success (data) ->
+      newFilterContent = $(data).find("#workers-filter")
+      $("#city-filter").html newFilterContent.find("#city-filter").html()
+      $("#skill-filter").html newFilterContent.find("#skill-filter").html()
     false
-return
+  return

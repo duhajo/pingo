@@ -13,9 +13,11 @@ class JobsController < ApplicationController
       @job = Job.find(params[:job_id])
       redirect_to @job
     else
-      @demands = Job.where('parent_id' => nil).where('type' => 1)
-      @supplies = Job.where('parent_id' => nil).where('type' => 2)
-      @categories = Job.find_all_by_type(0)
+      all_jobs = Job.where('parent_id' => nil)
+      @jobs = all_jobs.where('type' => 1)
+      @demands = all_jobs.where('type' => 2)
+      @supplies = all_jobs.where('type' => 3)
+      @categories = all_jobs.where('type' => 0)
     end
   end
 
@@ -51,8 +53,8 @@ class JobsController < ApplicationController
     @is_manager = JobsWorker.where(:job_id => @job.id).where('jobs_workers.isCreator' => true).to_a
     
     @all_jobs = Job.where('parent_id' => @job.id)
-    @demands = @all_jobs.where('type' => 1)
-    @supplies = @all_jobs.where('type' => 2)
+    @jobs = @all_jobs.where('type' => 1)
+    @resources = @all_jobs.where('type' => [2,3])
     
     @parent_jobs = @job.ancestors
     @job_ids = Array.new << @job.id
@@ -68,6 +70,7 @@ class JobsController < ApplicationController
     
     if @job.type == 0
       @most_used_tags = @all_jobs.skill_counts
+      @categories = @all_jobs.where('type' => 0)
     end
     respond_to do |format|
       format.html # show.html.erb
@@ -81,8 +84,12 @@ class JobsController < ApplicationController
     if params[:id]
        @parent_job = Job.find(params[:id])
     end
-    
-    @type = 0 if params[:type].present?
+
+    if params[:type].present?
+      @type = 0 if params[:type] == 'category'
+      @type = 1 if params[:type] == 'job'
+      @type = 2 if params[:type] == 'resource'
+    end
     
     @job = Job.new
 
@@ -132,7 +139,8 @@ class JobsController < ApplicationController
 	        @job.create_activity :create_child, params: {job: Job.find(@job.parent_id)}, owner: current_user
 	      else
           @job.create_activity :create, owner: current_user
-	      end
+        end
+        #ToDo: Add Type Distinction ("add Resource ABC to category XYZ")
         format.html { redirect_to @job, notice: 'Job was successfully created.' }
         format.json { render json: @job, status: :created, location: @job }
       else

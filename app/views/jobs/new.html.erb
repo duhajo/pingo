@@ -2,17 +2,16 @@
 <div class="container">
   <div id="new-job-page" class="form col-md-6 col-md-offset-3 white-panel clear-top" data-id="<%= @job.id %>">
 
-    <% if !@type.nil? && @type == 0 %>
-      <h1><%= t("jobs_new_category") %></h1>
-    <% else %>
-      <h1>
-        <% if not @parent_job.nil? %>
-          <%= t("jobs_new_job") %> "<%= @parent_job.title %>"
-        <% else %>
-          <%= t("jobs_new") %>
-        <%end%>
-      </h1>
-    <% end %>
+    <h1>
+      <% if !@type.nil? && @type == 0 %>
+        <%= t('jobs_new_category') %>
+      <% elsif @type == 2 %>
+        <%= t('jobs_new_resource') %>
+      <% else %>
+        <%= t('jobs_new') %>
+      <% end %>
+      <% if not @parent_job.nil?%> <%=t('for')%> "<%= @parent_job.title %>"<% end %>
+    </h1>
 
     <%= form_for(@job) do |f| %>
       <% if @job.errors.any? %>
@@ -31,7 +30,7 @@
       <% end %>
 
       <div class="form-group">
-        <% if not @type.nil? %>
+        <% if @type < 2 %>
           <%= f.hidden_field :type, value: @type %>
         <% else %>
           <%= f.label :type, t('job_form_type') %>
@@ -54,7 +53,7 @@
         <%= f.label :description, t('job_form_description') %>
         <%= f.resizable_text_area :description, class: "form-control", rows: "4" %>
       </div>
-      <% if @type.nil? && @type != 0 %>
+      <% if @type > 0 %>
         <div class="form-group">
           <%= f.label :skill_list, t('job_form_tags') %>
           <br/>
