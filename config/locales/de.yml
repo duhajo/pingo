@@ -17,6 +17,9 @@ de:
   jobs_category_no_tags: "Es sind noch keine Schlagworte vorhanden."
 
   jobs_no_jobs: "Keinen Job gefunden. Sorry!"
+  jobs_no_resources: "Keine Angebote oder Nachfragen gefunden. Sorry!"
+  jobs_no_demand: "Keine Nachfrage gefunden!"
+  jobs_no_supply: "Kein Angebot gefunden!"
   jobs_no_description: "Es ist noch keine Beschreibung vorhanden."
   jobs_near_search_info: "Suche nach einem Job, indem du einen Ort oder eine Straße angibst."
   jobs_edit_header: "Job bearbeiten"
@@ -26,10 +29,10 @@ de:
   jobs_new_category: "Neue Kategorie"
   jobs_new_resource: "Neue Ressource"
 
-  jobs_related: "Eingeordnete Jobs"
-  jobs_resources_related: "Eingeordnete Ressourcen"
+  jobs_related: "Jobs"
+  jobs_resources_related: "Marktplatz"
   jobs_not_related: "Nicht eingeordnete Jobs"
-  jobs_resources_not_related: "Nicht eingeordnete Ressourcen"
+  jobs_resources_not_related: "Marktplatz"
 
   jobs_supply: "Angebot"
   jobs_demand: "Nachfrage"
@@ -62,7 +65,7 @@ de:
   dashboard_recommendations: "Empfehlungen"
   dashboard_no_recommendations: "Es konnten keine Empfehlungen für dich gefunden werden."
   dashboard_recommendations_on_tags: "Basierend auf deine Schlagworte"
-  dashboard_recommendations_on_place: "Basierend auf deinen Ort"
+  dashboard_recommendations_on_place: "Basierend auf deinem Ort"
 
   tags_not_found: "Es wurden keine Schlagworte gefunden"
   most_used_tags: "Meist verwendete Schlagworte"

@@ -17,6 +17,9 @@ en:
   jobs_category_no_tags: "There are no tags in this category."
 
   jobs_no_jobs: "There are no jobs available. Sorry!"
+  jobs_no_resources: "There are no demands or supplies available. Sorry!"
+  jobs_no_demand: "There are no demand available!"
+  jobs_no_supply: "There are no supply available!"
   jobs_no_description: "There is not a description yet."
   jobs_near_search_info: "Find available Jobs in your area. Type in a street or city."
   jobs_edit_header: "Edit Job"
@@ -26,10 +29,10 @@ en:
   jobs_new_category: "New Category"
   jobs_new_resource: "New Resource"
 
-  jobs_related: "Related Jobs"
-  jobs_resources_related: "Related Resources"
+  jobs_related: "Jobs"
+  jobs_resources_related: "Marketplace"
   jobs_not_related: "Not Related Jobs"
-  jobs_resources_not_related: "Not Related Resources"
+  jobs_resources_not_related: "Marketplace"
 
   jobs_supply: "Supply"
   jobs_demand: "Demand"
