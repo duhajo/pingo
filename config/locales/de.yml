@@ -16,10 +16,11 @@ de:
   jobs_category_overview: "Kategorieübersicht"
   jobs_category_no_tags: "Es sind noch keine Schlagworte vorhanden."
 
-  jobs_no_jobs: "Keinen Job gefunden. Sorry!"
-  jobs_no_resources: "Keine Angebote oder Nachfragen gefunden. Sorry!"
-  jobs_no_demand: "Keine Nachfrage gefunden!"
-  jobs_no_supply: "Kein Angebot gefunden!"
+  jobs_no_jobs: "Keinen Job gefunden."
+  jobs_no_resources: "Kein Angebot und keine Nachfrage vorhanden."
+  jobs_no_category: "Keine weitere Kategorie vorhanden."
+  jobs_no_demand: "Keine Nachfrage vorhanden."
+  jobs_no_supply: "Kein Angebot vorhanden."
   jobs_no_description: "Es ist noch keine Beschreibung vorhanden."
   jobs_near_search_info: "Suche nach einem Job, indem du einen Ort oder eine Straße angibst."
   jobs_edit_header: "Job bearbeiten"
@@ -30,9 +31,9 @@ de:
   jobs_new_resource: "Neue Ressource"
 
   jobs_related: "Jobs"
-  jobs_resources_related: "Marktplatz"
+  jobs_resources_related: "Tauschbörse"
   jobs_not_related: "Nicht eingeordnete Jobs"
-  jobs_resources_not_related: "Marktplatz"
+  jobs_resources_not_related: "Tauschbörse"
 
   jobs_supply: "Angebot"
   jobs_demand: "Nachfrage"

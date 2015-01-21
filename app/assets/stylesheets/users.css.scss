@@ -34,6 +34,18 @@
   ul {
     margin-left: 32px;
   }
+  
+  #users-search {
+    @extend .row;
+    @extend .side-space;
+    @extend .side-space;
+    .search-input {
+      @extend .col-md-7;
+    }
+    .btn {
+      @extend .col-md-4, .col-md-offset-1;
+    }
+  }
 
   .place-list {
     li {

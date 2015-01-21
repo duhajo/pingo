@@ -30,62 +30,64 @@
         </div>
     <% end %>
   </div>
-  <div class="jobs-overview space">
-    <div class="unassigned-jobs-content">
-      <h1 class="bottom-margin overflow">
-        <% if user_signed_in? %><span class="icon-label left">
-        <% end %><%= t('jobs_not_related')%>
-        <% if user_signed_in? %></span>
-          <a href="<%= new_job_path %>" class="header-actions left"><span class="icon add"></span></a>
-        <% end %>
-      </h1>
-      <% if @jobs.empty? %>
-        <%= t('jobs_no_jobs') %>
-      <% else %>
-        <div class="list-jobs">
-          <div class="list">
-            <% @jobs.each do |job| %>
-              <%= render :partial => "job_box", :locals => {:job => job} %>
-            <% end %>
+  <div class="container-fluid">
+    <div class="jobs-overview">
+      <div class="unassigned-jobs-content">
+        <h1 class="bottom-margin overflow">
+          <% if user_signed_in? %><span class="icon-label left"><% end %>
+          <%= t('jobs_not_related')%>
+          <% if user_signed_in? %></span>
+            <a href="<%= new_job_path %>" class="header-actions left"><span class="icon add"></span></a>
+          <% end %>
+        </h1>
+        <% if @jobs.empty? %>
+          <%= t('jobs_no_jobs') %>
+        <% else %>
+          <div class="list-jobs">
+            <div class="list">
+              <% @jobs.each do |job| %>
+                <%= render :partial => "job_box", :locals => {:job => job} %>
+              <% end %>
+            </div>
           </div>
-        </div>
-      <% end %>
-    </div>
-
-    <div class="unassigned-resources-content">
-      <h1 class="bottom-margin overflow">
-        <% if user_signed_in? %><span class="icon-label left">
-        <% end %><%= t('jobs_resources_not_related')%>
-        <% if user_signed_in? %></span>
-          <a href="<%= new_job_path %>/resource" class="header-actions left"><span class="icon add"></span></a>
         <% end %>
-      </h1>
-      <% if @demands.empty? && @supplies.empty? %>
+      </div>
+
+      <div class="unassigned-resources-content">
+        <h1 class="bottom-margin overflow">
+          <% if user_signed_in? %><span class="icon-label left">
+          <% end %><%= t('jobs_resources_not_related')%>
+          <% if user_signed_in? %></span>
+          <a href="<%= new_job_path %>/resource" class="header-actions left"><span class="icon add"></span></a>
+          <% end %>
+        </h1>
+        <% if @demands.empty? && @supplies.empty? %>
           <%= t('jobs_no_resources') %>
-      <% else %>
+        <% else %>
           <div class="list-jobs">
             <div class="demands list right-space col-md-6">
               <h3><%= t('jobs_demand') %></h3>
               <% if @demands.empty? %>
-                  <p><%= t('jobs_no_resource') %></p>
-              <% else %>
-                  <% @demands.each do |job| %>
-                    <%= render :partial => "job_box", :locals => {:job => job} %>
-                  <% end %>
+              <p><%= t('jobs_no_resource') %></p>
+            <% else %>
+              <% @demands.each do |job| %>
+                <%= render :partial => "job_box", :locals => {:job => job} %>
               <% end %>
-            </div>
-            <div class="supplies list left-space col-md-6">
-              <h3><%= t('jobs_supply') %></h3>
-              <% if @supplies.empty? %>
-                  <%= t('jobs_no_resource') %>
-              <% else %>
-                  <% @supplies.each do |job| %>
-                    <%= render :partial => "job_box", :locals => {:job => job} %>
-                  <% end %>
+            <% end %>
+          </div>
+          <div class="supplies list left-space col-md-6">
+            <h3><%= t('jobs_supply') %></h3>
+            <% if @supplies.empty? %>
+              <%= t('jobs_no_resource') %>
+            <% else %>
+            <% @supplies.each do |job| %>
+                  <%= render :partial => "job_box", :locals => {:job => job} %>
+                <% end %>
               <% end %>
             </div>
           </div>
-      <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

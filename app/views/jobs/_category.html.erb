@@ -73,6 +73,8 @@
             </div>
           <% end -%>
         </div>
+      <% else %>
+        <%=t('jobs_no_category') %>
       <% end %>
     </div>
       <div class="blue-title">
@@ -102,7 +104,7 @@
       <% end %><%= t('jobs_resources_related') %>
       <% if user_signed_in? %></span>
         <a href="<%= new_sub_job_path(:id => @job.id, :type => 'resource') %>" class="header-actions left">
-          <span class="icon contrast add"><!-- Add new job --></span></a>
+          <span class="icon add"><!-- Add new job --></span></a>
       <% end %>
     </h2>
     <div id="job-resources" class="container-fluid space">
