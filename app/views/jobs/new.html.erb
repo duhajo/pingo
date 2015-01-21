@@ -34,13 +34,13 @@
           <%= f.hidden_field :type, value: @type %>
         <% else %>
           <%= f.label :type, t('job_form_type') %>
-          <%= f.hidden_field :type, id: "job_type", value: 1 %>
+          <%= f.hidden_field :type, id: "job_type", value: 2 %>
           <div class="btn-group btn-group-justified">
             <div class="btn-group">
-              <button type="button" id="job_type_demand" class="btn btn-default active" onclick="setJobType(this, $('#job_type_supply'), 1);"><%=t('jobs_demand')%></button>
+              <button type="button" id="job_type_demand" class="btn btn-default active" onclick="setJobType(this, $('#job_type_supply'), 2);"><%=t('jobs_demand')%></button>
             </div>
             <div class="btn-group">
-              <button type="button" id="job_type_supply" class="btn btn-default" onclick="setJobType(this, $('#job_type_demand'), 2);"><%=t('jobs_supply')%></button>
+              <button type="button" id="job_type_supply" class="btn btn-default" onclick="setJobType(this, $('#job_type_demand'), 3);"><%=t('jobs_supply')%></button>
             </div>
           </div>
         <% end %>
