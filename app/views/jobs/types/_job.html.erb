@@ -186,53 +186,7 @@
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-6">
-        <div class="blue-title">
-          <h2 class="overflow">
-            <% if user_signed_in? %><span class="icon-label left">
-            <% end %><%= t('jobs_related') %>
-            <% if user_signed_in? %></span>
-              <a href="<%= new_sub_job_path(:id => @job.id, :type => 'job') %>" class="header-actions left"><span class="icon contrast add"><!-- Add new job --></span></a>
-            <% end %>
-          </h2>
-        </div>
-        <div id="job-subjobs" class="container-fluid space">
-          <% if @jobs.empty? %>
-            <p><%= t('jobs_no_jobs') %></p>
-          <% else %>
-            <div class="list">
-              <% @jobs.each do |job| %>
-                <%= render :partial => "job_box", :locals => {:job => job} %>
-              <% end %>
-            </div>
-          <% end %>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="blue-title">
-          <h2 class="overflow">
-            <% if user_signed_in? %><span class="icon-label left">
-            <% end %><%= t('jobs_resources_related') %>
-            <% if user_signed_in? %></span>
-              <a href="<%= new_sub_job_path(:id => @job.id, :type => 'resource') %>" class="header-actions left">
-                <span class="icon contrast add"><!-- Add new job --></span></a>
-            <% end %>
-          </h2>
-        </div>
-        <div id="job-resources" class="container-fluid space">
-          <% if @resources.empty? %>
-            <p><%= t('jobs_no_resources') %></p>
-          <% else %>
-            <div class="list">
-              <% @resources.each do |job| %>
-                <%= render :partial => "job_box", :locals => {:job => job} %>
-              <% end %>
-            </div>
-          <% end %>
-        </div>
-      </div>
-    </div>
+    <div class="well">Hier kommen vielleicht noch untergeordnete Strukturen ...</div>
   </div>
   <div id="job-activities-area">
     <h2 class="title">Aktivit&auml;ten</h2>

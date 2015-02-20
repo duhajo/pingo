@@ -32,61 +32,43 @@
   </div>
   <div class="container-fluid">
     <div class="jobs-overview">
+      <h1 class="side-space"><%= t('jobs_not_related')%></h1>
       <div class="unassigned-jobs-content">
-        <h1 class="bottom-margin overflow">
+        <h2 class="bottom-margin overflow">
           <% if user_signed_in? %><span class="icon-label left"><% end %>
-          <%= t('jobs_not_related')%>
+          <%= t('jobs_supplies')%>
           <% if user_signed_in? %></span>
-            <a href="<%= new_job_path %>" class="header-actions left"><span class="icon add"></span></a>
+            <a href="<%= new_job_path %>/supply" class="header-actions left"><span class="icon add"></span></a>
           <% end %>
-        </h1>
-        <% if @jobs.empty? %>
-          <%= t('jobs_no_jobs') %>
-        <% else %>
-          <div class="list-jobs">
-            <div class="list">
-              <% @jobs.each do |job| %>
-                <%= render :partial => "job_box", :locals => {:job => job} %>
-              <% end %>
-            </div>
-          </div>
-        <% end %>
+        </h2>
+        <div class="supplies list">
+          <% if @supplies.empty? %>
+            <%= t('jobs_no_jobs') %>
+          <% else %>
+            <% @supplies.each do |job| %>
+              <%= render :partial => "job_box", :locals => {:job => job} %>
+            <% end %>
+          <% end %>
+        </div>
       </div>
 
       <div class="unassigned-resources-content">
-        <h1 class="bottom-margin overflow">
-          <% if user_signed_in? %><span class="icon-label left">
-          <% end %><%= t('jobs_resources_not_related')%>
+        <h2 class="bottom-margin overflow">
+          <% if user_signed_in? %><span class="icon-label left"><% end %>
+          <%= t('jobs_demands')%>
           <% if user_signed_in? %></span>
-          <a href="<%= new_job_path %>/resource" class="header-actions left"><span class="icon add"></span></a>
+          <a href="<%= new_job_path %>/demand" class="header-actions left"><span class="icon add"></span></a>
           <% end %>
-        </h1>
-        <% if @demands.empty? && @supplies.empty? %>
-          <%= t('jobs_no_resources') %>
-        <% else %>
-          <div class="list-jobs">
-            <div class="demands list right-space col-md-6">
-              <h3><%= t('jobs_demand') %></h3>
-              <% if @demands.empty? %>
-              <p><%= t('jobs_no_resource') %></p>
-            <% else %>
-              <% @demands.each do |job| %>
-                <%= render :partial => "job_box", :locals => {:job => job} %>
-              <% end %>
+        </h2>
+        <div class="demands list">
+          <% if @demands.empty? %>
+            <p><%= t('jobs_no_jobs') %></p>
+          <% else %>
+            <% @demands.each do |job| %>
+              <%= render :partial => "job_box", :locals => {:job => job} %>
             <% end %>
-          </div>
-          <div class="supplies list left-space col-md-6">
-            <h3><%= t('jobs_supply') %></h3>
-            <% if @supplies.empty? %>
-              <%= t('jobs_no_resource') %>
-            <% else %>
-            <% @supplies.each do |job| %>
-                  <%= render :partial => "job_box", :locals => {:job => job} %>
-                <% end %>
-              <% end %>
-            </div>
-          </div>
-        <% end %>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>

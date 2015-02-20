@@ -28,19 +28,27 @@ en:
 
   jobs_new: "New Job"
   jobs_new_category: "New Category"
-  jobs_new_resource: "New Resource"
+  jobs_new_supply: "New Supply"
+  jobs_new_demand: "New Demand"
 
-  jobs_related: "Jobs"
-  jobs_resources_related: "Swap Meet"
-  jobs_not_related: "Not Related Jobs"
-  jobs_resources_not_related: "Swap Meet"
+  jobs_type_project: "Project"
+  jobs_type_service: "Service"
+  jobs_type_material: "Material"
+  jobs_type_people: "People"
+
+  jobs_related: "Related to Category"
+  jobs_not_related: "Not Related"
 
   jobs_supply: "Supply"
+  jobs_supplies: "Supplies"
   jobs_demand: "Demand"
+  jobs_demands: "Demands"
   jobs_found: "Job Results"
 
-  jobs_demand_prefix: "Search"
-  jobs_supply_prefix: "Offer"
+  jobs_project_prefix: "Project"
+  jobs_material_prefix: "Material"
+  jobs_service_prefix: "Service"
+  jobs_people_prefix: "People"
 
   job_form_type: "Type"
   job_form_title: "Title"

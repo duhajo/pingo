@@ -28,19 +28,27 @@ de:
 
   jobs_new: "Neuer Job"
   jobs_new_category: "Neue Kategorie"
-  jobs_new_resource: "Neue Ressource"
+  jobs_new_supply: "Neues Angebot"
+  jobs_new_demand: "Neue Nachfrage"
 
-  jobs_related: "Jobs"
-  jobs_resources_related: "Tauschbörse"
-  jobs_not_related: "Nicht eingeordnete Jobs"
-  jobs_resources_not_related: "Tauschbörse"
+  jobs_type_project: "Aktion"
+  jobs_type_service: "Expertise"
+  jobs_type_material: "Material"
+  jobs_type_people: "Menschen"
+
+  jobs_related: "In Kategorie eingeordnet"
+  jobs_not_related: "Nicht eingeordnete"
 
   jobs_supply: "Angebot"
+  jobs_supplies: "Angebote"
   jobs_demand: "Nachfrage"
+  jobs_demands: "Nachfragen"
   jobs_found: "Gefundene Jobs"
 
-  jobs_demand_prefix: "Suche"
-  jobs_supply_prefix: "Biete"
+  jobs_project_prefix: "Aktion"
+  jobs_material_prefix: "Material"
+  jobs_service_prefix: "Expertise"
+  jobs_people_prefix: "Menschen"
 
   job_form_title: "Titel"
   job_form_description: "Beschreibung"

@@ -14,10 +14,9 @@ class JobsController < ApplicationController
       redirect_to @job
     else
       all_jobs = Job.where('parent_id' => nil)
-      @jobs = all_jobs.where('type' => 1)
-      @demands = all_jobs.where('type' => 2)
-      @supplies = all_jobs.where('type' => 3)
       @categories = all_jobs.where('type' => 0)
+      @supplies = all_jobs.where('type' => [1,2,3])
+      @demands = all_jobs.where('type' => [4,5])
     end
   end
 
@@ -53,9 +52,9 @@ class JobsController < ApplicationController
     @is_manager = JobsWorker.where(:job_id => @job.id).where('jobs_workers.isCreator' => true).to_a
     
     @all_jobs = Job.where('parent_id' => @job.id)
-    @jobs = @all_jobs.where('type' => 1)
-    @resources = @all_jobs.where('type' => [2,3])
-    
+    @supplies = @all_jobs.where('type' => [1,2,3])
+    @demands = @all_jobs.where('type' => [4,5])
+
     @parent_jobs = @job.ancestors
     @job_ids = Array.new << @job.id
     @all_jobs.each do |job|
@@ -86,9 +85,9 @@ class JobsController < ApplicationController
     end
 
     if params[:type].present?
-      @type = 0 if params[:type] == 'category'
-      @type = 1 if params[:type] == 'job'
-      @type = 2 if params[:type] == 'resource'
+      @type_category = 0 if params[:type] == 'category'
+      @type_category = 1 if params[:type] == 'demand'
+      @type_category = 2 if params[:type] == 'supply'
     end
     
     @job = Job.new
