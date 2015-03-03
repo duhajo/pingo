@@ -1,0 +1,171 @@
+<div class="breadcrumb-bar">
+  <ol class="breadcrumb">
+    <% if !@job.parent_id.nil? && Job.find(@job.parent_id).type == 0 %>
+      <li><%= link_to t('jobs_category_overview'), :action => "index" %></li>
+    <% else %>
+      <li><%= link_to t('jobs_overview'), :action => "index" %></li>
+    <% end %>
+    <% @parent_jobs.each.with_index do |job, index| %>
+      <% break if (job.id == @job.id) %>
+      <li><%= link_to job.title, job %></li>
+    <% end %>
+  </ol>
+</div>
+
+<div <% if @job.status == 3 || user_signed_in? && @job.parent_id.nil? %>class="closed"<% end %> id="job-view" data-id="<%= @job.id %>">
+  <div id="job-specification-area">
+    <div id="job-details">
+      <h1 class="title job">
+        <% if @user_role == 3 && user_signed_in? %><span class="icon-label left">
+        <% end %>
+        <%= t('jobs_demand') %>: <%= @job.title %>
+        <% if @user_role == 3 && user_signed_in? %></span>
+          <a href="<%= edit_job_path(@job) %>" class="header-actions left"><span class="icon edit"></span></a>
+        <% end %>
+      </h1>
+
+      <div class="row">
+        <div id="job-meta-wrapper">
+          <div id="job-meta">
+            <% if !@job.address.blank? && !@job.deadline.nil?
+                 @lessColumns = false
+               else
+                 @lessColumns = true
+               end %>
+            <% if not @job.deadline.nil? %>
+              <div id="job-deadline" class="col-sm-<% if @lessColumns %>8<% else %>4<% end %>">
+                <span class="icon pull-left"><!----></span>
+                    <span class="icon-label" title="<%= @job.deadline.to_formatted_s(:long) %>">
+                      <%= distance_of_time_in_words(Time.now, @job.deadline, true) %>
+                      <% if @job.deadline < DateTime.now %>
+                        ago (expired)
+                      <% else %>
+                        to go
+                      <% end %>
+                    </span>
+              </div>
+            <% end %>
+            <% if !@job.address.blank? %>
+              <div id="job-location" class="col-sm-<% if @lessColumns %>8<% else %>4<% end %>">
+                <span class="icon pull-left"><!----></span>
+                    <span class="icon-label">
+                      <%= link_to @job.address, {:action => :map_for_job}, :id => "show-map-button",
+                                  class: "header-actions left",
+                                  data: {toggle: "modal", target: "#ajax-modal",
+                                         lat: @job.latitude, long: @job.longitude} %>
+                    </span>
+              </div>
+            <% end %>
+            <div id="job-likes" class="col-sm-2">
+              <%= render :partial => "likes", :job => @job %>
+            </div>
+          </div>
+          <div id="job-description" class="html-content top-margin">
+            <% if @job.description.empty? %>
+              Noch keine Beschreibung vorhanden...
+            <% else %>
+              <div class="job-description-preview"><%= truncate_html @job.description, :length => 150 %>
+                <% if @job.description.html_safe.length > 150 %>
+                  <%= link_to_function 'Alles lesen', "$('.job-description-preview').hide();$('.job-description-full').show();$('#splitter-close').show();$(this).parent().hide();" %>
+                <% end %>
+              </div>
+              <div class="job-description-full" style="display:none;"><%= @job.description.html_safe %>
+                <%= link_to_function 'Weniger', "$('.job-description-full').hide();$('.job-description-preview').show();$('#splitter-open').show();$(this).parent().hide();" %>
+              </div>
+            <% end %>
+          </div>
+          <div id="job-tags" class="top-margin">
+            <% if not @job.skill_list.empty? %>
+              <ul class="tag-list overflow">
+                <li><span class="icon small left"></span></li>
+                <% @job.tag_counts_on(:skills, :limit => 5, :order => "count desc").each do |tag| %>
+                  <li><%= link_to tag.name, {:controller => :tags, :action => :show, :id => tag.id}, :class => "tag" %></li>
+                <% end %>
+              </ul>
+            <% end %>
+          </div>
+          <div id="job-files" class="top-margin">
+            <h3 class="overflow with-buttons">
+              <span class="icon-label left">Anhänge </span>
+              <% if @user_role == 3 && user_signed_in? %>
+                <a href="#" data-toggle="dropdown" class="header-actions dropdown-toggle">
+                  <span class="icon add"><!-- Add new file --></span>
+                </a>
+                <ul id="file-upload" class="dropdown-menu">
+                  <li class="uploader">
+                    <a href="#" class="upload-button">Computer</a>
+                    <%= simple_form_for JobsFiles.new, :url => {:action => :new_file}, html: {multipart: true, id: "file-upload-form"} do |f| %>
+                      <%= f.file_field :file, id: "file-upload-input" %>
+                    <% end %>
+                    <script type="text/javascript">
+                      document.getElementById("file-upload-input").onchange = function () {
+                        document.getElementById("file-upload-form").submit();
+                      };
+                    </script>
+                  </li>
+                </ul>
+              <% end %>
+            </h3>
+            <div class="row">
+              <div class="job-file-images col-md-6">
+                <% @file_images.each do |file| %>
+                  <%= link_to image_tag(file.file.thumb.url), file.file.url, :class => "show-tooltip thumbnail", :title => file.file.file.filename, data: {toggle: "tooltip"} %>
+                <% end %>
+              </div>
+              <div class="job-files-list col-md-6">
+                <% @file_others.each do |file| %>
+                  <a href="<%= file.file %>"><%= file.file.file.filename %>
+                    (<%= number_to_human_size(file.file.size) %>)</a><br/>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="job-workers-wrapper">
+          <h3 class="overflow with-buttons">
+            <span class="icon-label">Anbieter</span>
+            (Noch in Arbeit)
+          </h3>
+
+          <div class="preview-list workers">
+            <ul class="overflow">
+              <% @workers.each.with_index do |worker, index| %>
+                <li>
+                  <% title = worker.name
+                     if (worker.isCreator == 1)
+                       title << " (Manager)"
+                     end %>
+                  <%= link_to worker, :class => "show-tooltip", :title => title, data: {toggle: "tooltip"} do %>
+                              <span class="profile-avatar
+                                <% if (worker.isCreator == 1) %>manager
+                                <% end %>">
+                                <%= image_tag(avatar_url(worker), alt: "?", :class => "img-circle") %>
+                              </span>
+                  <% end %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="job-activities-area">
+    <h2 class="title">Aktivit&auml;ten</h2>
+    <% if user_signed_in? %>
+      <%= render :partial => "comments/form" %>
+    <% else %>
+      <div class="activity">
+        Du bist nicht angemeldet <%= link_to 'einloggen?', login_path, :class => "btn btn-primary" %>
+      </div>
+    <% end %>
+    <% @activities.each do |activity| %>
+      <% if activity.key == "job.commented" %>
+        <%= render_activity(activity, :layout => "layouts/activity_wrapper") %>
+      <% else %>
+        <%= render_activity(activity, :layout => "layouts/activity_wrapper") %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+<%= gflash %>

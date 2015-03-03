@@ -41,6 +41,16 @@
     padding-right: rem-calc(8);
     max-width: 242px;
   }
+
+  #sub-categories {
+    @extend .container-fluid;
+    #list-categories {
+      border-width: 1px 0;
+      border-style: solid;
+      border-color: #ebebeb;
+      background-color: $body-bg;
+    }
+  }
 }
 
 #job-view {
@@ -168,18 +178,24 @@
   margin-bottom: 10px;
   padding: 0 10px 3px;
 
-  &.job {
+  &.project {
     border-color: $brand-secondary;
     .prefix {
       background-color: $brand-secondary;
+      border: 1px solid darken($brand-secondary,10%);
+      border-radius: 4px;
+      color: #ffffff;
+      font-size: 12px;
+      margin-right: 5px;
+      padding: 3px;
     }
   }
 
-  &.demand {
+  &.service {
     border-color: orange;
     .prefix {
       background-color: orange;
-      border: 1px solid darkorange;
+      border: 1px solid darken(orange,10%);
       border-radius: 4px;
       font-size: 12px;
       margin-right: 5px;
@@ -187,11 +203,11 @@
     }
   }
 
-  &.supply {
+  &.material {
     border-color: darkgreen;
     .prefix {
       background-color: darkgreen;
-      border: 1px solid darkgreen;
+      border: 1px solid darken(darkgreen,10%);
       border-radius: 4px;
       color: #ffffff;
       font-size: 12px;

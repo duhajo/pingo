@@ -1,8 +1,10 @@
 <%= javascript_include_tag "jobs" %>
 <% if @job.type == 0 %>
-  <%= render 'category' %>
+  <%= render 'jobs/types/category' %>
 <% elsif @job.type == 1 %>
-  <%= render 'job' %>
+  <%= render 'jobs/types/job' %>
+<% elsif @job.type == 2 || @job.type == 3 %>
+  <%= render 'jobs/types/supply' %>
 <% else %>
-  <%= render 'resource' %>
+  <%= render 'jobs/types/demand' %>
 <% end %>

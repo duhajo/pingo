@@ -18,11 +18,7 @@
       <h1 class="title job">
         <% if @user_role == 3 && user_signed_in? %><span class="icon-label left">
         <% end %>
-        <%= if @job.type == 2
-              t('jobs_demand')
-            elsif @job.type == 3
-              t('jobs_supply')
-            end %>: <%= @job.title %>
+        <%= t('jobs_supply')%>: <%= @job.title %>
         <% if @user_role == 3 && user_signed_in? %></span>
           <a href="<%= edit_job_path(@job) %>" class="header-actions left"><span class="icon edit"></span></a>
         <% end %>

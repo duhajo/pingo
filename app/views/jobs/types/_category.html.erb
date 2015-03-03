@@ -1,0 +1,115 @@
+<div class="breadcrumb-bar">
+  <ol class="breadcrumb">
+    <li><%= link_to t('jobs_category_overview'), :action => "index" %></li>
+    <% @parent_jobs.each.with_index do |job, index| %>
+      <% break if (job.id == @job.id) %>
+      <li><%= link_to job.title, job %></li>
+    <% end %>
+  </ol>
+</div>
+<div id="category-view" class="content white simple overflow">
+  <div id="category-details" class="container-fluid space">
+    <div class="row">
+      <h1 class="title overflow bottom-margin col-md-12">
+        <% if @user_role == 3 && user_signed_in? %><span class="icon-label left">
+        <% end %><%= t('jobs_category') %>: <%= @job.title %>
+        <% if @user_role == 3 && user_signed_in? %></span>
+          <a href="<%= edit_job_path(@job) %>" class="header-actions left"><span class="icon edit"></span></a>
+        <% end %>
+      </h1>
+
+      <div class="col-md-3">
+        <div id="job-picture">
+          <%= image_tag @job.picture_url if @job.picture? %>
+        </div>
+      </div>
+      <div class="col-md-5">
+        <div id="job-description" class="html-content">
+          <% if @job.description.empty? %>
+            <p><%= t('jobs_no_description') %></p>
+          <% else %>
+            <div class="job-description-preview"><%= truncate_html @job.description, :length => 50 %></div>
+            <div class="job-description-full" style="display:none;"><%= @job.description.html_safe %></div>
+          <% end %>
+        </div>
+      </div>
+      <div class="col-md-4"><h2><%= t('most_used_tags') %></h2>
+        <% if @most_used_tags.empty? %>
+          <p><%= t('jobs_category_no_tags') %></p>
+        <% else %>
+          <div class="tag-list">
+            <% tag_cloud(@most_used_tags, %w(css1 css2 css3 css4)) do |tag, css_class| %>
+              <%= link_to tag.name, {:controller => :tags, :action => :show, :id => tag.id}, :class => css_class + " tag" %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div id="sub-categories">
+    <h2 class="title">
+      Sub Categories
+      <% if @user_role == 3 && user_signed_in? %>
+        <a href="<%= new_sub_job_path(:id => @job.id, :type => 'category') %>" class="header-actions left"><span class="icon add"></span></a>
+      <% end %>
+    </h2>
+    <div id="list-categories" class="row">
+      <% if not @categories.empty? %>
+        <% @categories.each do |category| -%>
+          <div class="category">
+            <div class="category-head"><%= link_to category.title, category %></div>
+            <div class="category-body">
+              <% if category.picture? %>
+                <%= link_to image_tag(category.picture_url), category %>
+              <% else %>
+                <ul class="tag-list">
+                  <% category.tag_counts_on(:skills, :limit => 5, :order => "count desc").each do |tag| %>
+                    <li><%= link_to tag.name, {:controller => :tags, :action => :show, :id => tag.id}, :class => "tag" %></li>
+                  <% end %>
+                </ul>
+              <% end %>
+            </div>
+          </div>
+        <% end -%>
+      <% else %>
+        <div class="space"><%=t('jobs_no_category') %></div>
+      <% end %>
+    </div>
+  </div>
+    <div id="job-subjobs" class="container-fluid space">
+      <div id="list-jobs" class="row">
+        <div class="supplies list col-md-6">
+          <h2 class="overflow">
+            <% if user_signed_in? %><span class="icon-label left">
+            <% end %><%= t('jobs_supply') %>
+                  <% if user_signed_in? %></span>
+                    <a href="<%= new_sub_job_path(:id => @job.id, :type => 'supply') %>" class="header-actions left"><span class="icon add"><!-- Add new job --></span></a>
+            <% end %>
+          </h2>
+          <% if @supplies.empty? %>
+            <%= t('jobs_no_jobs') %>
+          <% else %>
+            <% @supplies.each do |job| %>
+              <%= render :partial => "job_box", :locals => {:job => job} %>
+            <% end %>
+          <% end %>
+        </div>
+        <div class="demands list col-md-6">
+          <h2>
+            <% if user_signed_in? %><span class="icon-label left">
+            <% end %><%= t('jobs_demand') %>
+            <% if user_signed_in? %></span>
+              <a href="<%= new_sub_job_path(:id => @job.id, :type => 'demand') %>" class="header-actions left"><span class="icon add"><!-- Add new job --></span></a>
+            <% end %>
+          </h2>
+          <% if @demands.empty? %>
+            <p><%= t('jobs_no_jobs') %></p>
+          <% else %>
+            <% @demands.each do |job| %>
+              <%= render :partial => "job_box", :locals => {:job => job} %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+</div>
