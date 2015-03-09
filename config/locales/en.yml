@@ -45,11 +45,6 @@ en:
   jobs_demands: "Demands"
   jobs_found: "Job Results"
 
-  jobs_project_prefix: "Project"
-  jobs_material_prefix: "Material"
-  jobs_service_prefix: "Service"
-  jobs_people_prefix: "People"
-
   job_form_type: "Type"
   job_form_title: "Title"
   job_form_description: "Description"

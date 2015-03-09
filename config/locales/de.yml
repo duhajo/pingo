@@ -45,11 +45,6 @@ de:
   jobs_demands: "Nachfragen"
   jobs_found: "Gefundene Jobs"
 
-  jobs_project_prefix: "Aktion"
-  jobs_material_prefix: "Material"
-  jobs_service_prefix: "Expertise"
-  jobs_people_prefix: "Menschen"
-
   job_form_title: "Titel"
   job_form_description: "Beschreibung"
   job_form_tags: "Schlagworte (per Komma trennen)"

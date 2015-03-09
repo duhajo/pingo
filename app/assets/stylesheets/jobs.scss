@@ -19,7 +19,7 @@
     border-width: 0px 1px 1px;
     overflow: hidden;
     .tag-list {
-      padding: 0 5px;
+      padding: 5px;
     }
   }
 }
@@ -171,23 +171,29 @@
   h3 {
     margin-top: 0;
   }
+  @media (min-width: $screen-md-min) {
+    > div:first-child {
+      border-right: 1px solid $brand-quinary;
+    }
+  }
 }
 
 .job-box {
-  border: 1px solid transparent;
+  border: 2px solid transparent;
   margin-bottom: 10px;
-  padding: 0 10px 3px;
+
+  .prefix {
+    display: inline-block;
+    font-size: 12px;
+    margin-right: 5px;
+    padding: 5px;
+  }
 
   &.project {
     border-color: $brand-secondary;
     .prefix {
       background-color: $brand-secondary;
-      border: 1px solid darken($brand-secondary,10%);
-      border-radius: 4px;
       color: #ffffff;
-      font-size: 12px;
-      margin-right: 5px;
-      padding: 3px;
     }
   }
 
@@ -195,11 +201,6 @@
     border-color: orange;
     .prefix {
       background-color: orange;
-      border: 1px solid darken(orange,10%);
-      border-radius: 4px;
-      font-size: 12px;
-      margin-right: 5px;
-      padding: 3px;
     }
   }
 
@@ -207,30 +208,44 @@
     border-color: darkgreen;
     .prefix {
       background-color: darkgreen;
-      border: 1px solid darken(darkgreen,10%);
-      border-radius: 4px;
       color: #ffffff;
-      font-size: 12px;
-      margin-right: 5px;
-      padding: 3px;
     }
   }
 
   .title a {
     font-size: $font-size-base;
-    line-height: 2;
     display: block;
     width: 100%;
   }
 
   .description {
     font-size: $font-size-small;
-    padding-bottom: 8px;
+    padding: 5px 5px 0;
+  }
+
+  .tag-list {
+    padding: 5px 5px 0;
   }
 
   .job-bottom-line {
+    @extend .row;
     font-size: $font-size-small;
     line-height: 2.3;
+
+    .job-meta-line {
+      @extend .col-sm-10;
+      div {
+        display: inline-block;
+        padding-left: 10px;
+        &:first-child {
+          padding-left: 0;
+        }
+      }
+      .job-status  .btn {
+        border-radius: 0;
+        padding: 5px;
+      }
+    }
   }
 }
 

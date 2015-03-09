@@ -123,6 +123,14 @@ class JobsController < ApplicationController
   def edit
     @job = Job.find(params[:id])
     @managers = User.joins(:jobs_workers).select("users.id, name, email").where("jobs_workers.job_id" => @job.id).where("jobs_workers.isCreator" => true).to_a
+
+    if @job.type == 0
+      @type_category = 0
+    elsif @job.type == 4 || @job.type == 5
+      @type_category = 1
+    else
+      @type_category = 2
+    end
   end
 
   # POST /jobs
