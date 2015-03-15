@@ -160,9 +160,7 @@
       </div>
     <% end %>
     <% @activities.each do |activity| %>
-      <% if activity.key == "job.commented" %>
-        <%= render_activity(activity, :layout => "layouts/activity_wrapper") %>
-      <% else %>
+      <% if activity.key.include? "job" %>
         <%= render_activity(activity, :layout => "layouts/activity_wrapper") %>
       <% end %>
     <% end %>

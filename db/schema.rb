@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(:version => 20140413122049) do
     t.string   "commentable_type", :default => ""
     t.string   "title",            :default => ""
     t.text     "body"
-    t.string   "subject",          :default => ""
+    t.string   "for_type",         :default => ""
     t.integer  "user_id",          :default => 0,  :null => false
     t.integer  "parent_id"
     t.integer  "lft"
@@ -104,8 +104,7 @@ ActiveRecord::Schema.define(:version => 20140413122049) do
   add_index "taggings", ["taggable_id", "taggable_type", "context"], :name => "index_taggings_on_taggable_id_and_taggable_type_and_context"
 
   create_table "tags", :force => true do |t|
-    t.string  "name"
-    t.integer "taggings_count", :default => 0
+    t.string "name"
   end
 
   create_table "users", :force => true do |t|

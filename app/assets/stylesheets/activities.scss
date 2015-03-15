@@ -2,6 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.form-actions {
+  @extend .text-right, .top-margin;
+}
+
 .activity-box {
   margin-bottom: 1em;
   padding-left: 45px;
@@ -9,7 +13,7 @@
 
   .mega-icon {
     position: absolute;
-    top: 14px;
+    top: 25px;
     left: 0;
     width: 32px;
     height: 32px;
@@ -25,19 +29,19 @@
     padding: 0 0 1em 0;
   }
 
+  .avatar {
+    display: inline-block;
+    img {
+      border: 1px solid $gray-lighter;
+      padding: 1px;
+      background-color: white;
+      margin-right: .7em;
+    }
+  }
+
   .title {
     padding: 0 0 .25em 0;
     font-size: 14px;
-
-    .avatar {
-      display: inline-block;
-      img {
-        border: 1px solid #D0D0D0;
-        padding: 1px;
-        background-color: white;
-        margin-right: .7em;
-      }
-    }
   }
 
   .details {
@@ -52,6 +56,15 @@
   }
 
   .thread .answers {
-    margin-left: 10%;
+    margin-top: 20px;
+  }
+
+  .meta-info {
+    border-bottom: 1px solid $gray-lighter;
+    padding: 5px 0;
+  }
+
+  .content {
+    padding: 0 5px 10px;
   }
 }

@@ -16,7 +16,7 @@
             .meta-info.details
               - user = User.find_by_id(comment.user_id)
               .avatar
-                =' image_tag avatar_url(user), width: "30", height: "30"
+                =' image_tag avatar_url(user), width: "30", height: "30", class: "img-circle"
               .name
                 =' link_to user.name, user
             .content
@@ -24,4 +24,4 @@
 
 - single_content_for :editor do
   .answer-editor[id = "answer-editor_#{p[:id]}"]
-    = link_to("Reply", "/jobs/"+a.trackable_id.to_s+"/comments/"+p[:id].to_s+"/reply", :remote => true)
+    = link_to("Reply", "/jobs/"+a.trackable_id.to_s+"/comments/"+p[:id].to_s+"/reply", :remote => true, :class => "btn btn-primary")

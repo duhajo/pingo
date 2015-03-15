@@ -5,15 +5,14 @@
     .title
       - if a.owner
         .avatar
-          = image_tag avatar_url(a.owner), width: "30", height: "30", class: "img-circle"
+          = image_tag avatar_url(a.owner), width: "45", height: "45", class: "img-circle"
         =' link_to a.owner.name, a.owner
       - else
         ' someone
         = image_tag "http://i0.wp.com/a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-140.png", width: "30", height: "30", class: "img-circle"
       =' content_for :action
-    .details
-      .content
-        = yield
+    .text
+      = yield
     - if a.key == "job.commented"
       .thread
         =' content_for :thread
@@ -22,3 +21,7 @@
     - if a.key == "job.upload_file"
       .file-details
         =' content_for :file
+      .thread
+        =' content_for :thread
+      .answer-editor
+        =' content_for :editor

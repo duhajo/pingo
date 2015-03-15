@@ -1,5 +1,7 @@
 = simple_form_for [@job, @comment] do |f|
-  = f.input :body, label: false, :input_html => {:rows => 4, :cols => 40}
+  = f.input :body, label: false, :input_html => {:rows => 4, :cols => 40, class: 'form-control'}
   = f.input :parent_id, label: false, input_html: {value: @parent_id, type: :hidden}
+  - if @type
+    = f.input :type, label: false, input_html: {value: @type, type: :hidden}
   .form-actions
-    = f.button :submit, class: 'btn-success pull-right'
+    = f.button :submit, class: 'btn btn-primary'

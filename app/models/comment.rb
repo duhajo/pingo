@@ -4,7 +4,7 @@ class Comment < ActiveRecord::Base
   validates :body, :presence => true
   validates :user, :presence => true
   
-  attr_accessible :user_id, :comment, :commentable, :body
+  attr_accessible :user_id, :comment, :commentable, :body, :for_type, :parent_id
 
   # NOTE: install the acts_as_votable plugin if you
   # want user to vote on the quality of comments.
@@ -25,6 +25,15 @@ class Comment < ActiveRecord::Base
       :commentable => obj,
       :body        => comment,
       :user_id     => user_id
+  end
+
+  def self.comment_for_activity(obj, user_id, comment, for_type, parent_id)
+    new \
+      :commentable => obj,
+      :body        => comment,
+      :user_id     => user_id,
+      :for_type    => for_type,
+      :parent_id   => parent_id
   end
 
   #helper method to check if a comment has children
