@@ -38,6 +38,10 @@ $(document).ready ->
     $.get @href, (html) ->
       initAutocomplete()
 
+  $('.gallery-item').magnificPopup
+    type: 'image'
+    gallery: enabled: true
+
   $(".open-popup-link").magnificPopup type: "inline", midClick: true
 
   hasRight = $(".job-status").hasClass("rights")

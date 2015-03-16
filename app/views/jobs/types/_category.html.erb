@@ -61,12 +61,16 @@
             <div class="category-body">
               <% if category.picture? %>
                 <%= link_to image_tag(category.picture_url), category %>
-              <% else %>
+              <% elsif !category.skill_list.empty? %>
                 <ul class="tag-list">
                   <% category.tag_counts_on(:skills, :limit => 5, :order => "count desc").each do |tag| %>
                     <li><%= link_to tag.name, {:controller => :tags, :action => :show, :id => tag.id}, :class => "tag" %></li>
                   <% end %>
                 </ul>
+              <% else %>
+                <%= link_to category do %>
+                  <span><%= t('jobs_no_description'); %></span>
+                <% end %>
               <% end %>
             </div>
           </div>

@@ -18,7 +18,7 @@
     border-style: solid;
     border-width: 0px 1px 1px;
     overflow: hidden;
-    .tag-list {
+    .tag-list, > a {
       padding: 5px;
     }
   }
@@ -67,15 +67,27 @@
       #job-meta-wrapper {
         @extend .col-md-9;
 
-        .icon-label {
-          line-height: 21px;
-          padding-top: 4px;
-        }
         #job-meta {
-          @extend .row;
+          overflow: hidden;
+          > div {
+            float: left;
+            margin-left: 2%;
+            &:first-child {
+              margin-left: 0;
+            }
+          }
+
+          .icon {
+            float: left;
+          }
+
+          .icon-label {
+            line-height: 32px;
+            width: calc(100% - 32px);
+          }
+
           #job-deadline {
             height: rem-calc(38);
-            line-height: rem-calc(38);
             .icon {
               background-position: -32px -96px;
             }
@@ -88,28 +100,21 @@
           }
   
           #job-likes {
-            @extend .pull-right;
-            a {
-              line-height: 2.4;
-              padding: 0 5px;
-              &.my-like {
-                background-color: $brand-senary;
-                color: #ffffff;
-              }
+            float: right;
+            a.my-like {
+              background-color: $brand-senary;
+              color: #ffffff;
             }
             #like-button {
               .icon {
-                background-position: -550px -100px;
-                float: left;
-                height: 21px;
-                margin: 4px 4px 0 0;
-                width: 21px;
+                background-position: -545px -97px;
               }
             }
           }
         }
 
         #job-description {
+          clear: both;
           font-size: rem-calc(14);
           line-height: rem-calc(21);;
         }

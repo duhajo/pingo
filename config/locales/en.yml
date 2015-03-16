@@ -57,6 +57,8 @@ en:
   job_form_street: "Street"
   job_form_picture: "Category Picture"
 
+  attachment: "Attachment"
+
   worker_overview: "Worker Overview"
   filter_by: "Filter by"
   filter_by_name: "Searching for name..."

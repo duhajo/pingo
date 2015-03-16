@@ -14,6 +14,12 @@
   border-radius: $thumbnail-border-radius;
   @include transition(all .2s ease-in-out);
 
+  margin-left: $thumbnail-padding;
+
+  &:first-child {
+    margin-left: 0;
+  }
+
   > img,
   a > img {
     @include img-responsive();
