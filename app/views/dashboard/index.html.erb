@@ -17,7 +17,7 @@
       <% else %>
         <% if !@recommendations.blank? %>
           <h2><%= t('dashboard_recommendations_on_tags') %></h2>
-          <div class="list">
+          <div class="list row">
             <% @recommendations.each do |job| %>
               <%= render :partial => "jobs/job_box", :locals => {:job => job} %>
             <% end %>
@@ -25,7 +25,7 @@
         <% end %>
         <% if !@near_jobs.blank? %>
           <h2><%= t('dashboard_recommendations_on_place') %></h2>
-          <div class="list">
+          <div class="list row">
             <% @near_jobs.each do |job| %>
               <%= render :partial => "jobs/job_box", :locals => {:job => job} %>
             <% end %>
