@@ -1,14 +1,14 @@
 Duhajo::Application.routes.draw do
 
-  get "places/index"
+  get 'places/index'
 
-  devise_for :users, :controllers => { :sessions => "users/sessions", :registrations => "users/registrations" }
+  devise_for :users, :controllers => { :sessions => 'users/sessions', :registrations => 'users/registrations' }
 
   resources :searches, :only => [:index]
 
   resources :activities
 
-  match "worker/:id" => "users#show", :as => 'worker'
+  match 'worker/:id' => 'users#show', :as => 'worker'
 
   resources :users do
     collection do
@@ -18,35 +18,39 @@ Duhajo::Application.routes.draw do
     resources :comments
   end
 
+  resources :conversations do
+    resources :messages
+  end
+
   resources :jobs do
     collection do
       get :autocomplete_job_title
       get :tag
     end
     resources :comments, only: [:create, :reply, :update, :edit, :destroy] do
-      match "reply" => "comments#reply"
-      match "reply_to_file" => "comments#reply_to_file"
+      match 'reply' => 'comments#reply'
+      match 'reply_to_file' => 'comments#reply_to_file'
     end
   end
   resources :tags
   
   resources :places
 
-  match "dashboard" => "dashboard#index"
+  match 'dashboard' => 'dashboard#index'
 
-  match "jobs/:job_id/activity/:a_id/reply" => "comments#reply_to_activity"
+  match 'jobs/:job_id/activity/:a_id/reply' => 'comments#reply_to_activity'
 
-  match "jobs/new/:type" => "jobs#new"
+  match 'jobs/new/:type' => 'jobs#new'
 
-  match "jobs/:id/new/:type" => "jobs#new", :as => 'new_sub_job'
-  match "jobs/:id/support" => "jobs#support"
-  match "jobs/:id/love" => "jobs#like", :as => 'love_job'
-  match "jobs/:id/set_status" => "jobs#set_status"
-  match "jobs/:id/map_for_job" => "jobs#map_for_job"
-  match "jobs/:id/show_manager_list" => "jobs#show_manager_list", :as => "show_manager_list"
-  match "jobs/:id/edit_manager_list" => "jobs#edit_manager_list"
+  match 'jobs/:id/new/:type' => 'jobs#new', :as => 'new_sub_job'
+  match 'jobs/:id/support' => 'jobs#support'
+  match 'jobs/:id/love' => 'jobs#like', :as => 'love_job'
+  match 'jobs/:id/set_status' => 'jobs#set_status'
+  match 'jobs/:id/map_for_job' => 'jobs#map_for_job'
+  match 'jobs/:id/show_manager_list' => 'jobs#show_manager_list', :as => 'show_manager_list'
+  match 'jobs/:id/edit_manager_list' => 'jobs#edit_manager_list'
   
-  match "jobs/:id/new_file" => "jobs#new_file"
+  match 'jobs/:id/new_file' => 'jobs#new_file'
 
   put 'jobs/:id/like' => 'jobs#like', :as => 'like_job'
 
@@ -84,19 +88,19 @@ Duhajo::Application.routes.draw do
   #     resources :products
 
   devise_scope :user do
-    get "/login", :to => "users/sessions#new", :as => :login
-    post "/users/create", :to => "users/sessions#create", :as => :user_session
-    get "/logout", :to => "users/sessions#destroy", :as => :logout
-    get "/myprofile", :to => "users#my_profile", :as => :myprofile
+    get '/login', :to => 'users/sessions#new', :as => :login
+    post '/users/create', :to => 'users/sessions#create', :as => :user_session
+    get '/logout', :to => 'users/sessions#destroy', :as => :logout
+    get '/myprofile', :to => 'users#my_profile', :as => :myprofile
   end
 
-  root :to => "jobs#index"
+  root :to => 'jobs#index'
   authenticate :user do
-    root :to => "dashboard#index"
+    root :to => 'dashboard#index'
   end
 
 
-  # See how all your routes lay out with "rake routes"
+  # See how all your routes lay out with 'rake routes'
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.

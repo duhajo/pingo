@@ -42,7 +42,7 @@ class UsersController < ApplicationController
     @similar_users = @user.find_related_skills.to_a
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html # show.html.erb.erb
       format.json { render json: @user }
     end
   end
@@ -66,7 +66,7 @@ class UsersController < ApplicationController
     @workers = User.tagged_with(@tag.name)
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html # show.html.erb.erb
       format.json { render json: @tag }
     end
 

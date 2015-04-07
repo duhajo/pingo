@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta content='<%= user_signed_in? ? current_user.id : "" %>' name='user-id'/>
 
   <title><%= content_for?(:title) ? yield(:title) : "Duhajo" %></title>
 
@@ -25,7 +26,7 @@
                   <%= autocomplete_field_tag 'search', '', autocomplete_job_title_jobs_path, placeholder: "Search Jobs",
                       id: "search-input", class: "form-control dropdown-toggle", data: {:toggle => "dropdown"} %>
                   <ul id="my-jobs-list" class="ui-menu">
-                    <%= render :partial => "myjobs", :my_jobs => @my_jobs %>
+                    <%= render :partial => 'myjobs', :my_jobs => @my_jobs %>
                   </ul>
                 </li>
             <% end %>
@@ -103,10 +104,11 @@
     <div id="content-wrapper">
       <%= yield %>
       <%= yield :scripts %>
+      <%= render partial: 'initchats', :init_chats => @init_chats %>
     </div>
   </div>
   <%= render 'layouts/modal' %>
-  <%= javascript_include_tag "core" %>
+  <%= javascript_include_tag 'core' %>
 </div>
 </body>
 </html>

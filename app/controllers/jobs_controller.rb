@@ -72,7 +72,7 @@ class JobsController < ApplicationController
       @categories = @all_jobs.where('type' => 0)
     end
     respond_to do |format|
-      format.html # show.html.erb
+      format.html # show.html.erb.erb
       format.json { render json: @job }
     end
   end

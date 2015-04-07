@@ -3,6 +3,10 @@ module ApplicationHelper
     "active" if controller.include?(params[:controller])
   end
 
+  def avatar_url_by_id(user_id)
+    avatar_url(User.find(user_id))
+  end
+
   def avatar_url(user)
     default_url = "#{root_url}assets/guest.jpg"
     gravatar_id = Digest::MD5.hexdigest(user.email.downcase)
