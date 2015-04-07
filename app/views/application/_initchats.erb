@@ -1,0 +1,15 @@
+<div id="chats">
+  <% if init_chats.nil? %>
+    lol
+  <% else %>
+    <script type="text/javascript">
+      var ready = function () {
+      <% init_chats.each do |conversation| %>
+        chatBox.createChatBox(<%= conversation.id %>, 1);
+      <% end %>
+      }
+      $(document).ready(ready);
+    </script>
+  <% end %>
+  <%= subscribe_to "/conversation"%>
+</div>
