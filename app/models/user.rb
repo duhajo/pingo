@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
                   :country, :city, :district, :latitude, :longitude, :radius, :locale, :current_password
   has_many :jobs_workers, dependent: :delete_all
   has_many :jobs, :through => :jobs_workers
+  has_many :conversations, :foreign_key => :sender_id
 
   geocoded_by :address
   reverse_geocoded_by :latitude, :longitude do |obj,results|
