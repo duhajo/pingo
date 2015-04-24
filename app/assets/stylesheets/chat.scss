@@ -89,19 +89,6 @@
     order: 2;
 }
 
-.self .avatar:after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 0;
-    border: 5px solid white;
-    border-right-color: transparent;
-    border-top-color: transparent;
-    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-}
-
 .chatboxmessagecontent {
     background: white;
     padding: 10px;
@@ -174,12 +161,23 @@
 }
 
 .chat-content {
-  .avatar {
-    width: 40px;
-    position: relative;
-    img {
-      display: block;
-      width: 100%;
+  display: table;
+  .message {
+    display: table-row;
+    .avatar {
+      display: table-cell;
+      padding-right: 10px;
+      position: relative;
+      vertical-align: middle;
+      width: 50px;
+      img {
+        display: block;
+        width: 100%;
+      }
+    }
+    
+    .content-wrapper {
+      display: table-cell;
     }
   }
 }

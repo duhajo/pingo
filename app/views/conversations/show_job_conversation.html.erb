@@ -10,7 +10,7 @@
 </div>
 <div class="chat-input">
   <%= form_for([@conversation, @message], :remote => true, :html => {id: "conversation_form_#{@conversation.id}"}) do |f| %>
-    <%= f.text_area :body, class: "chat-textarea", "data-cid" => @conversation.id %>
+    <%= f.text_area :body, rows: 2, class: "chat-textarea form-control", "data-cid" => @conversation.id %>
   <% end %>
 </div>
 

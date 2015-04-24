@@ -12,6 +12,15 @@ var chatboxFocus = new Array();
 var chatBoxes = new Array();
 
 var ready = function () {
+  
+    $("#conversation-list .conversation-link").click(function() {
+      var convLink = $(this);
+      $("#conversation-list").hide();
+      $("#chat-wrapper").append('<div id="chatbox_' + convLink.data("conversation") + '" class="job-chat"></div>')
+      $.get(convLink.data("job_id") + "/conversations/" + convLink.data("conversation"), function (data) {
+          $("#chatbox_" + convLink.data('conversation')).html(data);
+      }, "html");
+    });
 
     chatBox = {
 

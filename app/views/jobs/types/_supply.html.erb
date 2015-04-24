@@ -114,27 +114,41 @@
       </div>
     </div>
   </div>
-  <div id="job-activities-area">
-    <% if current_user && @user_role < 3 %>
-      <%= link_to "Send Message", "#", class: "btn btn-success btn-xs start-conversation",
-                  "data-sid" =>  current_user.id, "data-rip" => @is_manager.first.user_id, 'data-job_id' => @job.id %>
-      <%= render partial: 'jobs/job_chat'%>
-    <% end %>
-    <h2 class="title">Aktivit&auml;ten</h2>
-    <% if user_signed_in? %>
-      <%= render :partial => "comments/form" %>
-    <% else %>
-      <div class="activity">
-        Du bist nicht angemeldet <%= link_to 'einloggen?', login_path, :class => 'btn btn-primary' %>
+  <div id="job-activities-area" role="tabpanel">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation" class="active"><a href="#public" aria-controls="profile" role="tab" data-toggle="tab">Public</a></li>
+      <li role="presentation"><a href="#private" aria-controls="home" role="tab" data-toggle="tab">Private</a></li>
+    </ul>
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane active" id="public">
+        <h2 class="title">Aktivit&auml;ten</h2>
+        <% if user_signed_in? %>
+          <%= render :partial => "comments/form" %>
+        <% else %>
+          <div class="activity">
+            Du bist nicht angemeldet <%= link_to 'einloggen?', login_path, :class => 'btn btn-primary' %>
+          </div>
+        <% end %>
+        <% @activities.each do |activity| %>
+          <% if activity.key == "job.commented" %>
+            <%= render_activity(activity, :layout => 'layouts/activity_wrapper') %>
+          <% else %>
+            <%= render_activity(activity, :layout => 'layouts/activity_wrapper') %>
+          <% end %>
+        <% end %>
       </div>
-    <% end %>
-    <% @activities.each do |activity| %>
-      <% if activity.key == "job.commented" %>
-        <%= render_activity(activity, :layout => 'layouts/activity_wrapper') %>
-      <% else %>
-        <%= render_activity(activity, :layout => 'layouts/activity_wrapper') %>
-      <% end %>
-    <% end %>
+      <div role="tabpanel" class="tab-pane" id="private">
+        <% if current_user %>
+          <% if @user_role < 3 %>
+            <%= link_to "Send Message", "#", class: "btn btn-success btn-xs start-conversation",
+                      "data-sid" =>  current_user.id, "data-rip" => @is_manager.first.user_id, 'data-job_id' => @job.id %>
+          <% end %>
+          <%= render partial: 'jobs/job_chat' %>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>
 <%= gflash %>

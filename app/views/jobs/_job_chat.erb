@@ -1,15 +1,26 @@
 <div id="chat-wrapper">
-  <% if !@conversations.nil? %>
-    <script type="text/javascript">
-      var ready = function () {
-        <% @conversations.each do |conversation|%>
-          chatBox.createJobChatWrapper(<%= conversation.id %>, <%=@job.id %>);
-        <% end %>
-      }
-      $(document).ready(ready);
-    </script>
+  <% if @user_role < 3 %>
+    <% if !@conversations.nil? %>
+      <script type="text/javascript">
+        var ready = function () {
+          <% @conversations.each do |conversation|%>
+            chatBox.createJobChatWrapper(<%= conversation.id %>, <%=@job.id %>);
+          <% end %>
+        }
+        $(document).ready(ready);
+      </script>
+    <% end %>
+    <div id="chat-messages">
+  
+    </div>
+  <% else %>
+    <div id="conversation-list">
+      List of Conversations:<br>
+      <% @conversations.each do |conversation| %>
+        <a href="javascript:;" class="conversation-link" data-conversation="<%=conversation.id%>" data-job_id="<%=@job.id%>">
+          <%= User.find(conversation.sender_id).name%> - <%= conversation.updated_at%>
+        </a>
+      <% end %>
+    </div>
   <% end %>
-  <div id="chat-messages">
-
-  </div>
 </div>

@@ -49,7 +49,7 @@ ready = ->
   # chatInputKey in chat.js for inspection
   ###
 
-  $(document).on 'keydown', '.chatboxtextarea', (event) ->
+  $(document).on 'keydown', '.chat-textarea', (event) ->
     id = $(this).data('cid')
     chatBox.checkInputKey event, $(this), id
     return
