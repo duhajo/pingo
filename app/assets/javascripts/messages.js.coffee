@@ -14,7 +14,9 @@ ready = ->
     e.preventDefault()
     sender_id = $(this).data('sid')
     recipient_id = $(this).data('rip')
+    job_id = $(this).data('job_id')
     $.post '/conversations', {
+      job_id: job_id
       sender_id: sender_id
       recipient_id: recipient_id
     }, (data) ->

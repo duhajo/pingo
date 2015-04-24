@@ -8,7 +8,7 @@ module ApplicationHelper
   end
 
   def avatar_url(user)
-    default_url = "#{root_url}assets/guest.jpg"
+    default_url = "http://placehold.it/150x150"#"#{root_url}assets/guest.jpg"
     gravatar_id = Digest::MD5.hexdigest(user.email.downcase)
     "http://gravatar.com/avatar/#{gravatar_id}.png?s=48&d=#{CGI.escape(default_url)}"
   end

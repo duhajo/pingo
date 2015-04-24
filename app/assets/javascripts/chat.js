@@ -72,6 +72,38 @@ var ready = function () {
 
         },
 
+        createJobChatWrapper: function (conversation_id, job_id) {
+            $("#chatbox_" + conversation_id + " .chatboxtextarea").focus();
+
+            $("#chat-messages").append('<div id="chatbox_' + conversation_id + '" class="job-chat"></div>')
+
+            $.get(job_id + "/conversations/" + conversation_id, function (data) {
+                $('#chatbox_' + conversation_id).html(data);
+            }, "html");
+
+            chatBoxes.push(conversation_id);
+
+            chatboxFocus[conversation_id] = false;
+
+            $("#chatbox_" + conversation_id + " .chatboxtextarea").blur(function () {
+                chatboxFocus[conversation_id] = false;
+                $("#chatbox_" + conversation_id + " .chatboxtextarea").removeClass('chatboxtextareaselected');
+            }).focus(function () {
+                chatboxFocus[conversation_id] = true;
+                $('#chatbox_' + conversation_id + ' .chatboxhead').removeClass('chatboxblink');
+                $("#chatbox_" + conversation_id + " .chatboxtextarea").addClass('chatboxtextareaselected');
+            });
+
+            $("#chatbox_" + conversation_id).click(function () {
+                if ($('#chatbox_' + conversation_id + ' .chatboxcontent').css('display') != 'none') {
+                    $("#chatbox_" + conversation_id + " .chatboxtextarea").focus();
+                }
+            });
+
+            $("#chatbox_" + conversation_id).show();
+
+        },
+
         /**
          * Takes in two parameters. It is responsible for fetching the specific conversation's
          * html page and appending it to the body of our home page e.g if conversation_id = 1

@@ -1,0 +1,15 @@
+<div id="chat-wrapper">
+  <% if !@conversations.nil? %>
+    <script type="text/javascript">
+      var ready = function () {
+        <% @conversations.each do |conversation|%>
+          chatBox.createJobChatWrapper(<%= conversation.id %>, <%=@job.id %>);
+        <% end %>
+      }
+      $(document).ready(ready);
+    </script>
+  <% end %>
+  <div id="chat-messages">
+
+  </div>
+</div>

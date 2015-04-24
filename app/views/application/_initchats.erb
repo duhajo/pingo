@@ -1,12 +1,12 @@
 <div id="chats">
-  <% if init_chats.nil? %>
-    lol
-  <% else %>
+  <% if !init_chats.nil? %>
     <script type="text/javascript">
       var ready = function () {
-      <% init_chats.each do |conversation| %>
-        chatBox.createChatBox(<%= conversation.id %>, 1);
-      <% end %>
+      <% init_chats.each do |conversation|
+        if conversation.job_id.nil? %>
+          chatBox.createChatBox(<%= conversation.id %>, 1);
+        <% end
+      end %>
       }
       $(document).ready(ready);
     </script>

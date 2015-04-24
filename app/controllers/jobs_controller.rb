@@ -35,6 +35,18 @@ class JobsController < ApplicationController
       return 0
     end
   end
+
+  def get_conversations(job)
+    if @current_user
+      if @user_role == 3
+        return Conversation.job_involving(@current_user, job) #ToDo
+      else
+        return Conversation.job_involving(@current_user, job)
+      end
+    else
+      return nil
+    end
+  end
   
   # GET /jobs/1
   # GET /jobs/1.json
@@ -63,10 +75,13 @@ class JobsController < ApplicationController
     @activities = PublicActivity::Activity.order("created_at DESC").all(:conditions => {trackable_type: "Job", trackable_id: [@job_ids] })
     @comment = Comment.new
     @comments = @job.comment_threads
+
+    @conversations = get_conversations(@job.id)
+
     @workers = User.joins(:jobs_workers)
     .where('jobs_workers.job_id' => @job.id)
     .select("name, id, email, isCreator").to_a
-    
+
     if @job.type == 0
       @most_used_tags = @all_jobs.skill_counts
       @categories = @all_jobs.where('type' => 0)

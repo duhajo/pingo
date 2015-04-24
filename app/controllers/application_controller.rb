@@ -25,7 +25,9 @@ class ApplicationController < ActionController::Base
   end
 
   def init_chats
-    @init_chats = Conversation.involving(@current_user)
+    if user_signed_in?
+      @init_chats = Conversation.involving(@current_user)
+    end
   end
 
 end

@@ -115,19 +115,24 @@
     </div>
   </div>
   <div id="job-activities-area">
+    <% if current_user && @user_role < 3 %>
+      <%= link_to "Send Message", "#", class: "btn btn-success btn-xs start-conversation",
+                  "data-sid" =>  current_user.id, "data-rip" => @is_manager.first.user_id, 'data-job_id' => @job.id %>
+      <%= render partial: 'jobs/job_chat'%>
+    <% end %>
     <h2 class="title">Aktivit&auml;ten</h2>
     <% if user_signed_in? %>
       <%= render :partial => "comments/form" %>
     <% else %>
       <div class="activity">
-        Du bist nicht angemeldet <%= link_to 'einloggen?', login_path, :class => "btn btn-primary" %>
+        Du bist nicht angemeldet <%= link_to 'einloggen?', login_path, :class => 'btn btn-primary' %>
       </div>
     <% end %>
     <% @activities.each do |activity| %>
       <% if activity.key == "job.commented" %>
-        <%= render_activity(activity, :layout => "layouts/activity_wrapper") %>
+        <%= render_activity(activity, :layout => 'layouts/activity_wrapper') %>
       <% else %>
-        <%= render_activity(activity, :layout => "layouts/activity_wrapper") %>
+        <%= render_activity(activity, :layout => 'layouts/activity_wrapper') %>
       <% end %>
     <% end %>
   </div>

@@ -1,0 +1,17 @@
+<div class="chat-head">
+  <div class="chat-title">
+    <i class="icon-chat"></i><span class="icon-label">Chat mit dem Anbieter <%= @reciever.name %> </span>
+  </div>
+</div>
+<div class="chat-content">
+  <% if @messages.any? %>
+    <%= render @messages %>
+  <% end %>
+</div>
+<div class="chat-input">
+  <%= form_for([@conversation, @message], :remote => true, :html => {id: "conversation_form_#{@conversation.id}"}) do |f| %>
+    <%= f.text_area :body, class: "chat-textarea", "data-cid" => @conversation.id %>
+  <% end %>
+</div>
+
+<%= subscribe_to "/conversation" %>

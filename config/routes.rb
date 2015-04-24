@@ -40,6 +40,8 @@ Duhajo::Application.routes.draw do
 
   match 'jobs/:job_id/activity/:a_id/reply' => 'comments#reply_to_activity'
 
+  match 'jobs/:job_id/conversations/:c_id' => 'conversations#show_job_conversation'
+
   match 'jobs/new/:type' => 'jobs#new'
 
   match 'jobs/:id/new/:type' => 'jobs#new', :as => 'new_sub_job'
@@ -49,6 +51,8 @@ Duhajo::Application.routes.draw do
   match 'jobs/:id/map_for_job' => 'jobs#map_for_job'
   match 'jobs/:id/show_manager_list' => 'jobs#show_manager_list', :as => 'show_manager_list'
   match 'jobs/:id/edit_manager_list' => 'jobs#edit_manager_list'
+
+  match 'jobs/:id/conversation/:conversation_id' => 'conversation#show'
   
   match 'jobs/:id/new_file' => 'jobs#new_file'
 
