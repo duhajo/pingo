@@ -11,18 +11,31 @@
 var chatboxFocus = new Array();
 var chatBoxes = new Array();
 
+/**
+ * ready to chat?
+ */
 var ready = function () {
   
     $("#conversation-list .conversation-link").click(function() {
       var convLink = $(this);
+      var chatbox = $("#chatbox_" + convLink.data('conversation'));
+      if(chatbox.size() == 0) {
+        $("#chat-wrapper").append('<div id="chatbox_' + convLink.data("conversation") + '" class="job-chat"></div>');
+        $.get(convLink.data("job_id") + "/conversations/" + convLink.data("conversation"), function (data) {          
+            $("#chatbox_" + convLink.data('conversation')).html(data);
+        }, "html");
+      }
+      chatbox.show();
       $("#conversation-list").hide();
-      $("#chat-wrapper").append('<div id="chatbox_' + convLink.data("conversation") + '" class="job-chat"></div>')
-      $.get(convLink.data("job_id") + "/conversations/" + convLink.data("conversation"), function (data) {
-          $("#chatbox_" + convLink.data('conversation')).html(data);
-      }, "html");
     });
-
+    
     chatBox = {
+      
+        show_conversations: function () {
+          $("#conversation-list").show();
+          $(".job-chat").hide();
+        },
+
 
         /**
          * creates an inline chatbox on the page by calling the
@@ -32,9 +45,13 @@ var ready = function () {
          */
 
         chatWith: function (conversation_id) {
-
             chatBox.createChatBox(conversation_id);
-            $("#chatbox_" + conversation_id + " .chatboxtextarea").focus();
+            $("#chatbox_" + conversation_id + " .chat-textarea").focus();
+        },
+        
+        chatWithJob: function (conversation_id, job_id) {
+          chatBox.createJobChatWrapper(conversation_id, job_id);
+            $("#chatbox_" + conversation_id + " .chat-textarea").focus();
         },
 
         /**
@@ -82,9 +99,9 @@ var ready = function () {
         },
 
         createJobChatWrapper: function (conversation_id, job_id) {
-            $("#chatbox_" + conversation_id + " .chatboxtextarea").focus();
+            $("#chatbox_" + conversation_id + " .chat-textarea").focus();
 
-            $("#chat-messages").append('<div id="chatbox_' + conversation_id + '" class="job-chat"></div>')
+            $("#chat-messages").append('<div id="chatbox_' + conversation_id + '" class="job-chat"></div>');
 
             $.get(job_id + "/conversations/" + conversation_id, function (data) {
                 $('#chatbox_' + conversation_id).html(data);
@@ -94,18 +111,18 @@ var ready = function () {
 
             chatboxFocus[conversation_id] = false;
 
-            $("#chatbox_" + conversation_id + " .chatboxtextarea").blur(function () {
+            $("#chatbox_" + conversation_id + " .chat-textarea").blur(function () {
                 chatboxFocus[conversation_id] = false;
-                $("#chatbox_" + conversation_id + " .chatboxtextarea").removeClass('chatboxtextareaselected');
+                $("#chatbox_" + conversation_id + " .chat-textarea").removeClass('chat-textareaselected');
             }).focus(function () {
                 chatboxFocus[conversation_id] = true;
                 $('#chatbox_' + conversation_id + ' .chatboxhead').removeClass('chatboxblink');
-                $("#chatbox_" + conversation_id + " .chatboxtextarea").addClass('chatboxtextareaselected');
+                $("#chatbox_" + conversation_id + " .chat-textarea").addClass('chat-textareaselected');
             });
 
             $("#chatbox_" + conversation_id).click(function () {
-                if ($('#chatbox_' + conversation_id + ' .chatboxcontent').css('display') != 'none') {
-                    $("#chatbox_" + conversation_id + " .chatboxtextarea").focus();
+                if ($('#chatbox_' + conversation_id + ' .chat-content').css('display') != 'none') {
+                    $("#chatbox_" + conversation_id + " .chat-textarea").focus();
                 }
             });
 
@@ -131,15 +148,15 @@ var ready = function () {
                     $("#chatbox_" + conversation_id).css('display', 'block');
                     chatBox.restructure();
                 }
-                $("#chatbox_" + conversation_id + " .chatboxtextarea").focus();
+                $("#chatbox_" + conversation_id + " .chat-textarea").focus();
                 return;
             }
 
-            $("body").append('<div id="chatbox_' + conversation_id + '" class="chatbox"></div>')
+            $("body").append('<div id="chatbox_' + conversation_id + '" class="chatbox"></div>');
 
             $.get("conversations/" + conversation_id, function (data) {
                 $('#chatbox_' + conversation_id).html(data);
-                $("#chatbox_" + conversation_id + " .chatboxcontent").scrollTop($("#chatbox_" + conversation_id + " .chatboxcontent")[0].scrollHeight);
+                $("#chatbox_" + conversation_id + " .chat-content").scrollTop($("#chatbox_" + conversation_id + " .chat-content")[0].scrollHeight);
             }, "html");
 
             $("#chatbox_" + conversation_id).css('bottom', '0px');
@@ -175,30 +192,29 @@ var ready = function () {
                 }
 
                 if (minimize == 1) {
-                    $('#chatbox_' + conversation_id + ' .chatboxcontent').css('display', 'none');
-                    $('#chatbox_' + conversation_id + ' .chatboxinput').css('display', 'none');
+                    $('#chatbox_' + conversation_id + ' .chat-content').css('display', 'none');
+                    $('#chatbox_' + conversation_id + ' .chat-input').css('display', 'none');
                 }
             }
 
             chatboxFocus[conversation_id] = false;
 
-            $("#chatbox_" + conversation_id + " .chatboxtextarea").blur(function () {
+            $("#chatbox_" + conversation_id + " .chat-textarea").blur(function () {
                 chatboxFocus[conversation_id] = false;
-                $("#chatbox_" + conversation_id + " .chatboxtextarea").removeClass('chatboxtextareaselected');
+                $("#chatbox_" + conversation_id + " .chat-textarea").removeClass('chat-textareaselected');
             }).focus(function () {
                 chatboxFocus[conversation_id] = true;
                 $('#chatbox_' + conversation_id + ' .chatboxhead').removeClass('chatboxblink');
-                $("#chatbox_" + conversation_id + " .chatboxtextarea").addClass('chatboxtextareaselected');
+                $("#chatbox_" + conversation_id + " .chat-textarea").addClass('chat-textareaselected');
             });
 
             $("#chatbox_" + conversation_id).click(function () {
-                if ($('#chatbox_' + conversation_id + ' .chatboxcontent').css('display') != 'none') {
-                    $("#chatbox_" + conversation_id + " .chatboxtextarea").focus();
+                if ($('#chatbox_' + conversation_id + ' .chat-content').css('display') != 'none') {
+                    $("#chatbox_" + conversation_id + " .chat-textarea").focus();
                 }
             });
 
             $("#chatbox_" + conversation_id).show();
-
         },
 
         /**
@@ -210,19 +226,19 @@ var ready = function () {
          * @param conversation_id
          */
 
-        checkInputKey: function (event, chatboxtextarea, conversation_id) {
-            if (event.keyCode == 13 && event.shiftKey == 0) {
-                event.preventDefault();
+        checkInputKey: function (is_click, event, chatboxtextarea, conversation_id) {
+            if (is_click || (event.keyCode == 13 && event.shiftKey == 0)) {
+              event.preventDefault();
 
-                message = chatboxtextarea.val();
-                message = message.replace(/^\s+|\s+$/g, "");
+              message = chatboxtextarea.val();
+              message = message.replace(/^\s+|\s+$/g, "");
 
-                if (message != '') {
-                    $('#conversation_form_' + conversation_id).submit();
-                    $(chatboxtextarea).val('');
-                    $(chatboxtextarea).focus();
-                    $(chatboxtextarea).css('height', '44px');
-                }
+              if (message != '') {
+                $('#conversation-form-' + conversation_id).submit();
+                $(chatboxtextarea).val('');
+                $(chatboxtextarea).focus();
+                $(chatboxtextarea).css('height', '44px');
+              }
             }
 
             var adjustedHeight = chatboxtextarea.clientHeight;
@@ -247,7 +263,7 @@ var ready = function () {
          */
 
         toggleChatBoxGrowth: function (conversation_id) {
-            if ($('#chatbox_' + conversation_id + ' .chatboxcontent').css('display') == 'none') {
+            if ($('#chatbox_' + conversation_id + ' .chat-content').css('display') == 'none') {
 
                 var minimizedChatBoxes = new Array();
 
@@ -263,13 +279,13 @@ var ready = function () {
                     }
                 }
 
-                newCookie = newCookie.slice(0, -1)
+                newCookie = newCookie.slice(0, -1);
 
 
                 $.cookie('chatbox_minimized', newCookie);
-                $('#chatbox_' + conversation_id + ' .chatboxcontent').css('display', 'block');
-                $('#chatbox_' + conversation_id + ' .chatboxinput').css('display', 'block');
-                $("#chatbox_" + conversation_id + " .chatboxcontent").scrollTop($("#chatbox_" + conversation_id + " .chatboxcontent")[0].scrollHeight);
+                $('#chatbox_' + conversation_id + ' .chat-content').css('display', 'block');
+                $('#chatbox_' + conversation_id + ' .chat-input').css('display', 'block');
+                $("#chatbox_" + conversation_id + " .chat-content").scrollTop($("#chatbox_" + conversation_id + " .chat-content")[0].scrollHeight);
             } else {
 
                 var newCookie = conversation_id;
@@ -280,15 +296,12 @@ var ready = function () {
 
 
                 $.cookie('chatbox_minimized', newCookie);
-                $('#chatbox_' + conversation_id + ' .chatboxcontent').css('display', 'none');
-                $('#chatbox_' + conversation_id + ' .chatboxinput').css('display', 'none');
+                $('#chatbox_' + conversation_id + ' .chat-content').css('display', 'none');
+                $('#chatbox_' + conversation_id + ' .chat-input').css('display', 'none');
             }
 
         }
-
-
-
-    }
+    };
 
 
     /**
@@ -344,7 +357,7 @@ var ready = function () {
     };
 
 
-}
+};
 
 $(document).ready(ready);
 $(document).on("page:load", ready);

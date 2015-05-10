@@ -13,7 +13,7 @@
 </div>
 
 <div <% if @job.status == 3 || user_signed_in? && @job.parent_id.nil? %>class="closed"<% end %> id="job-view" data-id="<%= @job.id %>">
-  <div id="job-specification-area">
+  <div id="job-specification-area" class="col">
     <div id="job-details">
       <h1 class="title job">
         <% if @user_role == 3 && user_signed_in? %><span class="icon-label left">
@@ -114,7 +114,8 @@
       </div>
     </div>
   </div>
-  <div id="job-activities-area" role="tabpanel">
+  <div id="job-activities-area" class="col" role="tabpanel">
+    <% if user_signed_in? %>
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
       <li role="presentation" class="active"><a href="#public" aria-controls="profile" role="tab" data-toggle="tab">Public</a></li>
@@ -124,13 +125,7 @@
     <div class="tab-content">
       <div role="tabpanel" class="tab-pane active" id="public">
         <h2 class="title">Aktivit&auml;ten</h2>
-        <% if user_signed_in? %>
-          <%= render :partial => "comments/form" %>
-        <% else %>
-          <div class="activity">
-            Du bist nicht angemeldet <%= link_to 'einloggen?', login_path, :class => 'btn btn-primary' %>
-          </div>
-        <% end %>
+        <%= render :partial => "comments/form" %>
         <% @activities.each do |activity| %>
           <% if activity.key == "job.commented" %>
             <%= render_activity(activity, :layout => 'layouts/activity_wrapper') %>
@@ -140,15 +135,25 @@
         <% end %>
       </div>
       <div role="tabpanel" class="tab-pane" id="private">
-        <% if current_user %>
-          <% if @user_role < 3 %>
+          <% if @user_role < 3 && @conversations.empty? %>
             <%= link_to "Send Message", "#", class: "btn btn-success btn-xs start-conversation",
-                      "data-sid" =>  current_user.id, "data-rip" => @is_manager.first.user_id, 'data-job_id' => @job.id %>
+                      "data-sid" =>  current_user.id, "data-rip" => @managers.first.user_id, 'data-job_id' => @job.id %>
           <% end %>
           <%= render partial: 'jobs/job_chat' %>
-        <% end %>
       </div>
     </div>
+    <% else %>
+      <div class="activity">
+        Du bist nicht angemeldet <%= link_to 'einloggen?', login_path, :class => 'btn btn-primary' %>
+      </div>
+      <% @activities.each do |activity| %>
+        <% if activity.key == "job.commented" %>
+          <%= render_activity(activity, :layout => 'layouts/activity_wrapper') %>
+        <% else %>
+          <%= render_activity(activity, :layout => 'layouts/activity_wrapper') %>
+        <% end %>
+      <% end %>
+    <% end %>
   </div>
 </div>
 <%= gflash %>

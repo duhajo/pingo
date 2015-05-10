@@ -20,28 +20,12 @@ class JobsController < ApplicationController
     end
   end
 
-  def get_user_role(job)
-    if current_user
-      if job.users.find_by_id(current_user.id)
-        unless JobsWorker.where(:job_id => job.id).where('jobs_workers.isCreator' => true).where(:user_id => current_user.id).to_a.empty?
-          return 3 #manager
-        else
-          return 2 #worker
-        end
-      else
-        return 1 #keine role
-      end
-    else
-      return 0
-    end
-  end
-
   def get_conversations(job)
-    if @current_user
+    if current_user
       if @user_role == 3
-        return Conversation.job_involving(@current_user, job) #ToDo
+        return Conversation.job_involving(current_user, job) #ToDo
       else
-        return Conversation.job_involving(@current_user, job)
+        return Conversation.job_involving(current_user, job)
       end
     else
       return nil
@@ -60,8 +44,8 @@ class JobsController < ApplicationController
       @file_others << attachment if ((attachment.file.content_type || "").split("/").first != 'image')
     end
 
-    @user_role = get_user_role(@job)
-    @is_manager = JobsWorker.where(:job_id => @job.id).where('jobs_workers.isCreator' => true).to_a
+    @user_role = Job.get_user_role(@job, current_user)
+    @managers = JobsWorker.where(:job_id => @job.id).where('jobs_workers.isCreator' => true).to_a
     
     @all_jobs = Job.where('parent_id' => @job.id)
     @supplies = @all_jobs.where('type' => [1,2,3])
@@ -77,6 +61,7 @@ class JobsController < ApplicationController
     @comments = @job.comment_threads
 
     @conversations = get_conversations(@job.id)
+    @job_chat_active = true
 
     @workers = User.joins(:jobs_workers)
     .where('jobs_workers.job_id' => @job.id)
@@ -231,7 +216,7 @@ class JobsController < ApplicationController
 
   def set_status
     @job = Job.find(params[:id])
-    @user_role = get_user_role(@job)
+    @user_role = Job.get_user_role(@job, current_user)
     @managers = JobsWorker.where(:job_id => @job.id).where('jobs_workers.isCreator' => true).where(:user_id => current_user.id)
     unless @managers.empty?
       @job.status = params[:status]

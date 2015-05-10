@@ -13,7 +13,7 @@
 </div>
 
 <div <% if @job.status == 3 || user_signed_in? && @job.parent_id.nil? %>class="closed"<% end %> id="job-view" data-id="<%= @job.id %>">
-  <div id="job-specification-area">
+  <div id="job-specification-area" class="col">
     <div id="job-details">
       <h1 class="title job">
         <% if @user_role == 3 && user_signed_in? %><span class="icon-label left"><% end %>
@@ -101,8 +101,8 @@
 
           <div class="preview-list workers">
             <ul class="overflow">
-              <% if (@workers.empty? && @user_role != 2 && current_user) or @is_manager.empty? %>
-                <%= link_to url_for({:action => :support, :support => true, :manager => @is_manager.empty?}), :class => "btn btn-primary" do %>
+              <% if (@workers.empty? && @user_role != 2 && current_user) or @managers.empty? %>
+                <%= link_to url_for({:action => :support, :support => true, :manager => @managers.empty?}), :class => "btn btn-primary" do %>
                   <span class='plus'>+</span>
                 <% end %>
               <% end %>
@@ -153,7 +153,7 @@
     </div>
     <div class="well">Hier ist Platz für Etherpad und andere Integration.</div>
   </div>
-  <div id="job-activities-area">
+  <div id="job-activities-area" class="col">
     <h2 class="title">Aktivit&auml;ten</h2>
     <% if user_signed_in? %>
       <%= render :partial => "comments/form" %>

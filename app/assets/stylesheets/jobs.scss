@@ -58,8 +58,10 @@
 
   #job-specification-area {
     @extend .col-md-8, .nospace;
-    border-right: 1px solid #EBEBEB;
-    margin-left: -15px;
+    @media (min-width: $screen-md-min) {
+      border-right: 1px solid #EBEBEB;
+      margin-left: -15px;
+    }
 
     #job-details {
       @extend .side-space;
@@ -68,7 +70,7 @@
         @extend .col-md-9;
 
         #job-meta {
-          overflow: hidden;
+          @extend .row;
           > div {
             float: left;
             margin-left: 2%;
@@ -150,8 +152,9 @@
 
       #job-workers-wrapper {
         @extend .col-md-3;
-        border-left: 1px solid #EBEBEB;
-
+        @media (min-width: $screen-md-min) {
+          border-left: 1px solid #EBEBEB;
+        }
         h3 {
           margin-top: 0;
           line-height: rem-calc(28);
@@ -161,13 +164,26 @@
   }
 
   #job-activities-area {
-    border-left: 1px solid #EBEBEB;
-    margin-left: -1px;
+    @extend .col-md-4, .space;
+    @media (min-width: $screen-md-min) {
+      border-left: 1px solid #EBEBEB;
+      margin-left: -1px;
+    }
     margin-top: rem-calc(45);
-    @extend .col-md-4, .side-space;
 
     h2 {
       margin-bottom: rem-calc(18);
+    }
+    
+    @media (min-width: $screen-md-min) {
+      .nav-tabs {
+        border: 0 none;
+        margin-bottom: 20px;
+        margin-top: -57px;
+        li.active a {
+          background-color: white;
+        }
+      }
     }
   }
 }

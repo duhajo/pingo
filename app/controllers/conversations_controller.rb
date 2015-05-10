@@ -5,15 +5,17 @@ class ConversationsController < ApplicationController
 
   def create
     if params[:job_id].nil?
-      if Conversation.between(params[:sender_id],params[:recipient_id]).present?
-        @conversation = Conversation.between(params[:sender_id],params[:recipient_id]).first
+      @conversation = Conversation.between(params[:sender_id],params[:recipient_id])
+      if @conversation.present?
+        @conversation = @conversation.first
       else
         @conversation = Conversation.create!(:sender_id => params[:sender_id], :recipient_id => params[:recipient_id])
       end
       render json: { conversation_id: @conversation.id }
     else
-      if Conversation.between(params[:sender_id],params[:recipient_id],params[:job_id]).present?
-        @conversation = Conversation.between(params[:sender_id],params[:recipient_id],params[:job_id]).first
+      @conversation = Conversation.between_job(params[:sender_id],params[:recipient_id],params[:job_id])
+      if @conversation.present?
+        @conversation = @conversation.first
       else
         @conversation = Conversation.create!(:sender_id => params[:sender_id], :recipient_id => params[:recipient_id], :job_id => params[:job_id])
       end
@@ -32,7 +34,8 @@ class ConversationsController < ApplicationController
     @conversation = Conversation.find(params[:c_id])
     @job = Job.find(params[:job_id])
     @reciever = interlocutor(@conversation)
-    @messages = @conversation.messages
+    @is_owner = current_user.id == @conversation.recipient.id ? true : false
+    @messages = @conversation.messages.reverse!
     @message = Message.new
   end
 

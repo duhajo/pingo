@@ -20,11 +20,11 @@ class Conversation < ActiveRecord::Base
   end
 
   scope :between, ->(sender_id,recipient_id) do
-    where("(conversations.sender_id = ? AND conversations.recipient_id =?) OR (conversations.sender_id = ? AND conversations.recipient_id =?)",
+    where("(conversations.sender_id = ? AND conversations.recipient_id =?) OR (conversations.sender_id = ? AND conversations.recipient_id =?) AND (conversations.job_id = '')",
           sender_id,recipient_id,recipient_id,sender_id)
   end
 
-  scope :between, ->(sender_id,recipient_id,job_id) do
+  scope :between_job, ->(sender_id,recipient_id,job_id) do
     where("(conversations.sender_id = ? AND conversations.recipient_id =?) OR (conversations.sender_id = ? AND conversations.recipient_id =?) AND (conversations.job_id = ?)",
           sender_id,recipient_id,recipient_id,sender_id,job_id)
   end

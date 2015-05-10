@@ -1,15 +1,23 @@
 <% publish_to "/conversation" do %>
   var id = "<%= @conversation.id %>";
-  var chatbox = $("#chatbox_" + id + " .chatboxcontent");
+  var chatbox = $("#chatbox_" + id + " .chat-content");
   var sender_id = "<%= @message.user.id %>";
   var reciever_id = $('meta[name=user-id]').attr("content");
-  var job_id = "<%= @conversation.job.id %>";
-
-  chatbox.append("<%= j render( partial: @message ) %>");
+  <% if @conversation.job %>
+    var job_id = "<%= @conversation.job.id %>";
+    chatbox.prepend("<%= j render( partial: @message ) %>");
+  <% else %>
+    chatbox.append("<%= j render( partial: @message ) %>");
+  <% end %>
+  
   chatbox.scrollTop(chatbox[0].scrollHeight);
 
   if(sender_id != reciever_id){
-    chatBox.chatWith(id);
+    <% if @conversation.job %>
+      chatBox.chatWithJob(id);
+    <% else %>
+      chatBox.chatWith(id);
+    <% end %>
     chatbox.children().last().removeClass("self").addClass("other");
     chatbox.scrollTop(chatbox[0].scrollHeight);
     chatBox.notify();

@@ -14,13 +14,26 @@ ready = ->
     e.preventDefault()
     sender_id = $(this).data('sid')
     recipient_id = $(this).data('rip')
+    $.post '/conversations', {
+      sender_id: sender_id
+      recipient_id: recipient_id
+    }, (data) ->
+      chatBox.chatWith data.conversation_id
+      return
+    return
+    
+  $('#job-view .start-conversation').click (e) ->
+    e.preventDefault()
+    e.target.remove()
+    sender_id = $(this).data('sid')
+    recipient_id = $(this).data('rip')
     job_id = $(this).data('job_id')
     $.post '/conversations', {
       job_id: job_id
       sender_id: sender_id
       recipient_id: recipient_id
     }, (data) ->
-      chatBox.chatWith data.conversation_id
+      chatBox.chatWithJob data.conversation_id, job_id
       return
     return
 
@@ -49,9 +62,19 @@ ready = ->
   # chatInputKey in chat.js for inspection
   ###
 
-  $(document).on 'keydown', '.chat-textarea', (event) ->
+  $(document).on 'keydown', '.chat-textarea.enter-sends', (event) ->
     id = $(this).data('cid')
-    chatBox.checkInputKey event, $(this), id
+    chatBox.checkInputKey false, event, $(this), id
+    return
+
+  ###*
+  # Listen on send button call the
+  # chatInputKey in chat.js for inspection
+  ###
+
+  $(document).on 'click', '.send-chat-message', (event) ->
+    id = $(this).data('cid')
+    chatBox.checkInputKey true, event, $("#message-for-"+id), id
     return
 
   ###*
