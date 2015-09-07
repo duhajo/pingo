@@ -221,3 +221,6 @@ DEPENDENCIES
   sunspot_rails
   truncate_html
   uglifier (>= 1.0.3)
+
+BUNDLED WITH
+   1.10.6
