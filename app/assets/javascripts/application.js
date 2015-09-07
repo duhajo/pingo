@@ -26,3 +26,6 @@
 //= require mapbox
 //= require markercluster
 //= require autocomplete-rails
+//= require chat
+//= require private_pub
+//= require messages

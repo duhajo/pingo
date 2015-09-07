@@ -1,0 +1,24 @@
+<div class="chat-head">
+  <div class="chat-title">
+    <i class="icon-chat"></i>
+
+    <h1><%= @reciever.name %> </h1>
+  </div>
+  <div class="chat-options">
+    <%= link_to "<i class='icon-minus-circled'></i> ".html_safe, "#", class: "toggleChatBox", "data-cid" => @conversation.id %>
+    &nbsp;&nbsp;
+    <%= link_to "<i class='icon-cancel'></i> ".html_safe, "#", class: "closeChat", "data-cid" => @conversation.id %>
+  </div>
+  <br clear="all"/>
+</div>
+<div class="chat-content">
+  <% if @messages.any? %>
+    <%= render @messages %>
+  <% end %>
+</div>
+<div class="chat-input">
+  <%= form_for([@conversation, @message], :remote => true, :html => {id: "conversation-form-#{@conversation.id}"}) do |f| %>
+    <%= f.text_area :body, id: "message-for-#{@conversation.id}", class: "chat-textarea enter-sends", "data-cid" => @conversation.id %>
+  <% end %>
+</div>
+

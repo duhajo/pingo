@@ -3,9 +3,9 @@ class CreateJobsFiles < ActiveRecord::Migration
     create_table :jobs_files do |t|
       t.references :user
       t.references :job
-	  t.string :file
-	  t.string :title
-	  t.text :description
+      t.string :file
+      t.string :title
+      t.text :description
 	  
       t.timestamps
     end

@@ -41,6 +41,15 @@
 }
 
 
+.row-no-space {
+  margin-left: 0;
+  margin-right: 0;
+  [class*="col"] {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
 // Columns
 //
 // Common styles for small and large grid columns
