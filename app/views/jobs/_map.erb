@@ -6,7 +6,8 @@
       lat         =   '<%= @job.latitude %>',
       job_title       =   '<%= @job.title %>';
 
-  var map = L.mapbox.map('map', 'examples.map-20v6611k')
+  L.mapbox.accessToken = 'pk.eyJ1IjoicHN5cGhhbnQiLCJhIjoiZ290ak5iYyJ9.bYZdC19qip0QBUtvrJ8r-Q';
+  var map = L.mapbox.map('map', 'psyphant.nhm78mmc')
       .setView([lat, long], 16);
 
   L.mapbox.featureLayer({

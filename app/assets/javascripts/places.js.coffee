@@ -3,7 +3,8 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 @initPlacesMap = ->
-  map = L.mapbox.map("map", "examples.map-20v6611k")
+  L.mapbox.accessToken = 'pk.eyJ1IjoicHN5cGhhbnQiLCJhIjoiZ290ak5iYyJ9.bYZdC19qip0QBUtvrJ8r-Q'
+  map = L.mapbox.map("map", "psyphant.nhm78mmc")
 
   $.getJSON "/places/index.json", (data) ->
     markers = new L.MarkerClusterGroup()

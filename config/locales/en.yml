@@ -15,6 +15,7 @@ en:
   jobs_category: "Category"
   jobs_category_overview: "Category Overview"
   jobs_category_no_tags: "There are no tags in this category."
+  jobs_category_choose: "Choose an category"
 
   jobs_no_jobs: "There are no jobs available."
   jobs_no_resources: "There are no demands or supplies available."
@@ -52,12 +53,14 @@ en:
   job_form_set_deadline: "Set Deadline"
   job_form_deadline: "Deadline"
   job_form_set_location: "Specify a Location"
+  job_form_category: "Assign to an category"
   job_form_country: "Country"
   job_form_city: "City"
   job_form_street: "Street"
   job_form_picture: "Category Picture"
 
   attachment: "Attachment"
+  attachment_not_found: "There are no attachments uploaded yet."
 
   worker_overview: "Worker Overview"
   filter_by: "Filter by"

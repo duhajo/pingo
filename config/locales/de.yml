@@ -15,6 +15,7 @@ de:
   jobs_category: "Kategorie"
   jobs_category_overview: "Kategorieübersicht"
   jobs_category_no_tags: "Es sind noch keine Schlagworte vorhanden."
+  jobs_category_choose: "Kategorie auswählen"
 
   jobs_no_jobs: "Keinen Job gefunden."
   jobs_no_resources: "Kein Angebot und keine Nachfrage vorhanden."
@@ -51,12 +52,14 @@ de:
   job_form_set_deadline: "Deadline festlegen"
   job_form_deadline: "Deadline"
   job_form_set_location: "Ort festlegen"
+  job_form_category: "Kategorie zuweisen"
   job_form_country: "Land"
   job_form_city: "Stadt"
   job_form_street: "Straße"
   job_form_picture: "Kategorienbild"
 
   attachment: "Anhänge"
+  attachment_not_found: "Es sind noch keine Anhänge hochgeladen wurden."
 
   worker_overview: "Arbeiterübersicht"
   filter_by: "Filtern nach"

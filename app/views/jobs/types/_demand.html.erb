@@ -23,7 +23,6 @@
           <a href="<%= edit_job_path(@job) %>" class="header-actions left"><span class="icon edit"></span></a>
         <% end %>
       </h1>
-
       <div class="row">
         <div id="job-meta-wrapper">
           <div id="job-meta">
@@ -110,6 +109,11 @@
               <% end %>
             </ul>
           </div>
+          <% if @job.status.nil? %>
+            <div class="job-status">
+              <a href="#toDo" class="btn btn-primary">Nachfrage erledigt!</a>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>

@@ -109,7 +109,7 @@ class JobsController < ApplicationController
     respond_to do |format|
       if @job_file.save
         @job.create_activity :upload_file, params: {file: @job_file.id}, owner: current_user
-        format.html { redirect_to @job, notice: 'Job was successfully created.' }
+        format.html { redirect_to @job, notice: 'File was uploaded successfully.' }
         format.json { render json: @job, status: :created, location: @job }
       end
     end
@@ -123,7 +123,7 @@ class JobsController < ApplicationController
   def edit
     @job = Job.find(params[:id])
     @managers = User.joins(:jobs_workers).select("users.id, name, email").where("jobs_workers.job_id" => @job.id).where("jobs_workers.isCreator" => true).to_a
-
+    
     if @job.type == 0
       @type_category = 0
     elsif @job.type == 4 || @job.type == 5

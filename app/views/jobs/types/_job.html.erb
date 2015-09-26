@@ -31,12 +31,12 @@
                else
                  @lessColumns = true
                end %>
-            <div id="job-status-wrapper">
+            <div id="job-status-wrapper" class="col-md-10 col-lg-<% if @lessColumns %>4<% else %>2<% end %>">
               <%= render :partial => "status", :job => @job, :manager => @user_role %>
             </div>
 
             <% if not @job.deadline.nil? %>
-              <div id="job-deadline">
+              <div id="job-deadline" class="col-md-10 col-lg-<% if @lessColumns %>8<% else %>4<% end %>">
                 <span class="icon"><!----></span>
                     <span class="icon-label" title="<%= @job.deadline.to_formatted_s(:long) %>">
                       <%= distance_of_time_in_words(Time.now, @job.deadline, true) %>
@@ -49,7 +49,7 @@
               </div>
             <% end %>
             <% if !@job.address.blank? %>
-              <div id="job-location">
+              <div id="job-location" class="col-md-10 col-lg-<% if @lessColumns %>8<% else %>4<% end %>">
                 <span class="icon"><!----></span>
                     <span class="icon-label">
                       <%= link_to @job.address, {:action => :map_for_job}, :id => "show-map-button",
@@ -59,7 +59,7 @@
                     </span>
               </div>
             <% end %>
-            <div id="job-likes">
+            <div id="job-likes" class="col-md-10 col-lg-2">
               <%= render :partial => "likes", :job => @job %>
             </div>
           </div>

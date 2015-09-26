@@ -10,7 +10,7 @@ ready = ->
   # recipient_id
   ###
 
-  $('.start-conversation').click (e) ->
+  $('#workers-overview .start-conversation').click (e) ->
     e.preventDefault()
     sender_id = $(this).data('sid')
     recipient_id = $(this).data('rip')
@@ -33,6 +33,7 @@ ready = ->
       sender_id: sender_id
       recipient_id: recipient_id
     }, (data) ->
+      $('#job-activities-area #private').html('<div id="chat-messages"></div>');
       chatBox.chatWithJob data.conversation_id, job_id
       return
     return

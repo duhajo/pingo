@@ -56,8 +56,8 @@ ActiveRecord::Schema.define(:version => 20150407120039) do
     t.datetime "updated_at",   :null => false
   end
 
-  add_index "conversations", ["sender_id", "recipient_id"], :name => "index_conversations_on_sender_id_and_recipient_id"
   add_index "conversations", ["job_id"], :name => "index_conversations_on_job_id"
+  add_index "conversations", ["sender_id", "recipient_id"], :name => "index_conversations_on_sender_id_and_recipient_id"
 
   create_table "jobs", :force => true do |t|
     t.string   "title"
