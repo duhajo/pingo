@@ -57,7 +57,7 @@ class Job < ActiveRecord::Base
   end
   
   def self.is_creator_of_job(job, current_user)
-    if JobsWorker.where(:job_id => job.id).where('jobs_workers.isCreator' => true).where(:user_id => current_user.id).to_a.empty?
+    if JobsWorker.where(:job_id => job.id).where('jobs_workers.is_creator' => true).where(:user_id => current_user.id).to_a.empty?
       return false
     else
       return true

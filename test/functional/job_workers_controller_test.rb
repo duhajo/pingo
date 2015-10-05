@@ -18,7 +18,7 @@ class JobWorkersControllerTest < ActionController::TestCase
 
   test "should create job_worker" do
     assert_difference('JobWorker.count') do
-      post :create, job_worker: { iscreator: @job_worker.iscreator, job_id: @job_worker.job_id, worker_id: @job_worker.worker_id }
+      post :create, job_worker: { is_creator: @job_worker.is_creator, job_id: @job_worker.job_id, worker_id: @job_worker.worker_id }
     end
 
     assert_redirected_to job_worker_path(assigns(:job_worker))
@@ -35,7 +35,7 @@ class JobWorkersControllerTest < ActionController::TestCase
   end
 
   test "should update job_worker" do
-    put :update, id: @job_worker, job_worker: { iscreator: @job_worker.iscreator, job_id: @job_worker.job_id, worker_id: @job_worker.worker_id }
+    put :update, id: @job_worker, job_worker: { is_creator: @job_worker.is_creator, job_id: @job_worker.job_id, worker_id: @job_worker.worker_id }
     assert_redirected_to job_worker_path(assigns(:job_worker))
   end
 

@@ -3,7 +3,7 @@ class CreateJobsWorkers < ActiveRecord::Migration
     create_table :jobs_workers, :id => false do |t|
       t.references :user
       t.references :job
-      t.boolean :isCreator
+      t.boolean :is_creator
       t.timestamps
     end
     
