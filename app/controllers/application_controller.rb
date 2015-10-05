@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   
   helper :all # include all helpers, all the time  
   helper_method :my_jobs
+  helper_method :init_chats
   
   private
   
@@ -22,5 +23,11 @@ class ApplicationController < ActionController::Base
   def my_jobs
     @my_jobs = Job.joins("LEFT JOIN `jobs_workers` ON jobs.id = jobs_workers.job_id").where('jobs_workers.user_id' => @current_user.id).to_a
   end
-  
+
+  def init_chats
+    if user_signed_in?
+      @init_chats = Conversation.involving(@current_user)
+    end
+  end
+
 end

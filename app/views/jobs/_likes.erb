@@ -9,9 +9,7 @@
   <span class="icon love"><!----></span>
   <span class="icon-label">
     <span class="likes-number">
-      <% if @job.likes.size == 0 %>
-        First
-      <% else %>
+      <% if @job.likes.size > 0 %>
         <%= @job.likes.size %>
     <% end %></span> Love
   </span>

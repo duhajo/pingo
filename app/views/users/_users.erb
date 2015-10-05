@@ -9,6 +9,10 @@
             </div>
             <div class="user-details col-md-9">
               <div class="user-name"><%= link_to user.name, user %></div>
+              <% if current_user && current_user != user %>
+                <%= link_to "Send Message", "#", class: "btn btn-success btn-xs start-conversation",
+                            "data-sid" =>  current_user.id, "data-rip" => user.id %>
+              <% end %>
               <% if !user.latitude.nil? && !user.longitude.nil? %>
                 <div class="user-address"><%= user.address %></div>
               <% end %>

@@ -1,0 +1,11 @@
+<div class="<%= self_or_other(message) %> message">
+  <div class="avatar">
+    <%= image_tag(avatar_url_by_id(message.user_id), alt: "?", class: "img-circle") %>
+  </div>
+  <div class="content-wrapper">
+    <p><%= simple_format(message.body) %></p>
+    <time datetime="<%= message.created_at %>" title="<%= message.created_at.strftime("%d %b  %Y at %I:%M%p") %>">
+      <%= message_interlocutor(message).name %> • <%= message.created_at.strftime("%H:%M %p") %>
+    </time>
+  </div>
+</div>

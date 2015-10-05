@@ -56,3 +56,7 @@ gem "truncate_html"
 gem "carrierwave"
 gem "rmagick"
 gem "mini_magick"
+
+#chat
+gem 'private_pub'
+gem 'thin'

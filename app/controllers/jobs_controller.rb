@@ -20,19 +20,15 @@ class JobsController < ApplicationController
     end
   end
 
-  def get_user_role(job)
+  def get_conversations(job)
     if current_user
-      if job.users.find_by_id(current_user.id)
-        unless JobsWorker.where(:job_id => job.id).where('jobs_workers.isCreator' => true).where(:user_id => current_user.id).to_a.empty?
-          return 3 #manager
-        else
-          return 2 #worker
-        end
+      if @user_role == 3
+        return Conversation.job_involving(current_user, job) #ToDo
       else
-        return 1 #keine role
+        return Conversation.job_involving(current_user, job)
       end
     else
-      return 0
+      return nil
     end
   end
   
@@ -48,8 +44,8 @@ class JobsController < ApplicationController
       @file_others << attachment if ((attachment.file.content_type || "").split("/").first != 'image')
     end
 
-    @user_role = get_user_role(@job)
-    @is_manager = JobsWorker.where(:job_id => @job.id).where('jobs_workers.isCreator' => true).to_a
+    @user_role = Job.get_user_role(@job, current_user)
+    @managers = JobsWorker.where(:job_id => @job.id).where('jobs_workers.isCreator' => true).to_a
     
     @all_jobs = Job.where('parent_id' => @job.id)
     @supplies = @all_jobs.where('type' => [1,2,3])
@@ -63,16 +59,20 @@ class JobsController < ApplicationController
     @activities = PublicActivity::Activity.order("created_at DESC").all(:conditions => {trackable_type: "Job", trackable_id: [@job_ids] })
     @comment = Comment.new
     @comments = @job.comment_threads
+
+    @conversations = get_conversations(@job.id)
+    @job_chat_active = true
+
     @workers = User.joins(:jobs_workers)
     .where('jobs_workers.job_id' => @job.id)
     .select("name, id, email, isCreator").to_a
-    
+
     if @job.type == 0
       @most_used_tags = @all_jobs.skill_counts
       @categories = @all_jobs.where('type' => 0)
     end
     respond_to do |format|
-      format.html # show.html.erb
+      format.html # show.html.erb.erb
       format.json { render json: @job }
     end
   end
@@ -109,7 +109,7 @@ class JobsController < ApplicationController
     respond_to do |format|
       if @job_file.save
         @job.create_activity :upload_file, params: {file: @job_file.id}, owner: current_user
-        format.html { redirect_to @job, notice: 'Job was successfully created.' }
+        format.html { redirect_to @job, notice: 'File was uploaded successfully.' }
         format.json { render json: @job, status: :created, location: @job }
       end
     end
@@ -123,7 +123,7 @@ class JobsController < ApplicationController
   def edit
     @job = Job.find(params[:id])
     @managers = User.joins(:jobs_workers).select("users.id, name, email").where("jobs_workers.job_id" => @job.id).where("jobs_workers.isCreator" => true).to_a
-
+    
     if @job.type == 0
       @type_category = 0
     elsif @job.type == 4 || @job.type == 5
@@ -216,7 +216,7 @@ class JobsController < ApplicationController
 
   def set_status
     @job = Job.find(params[:id])
-    @user_role = get_user_role(@job)
+    @user_role = Job.get_user_role(@job, current_user)
     @managers = JobsWorker.where(:job_id => @job.id).where('jobs_workers.isCreator' => true).where(:user_id => current_user.id)
     unless @managers.empty?
       @job.status = params[:status]

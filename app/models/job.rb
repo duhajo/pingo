@@ -55,4 +55,28 @@ class Job < ActiveRecord::Base
       find(:all)
     end
   end
+  
+  def self.is_creator_of_job(job, current_user)
+    if JobsWorker.where(:job_id => job.id).where('jobs_workers.isCreator' => true).where(:user_id => current_user.id).to_a.empty?
+      return false
+    else
+      return true
+    end
+  end
+  
+  def self.get_user_role(job, current_user)
+    if current_user
+      if job.users.find_by_id(current_user.id)
+        if is_creator_of_job(job, current_user)
+          return 3 #manager
+        else
+          return 2 #worker
+        end
+      else
+        return 1 #keine role
+      end
+    else
+      return 0
+    end
+  end
 end
