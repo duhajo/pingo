@@ -32,7 +32,7 @@ test:
   host: localhost
 
 production:
-  adapter: mysql2
+  adapter: postgresql
   encoding: utf8
   reconnect: false
   database: duhajo_production
