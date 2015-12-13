@@ -59,7 +59,7 @@ end %>
                 <%end%>
               </div>
             <%end%>
-            <%if job.likes.size > 0 %>
+            <%if job.votes_for.size > 0 %>
               <div class="job-likes">
                 <%= link_to job do %><span class="icon love pull-left"></span><span class="icon-label"><%= job.likes.size %></span><%end%>
               </div>

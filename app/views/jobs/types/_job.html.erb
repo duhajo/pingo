@@ -36,7 +36,7 @@
             </div>
 
             <% if not @job.deadline.nil? %>
-              <div id="job-deadline" class="col-md-10 col-lg-<% if @lessColumns %>8<% else %>4<% end %>">
+              <div id="job-deadline" class="col-md-10 col-lg-<% if @lessColumns %>8<% else %>3<% end %>">
                 <span class="icon"><!----></span>
                     <span class="icon-label" title="<%= @job.deadline.to_formatted_s(:long) %>">
                       <%= distance_of_time_in_words(Time.now, @job.deadline, true) %>
@@ -101,7 +101,7 @@
 
           <div class="preview-list workers">
             <ul class="overflow">
-              <% if (@workers.empty? && @user_role != 2 && current_user) or @managers.empty? %>
+              <% if (@user_role != 2 && current_user) or @managers.empty? %>
                 <%= link_to url_for({:action => :support, :support => true, :manager => @managers.empty?}), :class => "btn btn-primary" do %>
                   <span class='plus'>+</span>
                 <% end %>
@@ -109,15 +109,15 @@
               <% @workers.each.with_index do |worker, index| %>
                 <li>
                   <% title = worker.name
-                     if (worker.is_creator == 1)
+                     if to_b(worker.is_creator)
                        title << " (Manager)"
                      end %>
                   <%= link_to worker, :class => "show-tooltip", :title => title, data: {toggle: "tooltip"} do %>
-                              <span class="profile-avatar
-                                <% if (worker.is_creator == 1) %>manager
-                                <% end %>">
-                                <%= image_tag(avatar_url(worker), alt: "?", :class => "img-circle") %>
-                              </span>
+                    <span class="profile-avatar
+                      <% if (to_b(worker.is_creator)) %>manager
+                      <% end %>">
+                      <%= image_tag(avatar_url(worker), alt: "?", :class => "img-circle") %>
+                    </span>
                   <% end %>
                 </li>
                 <% if index == 2 && (@workers.size - index) > 1 %>

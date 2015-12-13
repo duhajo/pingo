@@ -65,7 +65,7 @@ class JobsController < ApplicationController
 
     @workers = User.joins(:jobs_workers)
     .where('jobs_workers.job_id' => @job.id)
-    .select("name, id, email, is_creator").to_a
+    .select("name, id, email, is_creator")
 
     if @job.type == 0
       @most_used_tags = @all_jobs.skill_counts
@@ -194,7 +194,7 @@ class JobsController < ApplicationController
         if @current_worker.empty?
           @job.jobs_workers.where(:user_id => current_user.id).where(:is_creator => true).first_or_create()
         else
-          @current_worker.update_all(:is_creator => 1)
+          @current_worker.update_all(:is_creator => true)
         end
       else
         @job.jobs_workers.where(:user_id => current_user.id).first_or_create()
@@ -245,7 +245,7 @@ class JobsController < ApplicationController
     end
 
     respond_to do |format|
-      format.json { render :json => @job.likes.size }
+      format.json { render :json => @job.votes_for.size }
     end
   end
 

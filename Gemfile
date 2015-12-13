@@ -18,6 +18,8 @@ group :development do
   gem "rails_layout"
 end
 
+gem "devise"
+
 #autocomplete
 gem "rails3-jquery-autocomplete"
 
@@ -27,7 +29,6 @@ gem "awesome_nested_set"
 
 #To use tagging
 gem "acts-as-taggable-on"
-gem "devise"
 
 # To use Geolocations
 gem "geocoder"
@@ -40,7 +41,7 @@ gem "pg"
 # Search Engine
 gem "sunspot_rails"
 
-gem "acts_as_votable", "~> 0.5.0"
+gem "acts_as_votable"
 gem "magnific-popup-rails"
 gem "public_activity"
 gem "acts_as_commentable_with_threading"

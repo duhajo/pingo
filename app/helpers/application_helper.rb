@@ -51,4 +51,10 @@ module ApplicationHelper
       "a #{object_type.downcase} which does not exist anymore"
     end
   end
+  
+  def to_b(value)
+    return true if value == true || value =~ (/(true|t|yes|y|1)$/i)
+    return false if value == false || value.empty? || value =~ (/(false|f|no|n|0)$/i)
+    raise ArgumentError.new("invalid value for Boolean: \"#{value}\"")
+  end
 end

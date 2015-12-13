@@ -56,9 +56,6 @@ ActiveRecord::Schema.define(:version => 20151005141834) do
     t.datetime "updated_at",   :null => false
   end
 
-  add_index "conversations", ["job_id"], :name => "index_conversations_on_job_id"
-  add_index "conversations", ["sender_id", "recipient_id"], :name => "index_conversations_on_sender_id_and_recipient_id"
-
   create_table "jobs", :force => true do |t|
     t.string   "title"
     t.text     "description"
@@ -165,6 +162,7 @@ ActiveRecord::Schema.define(:version => 20151005141834) do
     t.string   "voter_type"
     t.boolean  "vote_flag"
     t.string   "vote_scope"
+    t.integer  "vote_weight"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end
