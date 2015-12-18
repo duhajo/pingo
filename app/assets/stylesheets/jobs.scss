@@ -225,7 +225,7 @@
     padding: 5px;
   }
 
-  &.project {
+  &.demand {
     border-color: $brand-secondary;
     .prefix {
       background-color: $brand-secondary;
@@ -233,14 +233,7 @@
     }
   }
 
-  &.service {
-    border-color: orange;
-    .prefix {
-      background-color: orange;
-    }
-  }
-
-  &.material {
+  &.supply {
     border-color: darkgreen;
     .prefix {
       background-color: darkgreen;

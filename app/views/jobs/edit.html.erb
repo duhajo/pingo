@@ -36,13 +36,10 @@
           <div class="form-group col-md-4">
             <%= f.label :type, t('job_form_type') %>
             <select class="form-control" id="job_type" name="job[type]">
-              <% if @type_category == 2 %>
-                <option value="1"><%= t('jobs_type_project')%></option>
-                <option value="2"><%= t('jobs_type_service')%></option>
-                <option value="3"><%= t('jobs_type_material')%></option>
+              <% if @type_category == 1 %>
+                <option value="1">Ich biete...</option>
               <% else %>
-                <option value="4"><%= t('jobs_type_material')%></option>
-                <option value="5"><%= t('jobs_type_people')%></option>
+                <option value="2">Ich suche...</option>
               <% end %>
             </select>
             <script type="text/javascript">
@@ -113,15 +110,15 @@
         </div>
       <% end %>
       <div class="form-group row">
-        <div class="col-md-4">
+        <div class="col-xs-4">
           <%= link_to t('cancel'), job_path(@job), :class => "btn btn-default" %>
         </div>
-        <div class="col-md-4 center">
+        <div class="col-xs-4 center">
           <% if @job.leaf? %>
             <%= link_to t('delete'), @job, :method => :delete, :confirm => "Are you sure ?", :class => "btn btn-default" %>
           <% end %>
         </div>
-        <div class="col-md-4">
+        <div class="col-xs-4">
           <%= link_to t('save'), "#", :onclick => "nicEditors.findEditor('job_description').saveContent();sendForm('edit_job');return false;", :class => "btn btn-primary pull-right" %>
         </div>
       </div>

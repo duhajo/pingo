@@ -6,10 +6,12 @@
       <%if !@type_category.nil? && @type_category == 0%>
         <%=t('jobs_new_category')%>
       <%elsif @type_category == 1 %>
+        <%=t('jobs_new_supply')%>
+      <%elsif @type_category == 2 %>
         <%=t('jobs_new_demand')%>
       <%else%>
-        <%=t('jobs_new_supply')%>
-      <%end %>
+        <%=t('jobs_new')%>
+      <%end%>
       <% if not @parent_job.nil?%> <%=t('for')%> "<%= @parent_job.title %>"<% end %>
     </h1>
 
@@ -28,8 +30,8 @@
       <% if not @parent_job.nil? %>
         <%= f.hidden_field :parent_id, value: @parent_job.id %>
       <% end %>
-      <% if @type_category == 0 %>
-        <%= f.hidden_field :type, value: 0 %>
+    <% if @type_category != false %>
+      <%= f.hidden_field :type, value: @type_category %>
         <div class="form-group">
           <%= f.label :title, t('job_form_title') %>
           <%= f.text_field :title, class: "form-control" %>
@@ -37,17 +39,15 @@
       <% else %>
         <div class="row">
           <div class="form-group col-md-4">
-              <%= f.label :type, t('job_form_type') %>
-              <select class="form-control" id="job_type" name="job[type]">
-                <% if @type_category == 2 %>
-                  <option value="1"><%= t('jobs_type_project')%></option>
-                  <option value="2"><%= t('jobs_type_service')%></option>
-                  <option value="3"><%= t('jobs_type_material')%></option>
-                <% else %>
-                  <option value="4"><%= t('jobs_type_material')%></option>
-                  <option value="5"><%= t('jobs_type_people')%></option>
-              <% end %>
-              </select>
+            <%= f.label :type, t('job_form_type') %>
+            <div class="btn-group" data-toggle="buttons">
+              <label class="btn btn-primary active">
+                <input type="radio" name="job[type]" id="job_type_demand" autocomplete="off" value="2" checked>Ich suche...
+              </label>
+              <label class="btn btn-primary">
+                <input type="radio" value="1" name="job[type]" id="job_type_supply" autocomplete="off">Ich biete...
+              </label>
+            </div>
           </div>
           <div class="form-group col-md-8">
             <%= f.label :title, t('job_form_title') %>

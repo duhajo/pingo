@@ -1,15 +1,9 @@
 <%if job.type == 1
-    @type_prefix = t('jobs_type_project')
-    @type_class = 'project'
+    @type_prefix = t('jobs_supply')
+    @type_class = 'supply'
   elsif job.type == 2
-    @type_prefix = t('jobs_type_service')
-    @type_class = 'service'
-  elsif job.type == 5
-    @type_prefix = t('jobs_type_people')
-    @type_class = 'service'
-  elsif job.type == 3 || job.type == 4
-    @type_prefix = t('jobs_type_material')
-    @type_class = 'material'
+    @type_prefix = t('jobs_demand')
+    @type_class = 'demand'
 end %>
 
 

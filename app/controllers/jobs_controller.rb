@@ -15,8 +15,8 @@ class JobsController < ApplicationController
     else
       all_jobs = Job.where('parent_id' => nil)
       @categories = all_jobs.where('type' => 0)
-      @supplies = all_jobs.where('type' => [1,2,3])
-      @demands = all_jobs.where('type' => [4,5])
+      @supplies = all_jobs.where('type' => [1])
+      @demands = all_jobs.where('type' => [2])
     end
   end
 
@@ -48,8 +48,8 @@ class JobsController < ApplicationController
     @managers = JobsWorker.where(:job_id => @job.id).where('jobs_workers.is_creator' => true).to_a
     
     @all_jobs = Job.where('parent_id' => @job.id)
-    @supplies = @all_jobs.where('type' => [1,2,3])
-    @demands = @all_jobs.where('type' => [4,5])
+    @supplies = @all_jobs.where('type' => [1])
+    @demands = @all_jobs.where('type' => [2])
 
     @parent_jobs = @job.ancestors
     @job_ids = Array.new << @job.id
@@ -86,8 +86,10 @@ class JobsController < ApplicationController
 
     if params[:type].present?
       @type_category = 0 if params[:type] == 'category'
-      @type_category = 1 if params[:type] == 'demand'
-      @type_category = 2 if params[:type] == 'supply'
+      @type_category = 1 if params[:type] == 'supply'
+      @type_category = 2 if params[:type] == 'demand'
+    else
+      @type_category = false
     end
     
     @job = Job.new
@@ -127,9 +129,9 @@ class JobsController < ApplicationController
     if @job.type == 0
       @type_category = 0
     elsif @job.type == 4 || @job.type == 5
-      @type_category = 1
-    else
       @type_category = 2
+    else
+      @type_category = 1
     end
   end
 

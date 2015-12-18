@@ -2,8 +2,6 @@
 <% if @job.type == 0 %>
   <%= render 'jobs/types/category' %>
 <% elsif @job.type == 1 %>
-  <%= render 'jobs/types/job' %>
-<% elsif @job.type == 2 || @job.type == 3 %>
   <%= render 'jobs/types/supply' %>
 <% else %>
   <%= render 'jobs/types/demand' %>
