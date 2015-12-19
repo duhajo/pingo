@@ -50,7 +50,9 @@ a {
   text-decoration: none;
 
   &:hover,
-  &:focus {
+  &:focus,
+  li.active &,
+  &.active {
     color: $link-hover-color;
     text-decoration: none;
   }

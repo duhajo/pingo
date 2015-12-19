@@ -32,25 +32,6 @@
                   </div>
                   <span class="clear"></span>
                 </div>
-                <%
-                  likeClass = "likes-button like icon"
-                  if user_signed_in?
-                    if current_user.voted_up_on? job
-                      likeClass << " voted"
-                    end
-                  end
-                  if job.likes.size == 0
-                    likeClass << " no-votes"
-                  end
-                %>
-                <div class="job-likes">
-                  <% if user_signed_in? %>
-                    <%= link_to '', like_job_path(job), :class => likeClass, :method => :put, :remote => true, :"data-id" => job.id%>
-                  <% else %>
-                    <%= link_to '', login_path, :class => "like icon no-login"%>
-                  <% end %>
-                  <div class="likes-number <% if job.likes.size == 0 %>hidden<%end%>"><%= job.likes.size %></div>
-                </div>
               </div>
             <% end %>
           <% else %>

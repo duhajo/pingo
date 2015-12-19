@@ -20,19 +20,19 @@
 }
 
 .jbar {
-    height:50px;
-    width:100%;
-    position:fixed;
-    text-align:center;
-    left:0px;
-    z-index:9999999;
-    margin:0px;
-    padding:0px;
-    filter:progid:DXImageTransform.Microsoft.Alpha(opacity=92);
-    opacity: 0.92;
-    -moz-opacity: 0.92;
-    -moz-box-shadow: #555 0px 0px 5px;
-    box-shadow: #555 0px 0px 5px;
+  height:50px;
+  width:100%;
+  position:fixed;
+  text-align:center;
+  left:0px;
+  z-index:9999999;
+  margin:0px;
+  padding:0px;
+  filter:progid:DXImageTransform.Microsoft.Alpha(opacity=92);
+  opacity: 0.92;
+  -moz-opacity: 0.92;
+  -moz-box-shadow: #555 0px 0px 5px;
+  box-shadow: #555 0px 0px 5px;
 
   .jbar-top{
     top:0px;
@@ -49,95 +49,16 @@
   }
 
   .jbar-content{
-      line-height:46px;
-      font-size: 18px;
+    line-height:46px;
+    font-size: 18px;
   }
 }
 
 #map {
   height: 300px;
-  
+
   .olControlAttribution {
     bottom: 5px;
     font-size: 12px;
-  }
-}
-
-.icon {
-  background-image: url("icons/iconssprite.png");
-  background-size: 320px 256px;
-  display: block;
-  height: 32px;
-  width: 32px;
-
-  &.large {
-    height: 48px;
-    width: 48px;
-  }
-
-  &.center {
-    margin: 0 auto;
-  }
-
-  &.add {
-    background-position: -128px -128px;
-    &.contrast {
-      background-position: -128px -192px;
-    }
-  }
-
-  &.edit {
-    background-position: -160px -128px;
-    &.contrast {
-      background-position: -160px -192px;
-    }
-  }
-
-  &.love {
-    background-position: -545px -96px;
-  }
-
-  &.activity {
-    background-position: -512px -96px;
-  }
-
-  &.search {
-    background-position: -575px -127px;
-  }
-
-  &.jobs {
-    background-position: -48px 0;
-  }
-
-  a:hover &.dashboard, .active &.dashboard {
-    background-position: 0 -48px;
-  }
-
-  a:hover &.jobs, .active &.jobs {
-    background-position: -48px -48px;
-  }
-
-  a:hover &.workers, .active &.workers {
-    background-position: -96px -48px;
-  }
-
-  a:hover &.places, .active &.places {
-    background-position: -144px -48px;
-  }
-
-  &.workers {
-    background-position: -96px 0;
-  }
-
-  &.places {
-    background-position: -144px 0;
-
-    &.middle {
-      background-position: -160px -96px;
-    }
-  }
-
-  &.skill {
-    background-position: -128px -96px;
   }
 }

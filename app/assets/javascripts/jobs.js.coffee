@@ -78,15 +78,6 @@ $(document).ready ->
         false
     init_status()
 
-  $("#like-button").click ->
-    $.ajax(
-      type: "PUT"
-      url: "/jobs/"+$('#job-view').data('id')+"/like"
-    ).success (data) ->
-      setClass $("#like-button"), "my-like"
-      $(".likes-number").html data
-    false
-
 @setJobType = (element, counterElem, value) ->
   $('#job_type').val(value);
   if !$(element).hasClass "active"

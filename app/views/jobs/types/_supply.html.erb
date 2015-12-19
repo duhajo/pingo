@@ -27,14 +27,14 @@
       <div class="row">
         <div id="job-meta-wrapper">
           <div id="job-meta">
-            <% if !@job.address.blank? && !@job.deadline.nil?
-                 @lessColumns = false
-               else
+            <% if @job.address.blank? && @job.deadline.nil?
                  @lessColumns = true
+               else
+                 @lessColumns = false
                end %>
             <% if not @job.deadline.nil? %>
-              <div id="job-deadline" class="col-md-10 col-lg-<% if @lessColumns %>8<% else %>4<% end %>">
-                <span class="icon pull-left"><!----></span>
+              <div id="job-deadline" <% if !@lessColumns %>class="col-lg-6"<% end %>>
+                <span class="icon alarm pull-left"><!----></span>
                     <span class="icon-label" title="<%= @job.deadline.to_formatted_s(:long) %>">
                       <%= distance_of_time_in_words(Time.now, @job.deadline, true) %>
                       <% if @job.deadline < DateTime.now %>
@@ -46,8 +46,8 @@
               </div>
             <% end %>
             <% if !@job.address.blank? %>
-              <div id="job-location" class="col-md-10 col-lg-<% if @lessColumns %>8<% else %>4<% end %>">
-                <span class="icon pull-left"><!----></span>
+              <div id="job-location" <% if !@lessColumns %>class="col-lg-6"<% end %>>
+                <span class="icon map pull-left"><!----></span>
                     <span class="icon-label">
                       <%= link_to @job.address, {:action => :map_for_job}, :id => "show-map-button",
                                   class: "header-actions left",
@@ -56,9 +56,6 @@
                     </span>
               </div>
             <% end %>
-            <div id="job-likes" class="col-md-10 col-lg-2">
-              <%= render :partial => "likes", :job => @job %>
-            </div>
           </div>
           <div id="job-description" class="html-content top-margin">
             <% if @job.description.empty? %>

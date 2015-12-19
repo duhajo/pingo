@@ -5,7 +5,7 @@
   padding: 15px;
 
   .category-head {
-    background-color: $brand-secondary;
+    background-color: $brand-blue;
     padding: 10px 8px;
     a {
       color: #FFFFFF;
@@ -14,11 +14,8 @@
     }
   }
   .category-body {
-    border-color: $brand-secondary;
-    border-style: solid;
-    border-width: 0px 1px 1px;
     overflow: hidden;
-    
+
     .category-img {
       background-position: center center;
       background-repeat: no-repeat;
@@ -27,7 +24,7 @@
       min-height: 130px;
       min-width: 170px;
     }
-    
+
     .tag-list {
       margin: 0;
       overflow: hidden;
@@ -63,7 +60,7 @@
       border-width: 1px 0;
       border-style: solid;
       border-color: #ebebeb;
-      background-color: $body-bg;
+      background-color: $gray-lighter;
     }
   }
 }
@@ -86,13 +83,6 @@
 
         #job-meta {
           @extend .row;
-          > div {
-            float: left;
-            margin-left: 2%;
-            &:first-child {
-              margin-left: 0;
-            }
-          }
 
           .icon {
             float: left;
@@ -109,23 +99,10 @@
               background-position: -32px -96px;
             }
           }
-  
+
           #job-location {
             .icon {
               background-position: -64px -96px;
-            }
-          }
-  
-          #job-likes {
-            float: right;
-            a.my-like {
-              background-color: $brand-senary;
-              color: #ffffff;
-            }
-            #like-button {
-              .icon {
-                background-position: -545px -97px;
-              }
             }
           }
         }
@@ -189,12 +166,12 @@
     h2 {
       margin-bottom: rem-calc(18);
     }
-    
+
     @media (min-width: $screen-md-min) {
       .nav-tabs {
         border: 0 none;
         margin-bottom: 20px;
-        margin-top: -57px;
+        margin-top: -56px;
         li.active a {
           background-color: white;
         }
@@ -203,19 +180,46 @@
   }
 }
 
-#list-jobs {
-  h3 {
-    margin-top: 0;
+#job-type-header {
+  @extend .row;
+  .header {
+    @extend .col-md-4;
+    &.demand {
+      text-align: right;
+    }
   }
-  @media (min-width: $screen-md-min) {
-    > div:first-child {
-      border-right: 1px solid $brand-quinary;
+
+}
+
+#list-jobs {
+  display: table;
+  width: 100%;
+  height: 100%;
+
+  .list {
+    padding: 15px 0;
+    box-shadow: inset 10px 13px 0px -10px rgba(0, 0, 0, 0.15);
+    &.supplies {
+      display: table-cell;
+      background-image: url("bg_violet.jpg");
+      background-size: cover;
+      width: 50%;
+      border-right: 2px solid #FFFFFF;
+    }
+
+    &.demands {
+      display: table-cell;
+      background-image: url("bg_blue.jpg");
+      background-size: cover;
+      width: 50%;
+      border-left: 2px solid #FFFFFF;
     }
   }
 }
 
 .job-box {
-  border: 2px solid transparent;
+  background-color: #FFFFFF;
+  box-shadow: 0px 1px 3px rgba(0,0,0,0.15);
   margin-bottom: 10px;
 
   .prefix {
@@ -223,22 +227,6 @@
     font-size: 12px;
     margin-right: 5px;
     padding: 5px;
-  }
-
-  &.demand {
-    border-color: $brand-secondary;
-    .prefix {
-      background-color: $brand-secondary;
-      color: #ffffff;
-    }
-  }
-
-  &.supply {
-    border-color: darkgreen;
-    .prefix {
-      background-color: darkgreen;
-      color: #ffffff;
-    }
   }
 
   .title a {
@@ -259,15 +247,15 @@
   .job-bottom-line {
     @extend .row;
     font-size: $font-size-small;
-    line-height: 2.3;
 
     .job-meta-line {
       @extend .col-sm-7;
       div {
         display: inline-block;
-        padding-left: 10px;
-        &:first-child {
-          padding-left: 0;
+        padding-left: 5px;
+
+        .icon {
+          margin-right: 5px;
         }
       }
       .job-status  .btn {

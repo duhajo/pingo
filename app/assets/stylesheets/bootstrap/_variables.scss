@@ -11,23 +11,24 @@ $bootstrap-sass-asset-helper: (twbs-font-path("") != unquote('twbs-font-path("")
 //
 //## Gray and brand colors for use across Bootstrap.
 
-$gray-darker:            lighten(#000, 13.5%) !default; // #222
-$gray-dark:              lighten(#000, 20%) !default;   // #333
-$gray:                   lighten(#000, 33.5%) !default; // #555
-$gray-light:             lighten(#000, 60%) !default;   // #999
-$gray-lighter:           lighten(#000, 93.5%) !default; // #eee
+$gray-darker:           lighten(#000, 13.5%) !default; // #222
+$gray-dark:             lighten(#000, 20%) !default;   // #333
+$gray:                  lighten(#000, 40%) !default;   // #666
+$gray-light:            lighten(#000, 60%) !default;   // #999
+$gray-lighter:          lighten(#000, 97%) !default;   // #F7F7F7
 
 $brand-success:         #5cb85c !default;
 $brand-info:            #5bc0de !default;
 $brand-warning:         #f0ad4e !default;
 $brand-danger:          #d9534f !default;
 
-$brand-primary:         #353f47;
-$brand-secondary:       #55a0da;
-$brand-tertiary:        #b109ff;
-$brand-quaternary:      #666666;
-$brand-quinary:         #e6ebf0;
-$brand-senary:          #2d5b7f;
+$brand-grayblue:        #556270; // Icon Link color
+$brand-blue:            #00a4c7; // Primary Blue
+$brand-lightviolet:     #a45ead; // Light Violet (icons)
+$brand-violet:          #9619a6; // Darker Violet (font)
+$brand-softblue:        #e1edf0; // Light BG for example Tag-BG
+$brand-activeblue:      #00819c; // Hover color for $brand-blue
+$brand-darkerblue:      #353f47; // Link color
 
 
 //== Scaffolding
@@ -35,14 +36,14 @@ $brand-senary:          #2d5b7f;
 // ## Settings for some of the most global styles.
 
 //** Background color for `<body>`.
-$body-bg:               #f7f7f7 !default;
+$body-bg:               $brand-darkerblue !default;
 //** Global text color on `<body>`.
-$text-color:            $brand-quaternary !default;
+$text-color:            $gray-darker !default;
 
 //** Global textual link color.
-$link-color:            $brand-primary !default;
+$link-color:            $brand-darkerblue !default;
 //** Link hover color set via `darken()` function.
-$link-hover-color:      darken($link-color, 15%) !default;
+$link-hover-color:      $brand-violet;
 
 
 //== Typography
@@ -82,9 +83,9 @@ $headings-color:          inherit !default;
 //
 //## Specify custom locations of the include Glyphicons icon font. Useful for those including Bootstrap via Bower.
 
-$icon-font-path: "bootstrap/" !default;
-$icon-font-name:          "glyphicons-halflings-regular" !default;
-$icon-font-svg-id:        "glyphicons_halflingsregular" !default;
+$icon-font-path:          "fonts/" !default;
+$icon-font-name:          "flaticon" !default;
+$icon-font-svg-id:        "flaticon" !default;
 
 //== Components
 //
@@ -112,7 +113,7 @@ $border-radius-small:       3px !default;
 //** Global color for active items (e.g., navs or dropdowns).
 $component-active-color:    #fff !default;
 //** Global background color for active items (e.g., navs or dropdowns).
-$component-active-bg:       $brand-primary !default;
+$component-active-bg:       $brand-activeblue !default;
 
 //** Width of the `border` for generating carets that indicator dropdowns.
 $caret-width-base:          4px !default;
@@ -147,12 +148,12 @@ $table-border-color:            #ddd !default;
 
 $btn-font-weight:                normal !default;
 
-$btn-default-color:              $brand-primary !default;
+$btn-default-color:              $brand-darkerblue !default;
 $btn-default-bg:                 #fff !default;
 $btn-default-border:             #6a7279 !default;
 
 $btn-primary-color:              #fff !default;
-$btn-primary-bg:                 $brand-secondary !default;
+$btn-primary-bg:                 $brand-blue !default;
 $btn-primary-border:             darken($btn-primary-bg, 5%) !default;
 
 $btn-success-color:              #fff !default;
@@ -216,7 +217,7 @@ $input-group-addon-border-color: $input-border !default;
 //## Dropdown menu container and contents.
 
 //** Background for the dropdown menu.
-$dropdown-bg:                    $brand-secondary !default;
+$dropdown-bg:                    $brand-blue !default;
 //** Dropdown menu `border-color`.
 $dropdown-border:                0 none !default;
 //** Dropdown menu `border-color` **for IE8**.
@@ -229,18 +230,18 @@ $dropdown-link-color:            #fff !default;
 //** Hover color for dropdown links.
 $dropdown-link-hover-color:      darken($gray-dark, 5%) !default;
 //** Hover background for dropdown links.
-$dropdown-link-hover-bg:         $brand-senary !default;
+$dropdown-link-hover-bg:         $brand-activeblue !default;
 
 //** Active dropdown menu item text color.
 $dropdown-link-active-color:     $component-active-color !default;
 //** Active dropdown menu item background color.
-$dropdown-link-active-bg:        $brand-senary !default;
+$dropdown-link-active-bg:        $brand-activeblue !default;
 
 //** Disabled dropdown menu item background color.
 $dropdown-link-disabled-color:   $gray-light !default;
 
 //** Text color for headers within dropdown menus.
-$dropdown-header-color:          $brand-quaternary;
+$dropdown-header-color:          $gray;
 
 // Note: Deprecated $dropdown-caret-color as of v3.1.0
 $dropdown-caret-color:           #000 !default;
@@ -370,7 +371,7 @@ $navbar-default-toggle-border-color:       #ddd !default;
 // Inverted navbar
 // Reset inverted navbar basics
 $navbar-inverse-color:                      $gray-light !default;
-$navbar-inverse-bg:                         $brand-secondary !default;
+$navbar-inverse-bg:                         $brand-blue !default;
 $navbar-inverse-border:                     darken($navbar-inverse-bg, 10%) !default;
 
 // Inverted navbar links
@@ -437,8 +438,8 @@ $pagination-hover-bg:                  $gray-lighter !default;
 $pagination-hover-border:              #ddd !default;
 
 $pagination-active-color:              #fff !default;
-$pagination-active-bg:                 $brand-primary !default;
-$pagination-active-border:             $brand-primary !default;
+$pagination-active-bg:                 $brand-activeblue !default;
+$pagination-active-border:             $brand-activeblue !default;
 
 $pagination-disabled-color:            $gray-light !default;
 $pagination-disabled-bg:               #fff !default;
@@ -547,7 +548,7 @@ $popover-arrow-outer-fallback-color:  darken($popover-fallback-border-color, 20%
 //** Default label background color
 $label-default-bg:            $gray-light !default;
 //** Primary label background color
-$label-primary-bg:            $brand-primary !default;
+$label-primary-bg:            $brand-activeblue !default;
 //** Success label background color
 $label-success-bg:            $brand-success !default;
 //** Info label background color
@@ -631,7 +632,7 @@ $progress-bg:                 #f5f5f5 !default;
 $progress-bar-color:          #fff !default;
 
 //** Default progress bar color
-$progress-bar-bg:             $brand-primary !default;
+$progress-bar-bg:             $brand-activeblue !default;
 //** Success progress bar color
 $progress-bar-success-bg:     $brand-success !default;
 //** Warning progress bar color
@@ -684,8 +685,8 @@ $panel-default-border:        #ddd !default;
 $panel-default-heading-bg:    #f5f5f5 !default;
 
 $panel-primary-text:          #fff !default;
-$panel-primary-border:        $brand-primary !default;
-$panel-primary-heading-bg:    $brand-primary !default;
+$panel-primary-border:        $brand-activeblue !default;
+$panel-primary-heading-bg:    $brand-activeblue !default;
 
 $panel-success-text:          $state-success-text !default;
 $panel-success-border:        $state-success-border !default;

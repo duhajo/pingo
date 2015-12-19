@@ -18,11 +18,11 @@
     <section class="container-fluid">
       <div class="row">
         <!-- Left Nav Section -->
-        <div id="search-wrapper" class="col-xs-4">
+        <div id="search-wrapper">
           <ul id="search-box">
             <%= form_tag(jobs_path, id: "search-form") do %>
                 <li class="dropdown">
-                  <a href="javascript:;" id="my-jobs-link"><span class="search icon"></span></a>
+                  <a href="javascript:;" id="my-jobs-link"><span class="icon list"></span></a>
                   <%= autocomplete_field_tag 'search', '', autocomplete_job_title_jobs_path, placeholder: "Search Jobs",
                       id: "search-input", class: "form-control dropdown-toggle", data: {:toggle => "dropdown"} %>
                   <ul id="my-jobs-list" class="ui-menu">
@@ -33,12 +33,12 @@
           </ul>
         </div>
 
-        <div id="header-logo" class="navbar-header col-xs-4 center">
+        <div id="header-logo" class="navbar-header">
           <%= link_to image_tag("logo.png"), root_path %>
         </div>
 
         <!-- Right Nav Section -->
-        <div id="user-navigation" class="col-xs-4">
+        <div id="user-navigation">
           <ul class="nav navbar-nav navbar-right">
             <% if user_signed_in? %>
               <li class="dropdown">
@@ -70,29 +70,29 @@
     <div id="main-navigation" class="navigation-area white-panel">
       <div class="container">
         <div class="row">
-            <div class="col-xs-12 col-md-8 col-md-offset-2 center">
+            <div class="col-xs-12 col-md-8 col-md-offset-2">
               <ul class="nav">
                 <li class="col-xs-3 <%= cp("dashboard") %>">
                   <a href="<%= dashboard_path %>">
-                    <span class="icon large center dashboard"></span>
+                    <span class="icon pulse"></span>
                     <span class="icon-label"><%= t('main_nav_dashboard') %></span>
                   </a>
                 </li>
                 <li class="col-xs-3 <%= cp("jobs") %>">
                   <a href="<%= jobs_path %>">
-                    <span class="icon large center jobs"></span>
+                    <span class="icon job"></span>
                     <span class="icon-label"><%= t('main_nav_jobs') %></span>
                   </a>
                 </li>
                 <li class="col-xs-3 <%= cp("users") %>">
                   <a href="<%= users_path %>">
-                    <span class="icon large center workers"></span>
+                    <span class="icon users"></span>
                     <span class="icon-label"><%= t('main_nav_workers') %></span>
                   </a>
                 </li>
                 <li class="col-xs-3 <%= cp("places") %>">
                   <a href="<%= places_path %>">
-                    <span class="icon large center places"></span>
+                    <span class="icon map"></span>
                     <span class="icon-label"><%= t('main_nav_places') %></span>
                   </a>
                 </li>
@@ -105,6 +105,9 @@
       <%= yield %>
       <%= yield :scripts %>
       <%= render partial: 'initchats', :init_chats => @init_chats %>
+    </div>
+    <div id="footer">
+      <div class="icons">Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a>, <a href="http://www.flaticon.com/authors/daniel-bruce" title="Daniel Bruce">Daniel Bruce</a>, <a href="http://www.flaticon.com/authors/simpleicon" title="SimpleIcon">SimpleIcon</a>, <a href="http://www.flaticon.com/authors/catalin-fertu" title="Catalin Fertu">Catalin Fertu</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a>             is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a></div>
     </div>
   </div>
   <%= render 'layouts/modal' %>

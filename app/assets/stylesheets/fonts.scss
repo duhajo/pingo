@@ -60,115 +60,64 @@
 
 @font-face {
   font: {
-    family: 'fontello';
+    family: 'Flaticon';
     weight: normal;
     style: normal;
   }
-  src: asset-url('fontello.eot?37909921', font);
-  src: asset-url('fontello.eot?37909921#iefix', font) format('embedded-opentype'),
-       asset-url('fontello.woff?37909921', font) format('woff'),
-       asset-url('fontello.ttf?37909921', font) format('truetype'),
-       asset-url('fontello.svg?37909921#fontello', font) format('svg');
+  src: asset-url('flaticon.eot?37909921', font);
+  src: asset-url('flaticon.eot?37909921#iefix', font) format('embedded-opentype'),
+       asset-url('flaticon.woff?37909921', font) format('woff'),
+       asset-url('flaticon.ttf?37909921', font) format('truetype'),
+       asset-url('flaticon.svg?37909921#flaticon', font) format('svg');
 }
-/* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
-/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
-/*
-@media screen and (-webkit-min-device-pixel-ratio:0) {
-  @font-face {
-    font-family: 'fontello';
-    src: url('../font/fontello.svg?37909921#fontello') format('svg');
+
+.icon {
+  &:before {
+  	font-family: "Flaticon";
+    font-size: 20px;
+    font-style: normal;
+  }
+
+  &.search:before {
+  	content: "\e000";
+  }
+  &.add:before {
+  	content: "\e001";
+  }
+  &.job:before {
+  	content: "\e002";
+  }
+  &.alarm:before {
+  	content: "\e003";
+  }
+  &.chat:before {
+  	content: "\e004";
+  }
+  &.attachment:before {
+  	content: "\e005";
+  }
+  &.settings:before {
+  	content: "\e006";
+  }
+  &.map:before {
+  	content: "\e007";
+  }
+  &.users:before {
+  	content: "\e008";
+  }
+  &.notify:before {
+  	content: "\e009";
+  }
+  &.tag:before {
+  	content: "\e00a";
+  }
+  &.pulse:before {
+  	content: "\e00b";
+  }
+  &.message:before {
+  	content: "\e00c";
+  }
+  &.list:before {
+  	content: "\e00d";
   }
 }
-*/
- 
- [class^="icon-"]:before, [class*=" icon-"]:before {
-  font-family: "fontello";
-  font-style: normal;
-  font-weight: normal;
-  speak: none;
- 
-  display: inline-block;
-  text-decoration: inherit;
-  width: 1em;
-  margin-right: .2em;
-  text-align: center;
-  /* opacity: .8; */
- 
-  /* For safety - reset parent styles, that can break glyph codes*/
-  font-variant: normal;
-  text-transform: none;
-     
-  /* fix buttons height, for twitter bootstrap */
-  line-height: 1em;
- 
-  /* Animation center compensation - margins should be symmetric */
-  /* remove if not needed */
-  margin-left: .2em;
- 
-  /* you can be more comfortable with increased icons size */
-  /* font-size: 120%; */
- 
-  /* Uncomment for 3D effect */
-  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
-}
- 
-.icon-cancel-circled:before { content: '\e800'; } /* '?' */
-.icon-heart:before { content: '\e801'; } /* '?' */
-.icon-heart-empty:before { content: '\e802'; } /* '?' */
-.icon-attach:before { content: '\e803'; } /* '?' */
-.icon-plus-circled:before { content: '\e804'; } /* '?' */
-.icon-minus-circled:before { content: '\e805'; } /* '?' */
-.icon-attention-circled:before { content: '\e806'; } /* '?' */
-.icon-location:before { content: '\e807'; } /* '?' */
-.icon-pencil:before { content: '\e808'; } /* '?' */
-.icon-chat:before { content: '\e809'; } /* '?' */
-.icon-comment:before { content: '\e80a'; } /* '?' */
-.icon-comment-empty:before { content: '\e80b'; } /* '?' */
-.icon-chat-empty:before { content: '\e80c'; } /* '?' */
-.icon-bell:before { content: '\e80d'; } /* '?' */
-.icon-bell-alt:before { content: '\e80e'; } /* '?' */
-.icon-compass:before { content: '\e80f'; } /* '?' */
-.icon-trash:before { content: '\e810'; } /* '?' */
-.icon-trash-empty:before { content: '\e811'; } /* '?' */
-.icon-file-pdf:before { content: '\e812'; } /* '?' */
-.icon-file-word:before { content: '\e813'; } /* '?' */
-.icon-file-excel:before { content: '\e814'; } /* '?' */
-.icon-file-powerpoint:before { content: '\e815'; } /* '?' */
-.icon-file-image:before { content: '\e816'; } /* '?' */
-.icon-doc-text:before { content: '\e817'; } /* '?' */
-.icon-file-archive:before { content: '\e818'; } /* '?' */
-.icon-file-audio:before { content: '\e819'; } /* '?' */
-.icon-file-video:before { content: '\e81a'; } /* '?' */
-.icon-file-code:before { content: '\e81b'; } /* '?' */
-.icon-cog:before { content: '\e81c'; } /* '?' */
-.icon-sliders:before { content: '\e81d'; } /* '?' */
-.icon-calendar:before { content: '\e81e'; } /* '?' */
-.icon-calendar-empty:before { content: '\e81f'; } /* '?' */
-.icon-clock:before { content: '\e820'; } /* '?' */
-.icon-lightbulb:before { content: '\e821'; } /* '?' */
-.icon-angle-left:before { content: '\e822'; } /* '?' */
-.icon-angle-right:before { content: '\e823'; } /* '?' */
-.icon-angle-up:before { content: '\e824'; } /* '?' */
-.icon-angle-down:before { content: '\e825'; } /* '?' */
-.icon-check-empty:before { content: '\e826'; } /* '?' */
-.icon-check:before { content: '\e827'; } /* '?' */
-.icon-megaphone:before { content: '\e828'; } /* '?' */
-.icon-filter:before { content: '\e829'; } /* '?' */
-.icon-magic:before { content: '\e82a'; } /* '?' */
-.icon-beaker:before { content: '\e82b'; } /* '?' */
-.icon-briefcase:before { content: '\e82c'; } /* '?' */
-.icon-hammer:before { content: '\e82d'; } /* '?' */
-.icon-gauge:before { content: '\e82e'; } /* '?' */
-.icon-user:before { content: '\e82f'; } /* '?' */
-.icon-flash:before { content: '\e830'; } /* '?' */
-.icon-users:before { content: '\e831'; } /* '?' */
-.icon-ok-circled:before { content: '\e832'; } /* '?' */
-.icon-ok-circled2:before { content: '\e833'; } /* '?' */
-.icon-cancel:before { content: '\e834'; } /* '?' */
-.icon-ellipsis:before { content: '\e835'; } /* '?' */
-.icon-ellipsis-vert:before { content: '\e836'; } /* '?' */
-.icon-graduation-cap:before { content: '\e837'; } /* '?' */
-.icon-search:before { content: '\e838'; } /* '?' */
-.icon-tools:before { content: '\e839'; } /* '?' */
-.icon-cog-1:before { content: '\e83a'; } /* '?' */
-.icon-flash-1:before { content: '\e83b'; } /* '?' */

@@ -34,64 +34,70 @@ a:-moz-any-link:focus {
 }
 
 #duhajo {
+  background-color: $gray-lighter;
   height: 100%;
   overflow: visible;
 
-  .inner-wrap {
-    height: 100%;
-  }
-
   #topbar {
-    border-bottom: 2px solid #3180BD;
+    border-bottom: 2px solid $brand-activeblue;
     position: relative;
 
-    #search-box {
-      float: none;
-      margin: 17px auto;
+    #search-wrapper {
+      @extend .col-xs-4;
+      #search-box {
+        float: none;
+        margin: 17px auto;
 
-      #my-jobs-link .icon {
-        position: absolute;
-      }
-
-      #search-input {
-        border: 0 none;
-        box-shadow: 0 2px 1px 0 #488EC4;
-        font-size: $font-size-small;
-        margin-top: 12px;
-        max-width: 350px;
-        padding-left: 35px;
-        top: 0;
-      }
-
-      #my-jobs-list {
-        display: none;
-        &.active {
-          display: block;
-          left: 0;
-          max-width: 350px;
+        #my-jobs-link .icon {
           position: absolute;
-          width: 100%;
-          z-index: 2;
+          left: 6px;
+          top: 4px;
+          color: $brand-blue;
+        }
+
+        #search-input {
+          border: 0 none;
+          box-shadow: 0 2px 1px 0 $brand-blue;
+          font-size: $font-size-small;
+          margin-top: 12px;
+          max-width: 350px;
+          padding-left: 35px;
+          top: 0;
+        }
+
+        #my-jobs-list {
+          display: none;
+          &.active {
+            display: block;
+            left: 0;
+            max-width: 350px;
+            position: absolute;
+            width: 100%;
+            z-index: 2;
+          }
         }
       }
     }
 
     #header-logo {
+      @extend .col-xs-4;
+      text-align: center;
       img {
         vertical-align: top;
       }
     }
 
     #user-navigation {
+      @extend .col-xs-4;
       a {
-        color: #ffffff;
+        color: #FFFFFF;
       }
 
       .navbar-nav {
         .profile-avatar img {
           border-color: #FFFFFF;
         }
-        
+
         .login, .register {
           padding-top: 14px;
         }
@@ -106,6 +112,32 @@ a:-moz-any-link:focus {
     }
   }
 
+  #main-navigation {
+    position: relative;
+    a {
+      text-align: center;
+      .icon {
+        display: block;
+        &:before {
+          font-size: 30px;
+        }
+      }
+    }
+  }
+
+  #footer {
+    text-align: center;
+    padding: 30px;
+    background-color: $brand-darkerblue;
+    color: #FFFFFF;
+    .icons {
+      font-size: 10px;
+    }
+    a {
+      color: $brand-softblue;
+    }
+  }
+
   .profile-avatar {
     img {
       border: 2px solid transparent;
@@ -116,12 +148,12 @@ a:-moz-any-link:focus {
       }
     }
     &.manager img {
-      border-color: $brand-secondary;
+      border-color: $brand-blue;
     }
   }
 
-  #main-navigation {
-    position: relative;
+  .inner-wrap {
+    height: 100%;
   }
 
   .white-panel {
@@ -135,7 +167,7 @@ a:-moz-any-link:focus {
   }
 
   .blue-title {
-    background-color: $brand-secondary;
+    background-color: $brand-blue;
     padding: 15px;
 
     a, h2 {
@@ -156,7 +188,7 @@ a:-moz-any-link:focus {
         font-weight: 300;
       }
       li:last-child:after {
-        color: #AAAAAA;
+        color: $gray;
         content: ">";
         font-size: $font-size-small;
         font-weight: 300;
@@ -168,13 +200,8 @@ a:-moz-any-link:focus {
   }
 
   #login-page, #registration-page {
-    border-top: 0 none;
-    padding: rem-calc(30);
+    border-top-color: transparent;
   }
-}
-
-.hidden {
-  display: none;
 }
 
 .white-popup {
@@ -192,14 +219,6 @@ abbr.timeago {
   color: #BBB;
   font-weight: normal;
   font-size: 12px;
-}
-
-.clear {
-  clear: both;
-}
-
-.center {
-  text-align: center;
 }
 
 .nospace {
@@ -236,7 +255,6 @@ h1, h2, h3, h4 {
   overflow: hidden;
 
   .icon-label {
-    display: inline-block;
     font-size: inherit;
   }
 
@@ -258,27 +276,9 @@ form {
   overflow: hidden;
 }
 
-a:hover .icon.add {
-  background-position: -128px -160px;
-  &.contrast {
-    background-position: -128px -224px;
-  }
-}
-
-a:hover .icon.edit {
-  background-position: -160px -160px;
-  &.contrast {
-    background-position: -128px -192px;
-  }
-}
-
 .icon-label {
   display: inline-block;
   font-size: $font-size-base;
-}
-
-.active .icon-label, a:hover .icon-label {
-  color: $brand-tertiary;
 }
 
 .sec-button {
@@ -310,4 +310,10 @@ body[data-controller='sessions'] #main-navigation, body[data-controller='registr
     height: 400px;
     img { max-width: none; }
   }
+}
+
+/* ToolTip */
+
+a.show-tooltip {
+  display: block;
 }

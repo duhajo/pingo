@@ -92,7 +92,7 @@ cite    { font-style: normal; }
   color: $text-muted;
 }
 
-@include text-emphasis-variant('.text-primary', $brand-primary);
+@include text-emphasis-variant('.text-primary', $brand-darkerblue);
 
 @include text-emphasis-variant('.text-success', $state-success-text);
 
@@ -110,7 +110,7 @@ cite    { font-style: normal; }
   // automatically.
   color: #fff;
 }
-@include bg-variant('.bg-primary', $brand-primary);
+@include bg-variant('.bg-primary', $brand-darkerblue);
 
 @include bg-variant('.bg-success', $state-success-bg);
 

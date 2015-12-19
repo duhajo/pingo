@@ -31,7 +31,7 @@ class JobsController < ApplicationController
       return nil
     end
   end
-  
+
   # GET /jobs/1
   # GET /jobs/1.json
   def show
@@ -46,7 +46,7 @@ class JobsController < ApplicationController
 
     @user_role = Job.get_user_role(@job, current_user)
     @managers = JobsWorker.where(:job_id => @job.id).where('jobs_workers.is_creator' => true).to_a
-    
+
     @all_jobs = Job.where('parent_id' => @job.id)
     @supplies = @all_jobs.where('type' => [1])
     @demands = @all_jobs.where('type' => [2])
@@ -91,7 +91,7 @@ class JobsController < ApplicationController
     else
       @type_category = false
     end
-    
+
     @job = Job.new
 
     respond_to do |format|
@@ -99,7 +99,7 @@ class JobsController < ApplicationController
        format.json { render json: @job }
     end
   end
-  
+
   # GET /jobs/new
   # GET /jobs/new.json
   def new_file
@@ -125,7 +125,7 @@ class JobsController < ApplicationController
   def edit
     @job = Job.find(params[:id])
     @managers = User.joins(:jobs_workers).select("users.id, name, email").where("jobs_workers.job_id" => @job.id).where("jobs_workers.is_creator" => true).to_a
-    
+
     if @job.type == 0
       @type_category = 0
     elsif @job.type == 4 || @job.type == 5
@@ -234,23 +234,6 @@ class JobsController < ApplicationController
     end
   end
 
-  def like
-    @job = Job.find(params[:id])
-    if current_user
-      unless current_user.voted_as_when_voted_for @job
-        current_user.likes @job
-        @job.save()
-      else
-        current_user.dislikes @job
-        @job.save()
-      end
-    end
-
-    respond_to do |format|
-      format.json { render :json => @job.votes_for.size }
-    end
-  end
-
   def map_for_job
     @job = Job.find(params[:id])
     @lat = @job.latitude
@@ -272,8 +255,8 @@ class JobsController < ApplicationController
       format.js
     end
   end
-  
-  def edit_manager_list 
+
+  def edit_manager_list
     @job = Job.find(params[:id])
     @user_id = params[:user_id].to_i
 
@@ -287,13 +270,13 @@ class JobsController < ApplicationController
         @job_worker.update_all(:is_creator => 1)
       end
     end
-    
+
     unless JobsWorker.where(:job_id => @job.id).where('jobs_workers.is_creator' => true).where(:user_id => current_user.id).to_a.empty?
       @user_is_manager = true
     end
-    
+
     @managers = User.joins(:jobs_workers).select("users.id, name, email").where("jobs_workers.job_id" => @job.id).where("jobs_workers.is_creator" => true).to_a
-    
+
     respond_to do |format|
       format.js
     end
