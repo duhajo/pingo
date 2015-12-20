@@ -7,49 +7,43 @@
 end %>
 
 
-<% if job.type == 0 %>
-  <div class="job-box category">
-    <div class="title"><%=link_to job.title, job %></div>
-  </div>
-<% else %>
-  <div class="col-md-6">
-    <div class="job-box <%=@type_class%>">
-      <div class="title">
-        <%=link_to job do
-          if @type_prefix.present?
-            content_tag(:span, @type_prefix, :class => 'prefix') + job.title
-          else
-            job.title
-          end
-        end%>
+<div class="job-box-wrapper <%=@type_class%>">
+  <div class="job-box">
+    <h3 class="title">
+      <%=link_to job do
+        if @type_prefix.present?
+          content_tag(:span, @type_prefix, :class => 'prefix') + job.title
+        else
+          job.title
+        end
+      end%>
+    </h3>
+    <% if not job.skill_list.empty? %>
+      <div class="tag-list overflow small">
+        <% job.tag_counts_on(:skills, :limit => 5, :order => "count desc").each do |tag| %>
+          <%= link_to tag.name, {:controller => :tags, :action => :show, :id => tag.id}, :class => "tag" %>
+        <% end %>
       </div>
-      <% if not job.skill_list.empty? %>
-        <div class="tag-list overflow small">
-          <% job.tag_counts_on(:skills, :limit => 5, :order => "count desc").each do |tag| %>
-            <%= link_to tag.name, {:controller => :tags, :action => :show, :id => tag.id}, :class => "tag" %>
+    <% else %>
+      <div class="description">
+        <%= truncate_html job.description.gsub('<br>', ''), :length => 120 %>
+      </div>
+    <% end %>
+    <div class="job-bottom-line">
+      <div class="job-meta-line">
+          <div class="job-activities"><%= link_to job do %><span class="icon pulse"></span><span class="icon-label"><%= job.activities.count%></span><% end %></div>
+      </div>
+      <div class="col-sm-5">
+        <ul class="preview-list pull-right">
+          <% job.jobs_workers.joins(:user).select("name, user_id, email, is_creator").each do |worker| %>
+            <%= worker.id %>
+            <li class="worker">
+              <span class="profile-avatar <% if (worker.is_creator == 1) %>manager
+              <% end %>"><%= link_to image_tag(avatar_url(worker), alt: worker.name, :class => "img-circle small" ), worker_path(:id => worker.user_id) %></span>
+            </li>
           <% end %>
-        </div>
-      <% else %>
-        <div class="description">
-          <%= truncate_html job.description.gsub('<br>', ''), :length => 120 %>
-        </div>
-      <% end %>
-      <div class="job-bottom-line">
-        <div class="job-meta-line">
-            <div class="job-activities"><%= link_to job do %><span class="icon pulse"></span><span class="icon-label"><%= job.activities.count%></span><% end %></div>
-        </div>
-        <div class="col-sm-5">
-          <ul class="preview-list pull-right">
-            <% job.jobs_workers.joins(:user).select("name, user_id, email, is_creator").each do |worker| %>
-              <%= worker.id %>
-              <li class="worker">
-                <span class="profile-avatar <% if (worker.is_creator == 1) %>manager
-                <% end %>"><%= link_to image_tag(avatar_url(worker), alt: worker.name, :class => "img-circle small" ), worker_path(:id => worker.user_id) %></span>
-              </li>
-            <% end %>
-          </ul>
-        </div>
+        </ul>
       </div>
     </div>
   </div>
-<% end %>
+</div>

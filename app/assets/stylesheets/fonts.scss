@@ -7,63 +7,53 @@
 */
 
 @font-face {
-    font: {
-       family: 'Roboto';
-       weight: 'normal';
-       style: 'normal';
-    }
-    src: asset-url('Roboto-Regular.eot', font);
-    src: asset-url('Roboto-Regular.eot', font) format('embedded-opentype'),
-         asset-url('Roboto-Regular.woff', font) format('woff'),
-         asset-url('Roboto-Regular.ttf', font) format('truetype'),
-         asset-url('Roboto-Regular.svg#RobotoRegular', font) format('svg')
+  font-family: 'Roboto';
+  font-weight: normal;
+  font-style: normal;
+  src: asset-url('Roboto-Regular.eot', font);
+  src: asset-url('Roboto-Regular.eot', font) format('embedded-opentype'),
+       asset-url('Roboto-Regular.woff', font) format('woff'),
+       asset-url('Roboto-Regular.ttf', font) format('truetype'),
+       asset-url('Roboto-Regular.svg#RobotoRegular', font) format('svg');
 }
 
 @font-face {
-    font: {
-       family: 'RobotoLight';
-       weight: '100';
-       style: 'normal';
-    }
-    src: asset-url('Roboto-Light.eot', font);
-    src: asset-url('Roboto-Light.eot', font) format('embedded-opentype'),
-         asset-url('Roboto-Light.woff', font) format('woff'),
-         asset-url('Roboto-Light.ttf', font) format('truetype'),
-         asset-url('Roboto-Light.svg#RobotoLight', font) format('svg')
+  font-family: 'Roboto';
+  font-weight: 300;
+  font-style: normal;
+  src: asset-url('Roboto-Light.eot', font);
+  src: asset-url('Roboto-Light.eot', font) format('embedded-opentype'),
+       asset-url('Roboto-Light.woff', font) format('woff'),
+       asset-url('Roboto-Light.ttf', font) format('truetype'),
+       asset-url('Roboto-Light.svg#RobotoLight', font) format('svg');
 }
 
 @font-face {
-    font: {
-       family: 'RobotoMedium';
-       weight: '300';
-       style: 'normal';
-    }
-    src: asset-url('Roboto-Medium.eot', font);
-    src: asset-url('Roboto-Medium.eot', font) format('embedded-opentype'),
-         asset-url('Roboto-Medium.woff', font) format('woff'),
-         asset-url('Roboto-Medium.ttf', font) format('truetype'),
-         asset-url('Roboto-Medium.svg#RobotoMedium', font) format('svg')
+  font-family: 'Roboto';
+  font-weight: 500;
+  font-style: normal;
+  src: asset-url('Roboto-Medium.eot', font);
+  src: asset-url('Roboto-Medium.eot', font) format('embedded-opentype'),
+       asset-url('Roboto-Medium.woff', font) format('woff'),
+       asset-url('Roboto-Medium.ttf', font) format('truetype'),
+       asset-url('Roboto-Medium.svg#RobotoMedium', font) format('svg');
 }
 
 @font-face {
-    font: {
-       family: 'RobotoBold';
-       weight: 'bold';
-       style: 'normal';
-    }
-    src: asset-url('Roboto-Bold.eot', font);
-    src: asset-url('Roboto-Bold.eot', font) format('embedded-opentype'),
-         asset-url('Roboto-Bold.woff', font) format('woff'),
-         asset-url('Roboto-Bold.ttf', font) format('truetype'),
-         asset-url('Roboto-Bold.svg#RobotoBold', font) format('svg')
+  font-family: 'Roboto';
+  font-weight: 700;
+  font-style: normal;
+  src: asset-url('Roboto-Bold.eot', font);
+  src: asset-url('Roboto-Bold.eot', font) format('embedded-opentype'),
+       asset-url('Roboto-Bold.woff', font) format('woff'),
+       asset-url('Roboto-Bold.ttf', font) format('truetype'),
+       asset-url('Roboto-Bold.svg#RobotoBold', font) format('svg');
 }
 
 @font-face {
-  font: {
-    family: 'Flaticon';
-    weight: normal;
-    style: normal;
-  }
+  font-family: 'Flaticon';
+  font-weight: normal;
+  font-style: normal;
   src: asset-url('flaticon.eot?37909921', font);
   src: asset-url('flaticon.eot?37909921#iefix', font) format('embedded-opentype'),
        asset-url('flaticon.woff?37909921', font) format('woff'),
@@ -72,11 +62,9 @@
 }
 
 .icon {
-  &:before {
-  	font-family: "Flaticon";
-    font-size: 20px;
-    font-style: normal;
-  }
+  font-family: "Flaticon";
+  font-size: 20px;
+  font-style: normal;
 
   &.search:before {
   	content: "\e000";
@@ -99,25 +87,28 @@
   &.settings:before {
   	content: "\e006";
   }
-  &.map:before {
-  	content: "\e007";
+  &.loudspeaker:before {
+    content: "\e007";
   }
-  &.users:before {
+  &.map:before {
   	content: "\e008";
   }
-  &.notify:before {
-  	content: "\e009";
+  &.list:before {
+    content: "\e009";
   }
-  &.tag:before {
+  &.users:before {
   	content: "\e00a";
   }
-  &.pulse:before {
+  &.notify:before {
   	content: "\e00b";
   }
-  &.message:before {
+  &.tag:before {
   	content: "\e00c";
   }
-  &.list:before {
+  &.pulse:before {
   	content: "\e00d";
+  }
+  &.message:before {
+  	content: "\e00e";
   }
 }

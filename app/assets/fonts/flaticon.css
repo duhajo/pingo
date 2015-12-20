@@ -35,24 +35,27 @@ margin-left: 20px;
 .flaticon-gear30:before {
 	content: "\e006";
 }
-.flaticon-map32:before {
+.flaticon-loudspeaker41:before {
 	content: "\e007";
 }
-.flaticon-multiple25:before {
+.flaticon-map32:before {
 	content: "\e008";
 }
-.flaticon-notify:before {
+.flaticon-menu7:before {
 	content: "\e009";
 }
-.flaticon-onlinestore1:before {
+.flaticon-multiple25:before {
 	content: "\e00a";
 }
-.flaticon-pulse1:before {
+.flaticon-notify:before {
 	content: "\e00b";
 }
-.flaticon-speech96:before {
+.flaticon-onlinestore1:before {
 	content: "\e00c";
 }
-.flaticon-text156:before {
+.flaticon-pulse1:before {
 	content: "\e00d";
+}
+.flaticon-speech96:before {
+	content: "\e00e";
 }

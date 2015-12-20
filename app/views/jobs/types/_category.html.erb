@@ -83,24 +83,20 @@
   <div id="job-subjobs-header" class="container-fluid">
     <div id="job-type-header">
       <div class="header supply">
-        <h2 class="overflow">
-          <% if user_signed_in? %><span class="icon-label left">
-          <% end %><%= t('jobs_supply') %>
-                <% if user_signed_in? %></span>
-                  <a href="<%= new_sub_job_path(:id => @job.id, :type => 'supply') %>" class="header-actions left"><span class="icon add"><!-- Add new job --></span></a>
-          <% end %>
+        <h2>
+          <span class="icon loudspeaker"></span>
+          <span class="icon-label"><span class="pre"><%= t('jobs_list_pre') %></span> <%= t('jobs_list_supplies') %></span>
         </h2>
       </div>
-      <div class="header search">
-        Suche
+      <div class="header filter-wrapper">
+        <div class="filter">
+          <input type="text" placeholder="Mit einem Suchbegriff einschränken..." class="form-control"/>
+        </div>
       </div>
       <div class="header demand">
         <h2>
-          <% if user_signed_in? %><span class="icon-label left">
-          <% end %><%= t('jobs_demand') %>
-          <% if user_signed_in? %></span>
-            <a href="<%= new_sub_job_path(:id => @job.id, :type => 'demand') %>" class="header-actions left"><span class="icon add"><!-- Add new job --></span></a>
-          <% end %>
+          <span class="icon-label"><span class="pre"><%= t('jobs_list_pre') %></span> <%= t('jobs_list_demands') %></span>
+          <span class="icon search"></span>
         </h2>
       </div>
     </div>

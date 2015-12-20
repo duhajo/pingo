@@ -34,7 +34,7 @@
   ul {
     margin-left: 32px;
   }
-  
+
   #users-search {
     @extend .row;
     @extend .side-space;
@@ -55,7 +55,7 @@
       padding: 3px 0;
       .place {
         &.active {
-          font-family: "RobotoMedium";
+          font-weight: 500;
         }
       }
     }

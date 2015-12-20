@@ -39,6 +39,9 @@ de:
   jobs_supplies: "Angebote"
   jobs_demand: "Nachfrage"
   jobs_demands: "Nachfragen"
+  jobs_list_pre: "Es wird"
+  jobs_list_supplies: "ANGEBOTEN"
+  jobs_list_demands: "GESUCHT"
   jobs_found: "Gefundene Annoncen"
 
   job_form_title: "Titel"
