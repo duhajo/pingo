@@ -1,0 +1,80 @@
+<div class="breadcrumb-bar">
+  <ol class="breadcrumb">
+    <li><%= link_to t('jobs_category_overview'), :action => "index" %></li>
+  </ol>
+</div>
+<div id="category-view" class="content white simple overflow">
+  <div id="category-details" class="container-fluid space">
+    <div class="row">
+      <h1 class="title overflow bottom-margin col-md-6">
+        <%= t('unsorted_jobs') %>
+      </h1>
+      <div class="col-md-6"><h2><%= t('most_used_tags') %></h2>
+        <% if @most_used_tags.empty? %>
+          <p><%= t('jobs_category_no_tags') %></p>
+        <% else %>
+          <div class="tag-list">
+            <% tag_cloud(@most_used_tags, %w(css1 css2 css3 css4)) do |tag, css_class| %>
+              <%= link_to tag.name, {:controller => :tags, :action => :show, :id => tag.id}, :class => css_class + " tag" %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div id="job-subjobs-header" class="container-fluid">
+    <div id="job-type-header">
+      <div class="header supply">
+        <h2>
+          <span class="icon loudspeaker"></span>
+          <span class="icon-label"><span class="pre"><%= t('jobs_list_pre') %></span> <%= t('jobs_list_supplies') %></span>
+        </h2>
+      </div>
+      <div class="header filter-wrapper">
+        <div class="filter">
+          <input type="text" placeholder="Mit einem Suchbegriff einschränken..." class="form-control"/>
+        </div>
+      </div>
+      <div class="header demand">
+        <h2>
+          <span class="icon-label"><span class="pre"><%= t('jobs_list_pre') %></span> <%= t('jobs_list_demands') %></span>
+          <span class="icon search"></span>
+        </h2>
+      </div>
+    </div>
+  </div>
+  <div id="job-subjobs-content">
+    <div id="list-jobs">
+      <div class="supplies list">
+        <div class="container-fluid">
+          <% if @supplies.empty? %>
+            <%= t('jobs_no_jobs') %>
+          <% else %>
+            <% @supplies.in_groups_of(2, false).each do |sup| %>
+                <div class="row">
+                  <% sup.each do |job| %>
+                    <%= render :partial => "job_box", :locals => {:job => job} %>
+                  <% end %>
+                </div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+      <div class="demands list">
+        <div class="container-fluid">
+          <% if @demands.empty? %>
+            <p><%= t('jobs_no_jobs') %></p>
+          <% else %>
+            <% @demands.in_groups_of(2, false).each do |dem| %>
+                <div class="row">
+                  <% dem.each do |job| %>
+                    <%= render :partial => "job_box", :locals => {:job => job} %>
+                  <% end %>
+                </div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
