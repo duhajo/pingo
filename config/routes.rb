@@ -33,7 +33,7 @@ Duhajo::Application.routes.draw do
     end
   end
   resources :tags
-  
+
   resources :places
 
   match 'dashboard' => 'dashboard#index'
@@ -41,7 +41,7 @@ Duhajo::Application.routes.draw do
   match 'jobs/:job_id/activity/:a_id/reply' => 'comments#reply_to_activity'
 
   match 'jobs/:job_id/conversations/:c_id' => 'conversations#show_job_conversation'
-  
+
   match 'jobs/new/:type' => 'jobs#new'
 
   match 'jobs/:id/new/:type' => 'jobs#new', :as => 'new_sub_job'
@@ -53,7 +53,7 @@ Duhajo::Application.routes.draw do
   match 'jobs/:id/edit_manager_list' => 'jobs#edit_manager_list'
 
   match 'jobs/:id/conversation/:conversation_id' => 'conversation#show'
-  
+
   match 'jobs/:id/new_file' => 'jobs#new_file'
 
   put 'jobs/:id/like' => 'jobs#like', :as => 'like_job'

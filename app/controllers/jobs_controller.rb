@@ -12,11 +12,36 @@ class JobsController < ApplicationController
     if params[:job_id]
       @job = Job.find(params[:job_id])
       redirect_to @job
+    elsif params[:scope]
+      if params[:scope] == "categories"
+        @categories = Job.where('parent_id' => nil, 'type' => 0)
+        @unsorted_job_tags = Job.where(type: [1,2], parent_id: nil).skill_counts
+        respond_to do |format|
+          format.html {
+            render :partial => 'categories_overview', :categories => @categories, :unsorted_job_tags => @unsorted_job_tags
+          }
+        end
+      elsif params[:scope] == "unsorted"
+        @supplies = Job.where(type: 1, parent_id: nil)
+        @demands = Job.where(type: 2, parent_id: nil)
+        @most_used_tags = Job.where(type: [1,2], parent_id: nil).skill_counts
+        respond_to do |format|
+          format.html {
+            render 'unsorted_jobs.erb', :demands => @demands, :supplies => @supplies, :most_used_tags => @most_used_tags
+          }
+        end
+      else
+        @supplies = Job.where(type: 1)
+        @demands = Job.where(type: 2)
+        respond_to do |format|
+          format.html {
+            render :partial => 'jobs_overview', :supplies => @supplies, :demands => @demands
+          }
+        end
+      end
     else
-      all_jobs = Job.where('parent_id' => nil)
-      @categories = all_jobs.where('type' => 0)
-      @supplies = all_jobs.where('type' => [1])
-      @demands = all_jobs.where('type' => [2])
+      @categories = Job.where('parent_id' => nil, 'type' => 0)
+      @unsorted_job_tags = Job.where(type: [1,2], parent_id: nil).skill_counts
     end
   end
 
@@ -36,40 +61,42 @@ class JobsController < ApplicationController
   # GET /jobs/1.json
   def show
     @job = Job.find(params[:id])
-    @job_files = JobsFiles.find_all_by_job_id(@job.id)
-
-    @file_others , @file_images = [], []
-    @job_files.each do |attachment|
-      @file_images << attachment if ((attachment.file.content_type || "").split("/").first == 'image')
-      @file_others << attachment if ((attachment.file.content_type || "").split("/").first != 'image')
-    end
 
     @user_role = Job.get_user_role(@job, current_user)
     @managers = JobsWorker.where(:job_id => @job.id).where('jobs_workers.is_creator' => true).to_a
 
     @all_jobs = Job.where('parent_id' => @job.id)
-    @supplies = @all_jobs.where('type' => [1])
-    @demands = @all_jobs.where('type' => [2])
+    @supplies = @all_jobs.where(type: 1)
+    @demands = @all_jobs.where(type: 2)
 
     @parent_jobs = @job.ancestors
     @job_ids = Array.new << @job.id
     @all_jobs.each do |job|
       @job_ids << job.id
     end
-    @activities = PublicActivity::Activity.order("created_at DESC").all(:conditions => {trackable_type: "Job", trackable_id: [@job_ids] })
-    @comment = Comment.new
-    @comments = @job.comment_threads
-
-    @conversations = get_conversations(@job.id)
-    @job_chat_active = true
-
-    @workers = User.joins(:jobs_workers)
-    .where('jobs_workers.job_id' => @job.id)
-    .select("name, id, email, is_creator")
 
     if @job.type == 0
       @most_used_tags = @all_jobs.skill_counts
       @categories = @all_jobs.where('type' => 0)
+    else
+      @activities = PublicActivity::Activity.order("created_at DESC").all(:conditions => {trackable_type: "Job", trackable_id: [@job_ids] })
+      @comment = Comment.new
+      @comments = @job.comment_threads
+
+      @conversations = get_conversations(@job.id)
+      @job_chat_active = true
+
+      @workers = User.joins(:jobs_workers)
+      .where('jobs_workers.job_id' => @job.id)
+      .select("name, id, email, is_creator")
+
+      @job_files = JobsFiles.find_all_by_job_id(@job.id)
+
+      @file_others , @file_images = [], []
+      @job_files.each do |attachment|
+        @file_images << attachment if ((attachment.file.content_type || "").split("/").first == 'image')
+        @file_others << attachment if ((attachment.file.content_type || "").split("/").first != 'image')
+      end
     end
     respond_to do |format|
       format.html # show.html.erb.erb

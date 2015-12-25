@@ -1,94 +1,37 @@
 <div class="content white">
-  <div id="catgories-overview" class="side-space overflow">
-    <h1>
-      <% if user_signed_in? %><span class="icon-label">
-          <% end %><%= t('jobs_category_overview')%>
-      <% if user_signed_in? %></span>
-          <a href="<%= new_job_path %>/category" class="header-actions"><span class="icon add"></span></a>
-      <% end %>
-    </h1>
-    <% if @categories.empty? %>
-      <%= t('no_categories_definied') %>
-    <% else %>
-      <div id="list-categories" class="row">
-        <% @categories.each do |category| -%>
-          <div class="category">
-            <div class="category-head"><%= link_to category.title, category %></div>
-            <div class="category-body">
-              <% @tags = Job.where('parent_id' => category.id).skill_counts %>
-              <% if category.picture? %>
-                <%= link_to category do %>
-                  <span class="category-img" style="background-image: url('<%=category.picture_url%>');"></span>
-                <% end %>
-              <% elsif !@tags.empty? %>
-                <ul class="tag-list">
-                  <% tag_cloud(@tags, %w(css1 css2 css3 css4)) do |tag, css_class| %>
-                    <li><%= link_to tag.name, {:controller => :tags, :action => :show, :id => tag.id}, :class => "tag" %></li>
-                  <% end %>
-                </ul>
-              <% else %>
-                <%= link_to category do %>
-                  <% if category.description.empty? %>
-                    <span><%= category.description %></span>
-                  <% else %>
-                    <span><%= t('jobs_no_description'); %></span>
-                  <% end %>
-                <% end %>
-              <% end %>
-            </div>
-          </div>
-        <% end -%>
-      </div>
-    <% end %>
+  <div class="headline-navigation side-space overflow">
+    <ul class="nav">
+      <li class="active">
+        <a href="/jobs?scope=categories" data-toggle="headline-tab" data-target="#categories-overview">
+          <h1><%= t('jobs_category_overview')%></h1>
+        </a>
+      </li>
+      <li>
+        <a href="/jobs?scope=jobs" data-toggle="headline-tab" data-target="#jobs-overview">
+          <h1><%= t('jobs_overview')%></h1>
+        </a>
+      </li>
+    </ul>
   </div>
-  <div class="container-fluid">
-    <div class="jobs-overview">
-      <h1 class="side-space"><%= t('jobs_not_related')%></h1>
-      <div class="unassigned-jobs-content">
-        <h2 class="bottom-margin overflow">
-          <% if user_signed_in? %><span class="icon-label left"><% end %>
-          <%= t('jobs_supplies')%>
-          <% if user_signed_in? %></span>
-            <a href="<%= new_job_path %>/supply" class="header-actions left"><span class="icon add"></span></a>
-          <% end %>
-        </h2>
-        <div class="supplies list">
-          <% if @supplies.empty? %>
-            <%= t('jobs_no_jobs') %>
-          <% else %>
-            <% @supplies.in_groups_of(2, false).each do |sup| %>
-              <div class="row">
-                <% sup.each do |job| %>
-                  <%= render :partial => "job_box", :locals => {:job => job} %>
-                <% end %>
-              </div>
-            <% end %>
-          <% end %>
-        </div>
-      </div>
-
-      <div class="unassigned-resources-content">
-        <h2 class="bottom-margin overflow">
-          <% if user_signed_in? %><span class="icon-label left"><% end %>
-          <%= t('jobs_demands')%>
-          <% if user_signed_in? %></span>
-          <a href="<%= new_job_path %>/demand" class="header-actions left"><span class="icon add"></span></a>
-          <% end %>
-        </h2>
-        <div class="demands list">
-          <% if @demands.empty? %>
-            <p><%= t('jobs_no_jobs') %></p>
-          <% else %>
-            <% @demands.in_groups_of(2, false).each do |dem| %>
-              <div class="row">
-                <% dem.each do |job| %>
-                  <%= render :partial => "job_box", :locals => {:job => job} %>
-                <% end %>
-              </div>
-            <% end %>
-          <% end %>
-        </div>
-      </div>
+  <div class="tab-content">
+    <div id="categories-overview" class="side-space overflow tab-pane active">
+      <%= render :partial => 'categories_overview', :categories => @categories %>
+    </div>
+    <div id="jobs-overview" class="side-space overflow tab-pane">
     </div>
   </div>
 </div>
+<script type="text/javascript">
+  $('[data-toggle="headline-tab"]').click(function(e) {
+      var $this = $(this),
+          loadurl = $this.attr('href'),
+          targ = $this.attr('data-target');
+
+      $.get(loadurl, function(data) {
+          $(targ).html(data);
+      });
+
+      $this.tab('show');
+      return false;
+  });
+</script>

@@ -34,7 +34,6 @@ a:-moz-any-link:focus {
 }
 
 #duhajo {
-  background-color: $gray-lighter;
   height: 100%;
   overflow: visible;
 
@@ -129,13 +128,8 @@ a:-moz-any-link:focus {
   #footer {
     text-align: center;
     padding: 30px;
-    background-color: $brand-darkerblue;
-    color: #FFFFFF;
     .icons {
       font-size: 10px;
-    }
-    a {
-      color: $brand-softblue;
     }
   }
 
@@ -205,6 +199,29 @@ a:-moz-any-link:focus {
   }
 }
 
+/* Headline Navigation */
+
+.headline-navigation .nav {
+  border-bottom: 1px solid #e4e4e4;
+  li {
+    float: left;
+    margin-right: 30px;
+    a {
+      padding: 0;
+      display: inline-block;
+      &:hover, &:focus {
+        border-bottom: 2px solid;
+        background-color: transparent;
+      }
+    }
+    &.active {
+      a {
+        border-bottom: 2px solid;
+      }
+    }
+  }
+}
+
 .white-popup {
   position: relative;
   background: #FFFFFF;
@@ -250,36 +267,12 @@ abbr.timeago {
   margin-bottom: 15px;
 }
 
-/** Neue Stile **/
-
-h1, h2, h3, h4 {
-  overflow: hidden;
-
-  .icon-label {
-    font-size: inherit;
-  }
-
-  .header-actions {
-    display: inline-block;
-    margin-left: rem-calc(6);
-    vertical-align: middle;
-  }
-}
-
-form {
-
-  label {
-    text-align: left;
-  }
-}
-
 .overflow {
   overflow: hidden;
 }
 
 .icon-label {
   display: inline-block;
-  font-size: $font-size-base;
 }
 
 .sec-button {

@@ -36,7 +36,7 @@ $brand-darkerblue:      #353f47; // Link color
 // ## Settings for some of the most global styles.
 
 //** Background color for `<body>`.
-$body-bg:               $brand-darkerblue !default;
+$body-bg:               $gray-lighter !default;
 //** Global text color on `<body>`.
 $text-color:            $gray-darker !default;
 
@@ -75,7 +75,7 @@ $line-height-computed:    floor(($font-size-base * $line-height-base)) !default;
 
 //** By default, this inherits from the `<body>`.
 $headings-font-family:    "Roboto" !default;
-$headings-font-weight:    700 !default;
+$headings-font-weight:    400 !default;
 $headings-line-height:    1.5 !default;
 $headings-color:          inherit !default;
 
