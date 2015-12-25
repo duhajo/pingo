@@ -47,32 +47,52 @@
     <div id="list-jobs">
       <div class="supplies list">
         <div class="container-fluid">
-          <% if @supplies.empty? %>
-            <%= t('jobs_no_jobs') %>
-          <% else %>
-            <% @supplies.in_groups_of(2, false).each do |sup| %>
-                <div class="row">
-                  <% sup.each do |job| %>
-                    <%= render :partial => "job_box", :locals => {:job => job} %>
-                  <% end %>
-                </div>
-            <% end %>
+          <div class="row">
+            <div class="job-add-wrapper">
+              <div class="job-add">
+                <a href="<%=new_job_path%>/supply">
+                  <span class="icon add"></span>
+                  <span class="icon-label"><%= t("jobs_new_supply") %></span>
+                </a>
+              </div>
+            </div>
+            <% if @supplies.empty? %>
+              <div class="no-entries">
+                <%= t('jobs_no_jobs') %>
+              </div>
+            <% else %>
+              <% @supplies.in_groups_of(2, false).each do |sup| %>
+                <% sup.each do |job| %>
+                  <%= render :partial => "job_box", :locals => {:job => job} %>
+                <% end %>
+              <% end %>
+            </div>
           <% end %>
         </div>
       </div>
       <div class="demands list">
         <div class="container-fluid">
-          <% if @demands.empty? %>
-            <p><%= t('jobs_no_jobs') %></p>
-          <% else %>
-            <% @demands.in_groups_of(2, false).each do |dem| %>
-                <div class="row">
-                  <% dem.each do |job| %>
-                    <%= render :partial => "job_box", :locals => {:job => job} %>
-                  <% end %>
-                </div>
+          <div class="row">
+            <div class="job-add-wrapper">
+              <div class="job-add">
+                <a href="<%=new_job_path%>/demand">
+                  <span class="icon add"></span>
+                  <span class="icon-label"><%= t("jobs_new_demand") %></span>
+                </a>
+              </div>
+            </div>
+            <% if @demands.empty? %>
+              <div class="no-entries">
+                <%= t('jobs_no_jobs') %>
+              </div>
+            <% else %>
+              <% @demands.in_groups_of(2, false).each do |dem| %>
+                <% dem.each do |job| %>
+                  <%= render :partial => "job_box", :locals => {:job => job} %>
+                <% end %>
+              <% end %>
             <% end %>
-          <% end %>
+          </div>
         </div>
       </div>
     </div>

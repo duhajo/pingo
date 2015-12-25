@@ -255,6 +255,11 @@
   .list {
     padding: 15px 0;
     box-shadow: inset 10px 13px 0px -10px rgba(0, 0, 0, 0.15);
+    .no-entries {
+      text-align: center;
+      margin-top: 20px;
+      padding: 25px;
+    }
     &.supplies {
       display: table-cell;
       background-image: url("bg_blue.jpg");
@@ -273,6 +278,26 @@
 
     .prefix {
       display: none;
+    }
+  }
+}
+
+.job-add-wrapper {
+  @extend .col-md-6;
+  margin-bottom: 10px;
+  margin-top: 20px;
+  .job-add {
+    background-color: #FFFFFF;
+    box-shadow: 0px 1px 3px rgba(0,0,0,0.15);
+    padding: 10px;
+    text-align: center;
+    a {
+      display: block;
+      .icon {
+        vertical-align: middle;
+        margin-right: 10px;
+        font-size: 34px;
+      }
     }
   }
 }
