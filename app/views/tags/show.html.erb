@@ -1,61 +1,111 @@
-<div id="tag-overview">
-  <div id="tag-name"><h1>Verbindungen zum Tag <span><%=@tag.name%></span></h1></div>
-  <%if @jobs.empty? && @workers.empty? %>
-    <div class="content-box">
-      Keine Verbindungen gefunden
-    </div>
-  <%else%>
-    <div class="content-box left">
-      <div class="linked-jobs">
-        <h2>Jobs</h2>
-        <div class="jobs list">
-          <% unless @jobs.empty? %>
-            <% @jobs.each do |job|%>
-              <div class="job-container <% if job.status == 3 %>closed<% elsif job.status == 2 %>in-work<% else %>open<% end %>">
-                <div class="job">
-                  <div class="job-details">
-                    <div class="job-title"><h3><%= link_to job.title, job %>
-                <% if !job.deadline.nil? && job.deadline < DateTime.now %>
-                  <span class="expired">(expired)</span>
-                <% end %></h3></div>
-                    <div class="job-tags">
-                      <ul>
-                      <% job.tag_counts_on(:skills, :limit => 5, :order => "count desc").each do |tag| %>
-                        <li><%= link_to tag.name, { :controller => :tags, :action => :show, :id => tag.id } %></li>
-                      <% end %>
-                      </ul>
-                      <span class="clear"></span>
-                    </div>
-                  </div>
-                  <div class="job-interactions">
-                    <div class="job-fav"></div>
-                  </div>
-                  <span class="clear"></span>
-                </div>
-              </div>
-            <% end %>
+<div class="content white">
+  <div class="container-fluid">
+    <h1>Verbindungen zum Tag <span><%=@tag.name%></span></h1>
+      <%if @supplies.blank? && @demands.blank? && @users.blank? %>
+        <div class="content-box">
+          <span class="notice">Keine Verbindungen gefunden</span>
+        </div>
+      <%else%>
+      <div class="row">
+        <div id="workers-overview" class="col-md-6">
+          <h2><%=t('worker_overview')%></h2>
+          <% if @users.blank? %>
+            <span class="notice"><%= t('no_users_available') %></span>
           <% else %>
-            <%= t('jobs_no_jobs') %>
-          <%  end %>
+            <div id="list-users">
+              <%= render "users/users" %>
+            </div>
+          <% end %>
+        </div>
+        <div class="col-md-6">
+          <h2><%=t('similar_tags')%></h2>
+          <% if @related_tags.blank? %>
+            <span class="notice"><%= t('tags_not_found') %></span>
+          <% else %>
+            <ul class="tag-list">
+              <% tag_cloud(@related_tags, %w(css1 css2 css3 css4)) do |tag, css_class| %>
+                <li><%= link_to tag.name, {:controller => :tags, :action => :show, :id => tag.id}, :class => "tag " + css_class %></li>
+              <% end %>
+            </ul>
+          <% end %>
+        </div>
+      </div>
+    <%end%>
+  </div>
+  <div id="tag-rel-jobs-header" class="container-fluid">
+    <h2><%= t("jobs_related_tags") %></h2>
+    <div id="job-type-header">
+      <div class="header supply">
+        <h3>
+          <span class="icon loudspeaker"></span>
+          <span class="icon-label"><span class="pre"><%= t('jobs_list_pre') %></span> <%= t('jobs_list_supplies') %></span>
+        </h3>
+      </div>
+      <div class="header filter-wrapper">
+        <div class="filter">
+          <input type="text" placeholder="Mit einem Suchbegriff einschränken..." class="form-control"/>
+        </div>
+      </div>
+      <div class="header demand">
+        <h3>
+          <span class="icon-label"><span class="pre"><%= t('jobs_list_pre') %></span> <%= t('jobs_list_demands') %></span>
+          <span class="icon search"></span>
+        </h3>
+      </div>
+    </div>
+  </div>
+  <div id="tag-rel-jobs-content">
+    <div id="list-jobs">
+      <div class="supplies list">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="job-add-wrapper">
+              <div class="job-add">
+                <a href="<%=new_job_path%>/supply">
+                  <span class="icon add"></span>
+                  <span class="icon-label"><%= t("jobs_new_supply") %></span>
+                </a>
+              </div>
+            </div>
+            <% if @supplies.blank? %>
+              <div class="no-entries">
+                <span class="notice"><%= t('jobs_no_jobs') %></span>
+              </div>
+            <% else %>
+              <% @supplies.in_groups_of(2, false).each do |sup| %>
+                <% sup.each do |job| %>
+                  <%= render :partial => "jobs/job_box", :locals => {:job => job} %>
+                <% end %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="demands list">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="job-add-wrapper">
+              <div class="job-add">
+                <a href="<%=new_job_path%>/demand">
+                  <span class="icon add"></span>
+                  <span class="icon-label"><%= t("jobs_new_demand") %></span>
+                </a>
+              </div>
+            </div>
+            <% if @demands.blank? %>
+              <div class="no-entries">
+                <span class="notice"><%= t('jobs_no_jobs') %></span>
+              </div>
+            <% else %>
+              <% @demands.in_groups_of(2, false).each do |dem| %>
+                <% dem.each do |job| %>
+                  <%= render :partial => "jobs/job_box", :locals => {:job => job} %>
+                <% end %>
+              <% end %>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>
-    <div class="content-box right">
-      <div class="linked-workers">
-        <h2>Arbeiter</h2>
-        <% unless @workers.empty? %>
-          <div class="workers list">
-            <% @workers.each do |worker| %>
-              <div class="worker">
-                <div class="left"><span class="profile-avatar"><%= link_to image_tag(avatar_url(worker), alt: "?"), worker %></span></div>
-                <div class="right"><%= link_to worker.name, worker %></div>
-              </div>
-            <% end %>
-          </div>
-        <% else %>
-          <%= t('workers_no_workers') %>
-        <%  end %>
-      </div>
-    </div>
-  <%end%>
+  </div>
 </div>

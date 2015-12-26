@@ -120,9 +120,9 @@
               </div>
             <% else %>
               <% @supplies.in_groups_of(2, false).each do |sup| %>
-                    <% sup.each do |job| %>
-                      <%= render :partial => "job_box", :locals => {:job => job} %>
-                    <% end %>
+                <% sup.each do |job| %>
+                  <%= render :partial => "job_box", :locals => {:job => job} %>
+                <% end %>
               <% end %>
             <% end %>
           </div>
@@ -145,9 +145,9 @@
               </div>
             <% else %>
               <% @demands.in_groups_of(2, false).each do |dem| %>
-                    <% dem.each do |job| %>
-                      <%= render :partial => "job_box", :locals => {:job => job} %>
-                    <% end %>
+                <% dem.each do |job| %>
+                  <%= render :partial => "job_box", :locals => {:job => job} %>
+                <% end %>
               <% end %>
             <% end %>
           </div>

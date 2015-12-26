@@ -32,7 +32,8 @@ en:
   jobs_new_supply: "New Supply"
   jobs_new_demand: "New Demand"
 
-  jobs_related: "Related to Category"
+  jobs_related_category: "Related to Category"
+  jobs_related_tags: "Related Pins"
   jobs_not_related: "Not Related"
 
   jobs_supply: "Supply"

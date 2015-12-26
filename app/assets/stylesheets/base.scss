@@ -288,6 +288,11 @@ abbr.timeago {
   }
 }
 
+.notice {
+  color: $gray-dark;
+  font-weight: 300;
+}
+
 body[data-controller='sessions'] #main-navigation, body[data-controller='registrations'] #main-navigation {
   display: none;
 }

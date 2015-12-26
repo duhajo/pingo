@@ -32,7 +32,8 @@ de:
   jobs_new_supply: "Neues Angebot"
   jobs_new_demand: "Neue Nachfrage"
 
-  jobs_related: "In Kategorie eingeordnet"
+  jobs_related_category: "In Kategorie eingeordnet"
+  jobs_related_tags: "Verbundene Annoncen"
   jobs_not_related: "Nicht eingeordnete"
 
   jobs_supply: "Angebot"
