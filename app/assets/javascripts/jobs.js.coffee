@@ -34,6 +34,19 @@
           initAutocomplete()
 
 $(document).ready ->
+
+  $("#jobs-search #name").keyup ->
+    $.ajax(
+      type: "get"
+      data:
+        scope: $(this).data("scope"),
+        jobs_filter: @value
+    ).success (data) ->
+      newFilterContent = $(data).find("#list-jobs")
+      $("#list-jobs").html newFilterContent.html()
+    false
+  return
+
   $("#edit-manager-button").click (e) ->
     $.get @href, (html) ->
       initAutocomplete()

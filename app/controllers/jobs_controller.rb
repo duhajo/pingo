@@ -33,6 +33,12 @@ class JobsController < ApplicationController
       else
         @supplies = Job.where(type: 1)
         @demands = Job.where(type: 2)
+
+        if params[:jobs_filter].present?
+          @supplies = @supplies.where('lower(title) LIKE ?', "%#{params[:jobs_filter].downcase}%")
+          @demands = @demands.where('lower(title) LIKE ?', "%#{params[:jobs_filter].downcase}%")
+        end
+
         respond_to do |format|
           format.html {
             render :partial => 'jobs_overview', :supplies => @supplies, :demands => @demands

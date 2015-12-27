@@ -4,7 +4,7 @@
       <a href="<%= new_job_path %>/category"><span class="icon add"></span></a>
     </div>
   <% end %>
-  <% if @categories.empty? %>
+  <% if @categories.blank? %>
     <%= t('no_categories_definied') %>
   <% else %>
     <% @categories.each do |category| -%>
