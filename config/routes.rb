@@ -29,7 +29,6 @@ Duhajo::Application.routes.draw do
     end
     resources :comments, only: [:create, :reply, :update, :edit, :destroy] do
       match 'reply' => 'comments#reply'
-      match 'reply_to_file' => 'comments#reply_to_file'
     end
   end
   resources :tags

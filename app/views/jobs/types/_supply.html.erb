@@ -87,7 +87,6 @@
           <h3 class="overflow with-buttons">
             <span class="icon-label">Anbieter</span>
           </h3>
-
           <div class="preview-list workers">
             <ul class="overflow">
               <% @workers.each.with_index do |worker, index| %>
@@ -107,6 +106,11 @@
               <% end %>
             </ul>
           </div>
+          <% if @job.status.nil? %>
+            <div class="job-status">
+              <a href="#toDo" class="btn btn-primary">Abnehmer gefunden!</a>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>

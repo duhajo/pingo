@@ -31,3 +31,15 @@ $("#search-input").keyup ->
 
 $("#search-input").on 'click', ->
   $('#my-jobs-list').toggleClass "active"
+
+$('[data-toggle="headline-tab"]').click (e) ->
+  $this = $(this)
+  loadurl = $this.attr('href')
+  targ = $this.attr('data-target')
+  if typeof $this.attr('data-loaded') == 'undefined'
+    $.get loadurl, (data) ->
+      $(targ).html data
+      return
+  $this.tab 'show'
+  $this.attr('data-loaded', true)
+  false

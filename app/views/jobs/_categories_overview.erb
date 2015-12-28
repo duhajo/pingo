@@ -5,12 +5,12 @@
     </div>
   <% end %>
   <% if @categories.blank? %>
-    <%= t('no_categories_definied') %>
+    <span class="notice"><%= t('no_categories_definied') %></span>
   <% else %>
     <% @categories.each do |category| -%>
       <div class="category">
         <div class="category-head"><%= link_to category.title, category %></div>
-        <div class="category-body">
+        <div class="category-body <% if category.picture? %>show-picture<%end%>">
           <% @tags = Job.where('parent_id' => category.id).skill_counts %>
           <% if category.picture? %>
             <%= link_to category do %>
@@ -25,9 +25,9 @@
           <% else %>
             <%= link_to category do %>
               <% if category.description.empty? %>
-                <span><%= category.description %></span>
+                <span class="description"><%= category.description %></span>
               <% else %>
-                <span><%= t('jobs_no_description'); %></span>
+                <span class="notice"><%= t('jobs_no_description'); %></span>
               <% end %>
             <% end %>
           <% end %>

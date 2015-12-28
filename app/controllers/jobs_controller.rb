@@ -15,7 +15,7 @@ class JobsController < ApplicationController
     elsif params[:scope]
       if params[:scope] == "categories"
         @categories = Job.where('parent_id' => nil, 'type' => 0)
-        @unsorted_job_tags = Job.where(type: [1,2], parent_id: nil).skill_counts
+        @unsorted_job_tags = Job.where(type: [1,2], parent_id: nil).skill_counts.order('count desc').limit(5)
         respond_to do |format|
           format.html {
             render :partial => 'categories_overview', :categories => @categories, :unsorted_job_tags => @unsorted_job_tags
@@ -24,7 +24,7 @@ class JobsController < ApplicationController
       elsif params[:scope] == "unsorted"
         @supplies = Job.where(type: 1, parent_id: nil)
         @demands = Job.where(type: 2, parent_id: nil)
-        @most_used_tags = Job.where(type: [1,2], parent_id: nil).skill_counts
+        @most_used_tags = Job.where(type: [1,2], parent_id: nil).skill_counts.order('count desc').limit(15)
 
         if params[:jobs_filter].present?
           @supplies = @supplies.where('lower(title) LIKE ?', "%#{params[:jobs_filter].downcase}%")
@@ -53,7 +53,7 @@ class JobsController < ApplicationController
       end
     else
       @categories = Job.where('parent_id' => nil, 'type' => 0)
-      @unsorted_job_tags = Job.where(type: [1,2], parent_id: nil).skill_counts
+      @unsorted_job_tags = Job.where(type: [1,2], parent_id: nil).skill_counts.order('count desc').limit(5)
     end
   end
 
@@ -230,29 +230,6 @@ class JobsController < ApplicationController
     end
   end
 
-  def support
-    @job = Job.find(params[:id])
-    if params[:support]
-      if params[:manager]
-        @current_worker = @job.jobs_workers.where(:user_id => current_user.id)
-        if @current_worker.empty?
-          @job.jobs_workers.where(:user_id => current_user.id).where(:is_creator => true).first_or_create()
-        else
-          @current_worker.update_all(:is_creator => true)
-        end
-      else
-        @job.jobs_workers.where(:user_id => current_user.id).first_or_create()
-      end
-    else
-      @job.users.delete(current_user)
-    end
-
-    respond_to do |format|
-      format.html { redirect_to @job }
-      format.json { head :no_content }
-    end
-  end
-
   def get_tags
     @job = Job.find(params[:id])
     @tags = @job.tag_counts_on(:skills, :limit => 5, :order => "count desc")
@@ -283,44 +260,6 @@ class JobsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to root_path }
       format.js { render :action => 'map', :job => @job }
-    end
-  end
-
-  def show_manager_list
-    @job = Job.find(params[:id])
-    unless JobsWorker.where(:job_id => @job.id).where('jobs_workers.is_creator' => true).where(:user_id => current_user.id).to_a.empty?
-      @user_is_manager = true
-    end
-    @managers = User.joins(:jobs_workers).select("users.id, name, email").where("jobs_workers.job_id" => @job.id).where("jobs_workers.is_creator" => true).to_a
-    respond_to do |format|
-      format.html { redirect_to root_path }
-      format.js
-    end
-  end
-
-  def edit_manager_list
-    @job = Job.find(params[:id])
-    @user_id = params[:user_id].to_i
-
-    if(params[:remove] && params[:remove] == "true")
-      @job.jobs_workers.where(:user_id => @user_id).update_all(:is_creator => 0)
-    else
-      @job_worker = @job.jobs_workers.where(:user_id => @user_id)
-      if(@job_worker.empty?)
-        JobsWorker.where('jobs_workers.job_id' => @job.id).where('jobs_workers.user_id' => @user_id).where('jobs_workers.is_creator' => true).first_or_create()
-      else
-        @job_worker.update_all(:is_creator => 1)
-      end
-    end
-
-    unless JobsWorker.where(:job_id => @job.id).where('jobs_workers.is_creator' => true).where(:user_id => current_user.id).to_a.empty?
-      @user_is_manager = true
-    end
-
-    @managers = User.joins(:jobs_workers).select("users.id, name, email").where("jobs_workers.job_id" => @job.id).where("jobs_workers.is_creator" => true).to_a
-
-    respond_to do |format|
-      format.js
     end
   end
 end

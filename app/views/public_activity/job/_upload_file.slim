@@ -13,7 +13,7 @@
       = link_to file.file.file.filename, file.file.url
 
 - single_content_for :thread do
-  - @comments = Comment.where(for_type: "activity", parent_id: a.trackable_id)
+  - @comments = Comment.where(for_type: "activity", parent_id: a.id)
   - if @comments
     .answers[id = "answers_#{p[:id]}"]
       - @comments.each do |comment|

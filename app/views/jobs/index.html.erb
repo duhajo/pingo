@@ -2,12 +2,12 @@
   <div class="headline-navigation side-space overflow">
     <ul class="nav">
       <li class="active">
-        <a href="/jobs?scope=categories" data-toggle="headline-tab" data-target="#categories-overview">
+        <a href="<%=jobs_path%>?scope=categories" data-toggle="headline-tab" data-target="#categories-overview">
           <h1><%= t('jobs_category_overview')%></h1>
         </a>
       </li>
       <li>
-        <a href="/jobs?scope=jobs" data-toggle="headline-tab" data-target="#jobs-overview">
+        <a href="<%=jobs_path%>?scope=jobs" data-toggle="headline-tab" data-target="#jobs-overview">
           <h1><%= t('jobs_overview')%></h1>
         </a>
       </li>
@@ -21,17 +21,3 @@
     </div>
   </div>
 </div>
-<script type="text/javascript">
-  $('[data-toggle="headline-tab"]').click(function(e) {
-      var $this = $(this),
-          loadurl = $this.attr('href'),
-          targ = $this.attr('data-target');
-
-      $.get(loadurl, function(data) {
-          $(targ).html(data);
-      });
-
-      $this.tab('show');
-      return false;
-  });
-</script>

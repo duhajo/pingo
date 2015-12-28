@@ -1,38 +1,3 @@
-@addManager = (element) ->
-  list = $("#job_manager_ids")
-  managerList = list[0].value.split(",")
-  for manager in managerList
-    if(element != parseInt(manager))
-      managerList.push(element)
-      list[0].value = managerList
-      $.ajax(
-          url: "/jobs/"+$('#job-manager-list').data('id')+"/edit_manager_list"
-          data:
-            user_id: element,
-            remove: false
-        ).success (data) ->
-          initAutocomplete()
-      break
-      return false
-    else
-      break
-      return false
-
-@removeManager = (element) ->
-  list = $("#job_manager_ids")
-  managerList = list[0].value.split(",")
-  for manager in managerList
-    if(element == parseInt(manager))
-      managerList.remove(element)
-      list[0].value = managerList
-      $.ajax(
-          url: "/jobs/"+$('#job-manager-list').data('id')+"/edit_manager_list"
-          data:
-            user_id: element,
-            remove: true
-        ).success (data) ->
-          initAutocomplete()
-
 $(document).ready ->
 
   $("#jobs-search #name").keyup ->
@@ -46,10 +11,6 @@ $(document).ready ->
       $("#list-jobs").html newFilterContent.html()
     false
   return
-
-  $("#edit-manager-button").click (e) ->
-    $.get @href, (html) ->
-      initAutocomplete()
 
   $('.gallery-item').magnificPopup
     type: 'image'
