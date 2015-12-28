@@ -25,6 +25,12 @@ class JobsController < ApplicationController
         @supplies = Job.where(type: 1, parent_id: nil)
         @demands = Job.where(type: 2, parent_id: nil)
         @most_used_tags = Job.where(type: [1,2], parent_id: nil).skill_counts
+
+        if params[:jobs_filter].present?
+          @supplies = @supplies.where('lower(title) LIKE ?', "%#{params[:jobs_filter].downcase}%")
+          @demands = @demands.where('lower(title) LIKE ?', "%#{params[:jobs_filter].downcase}%")
+        end
+
         respond_to do |format|
           format.html {
             render 'unsorted_jobs.erb', :demands => @demands, :supplies => @supplies, :most_used_tags => @most_used_tags
@@ -71,20 +77,23 @@ class JobsController < ApplicationController
     @user_role = Job.get_user_role(@job, current_user)
     @managers = JobsWorker.where(:job_id => @job.id).where('jobs_workers.is_creator' => true).to_a
 
-    @all_jobs = Job.where('parent_id' => @job.id)
-    @supplies = @all_jobs.where(type: 1)
-    @demands = @all_jobs.where(type: 2)
-
     @parent_jobs = @job.ancestors
-    @job_ids = Array.new << @job.id
-    @all_jobs.each do |job|
-      @job_ids << job.id
-    end
+    @all_jobs = Job.where('parent_id' => @job.id)
 
     if @job.type == 0
       @most_used_tags = @all_jobs.skill_counts
       @categories = @all_jobs.where('type' => 0)
+      @supplies = @all_jobs.where(type: 1)
+      @demands = @all_jobs.where(type: 2)
+      if params[:jobs_filter].present?
+        @supplies = @supplies.where('lower(title) LIKE ?', "%#{params[:jobs_filter].downcase}%")
+        @demands = @demands.where('lower(title) LIKE ?', "%#{params[:jobs_filter].downcase}%")
+      end
     else
+      @job_ids = Array.new << @job.id
+      @all_jobs.each do |job|
+        @job_ids << job.id
+      end
       @activities = PublicActivity::Activity.order("created_at DESC").all(:conditions => {trackable_type: "Job", trackable_id: [@job_ids] })
       @comment = Comment.new
       @comments = @job.comment_threads
