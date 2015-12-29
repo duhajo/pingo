@@ -22,7 +22,7 @@
           .meta-info.details
             - user = User.find_by_id(comment.user_id)
             .avatar
-              =' image_tag avatar_url(user), width: "30", height: "30", class: "img-circle"
+              =' image_tag avatar_url(user.email), width: "30", height: "30", class: "img-circle"
             =' link_to user.name, user
           .content
             = comment.body

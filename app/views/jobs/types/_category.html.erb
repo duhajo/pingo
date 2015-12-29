@@ -11,10 +11,12 @@
   <div id="category-details" class="container-fluid space">
     <div class="row">
       <h1 class="title overflow bottom-margin col-md-12">
-        <% if @user_role == 3 && user_signed_in? %><span class="icon-label left">
-        <% end %><%= t('jobs_category') %>: <%= @job.title %>
-        <% if @user_role == 3 && user_signed_in? %></span>
-          <a href="<%= edit_job_path(@job) %>" class="header-actions left"><span class="icon edit"></span></a>
+        <% if @is_manager && user_signed_in? %>
+          <span class="icon-label">
+        <% end %>
+        <%= t('jobs_category') %>: <%= @job.title %>
+        <% if @is_manager && user_signed_in? %>
+          </span><a href="<%= edit_job_path(@job) %>" class="header-actions"><span class="icon settings"></span></a>
         <% end %>
       </h1>
 
@@ -49,7 +51,7 @@
   <div id="sub-categories">
     <h2 class="title">
       Sub Categories
-      <% if @user_role == 3 && user_signed_in? %>
+      <% if @is_manager && user_signed_in? %>
         <a href="<%= new_sub_job_path(:id => @job.id, :type => 'category') %>" class="header-actions left"><span class="icon add"></span></a>
       <% end %>
     </h2>

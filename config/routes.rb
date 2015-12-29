@@ -8,8 +8,6 @@ Duhajo::Application.routes.draw do
 
   resources :activities
 
-  match 'worker/:id' => 'users#show', :as => 'worker'
-
   resources :users do
     collection do
       get :autocomplete_user

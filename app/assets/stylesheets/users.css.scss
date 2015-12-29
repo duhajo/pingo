@@ -15,10 +15,11 @@
 
 .user {
   .user-name {
-    font-size: rem-calc(15);
+    font-size: $font-size-large;
+    font-weight: 300;
   }
   .user-address{
-    font-size: rem-calc(12);
+    font-size: $font-size-small;
   }
 }
 

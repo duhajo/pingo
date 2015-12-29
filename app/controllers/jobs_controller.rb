@@ -22,8 +22,8 @@ class JobsController < ApplicationController
           }
         end
       elsif params[:scope] == "unsorted"
-        @supplies = Job.where(type: 1, parent_id: nil)
-        @demands = Job.where(type: 2, parent_id: nil)
+        @supplies = Job.where(type: 1, parent_id: nil).joins(:user).select("jobs.*, users.email as user_email, users.name as user_name, users.id as user_id")
+        @demands = Job.where(type: 2, parent_id: nil).joins(:user).select("jobs.*, users.email as user_email, users.name as user_name, users.id as user_id")
         @most_used_tags = Job.where(type: [1,2], parent_id: nil).skill_counts.order('count desc').limit(15)
 
         if params[:jobs_filter].present?
@@ -37,8 +37,8 @@ class JobsController < ApplicationController
           }
         end
       else
-        @supplies = Job.where(type: 1)
-        @demands = Job.where(type: 2)
+        @supplies = Job.where(type: 1).joins(:user).select("jobs.*, users.email as user_email, users.name as user_name, users.id as user_id")
+        @demands = Job.where(type: 2).joins(:user).select("jobs.*, users.email as user_email, users.name as user_name, users.id as user_id")
 
         if params[:jobs_filter].present?
           @supplies = @supplies.where('lower(title) LIKE ?', "%#{params[:jobs_filter].downcase}%")
@@ -59,7 +59,7 @@ class JobsController < ApplicationController
 
   def get_conversations(job)
     if current_user
-      if @user_role == 3
+      if @is_manager
         return Conversation.job_involving(current_user, job) #ToDo
       else
         return Conversation.job_involving(current_user, job)
@@ -74,8 +74,9 @@ class JobsController < ApplicationController
   def show
     @job = Job.find(params[:id])
 
-    @user_role = Job.get_user_role(@job, current_user)
-    @managers = JobsWorker.where(:job_id => @job.id).where('jobs_workers.is_creator' => true).to_a
+    @is_manager = Job.is_creator_of_job(@job, current_user)
+    Rails.logger.debug("My object: #{@job.inspect}")
+    @manager = User.find(@job.user_id)
 
     @parent_jobs = @job.ancestors
     @all_jobs = Job.where('parent_id' => @job.id)
@@ -83,8 +84,8 @@ class JobsController < ApplicationController
     if @job.type == 0
       @most_used_tags = @all_jobs.skill_counts
       @categories = @all_jobs.where('type' => 0)
-      @supplies = @all_jobs.where(type: 1)
-      @demands = @all_jobs.where(type: 2)
+      @supplies = @all_jobs.where(type: 1).joins(:user).select("jobs.*, users.email as user_email, users.name as user_name, users.id as user_id")
+      @demands = @all_jobs.where(type: 2).joins(:user).select("jobs.*, users.email as user_email, users.name as user_name, users.id as user_id")
       if params[:jobs_filter].present?
         @supplies = @supplies.where('lower(title) LIKE ?', "%#{params[:jobs_filter].downcase}%")
         @demands = @demands.where('lower(title) LIKE ?', "%#{params[:jobs_filter].downcase}%")
@@ -100,10 +101,6 @@ class JobsController < ApplicationController
 
       @conversations = get_conversations(@job.id)
       @job_chat_active = true
-
-      @workers = User.joins(:jobs_workers)
-      .where('jobs_workers.job_id' => @job.id)
-      .select("name, id, email, is_creator")
 
       @job_files = JobsFiles.find_all_by_job_id(@job.id)
 
@@ -137,8 +134,8 @@ class JobsController < ApplicationController
     @job = Job.new
 
     respond_to do |format|
-       format.html # new.html.erb
-       format.json { render json: @job }
+      format.html # new.html.erb
+      format.json { render json: @job }
     end
   end
 
@@ -166,7 +163,7 @@ class JobsController < ApplicationController
   # GET /jobs/1/edit
   def edit
     @job = Job.find(params[:id])
-    @managers = User.joins(:jobs_workers).select("users.id, name, email").where("jobs_workers.job_id" => @job.id).where("jobs_workers.is_creator" => true).to_a
+    @is_manager = Job.is_creator_of_job(@job, current_user)
 
     if @job.type == 0
       @type_category = 0
@@ -181,7 +178,7 @@ class JobsController < ApplicationController
   # POST /jobs.json
   def create
     @job = Job.new(params[:job])
-    @job.jobs_workers.build( :user_id => current_user.id, :is_creator => true)
+    @job.user_id = current_user.id
 
     respond_to do |format|
       if @job.save
@@ -237,16 +234,15 @@ class JobsController < ApplicationController
 
   def set_status
     @job = Job.find(params[:id])
-    @user_role = Job.get_user_role(@job, current_user)
-    @managers = JobsWorker.where(:job_id => @job.id).where('jobs_workers.is_creator' => true).where(:user_id => current_user.id)
-    unless @managers.empty?
+    @is_manager = Job.is_creator_of_job(@job, current_user)
+    if @is_manager
       @job.status = params[:status]
       @job.save()
     end
 
     respond_to do |format|
       format.html {
-        render :partial => 'status', :job => @job, :manager => @managers
+        render :partial => 'status', :job => @job, :is_manager => @is_manager
       }
       format.json { head :no_content }
       format.js {}

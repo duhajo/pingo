@@ -23,7 +23,7 @@
             <%= form_tag(jobs_path, id: "search-form") do %>
                 <li class="dropdown">
                   <a href="javascript:;" id="my-jobs-link"><span class="icon list"></span></a>
-                  <%= autocomplete_field_tag 'search', '', autocomplete_job_title_jobs_path, placeholder: "Search Jobs",
+                  <%= autocomplete_field_tag 'search', '', autocomplete_job_title_jobs_path, placeholder: "Search Pins",
                       id: "search-input", class: "form-control dropdown-toggle", data: {:toggle => "dropdown"} %>
                   <ul id="my-jobs-list" class="ui-menu">
                     <%= render :partial => 'myjobs', :my_jobs => @my_jobs %>
@@ -43,7 +43,7 @@
             <% if user_signed_in? %>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle overflow" data-toggle="dropdown">
-                  <span class="profile-avatar"><%= image_tag avatar_url(current_user), alt: "?", class: "img-circle" %></span>
+                  <span class="profile-avatar"><%= image_tag avatar_url(current_user.email), alt: "?", class: "img-circle" %></span>
                   <span class="profile-name"><%= current_user.name %></span>
                   <b class="caret"></b>
                 </a>

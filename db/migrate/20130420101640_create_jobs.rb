@@ -4,6 +4,7 @@ class CreateJobs < ActiveRecord::Migration
       t.string :title
       t.text :description
       t.date :deadline
+      t.integer :user_id
       t.integer :parent_id
       t.integer :lft
       t.integer :rgt
@@ -11,7 +12,7 @@ class CreateJobs < ActiveRecord::Migration
       t.timestamps
     end
   end
-    
+
   def self.down
     drop_table :jobs
   end

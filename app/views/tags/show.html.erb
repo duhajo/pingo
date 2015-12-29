@@ -43,7 +43,10 @@
       </div>
       <div class="header filter-wrapper">
         <div class="filter">
-          <input type="text" placeholder="Mit einem Suchbegriff einschränken..." class="form-control"/>
+          <%= form_tag jobs_path, :method => 'get', :id => 'jobs-search' do %>
+            <%= text_field_tag :name, params[:name], :placeholder => t('filter_by'), :class => 'search-input form-control',
+            :data => { :scope => "jobs" } %>
+          <% end %>
         </div>
       </div>
       <div class="header demand">
@@ -109,3 +112,4 @@
     </div>
   </div>
 </div>
+<%= javascript_include_tag "jobs" %>

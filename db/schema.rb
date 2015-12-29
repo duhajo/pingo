@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(:version => 20151005141834) do
     t.string   "title"
     t.text     "description"
     t.date     "deadline"
+    t.integer  "user_id"
     t.integer  "parent_id"
     t.integer  "lft"
     t.integer  "rgt"
@@ -87,16 +88,6 @@ ActiveRecord::Schema.define(:version => 20151005141834) do
   end
 
   add_index "jobs_files", ["job_id", "user_id"], :name => "index_jobs_files_on_job_id_and_user_id"
-
-  create_table "jobs_workers", :id => false, :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "job_id"
-    t.boolean  "is_creator"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "jobs_workers", ["job_id", "user_id"], :name => "index_jobs_workers_on_job_id_and_user_id"
 
   create_table "messages", :force => true do |t|
     t.text     "body"

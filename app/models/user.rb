@@ -8,9 +8,8 @@ class User < ActiveRecord::Base
   attr_accessor   :login, :current_password, :address
   attr_accessible :login, :name, :email, :password, :password_confirmation, :remember_me, :skill_list,
                   :country, :city, :district, :latitude, :longitude, :radius, :locale, :current_password
-  has_many :jobs_workers, dependent: :delete_all
-  has_many :jobs, :through => :jobs_workers
   has_many :conversations, :foreign_key => :sender_id
+  has_many :jobs, :foreign_key => :user_id
 
   geocoded_by :address
   reverse_geocoded_by :latitude, :longitude do |obj,results|
@@ -29,7 +28,7 @@ class User < ActiveRecord::Base
   def gmaps4rails_address
     "#{self.district}, #{self.city}, #{self.country}"
   end
-  
+
   def address
     @address = ""
     unless district.nil? && city.nil? && country.nil?

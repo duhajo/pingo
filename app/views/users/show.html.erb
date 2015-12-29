@@ -22,7 +22,7 @@
       <ul>
         <% @similar_users.each do |worker|%>
           <li>
-            <span class="profile-avatar"><%= link_to image_tag(avatar_url(worker), alt: "?"), worker, :title => worker.name, :rel => "tipsy" %></span>
+            <span class="profile-avatar"><%= link_to image_tag(avatar_url(worker.email), alt: "?"), worker, :title => worker.name, :rel => "tipsy" %></span>
           </li>
         <% end %>
       </ul>

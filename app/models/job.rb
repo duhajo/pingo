@@ -5,8 +5,8 @@ class Job < ActiveRecord::Base
   acts_as_taggable_on :skills
   acts_as_nested_set
   attr_accessible :deadline, :description, :parent_id, :title, :skill_list, :country, :city, :street, :type, :picture, :picture_cache
-  has_many :jobs_workers, dependent: :delete_all
-  has_many :users, :through => :jobs_workers
+
+  belongs_to :user
 
   include PublicActivity::Common
 
@@ -56,26 +56,10 @@ class Job < ActiveRecord::Base
   end
 
   def self.is_creator_of_job(job, current_user)
-    if JobsWorker.where(:job_id => job.id).where('jobs_workers.is_creator' => true).where(:user_id => current_user.id).to_a.empty?
+    if Job.where(:id => job.id, :user_id => current_user.id).to_a.empty?
       return false
     else
       return true
-    end
-  end
-
-  def self.get_user_role(job, current_user)
-    if current_user
-      if job.users.find_by_id(current_user.id)
-        if is_creator_of_job(job, current_user)
-          return 3 #manager
-        else
-          return 2 #worker
-        end
-      else
-        return 1 #keine role
-      end
-    else
-      return 0
     end
   end
 end

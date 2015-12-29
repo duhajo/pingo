@@ -5,7 +5,7 @@
     .title
       - if a.owner
         .avatar
-          = image_tag avatar_url(a.owner), width: "45", height: "45", class: "img-circle"
+          = image_tag avatar_url(a.owner.email), width: "45", height: "45", class: "img-circle"
         =' link_to a.owner.name, a.owner
       - else
         ' someone

@@ -1,4 +1,4 @@
-<% unless @user_role == 3%>
+<% if !@is_manager%>
   <div class="job-status view-only">
     <%if @job.status == 3%>
       <div class="status-closed btn small">

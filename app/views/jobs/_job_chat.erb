@@ -1,24 +1,24 @@
 <% if !@conversations.nil? && @conversations.size > 0 %>
   <div id="chat-wrapper">
-    <% if @user_role < 3 %>
-      <script type="text/javascript">
-        var ready = function () {
-          <% @conversations.each do |conversation|%>
-            chatBox.createJobChatWrapper(<%= conversation.id %>, <%=@job.id %>);
-          <% end %>
-        }
-        $(document).ready(ready);
-      </script>
-      <div id="chat-messages"></div>
-    <% else %>
+    <% if @is_manager %>
       <div id="conversation-list" class="list-group">
         List of Conversations:<br>
         <% @conversations.each do |conversation| %>
-          <a href="javascript:;" class="conversation-link list-group-item" data-conversation="<%=conversation.id%>" data-job_id="<%=@job.id%>">
-            <%= User.find(conversation.sender_id).name%> - <%= conversation.updated_at%>
-          </a>
+        <a href="javascript:;" class="conversation-link list-group-item" data-conversation="<%=conversation.id%>" data-job_id="<%=@job.id%>">
+          <%= User.find(conversation.sender_id).name%> - <%= conversation.updated_at%>
+        </a>
         <% end %>
       </div>
+    <% elsif user_signed_in? %>
+      <script type="text/javascript">
+      var ready = function () {
+        <% @conversations.each do |conversation|%>
+        chatBox.createJobChatWrapper(<%= conversation.id %>, <%=@job.id %>);
+        <% end %>
+      }
+      $(document).ready(ready);
+      </script>
+      <div id="chat-messages"></div>
     <% end %>
   </div>
 <% else %>

@@ -1,7 +1,7 @@
 <div id="job-files" class="top-margin">
   <h3 class="overflow with-buttons">
     <span class="icon-label left"><%= t('attachment')%></span>
-    <% if @user_role == 3 && user_signed_in? %>
+    <% if @is_manager && user_signed_in? %>
       <a href="#" data-toggle="dropdown" class="header-actions dropdown-toggle">
         <span class="icon add"><!-- Add new file --></span>
       </a>
@@ -12,7 +12,7 @@
             <%= f.file_field :file, id: "file-upload-input" %>
           <% end %>
           <script type="text/javascript">
-            $(document).on('change', '#file-upload-input', function() { 
+            $(document).on('change', '#file-upload-input', function() {
               $("#file-upload-form").submit();
             });
           </script>

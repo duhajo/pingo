@@ -16,11 +16,11 @@
   <div id="job-specification-area" class="col">
     <div id="job-details">
       <h1 class="title job">
-        <% if @user_role == 3 && user_signed_in? %><span class="icon-label left">
+        <% if @is_manager && user_signed_in? %><span class="icon-label">
         <% end %>
         <%= t('jobs_demand') %>: <%= @job.title %>
-        <% if @user_role == 3 && user_signed_in? %></span>
-          <a href="<%= edit_job_path(@job) %>" class="header-actions left"><span class="icon edit"></span></a>
+        <% if @is_manager && user_signed_in? %></span>
+          <a href="<%= edit_job_path(@job) %>" class="header-actions"><span class="icon settings"></span></a>
         <% end %>
       </h1>
       <div class="row">
@@ -33,26 +33,26 @@
                end %>
             <% if not @job.deadline.nil? %>
               <div id="job-deadline" <% if !@lessColumns %>class="col-lg-6"<% end %>>
-                <span class="icon pull-left"><!----></span>
-                    <span class="icon-label" title="<%= @job.deadline.to_formatted_s(:long) %>">
-                      <%= distance_of_time_in_words(Time.now, @job.deadline, true) %>
-                      <% if @job.deadline < DateTime.now %>
-                        ago (expired)
-                      <% else %>
-                        to go
-                      <% end %>
-                    </span>
+                <span class="icon alarm"><!----></span>
+                <span class="icon-label" title="<%= @job.deadline.to_formatted_s(:long) %>">
+                  <%= distance_of_time_in_words(Time.now, @job.deadline, true) %>
+                  <% if @job.deadline < DateTime.now %>
+                    ago (expired)
+                  <% else %>
+                    to go
+                  <% end %>
+                </span>
               </div>
             <% end %>
             <% if !@job.address.blank? %>
               <div id="job-location" <% if !@lessColumns %>class="col-lg-6"<% end %>>
-                <span class="icon pull-left"><!----></span>
-                    <span class="icon-label">
-                      <%= link_to @job.address, {:action => :map_for_job}, :id => "show-map-button",
-                                  class: "header-actions left",
-                                  data: {toggle: "modal", target: "#ajax-modal",
-                                         lat: @job.latitude, long: @job.longitude} %>
-                    </span>
+                <span class="icon map"><!----></span>
+                <span class="icon-label">
+                  <%= link_to @job.address, {:action => :map_for_job}, :id => "show-map-button",
+                              class: "header-actions left",
+                              data: {toggle: "modal", target: "#ajax-modal",
+                                     lat: @job.latitude, long: @job.longitude} %>
+                </span>
               </div>
             <% end %>
           </div>
@@ -87,24 +87,12 @@
             <span class="icon-label">Interessent</span>
           </h3>
 
-          <div class="preview-list workers">
-            <ul class="overflow">
-              <% @workers.each.with_index do |worker, index| %>
-                <li>
-                  <% title = worker.name
-                     if (worker.is_creator == 1)
-                       title << " (Manager)"
-                     end %>
-                  <%= link_to worker, :class => "show-tooltip", :title => title, data: {toggle: "tooltip"} do %>
-                              <span class="profile-avatar
-                                <% if (worker.is_creator == 1) %>manager
-                                <% end %>">
-                                <%= image_tag(avatar_url(worker), alt: "?", :class => "img-circle") %>
-                              </span>
-                  <% end %>
-                </li>
-              <% end %>
-            </ul>
+          <div class="manager">
+            <%= link_to @manager, :title => @manager.name do %>
+              <span class="profile-avatar manager">
+                <%= image_tag(avatar_url(@manager.email), alt: "?", :class => "img-circle") %>
+              </span>
+            <% end %>
           </div>
           <% if @job.status.nil? %>
             <div class="job-status">
@@ -136,9 +124,9 @@
           <% end %>
         </div>
         <div role="tabpanel" class="tab-pane" id="private">
-            <% if @user_role < 3 && @conversations.empty? %>
+            <% if !@is_manager && @conversations.empty? %>
               <%= link_to "Send Message", "#", class: "btn btn-success btn-xs start-conversation",
-                        "data-sid" =>  current_user.id, "data-rip" => @managers.first.user_id, 'data-job_id' => @job.id %>
+                        "data-sid" =>  current_user.id, "data-rip" => @manager.first.user_id, 'data-job_id' => @job.id %>
             <% end %>
             <%= render partial: 'jobs/job_chat' %>
         </div>
