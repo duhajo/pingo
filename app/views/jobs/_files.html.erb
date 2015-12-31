@@ -1,4 +1,4 @@
-<div id="job-files" class="top-margin">
+<div id="job-files">
   <h3 class="overflow with-buttons">
     <span class="icon-label left"><%= t('attachment')%></span>
     <% if @is_manager && user_signed_in? %>
@@ -35,6 +35,6 @@
       </div>
     </div>
   <% else %>
-    <% t("attachment_not_found") %>
+    <span class="notice"><%= t("attachment_not_found") %></span>
   <% end %>
 </div>

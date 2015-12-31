@@ -1,78 +1,84 @@
-.category {
-  float: left;
-  position: relative;
-  vertical-align: top;
-  text-align: center;
-  margin: 15px;
-  width: 170px;
-
-  .category-head {
-    background-color: rgba($brand-blue, 0.75);
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    a {
-      color: #FFFFFF;
-      display: block;
-      padding: 10px 8px;
-      width: 100%;
-    }
+#list-categories {
+  #categories-overview & {
+    text-align: center;
   }
-  .category-body {
-    overflow: hidden;
-    min-height: 130px;
-    min-width: 170px;
 
-    .category-img {
-      background-position: center center;
-      background-repeat: no-repeat;
-      background-size: cover;
-      display: block;
+  .category {
+    display: inline-block;
+    position: relative;
+    vertical-align: top;
+    text-align: center;
+    margin: 15px;
+    width: 170px;
+
+    .category-head {
+      background-color: rgba($brand-blue, 0.75);
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      a {
+        color: #FFFFFF;
+        display: block;
+        padding: 10px 8px;
+        width: 100%;
+      }
+    }
+    .category-body {
+      overflow: hidden;
       min-height: 130px;
       min-width: 170px;
-    }
 
-    .tag-list {
-      margin: 0;
-      max-height: 128px;
-      overflow: hidden;
-      padding: 10px;
-      > a {
-        padding: 5px;
+      .category-img {
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        display: block;
+        min-height: 130px;
+        min-width: 170px;
+      }
+
+      .tag-list {
+        margin: 0;
+        max-height: 128px;
+        overflow: hidden;
+        padding: 10px;
+        > a {
+          padding: 5px;
+        }
+      }
+
+      &:not(.show-picture) {
+        border: 1px solid $brand-blue;
+      }
+
+      .notice {
+        display: block;
+        padding: 10px;
+        margin-top: 15px;
       }
     }
 
-    &:not(.show-picture) {
-      border: 1px solid $brand-blue;
-    }
-
-    .notice {
-      display: block;
-      padding: 10px;
-      margin-top: 15px;
-    }
-  }
-
-  &.new {
-    a {
-      background-color: rgba($brand-blue, 0.75);
-      color: #FFFFFF;
-      display: table;
-      height: 130px;
-      width: 100%;
-      .icon {
-        font-size: 42px;
-        display: table-cell;
-        vertical-align: middle;
-      }
-    }
-  }
-
-  @media (max-width: $screen-xs-max) {
-    width: calc(100% - 30px);
     &.new {
-      width: calc(100% - 32px);
+      a {
+        background-color: rgba($brand-blue, 0.75);
+        color: #FFFFFF;
+        display: table;
+        height: 130px;
+        width: 100%;
+        .icon {
+          font-size: 42px;
+          display: table-cell;
+          vertical-align: middle;
+        }
+      }
+    }
+
+    @media (max-width: $screen-xs-max) {
+      width: calc(100% - 30px);
+      &.new {
+        width: calc(100% - 32px);
+      }
     }
   }
 }
@@ -90,9 +96,17 @@
     margin-top: 0;
   }
 
-  #job-picture {
-    padding-right: rem-calc(8);
-    max-width: 242px;
+  #category-picture {
+    @extend .col-sm-4, .col-md-3;
+    max-width: 250px;
+  }
+
+  #category-description {
+    @extend .col-sm-4, .col-md-5;
+  }
+
+  #category-tags {
+    @extend .col-sm-4, .col-md-4;
   }
 
   #sub-categories {
@@ -130,7 +144,7 @@
           }
 
           #job-deadline {
-            height: rem-calc(38);
+            height: 38px;
             .icon {
               background-position: -32px -96px;
             }
@@ -145,8 +159,7 @@
 
         #job-description {
           clear: both;
-          font-size: rem-calc(14);
-          line-height: rem-calc(21);;
+          line-height: 21px;
         }
 
         #job-files {
@@ -185,7 +198,7 @@
         }
         h3 {
           margin-top: 0;
-          line-height: rem-calc(28);
+          line-height: 28px;
         }
       }
     }
@@ -197,17 +210,17 @@
       border-left: 1px solid #EBEBEB;
       margin-left: -1px;
     }
-    margin-top: rem-calc(45);
+    margin-top: 45px;
 
     h2 {
-      margin-bottom: rem-calc(18);
+      margin-bottom: 18px;
     }
 
     @media (min-width: $screen-md-min) {
       .nav-tabs {
         border: 0 none;
         margin-bottom: 20px;
-        margin-top: -56px;
+        margin-top: -101px;
         li.active a {
           background-color: white;
         }

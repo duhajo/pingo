@@ -85,28 +85,25 @@
 .tag-list {
   padding: 0;
 
-  .icon {
-    background-position: -96px -96px;
-    margin: rem-calc(4) rem-calc(12) rem-calc(4) 0;
-    float: left;
-  }
-
-  .tag {
+  .tag:not(.icon) {
     background-color: $brand-softblue;
     border-radius: 3px;
     font-size: $font-size-base;
     padding: 5px;
     float: left;
     margin: 0 12px 5px 0;
+    line-height: 20px;
     &.active, &:hover {
       background-color: $brand-darkerblue;
       color: $brand-softblue;
     }
   }
-  &.small {
-    .tag {
-      font-size: $font-size-small;
-      padding: 3px;
-    }
+
+  .icon {
+    font-size: ceil(($font-size-base * 1.5));
+    float: left;
+    line-height: 20px;
+    padding-right: 10px;
+    margin: 5px;
   }
 }

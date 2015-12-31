@@ -56,10 +56,10 @@ class Job < ActiveRecord::Base
   end
 
   def self.is_creator_of_job(job, current_user)
-    if Job.where(:id => job.id, :user_id => current_user.id).to_a.empty?
-      return false
-    else
+    if current_user && !Job.where(:id => job.id, :user_id => current_user.id).to_a.empty?
       return true
+    else
+      return false
     end
   end
 end

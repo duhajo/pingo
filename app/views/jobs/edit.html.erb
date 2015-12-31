@@ -19,7 +19,7 @@
           </ul>
         </div>
       <% end %>
-      <% if @type_category == 0 %>
+      <% if @type == 0 %>
         <%= f.hidden_field :type, value: 0 %>
         <div class="form-group">
           <%= f.label :title, t('job_form_title') %>
@@ -36,7 +36,7 @@
           <div class="form-group col-md-4">
             <%= f.label :type, t('job_form_type') %>
             <select class="form-control" id="job_type" name="job[type]">
-              <% if @type_category == 1 %>
+              <% if @type == 1 %>
                 <option value="1">Ich biete...</option>
               <% else %>
                 <option value="2">Ich suche...</option>

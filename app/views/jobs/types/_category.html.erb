@@ -1,9 +1,11 @@
 <div class="breadcrumb-bar">
   <ol class="breadcrumb">
     <li><%= link_to t('jobs_category_overview'), :action => "index" %></li>
-    <% @parent_jobs.each.with_index do |job, index| %>
-      <% break if (job.id == @job.id) %>
-      <li><%= link_to job.title, job %></li>
+    <% if !@parent_jobs.nil? %>
+      <% @parent_jobs.each.with_index do |job, index| %>
+        <% break if (job.id == @job.id) %>
+        <li><%= link_to job.title, job %></li>
+      <% end %>
     <% end %>
   </ol>
 </div>
@@ -20,24 +22,21 @@
         <% end %>
       </h1>
 
-      <div class="col-md-3">
-        <div id="job-picture">
-          <%= image_tag @job.picture_url if @job.picture? %>
-        </div>
+      <div id="category-picture">
+        <%= image_tag @job.picture_url if @job.picture? %>
       </div>
-      <div class="col-md-5">
-        <div id="job-description" class="html-content">
-          <% if @job.description.empty? %>
-            <p><%= t('jobs_no_description') %></p>
-          <% else %>
-            <div class="job-description-preview"><%= truncate_html @job.description, :length => 50 %></div>
-            <div class="job-description-full" style="display:none;"><%= @job.description.html_safe %></div>
-          <% end %>
-        </div>
+      <div id="category-description" class="html-content">
+        <% if @job.description.empty? %>
+          <p class="notice"><%= t('jobs_no_description') %></p>
+        <% else %>
+          <div class="job-description-preview"><%= truncate_html @job.description, :length => 50 %></div>
+          <div class="job-description-full" style="display:none;"><%= @job.description.html_safe %></div>
+        <% end %>
       </div>
-      <div class="col-md-4"><h2><%= t('most_used_tags') %></h2>
+      <div id="category-tags">
+        <h2><%= t('most_used_tags') %></h2>
         <% if @most_used_tags.empty? %>
-          <p><%= t('jobs_category_no_tags') %></p>
+          <p class="notice"><%= t('jobs_category_no_tags') %></p>
         <% else %>
           <div class="tag-list">
             <% tag_cloud(@most_used_tags, %w(css1 css2 css3 css4)) do |tag, css_class| %>
@@ -55,14 +54,16 @@
         <a href="<%= new_sub_job_path(:id => @job.id, :type => 'category') %>" class="header-actions left"><span class="icon add"></span></a>
       <% end %>
     </h2>
-    <div id="list-categories" class="row">
+    <div id="list-categories" <% if !@categories.blank? %>class="row"<%end%>>
       <% if not @categories.empty? %>
         <% @categories.each do |category| -%>
           <div class="category">
             <div class="category-head"><%= link_to category.title, category %></div>
-            <div class="category-body">
+            <div class="category-body <% if category.picture? %>show-picture<%end%>">
               <% if category.picture? %>
-                <%= link_to image_tag(category.picture_url), category %>
+                <%= link_to category do %>
+                  <span class="category-img" style="background-image: url('<%=category.picture_url%>');"></span>
+                <% end %>
               <% elsif !category.skill_list.empty? %>
                 <ul class="tag-list">
                   <% category.tag_counts_on(:skills, :limit => 5, :order => "count desc").each do |tag| %>
@@ -71,14 +72,14 @@
                 </ul>
               <% else %>
                 <%= link_to category do %>
-                  <span><%= t('jobs_no_description'); %></span>
+                  <span class="notice"><%= t('jobs_no_description'); %></span>
                 <% end %>
               <% end %>
             </div>
           </div>
         <% end -%>
       <% else %>
-        <div class="space"><%=t('jobs_no_category') %></div>
+        <span class="notice"><%=t('jobs_no_category') %></span>
       <% end %>
     </div>
   </div>

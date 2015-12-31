@@ -75,10 +75,12 @@ class JobsController < ApplicationController
     @job = Job.find(params[:id])
 
     @is_manager = Job.is_creator_of_job(@job, current_user)
-    Rails.logger.debug("My object: #{@job.inspect}")
     @manager = User.find(@job.user_id)
 
-    @parent_jobs = @job.ancestors
+    if @job.parent_id
+      @parent_jobs = @job.ancestors
+    end
+
     @all_jobs = Job.where('parent_id' => @job.id)
 
     if @job.type == 0
@@ -124,11 +126,11 @@ class JobsController < ApplicationController
     end
 
     if params[:type].present?
-      @type_category = 0 if params[:type] == 'category'
-      @type_category = 1 if params[:type] == 'supply'
-      @type_category = 2 if params[:type] == 'demand'
+      @type = 0 if params[:type] == 'category'
+      @type = 1 if params[:type] == 'supply'
+      @type = 2 if params[:type] == 'demand'
     else
-      @type_category = false
+      @type = false
     end
 
     @job = Job.new
@@ -166,11 +168,11 @@ class JobsController < ApplicationController
     @is_manager = Job.is_creator_of_job(@job, current_user)
 
     if @job.type == 0
-      @type_category = 0
-    elsif @job.type == 4 || @job.type == 5
-      @type_category = 2
+      @type = 0
+    elsif @job.type == 1 || @job.type == 2
+      @type = 2
     else
-      @type_category = 1
+      @type = 1
     end
   end
 

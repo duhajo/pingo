@@ -5,9 +5,11 @@
     <% else %>
       <li><%= link_to t('jobs_overview'), :action => "index" %></li>
     <% end %>
-    <% @parent_jobs.each.with_index do |job, index| %>
-      <% break if (job.id == @job.id) %>
-      <li><%= link_to job.title, job %></li>
+    <% if !@parent_jobs.nil? %>
+      <% @parent_jobs.each.with_index do |job, index| %>
+        <% break if (job.id == @job.id) %>
+        <li><%= link_to job.title, job %></li>
+      <% end %>
     <% end %>
   </ol>
 </div>
@@ -58,7 +60,7 @@
             <% end %>
           </div>
           <div id="job-description" class="html-content top-margin">
-            <% if @job.description.empty? %>
+            <% if strip_tags(@job.description).empty? %>
               Noch keine Beschreibung vorhanden...
             <% else %>
               <div class="job-description-preview"><%= truncate_html @job.description, :length => 150 %>
@@ -71,10 +73,10 @@
               </div>
             <% end %>
           </div>
-          <div id="job-tags" class="top-margin">
+          <div id="job-tags">
             <% if not @job.skill_list.empty? %>
               <ul class="tag-list overflow">
-                <li><span class="icon small left"></span></li>
+                <li><span class="icon tag"></span></li>
                 <% @job.tag_counts_on(:skills, :limit => 5, :order => "count desc").each do |tag| %>
                   <li><%= link_to tag.name, {:controller => :tags, :action => :show, :id => tag.id}, :class => "tag" %></li>
                 <% end %>

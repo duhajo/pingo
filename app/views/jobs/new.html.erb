@@ -3,11 +3,11 @@
   <div id="new-job-page" class="form col-md-6 col-md-offset-3 white-panel clear-top" data-id="<%= @job.id %>">
 
     <h1>
-      <%if !@type_category.nil? && @type_category == 0%>
+      <%if !@type.nil? && @type == 0%>
         <%=t('jobs_new_category')%>
-      <%elsif @type_category == 1 %>
+      <%elsif @type == 1 %>
         <%=t('jobs_new_supply')%>
-      <%elsif @type_category == 2 %>
+      <%elsif @type == 2 %>
         <%=t('jobs_new_demand')%>
       <%else%>
         <%=t('jobs_new')%>
@@ -30,8 +30,8 @@
       <% if not @parent_job.nil? %>
         <%= f.hidden_field :parent_id, value: @parent_job.id %>
       <% end %>
-    <% if @type_category != false %>
-      <%= f.hidden_field :type, value: @type_category %>
+    <% if @type != false %>
+      <%= f.hidden_field :type, value: @type %>
         <div class="form-group">
           <%= f.label :title, t('job_form_title') %>
           <%= f.text_field :title, class: "form-control" %>
@@ -59,7 +59,7 @@
         <%= f.label :description, t('job_form_description') %>
         <%= f.resizable_text_area :description, class: "form-control", rows: "4" %>
       </div>
-      <% if @type_category != 0 %>
+      <% if @type != 0 %>
         <div class="form-group">
           <%= f.label :skill_list, t('job_form_tags') %>
           <br/>
