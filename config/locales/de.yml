@@ -57,6 +57,11 @@ de:
   job_form_street: "Straße"
   job_form_picture: "Kategorienbild"
 
+  user_form_language: "Sprache"
+  user_form_about: "Über mich"
+  user_form_tags: "Schlagworte (getrennt per Komma)"
+  user_form_radius: "Radius (in km für Empfehlungen)"
+
   attachment: "Anhänge"
   attachment_not_found: "Es sind noch keine Anhänge hochgeladen wurden."
 

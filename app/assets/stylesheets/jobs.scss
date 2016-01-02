@@ -11,6 +11,14 @@
     margin: 15px;
     width: 170px;
 
+    > .notice {
+      display: block;
+      text-align: center;
+      width: 170px;
+      margin: 50px 0;
+      line-height: 30px;
+    }
+
     .category-head {
       background-color: rgba($brand-blue, 0.75);
       position: absolute;
@@ -200,6 +208,12 @@
           margin-top: 0;
           line-height: 28px;
         }
+
+        .manager .user-about {
+          font-style: italic;
+          font-weight: 300;
+          margin-top: 15px;
+        }
       }
     }
   }
@@ -380,6 +394,7 @@
 }
 
 .job-status {
+  margin-top: 15px;
 
   .status-open,
   &.rights .status-closed:hover {

@@ -5,7 +5,9 @@
     </div>
   <% end %>
   <% if @categories.blank? %>
-    <span class="notice"><%= t('no_categories_definied') %></span>
+    <div class="category">
+      <span class="notice"><%= t('no_categories_definied') %></span>
+    </div>
   <% else %>
     <% @categories.each do |category| -%>
       <div class="category">

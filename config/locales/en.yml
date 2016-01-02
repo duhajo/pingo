@@ -58,6 +58,11 @@ en:
   job_form_street: "Street"
   job_form_picture: "Category Picture"
 
+  user_form_language: "Language"
+  user_form_about: "About me"
+  user_form_tags: "Tags (separated by commas)"
+  user_form_radius: "Radius (in km for recommendation)"
+
   attachment: "Attachment"
   attachment_not_found: "There are no attachments uploaded yet."
 

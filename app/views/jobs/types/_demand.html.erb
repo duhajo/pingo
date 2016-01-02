@@ -94,7 +94,11 @@
               <span class="profile-avatar manager">
                 <%= image_tag(avatar_url(@manager.email), alt: "?", :class => "img-circle") %>
               </span>
+              <span class="user-name"><%=@manager.name%></span>
             <% end %>
+            <p class="user-about">
+              <%= truncate_html @manager.about, :length => 150 %>
+            </p>
           </div>
           <% if @job.status.nil? %>
             <div class="job-status">
