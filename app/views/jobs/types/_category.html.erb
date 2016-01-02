@@ -22,9 +22,11 @@
         <% end %>
       </h1>
 
-      <div id="category-picture">
-        <%= image_tag @job.picture_url if @job.picture? %>
-      </div>
+      <% if @job.picture? %>
+        <div id="category-picture">
+          <%= image_tag @job.picture_url %>
+        </div>
+      <% end %>
       <div id="category-description" class="html-content">
         <% if @job.description.empty? %>
           <p class="notice"><%= t('jobs_no_description') %></p>
