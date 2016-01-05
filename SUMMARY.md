@@ -2,5 +2,5 @@
 
 * [Introduction](README.md)
 * [Testing](testing.md)
-* User Documentation
+* [User Documentation](user_documentation.md)
 
