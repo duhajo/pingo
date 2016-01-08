@@ -122,21 +122,45 @@
   }
 }
 
-#job-view {
-  @extend .container-fluid, .content, .white, .simple;
+#job {
+  @extend .content, .white, .simple;
 
-  #job-specification-area {
-    @extend .col-md-8, .nospace;
-    @media (min-width: $screen-md-min) {
-      border-right: 1px solid #EBEBEB;
-      margin-left: -15px;
+  #job-title {
+    border-bottom: 1px solid #EBEBEB;
+    padding: 0 15px 5px;
+    margin-bottom: 0;
+
+    .icon {
+      font-size: 26px;
+      margin-right: 15px;
+      vertical-align: middle;
     }
 
-    #job-details {
-      @extend .side-space;
+    h1 {
+      display: inline-block;
+    }
 
-      #job-meta-wrapper {
-        @extend .col-md-9;
+    #job-actions {
+      float: right;
+      margin-top: 20px;
+      #job-status {
+        display: inline-block;
+      }
+    }
+  }
+
+  #job-content {
+    @extend .container-fluid;
+
+    #job-specification {
+      @extend .col-md-8, .nospace;
+      @media (min-width: $screen-md-min) {
+        border-right: 1px solid #EBEBEB;
+      }
+      padding-top: 15px;
+
+      #job-details {
+        @extend .side-space;
 
         #job-meta {
           @extend .row;
@@ -197,47 +221,36 @@
             }
           }
         }
+
+        #job-workers-wrapper {
+          @extend .col-md-3;
+          @media (min-width: $screen-md-min) {
+            border-left: 1px solid #EBEBEB;
+          }
+          h3 {
+            margin-top: 0;
+            line-height: 28px;
+          }
+
+          .manager .user-about {
+            font-style: italic;
+            font-weight: 300;
+            margin-top: 15px;
+          }
+        }
+      }
+    }
+
+    #job-communication {
+      @extend .col-md-4, .space;
+      @media (min-width: $screen-md-min) {
+        border-left: 1px solid #EBEBEB;
+        margin-left: -1px;
       }
 
-      #job-workers-wrapper {
-        @extend .col-md-3;
-        @media (min-width: $screen-md-min) {
-          border-left: 1px solid #EBEBEB;
-        }
-        h3 {
-          margin-top: 0;
-          line-height: 28px;
-        }
-
-        .manager .user-about {
-          font-style: italic;
-          font-weight: 300;
-          margin-top: 15px;
-        }
-      }
-    }
-  }
-
-  #job-activities-area {
-    @extend .col-md-4, .space;
-    @media (min-width: $screen-md-min) {
-      border-left: 1px solid #EBEBEB;
-      margin-left: -1px;
-    }
-    margin-top: 45px;
-
-    h2 {
-      margin-bottom: 18px;
-    }
-
-    @media (min-width: $screen-md-min) {
-      .nav-tabs {
-        border: 0 none;
-        margin-bottom: 20px;
-        margin-top: -101px;
-        li.active a {
-          background-color: white;
-        }
+      h2 {
+        margin-bottom: 18px;
+        margin-top: 0;
       }
     }
   }

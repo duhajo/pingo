@@ -1,5 +1,5 @@
 <div id="job-files">
-  <h3 class="overflow with-buttons">
+  <h2 class="overflow with-buttons">
     <span class="icon-label left"><%= t('attachment')%></span>
     <% if @is_manager && user_signed_in? %>
       <a href="#" data-toggle="dropdown" class="header-actions dropdown-toggle">
@@ -19,7 +19,7 @@
         </li>
       </ul>
     <% end %>
-  </h3>
+  </h2>
   <% if !@file_images.blank? %>
     <div class="row">
       <div class="job-file-images col-md-6">

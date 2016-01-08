@@ -14,19 +14,27 @@
   </ol>
 </div>
 
-<div <% if @job.status == 3 || user_signed_in? && @job.parent_id.nil? %>class="closed"<% end %> id="job-view" data-id="<%= @job.id %>">
-  <div id="job-specification-area" class="col">
-    <div id="job-details">
-      <h1 class="title job">
-        <% if @is_manager && user_signed_in? %><span class="icon-label">
+<div <% if @job.status == 3 || user_signed_in? && @job.parent_id.nil? %>class="closed"<% end %> id="job" data-id="<%= @job.id %>">
+  <div id="job-title">
+    <h1>
+      <span class="icon search" title="<%=t('jobs_demand') %>"></span>
+      <span class="icon-label"><%= @job.title %></span>
+    </h1>
+    <% if @is_manager && user_signed_in? %></span>
+      <div id="job-actions">
+        <a href="<%= edit_job_path(@job) %>" class="header-actions"><span class="icon settings"></span></a>
+        <% if @job.status.nil? %>
+          <div id="job-status">
+            <a href="#toDo" class="btn btn-primary">Nachfrage erledigt!</a>
+          </div>
         <% end %>
-        <%= t('jobs_demand') %>: <%= @job.title %>
-        <% if @is_manager && user_signed_in? %></span>
-          <a href="<%= edit_job_path(@job) %>" class="header-actions"><span class="icon settings"></span></a>
-        <% end %>
-      </h1>
-      <div class="row">
-        <div id="job-meta-wrapper">
+      </div>
+    <% end %>
+  </div>
+  <div id="job-content">
+    <div class="row">
+      <div id="job-specification" class="col">
+        <div id="job-details">
           <div id="job-meta">
             <% if @job.address.blank? && @job.deadline.nil?
                  @lessColumns = true
@@ -84,10 +92,12 @@
           </div>
           <%= render 'jobs/files' %>
         </div>
+      </div>
+      <div id="job-communication" class="col">
         <div id="job-workers-wrapper">
-          <h3 class="overflow with-buttons">
+          <h2 class="overflow with-buttons">
             <span class="icon-label">Interessent</span>
-          </h3>
+          </h2>
 
           <div class="manager">
             <%= link_to @manager, :title => @manager.name do %>
@@ -100,27 +110,30 @@
               <%= truncate_html @manager.about, :length => 150 %>
             </p>
           </div>
-          <% if @job.status.nil? %>
-            <div class="job-status">
-              <a href="#toDo" class="btn btn-primary">Nachfrage erledigt!</a>
-            </div>
-          <% end %>
         </div>
-      </div>
-    </div>
-  </div>
-  <div id="job-activities-area" class="col">
-    <% if user_signed_in? %>
-      <!-- Nav tabs -->
-      <ul class="nav nav-tabs" role="tablist">
-        <li role="presentation" class="active"><a href="#public" aria-controls="profile" role="tab" data-toggle="tab">Public</a></li>
-        <li role="presentation"><a href="#private" aria-controls="home" role="tab" data-toggle="tab">Private</a></li>
-      </ul>
-      <!-- Tab panes -->
-      <div class="tab-content">
-        <div role="tabpanel" class="tab-pane active" id="public">
-          <h2 class="title">Aktivit&auml;ten</h2>
-          <%= render :partial => "comments/form" %>
+        <% if user_signed_in? %>
+          <div id="job-conversations">
+              <% if !@is_manager && @conversations.empty? %>
+                <%= link_to "Send Message", "#", class: "btn btn-success btn-xs start-conversation",
+                          "data-sid" =>  current_user.id, "data-rip" => @manager.first.user_id, 'data-job_id' => @job.id %>
+              <% end %>
+              <%= render partial: 'jobs/job_chat' %>
+          </div>
+          <div role="tabpanel" class="tab-pane active" id="public">
+            <h2 class="title">Aktivit&auml;ten</h2>
+            <%= render :partial => "comments/form" %>
+            <% @activities.each do |activity| %>
+              <% if activity.key == "job.commented" %>
+                <%= render_activity(activity, :layout => 'layouts/activity_wrapper') %>
+              <% else %>
+                <%= render_activity(activity, :layout => 'layouts/activity_wrapper') %>
+              <% end %>
+            <% end %>
+          </div>
+        <% else %>
+          <div class="activity">
+            Du bist nicht angemeldet <%= link_to 'einloggen?', login_path, :class => 'btn btn-primary' %>
+          </div>
           <% @activities.each do |activity| %>
             <% if activity.key == "job.commented" %>
               <%= render_activity(activity, :layout => 'layouts/activity_wrapper') %>
@@ -128,27 +141,9 @@
               <%= render_activity(activity, :layout => 'layouts/activity_wrapper') %>
             <% end %>
           <% end %>
-        </div>
-        <div role="tabpanel" class="tab-pane" id="private">
-            <% if !@is_manager && @conversations.empty? %>
-              <%= link_to "Send Message", "#", class: "btn btn-success btn-xs start-conversation",
-                        "data-sid" =>  current_user.id, "data-rip" => @manager.first.user_id, 'data-job_id' => @job.id %>
-            <% end %>
-            <%= render partial: 'jobs/job_chat' %>
-        </div>
-      </div>
-    <% else %>
-      <div class="activity">
-        Du bist nicht angemeldet <%= link_to 'einloggen?', login_path, :class => 'btn btn-primary' %>
-      </div>
-      <% @activities.each do |activity| %>
-        <% if activity.key == "job.commented" %>
-          <%= render_activity(activity, :layout => 'layouts/activity_wrapper') %>
-        <% else %>
-          <%= render_activity(activity, :layout => 'layouts/activity_wrapper') %>
         <% end %>
-      <% end %>
-    <% end %>
+      </div>
+    </div>
   </div>
 </div>
 <%= gflash %>
