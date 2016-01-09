@@ -57,6 +57,8 @@ de:
   job_form_street: "Straße"
   job_form_picture: "Kategorienbild"
 
+  job_interested_in: "Interesse anmelden"
+
   user_form_language: "Sprache"
   user_form_about: "Über mich"
   user_form_tags: "Schlagworte (getrennt per Komma)"
@@ -85,6 +87,9 @@ de:
 
   search_no_param: "Die Suche braucht ein Begriff, um zu suchen."
 
+  created_at: Erstellt vor %{time}
+  deadline_active: noch %{time} aktiv
+  deadline_past: vor %{time} abgelaufen
   for: "für"
 
 # Defaults

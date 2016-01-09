@@ -163,8 +163,9 @@
         @extend .side-space;
 
         #job-meta {
-          @extend .row;
-
+          &.two-cols {
+            @extend .row;
+          }
           .icon {
             float: left;
           }
@@ -221,23 +222,6 @@
             }
           }
         }
-
-        #job-workers-wrapper {
-          @extend .col-md-3;
-          @media (min-width: $screen-md-min) {
-            border-left: 1px solid #EBEBEB;
-          }
-          h3 {
-            margin-top: 0;
-            line-height: 28px;
-          }
-
-          .manager .user-about {
-            font-style: italic;
-            font-weight: 300;
-            margin-top: 15px;
-          }
-        }
       }
     }
 
@@ -248,9 +232,27 @@
         margin-left: -1px;
       }
 
-      h2 {
-        margin-bottom: 18px;
-        margin-top: 0;
+      #job-contact {
+        h2 {
+          margin-bottom: 18px;
+          margin-top: 0;
+        }
+        .manager {
+          display: inline-block;
+          .user-about {
+            font-style: italic;
+            font-weight: 300;
+            margin-top: 15px;
+          }
+        }
+        .actions {
+          display: inline-block;
+          float: right;
+          .icon {
+            vertical-align: middle;
+            padding-right: 12px;
+          }
+        }
       }
     }
   }

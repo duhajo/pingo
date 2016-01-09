@@ -58,6 +58,8 @@ en:
   job_form_street: "Street"
   job_form_picture: "Category Picture"
 
+  job_interested_in: "Show Interest"
+
   user_form_language: "Language"
   user_form_about: "About me"
   user_form_tags: "Tags (separated by commas)"
@@ -86,6 +88,9 @@ en:
 
   search_no_param: "The search needs a term to search for."
 
+  created_at: "Created %{time} ago"
+  deadline_active: "%{time} to go"
+  deadline_past: "expired %{time} ago"
   for: "for"
 
   gflash:

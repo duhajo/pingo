@@ -35,27 +35,25 @@
     <div class="row">
       <div id="job-specification" class="col">
         <div id="job-details">
-          <div id="job-meta">
-            <% if @job.address.blank? && @job.deadline.nil?
-                 @lessColumns = true
-               else
-                 @lessColumns = false
-               end %>
-            <% if not @job.deadline.nil? %>
-              <div id="job-deadline" <% if !@lessColumns %>class="col-lg-6"<% end %>>
-                <span class="icon alarm"><!----></span>
-                <span class="icon-label" title="<%= @job.deadline.to_formatted_s(:long) %>">
-                  <%= distance_of_time_in_words(Time.now, @job.deadline, true) %>
-                  <% if @job.deadline < DateTime.now %>
-                    ago (expired)
-                  <% else %>
-                    to go
-                  <% end %>
-                </span>
-              </div>
-            <% end %>
+          <div id="job-meta" <% if !@job.address.blank? %>class ="two-cols"<% end %>>
+            <div id="job-time" <% if !@job.address.blank? %>class="col-lg-6"<% end %>>
+              <span class="icon alarm"><!----></span>
+              <span class="icon-label">
+                <span class="datetime" title="<%= @job.created_at.to_formatted_s(:long) %>"><%= t("created_at", :time => time_ago_in_words(@job.created_at))%></span>
+                <% if !@job.deadline.blank? %>
+                  <span class="deadline" title="<%= @job.deadline.to_formatted_s(:long) %>">(
+                    <% if @job.deadline < DateTime.now %>
+                      <%= t("deadline_past", :time => distance_of_time_in_words(Time.now, @job.deadline, true)) %>
+                    <% else %>
+                      <%= t("deadline_active", :time => distance_of_time_in_words(Time.now, @job.deadline, true)) %>
+                    <% end %>
+                    )
+                  </span>
+                <% end %>
+              </span>
+            </div>
             <% if !@job.address.blank? %>
-              <div id="job-location" <% if !@lessColumns %>class="col-lg-6"<% end %>>
+              <div id="job-location" <% if !@job.address.blank? %>class="col-lg-6"<% end %>>
                 <span class="icon map"><!----></span>
                 <span class="icon-label">
                   <%= link_to @job.address, {:action => :map_for_job}, :id => "show-map-button",
@@ -67,7 +65,7 @@
             <% end %>
           </div>
           <div id="job-description" class="html-content top-margin">
-            <% if @job.description.empty? %>
+            <% if strip_tags(@job.description).empty? %>
               <span class="notice">Noch keine Beschreibung vorhanden...</span>
             <% else %>
               <div class="job-description-preview"><%= truncate_html @job.description, :length => 150 %>
@@ -94,11 +92,8 @@
         </div>
       </div>
       <div id="job-communication" class="col">
-        <div id="job-workers-wrapper">
-          <h2 class="overflow with-buttons">
-            <span class="icon-label">Interessent</span>
-          </h2>
-
+        <div id="job-contact">
+          <h2 class="overflow with-buttons"><span class="icon-label"><%= t("job_interested_in") %></span></h2>
           <div class="manager">
             <%= link_to @manager, :title => @manager.name do %>
               <span class="profile-avatar manager">
@@ -110,30 +105,27 @@
               <%= truncate_html @manager.about, :length => 150 %>
             </p>
           </div>
-        </div>
-        <% if user_signed_in? %>
-          <div id="job-conversations">
+          <div class="actions">
+            <% if user_signed_in? %>
               <% if !@is_manager && @conversations.empty? %>
-                <%= link_to "Send Message", "#", class: "btn btn-success btn-xs start-conversation",
-                          "data-sid" =>  current_user.id, "data-rip" => @manager.first.user_id, 'data-job_id' => @job.id %>
+                <%= link_to "#", class: "btn btn-primary start-conversation",
+                  "data-sid" =>  current_user.id, "data-rip" => @manager.id, 'data-job_id' => @job.id do %>
+                  <span class="icon message"></span><span class="icon-label"><%= t("contact_manager") %></span>
+                <% end %>
               <% end %>
-              <%= render partial: 'jobs/job_chat' %>
-          </div>
-          <div role="tabpanel" class="tab-pane active" id="public">
-            <h2 class="title">Aktivit&auml;ten</h2>
-            <%= render :partial => "comments/form" %>
-            <% @activities.each do |activity| %>
-              <% if activity.key == "job.commented" %>
-                <%= render_activity(activity, :layout => 'layouts/activity_wrapper') %>
-              <% else %>
-                <%= render_activity(activity, :layout => 'layouts/activity_wrapper') %>
+            <% else %>
+              <%= link_to login_path, class: "btn btn-primary" do %>
+                <span class="icon message"></span><span class="icon-label"><%= t("contact_manager") %></span>
               <% end %>
             <% end %>
           </div>
-        <% else %>
-          <div class="activity">
-            Du bist nicht angemeldet <%= link_to 'einloggen?', login_path, :class => 'btn btn-primary' %>
+          <div id="job-conversations">
+            <%= render partial: 'jobs/job_chat' %>
           </div>
+        </div>
+        <div id="job-qa">
+          <h2 class="title">Questions &amp; Answers</h2>
+          <div class="well">#ToDo: Funktion der Aktivitäten durch ein Q&A ersetzen</div>
           <% @activities.each do |activity| %>
             <% if activity.key == "job.commented" %>
               <%= render_activity(activity, :layout => 'layouts/activity_wrapper') %>
@@ -141,7 +133,7 @@
               <%= render_activity(activity, :layout => 'layouts/activity_wrapper') %>
             <% end %>
           <% end %>
-        <% end %>
+        </div>
       </div>
     </div>
   </div>
