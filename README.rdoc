@@ -1,10 +1,13 @@
-== Duhajo
+== Pingo!
 
-... ein einfaches Aufgabenmanagementsystem, welches für mich auch als Übungsplatz für Rails agiert.
+... ein digitales Schwarzes Brett, welches für mich auch als Übungsplatz für Rails agiert.
 
-=== Konzept
-
-Ideen/Vorstellungen: https://docs.google.com/document/d/1obJU0ceYl9r45PTaohhALSUmvSm11G7nFomeIO5qOeA/edit#
+=== Mögliche Anwendungsfälle
+- Fluthilfe
+- Kleiderspende
+- Flüchtlingshilfe
+- Musikeraustausch
+- ...
 
 === Demo / Letzter Stand
 Findet ihr hier: https://duhajo.herokuapp.com
