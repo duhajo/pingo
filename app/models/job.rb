@@ -1,14 +1,11 @@
 class Job < ActiveRecord::Base
   self.inheritance_column = nil
-  acts_as_commentable
   acts_as_taggable
   acts_as_taggable_on :skills
   acts_as_nested_set
   attr_accessible :deadline, :description, :parent_id, :title, :skill_list, :country, :city, :street, :type, :picture, :picture_cache
 
   belongs_to :user
-
-  include PublicActivity::Common
 
   mount_uploader :picture, PictureUploader
 

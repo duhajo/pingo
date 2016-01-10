@@ -123,16 +123,9 @@
             <%= render partial: 'jobs/job_chat' %>
           </div>
         </div>
-        <div id="job-qa">
-          <h2 class="title">Questions &amp; Answers</h2>
-          <div class="well">#ToDo: Funktion der Aktivitäten durch ein Q&A ersetzen</div>
-          <% @activities.each do |activity| %>
-            <% if activity.key == "job.commented" %>
-              <%= render_activity(activity, :layout => 'layouts/activity_wrapper') %>
-            <% else %>
-              <%= render_activity(activity, :layout => 'layouts/activity_wrapper') %>
-            <% end %>
-          <% end %>
+        <div id="job-similar">
+          <h2 class="title">Ähnliche Annoncen</h2>
+          <div class="well">#ToDo: Funktion der Aktivitäten durch ähnliche Annoncen ersetzt</div>
         </div>
       </div>
     </div>

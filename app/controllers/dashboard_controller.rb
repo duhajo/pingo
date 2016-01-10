@@ -5,8 +5,6 @@ class DashboardController < ApplicationController
     @skills = @user.tag_counts_on(:skills)
     @recommendations = Job.tagged_with(@skills, :any => true).joins(:user).select("jobs.*, users.email as user_email, users.name as user_name, users.id as user_id").by_join_date
 
-    @my_activities = PublicActivity::Activity.order("created_at DESC").joins("LEFT JOIN jobs ON activities.trackable_id = jobs.id").where('jobs.user_id' => @current_user.id).all
-
     if(!@user.latitude.nil? and !@user.longitude.nil?)
       @center_point = [@user.latitude, @user.longitude]
       if(!@user.radius.nil?)

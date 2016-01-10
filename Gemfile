@@ -30,9 +30,6 @@ gem "awesome_nested_set"
 #To use tagging
 gem "acts-as-taggable-on"
 
-#To like comments
-gem "acts_as_votable"
-
 # To use Geolocations
 gem "geocoder"
 
@@ -45,8 +42,6 @@ gem "pg"
 gem "sunspot_rails"
 
 gem "magnific-popup-rails"
-gem "public_activity"
-gem "acts_as_commentable_with_threading"
 gem "slim-rails"
 gem "simple_form"
 gem "country_select"

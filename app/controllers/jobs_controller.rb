@@ -97,9 +97,6 @@ class JobsController < ApplicationController
       @all_jobs.each do |job|
         @job_ids << job.id
       end
-      @activities = PublicActivity::Activity.order("created_at DESC").all(:conditions => {trackable_type: "Job", trackable_id: [@job_ids] })
-      @comment = Comment.new
-      @comments = @job.comment_threads
 
       @conversations = get_conversations(@job.id)
       @job_chat_active = true
@@ -151,7 +148,6 @@ class JobsController < ApplicationController
 
     respond_to do |format|
       if @job_file.save
-        @job.create_activity :upload_file, params: {file: @job_file.id}, owner: current_user
         format.html { redirect_to @job, notice: 'File was uploaded successfully.' }
         format.json { render json: @job, status: :created, location: @job }
       end
@@ -185,11 +181,6 @@ class JobsController < ApplicationController
     respond_to do |format|
       if @job.save
         @job.reload
-        if @job.parent_id
-	        @job.create_activity :create_child, params: {job: Job.find(@job.parent_id)}, owner: current_user
-	      else
-          @job.create_activity :create, owner: current_user
-        end
         #ToDo: Add Type Distinction ("add Resource ABC to category XYZ")
         format.html { redirect_to @job, notice: 'Job was successfully created.' }
         format.json { render json: @job, status: :created, location: @job }
@@ -219,8 +210,6 @@ class JobsController < ApplicationController
   # DELETE /jobs/1.json
   def destroy
     @job = Job.find(params[:id])
-    @activities = PublicActivity::Activity.find_by_trackable_id(@job.id)
-    @activities.destroy
     @job.destroy
 
     respond_to do |format|

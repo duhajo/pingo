@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-  include PublicActivity::StoreController
   include ActionView::Helpers::TextHelper
   protect_from_forgery
   force_ssl

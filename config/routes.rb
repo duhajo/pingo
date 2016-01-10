@@ -6,8 +6,6 @@ Duhajo::Application.routes.draw do
 
   resources :searches, :only => [:index]
 
-  resources :activities
-
   resources :users do
     collection do
       get :autocomplete_user
@@ -25,9 +23,6 @@ Duhajo::Application.routes.draw do
       get :autocomplete_job_title
       get :tag
     end
-    resources :comments, only: [:create, :reply, :update, :edit, :destroy] do
-      match 'reply' => 'comments#reply'
-    end
   end
   resources :tags
 
@@ -35,15 +30,12 @@ Duhajo::Application.routes.draw do
 
   match 'dashboard' => 'dashboard#index'
 
-  match 'jobs/:job_id/activity/:a_id/reply' => 'comments#reply_to_activity'
-
   match 'jobs/:job_id/conversations/:c_id' => 'conversations#show_job_conversation'
 
   match 'jobs/new/:type' => 'jobs#new'
 
   match 'jobs/:id/new/:type' => 'jobs#new', :as => 'new_sub_job'
   match 'jobs/:id/support' => 'jobs#support'
-  match 'jobs/:id/love' => 'jobs#like', :as => 'love_job'
   match 'jobs/:id/set_status' => 'jobs#set_status'
   match 'jobs/:id/map_for_job' => 'jobs#map_for_job'
   match 'jobs/:id/show_manager_list' => 'jobs#show_manager_list', :as => 'show_manager_list'

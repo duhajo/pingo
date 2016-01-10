@@ -1,14 +1,8 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-6 space" id="activities">
-      <h1><%= t('dashboard_activities') %></h1>
-      <% if !@my_activities.empty? %>
-        <% @my_activities.each do |activity| %>
-          <%= render_activity(activity, :layout => "layouts/activity_wrapper") %>
-        <% end %>
-      <% else %>
-        <%= t('dashboard_no_activities') %>
-      <% end %>
+      <h1><%= t('dashboard_involved') %></h1>
+      <div class="well">#ToDo: Annoncen anzeigen, bei denen ich Kontakt hatte oder welche ich mir vorgemerkt hatte</div>
     </div>
     <div class="col-md-6 space" id="recommendations">
       <h1><%= t('dashboard_recommendations') %></h1>

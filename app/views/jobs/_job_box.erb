@@ -6,17 +6,13 @@
     @type_class = 'demand'
 end %>
 
-
 <div class="job-box-wrapper <%=@type_class%>">
   <div class="job-box">
     <h3 class="title">
-      <%=link_to job do
-        if @type_prefix.present?
-          content_tag(:span, @type_prefix, :class => 'prefix') + job.title
-        else
-          job.title
-        end
-      end%>
+      <%=link_to job do %>
+        <span class="prefix icon <% if job.type == 2%>search<% elsif job.type == 1%>loudspeaker<% end %>"></span>
+        <span class="icon-label"><%= job.title %></span>
+      <% end %>
     </h3>
     <% if not job.skill_list.empty? %>
       <div class="tag-list overflow small">
@@ -30,7 +26,24 @@ end %>
       </div>
     <% end %>
     <div class="job-bottom-line">
-      <div class="job-activities"><%= link_to job do %><span class="icon pulse"></span><span class="icon-label"><%= job.activities.count%></span><% end %></div>
+      <div class="job-time">
+        <%= link_to job do %>
+          <span class="icon alarm"><!----></span>
+          <span class="icon-label">
+            <span class="datetime" title="<%= job.created_at.to_formatted_s(:long) %>"><%= t("created_at", :time => time_ago_in_words(job.created_at))%></span>
+            <% if !job.deadline.blank? %>
+              <span class="deadline" title="<%= job.deadline.to_formatted_s(:long) %>">(
+                <% if job.deadline < DateTime.now %>
+                  <%= t("deadline_past", :time => distance_of_time_in_words(Time.now, job.deadline, true)) %>
+                <% else %>
+                  <%= t("deadline_active", :time => distance_of_time_in_words(Time.now, job.deadline, true)) %>
+                <% end %>
+                )
+              </span>
+            <% end %>
+          </span>
+        <% end %>
+      </div>
       <div class="job-manager">
         <%= link_to image_tag(avatar_url(job.user_email),
         alt: job.user_name, :class => "img-circle small"), user_path(job.user_id), :class => "profile-avatar show-tooltip", :title => job.user_name, data: {toggle: "tooltip"} %>

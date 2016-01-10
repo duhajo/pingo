@@ -2,7 +2,6 @@
 @import "bootstrap";
 @import "base";
 @import "misc";
-@import "activities";
 @import "jobs";
 @import "users";
 @import "places";
@@ -28,4 +27,3 @@
  *= require jquery.modal
  *= require_tree .
 */
-
