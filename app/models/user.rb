@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   attr_accessible :login, :name, :email, :password, :password_confirmation, :about, :remember_me, :skill_list,
                   :country, :city, :district, :latitude, :longitude, :radius, :locale, :current_password
   has_many :conversations, :foreign_key => :sender_id
-  has_many :jobs, :foreign_key => :user_id
+  has_many :pins, :foreign_key => :user_id
 
   geocoded_by :address
   reverse_geocoded_by :latitude, :longitude do |obj,results|

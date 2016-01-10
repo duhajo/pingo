@@ -1,0 +1,30 @@
+<div id="pin-subpins-header" class="container-fluid">
+  <div id="pin-type-header">
+    <div class="header supply">
+      <h2>
+        <span class="icon loudspeaker"></span>
+        <span class="icon-label"><span class="pre"><%= t('pins_list_pre') %></span> <%= t('pins_list_supplies') %></span>
+      </h2>
+    </div>
+    <div class="header filter-wrapper">
+      <div class="filter">
+        <%= form_tag pins_path, :method => 'get', :id => 'pins-search' do %>
+          <%= text_field_tag :name, params[:name], :placeholder => t('filter_by'), :class => 'search-input form-control',
+          :data => { :scope => "pins" } %>
+        <% end %>
+      </div>
+    </div>
+    <div class="header demand">
+      <h2>
+        <span class="icon-label"><span class="pre"><%= t('pins_list_pre') %></span> <%= t('pins_list_demands') %></span>
+        <span class="icon search"></span>
+      </h2>
+    </div>
+  </div>
+</div>
+<div id="pin-subpins-content">
+  <div id="list-pins">
+    <%= render "pins_list" %>
+  </div>
+</div>
+<%= javascript_include_tag "pins" %>

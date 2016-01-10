@@ -1,0 +1,118 @@
+<div class="breadcrumb-bar">
+  <ol class="breadcrumb">
+    <li><%= link_to t('pins_category_overview'), :action => "index" %></li>
+    <% if !@parent_pins.nil? %>
+      <% @parent_pins.each.with_index do |pin, index| %>
+        <% break if (pin.id == @pin.id) %>
+        <li><%= link_to pin.title, pin %></li>
+      <% end %>
+    <% end %>
+  </ol>
+</div>
+<div id="category-view" class="content white simple overflow">
+  <div id="category-details" class="container-fluid space">
+    <div class="row">
+      <h1 class="title overflow bottom-margin col-md-12">
+        <% if @is_manager && user_signed_in? %>
+          <span class="icon-label">
+        <% end %>
+        <%= t('pins_category') %>: <%= @pin.title %>
+        <% if @is_manager && user_signed_in? %>
+          </span><a href="<%= edit_pin_path(@pin) %>" class="header-actions"><span class="icon settings"></span></a>
+        <% end %>
+      </h1>
+
+      <% if @pin.picture? %>
+        <div id="category-picture">
+          <%= image_tag @pin.picture_url %>
+        </div>
+      <% end %>
+      <div id="category-description" class="html-content">
+        <% if @pin.description.empty? %>
+          <p class="notice"><%= t('pins_no_description') %></p>
+        <% else %>
+          <div class="pin-description-preview"><%= truncate_html @pin.description, :length => 50 %></div>
+          <div class="pin-description-full" style="display:none;"><%= @pin.description.html_safe %></div>
+        <% end %>
+      </div>
+      <div id="category-tags">
+        <h2><%= t('most_used_tags') %></h2>
+        <% if @most_used_tags.empty? %>
+          <p class="notice"><%= t('pins_category_no_tags') %></p>
+        <% else %>
+          <div class="tag-list">
+            <% tag_cloud(@most_used_tags, %w(css1 css2 css3 css4)) do |tag, css_class| %>
+              <%= link_to tag.name, {:controller => :tags, :action => :show, :id => tag.id}, :class => css_class + " tag" %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div id="sub-categories">
+    <h2 class="title">
+      Sub Categories
+      <% if @is_manager && user_signed_in? %>
+        <a href="<%= new_sub_pin_path(:id => @pin.id, :type => 'category') %>" class="header-actions left"><span class="icon add"></span></a>
+      <% end %>
+    </h2>
+    <div id="list-categories" <% if !@categories.blank? %>class="row"<%end%>>
+      <% if not @categories.empty? %>
+        <% @categories.each do |category| -%>
+          <div class="category">
+            <div class="category-head"><%= link_to category.title, category %></div>
+            <div class="category-body <% if category.picture? %>show-picture<%end%>">
+              <% if category.picture? %>
+                <%= link_to category do %>
+                  <span class="category-img" style="background-image: url('<%=category.picture_url%>');"></span>
+                <% end %>
+              <% elsif !category.skill_list.empty? %>
+                <ul class="tag-list">
+                  <% category.tag_counts_on(:skills, :limit => 5, :order => "count desc").each do |tag| %>
+                    <li><%= link_to tag.name, {:controller => :tags, :action => :show, :id => tag.id}, :class => "tag" %></li>
+                  <% end %>
+                </ul>
+              <% else %>
+                <%= link_to category do %>
+                  <span class="notice"><%= t('pins_no_description'); %></span>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        <% end -%>
+      <% else %>
+        <span class="notice"><%=t('pins_no_category') %></span>
+      <% end %>
+    </div>
+  </div>
+  <div id="pin-subpins-header" class="container-fluid">
+    <div id="pin-type-header">
+      <div class="header supply">
+        <h2>
+          <span class="icon loudspeaker"></span>
+          <span class="icon-label"><span class="pre"><%= t('pins_list_pre') %></span> <%= t('pins_list_supplies') %></span>
+        </h2>
+      </div>
+      <div class="header filter-wrapper">
+        <div class="filter">
+          <%= form_tag pins_path, :method => 'get', :id => 'pins-search' do %>
+            <%= text_field_tag :name, params[:name], :placeholder => t('filter_by'), :class => 'search-input form-control',
+            :data => { :scope => "unsorted" } %>
+          <% end %>
+        </div>
+      </div>
+      <div class="header demand">
+        <h2>
+          <span class="icon-label"><span class="pre"><%= t('pins_list_pre') %></span> <%= t('pins_list_demands') %></span>
+          <span class="icon search"></span>
+        </h2>
+      </div>
+    </div>
+  </div>
+  <div id="pin-subpins-content">
+    <div id="list-pins">
+      <%= render "pins/pins_list" %>
+    </div>
+  </div>
+</div>
+<%= javascript_include_tag "pins" %>

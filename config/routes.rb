@@ -18,9 +18,9 @@ Duhajo::Application.routes.draw do
     resources :messages
   end
 
-  resources :jobs do
+  resources :pins do
     collection do
-      get :autocomplete_job_title
+      get :autocomplete_pin_title
       get :tag
     end
   end
@@ -30,22 +30,22 @@ Duhajo::Application.routes.draw do
 
   match 'dashboard' => 'dashboard#index'
 
-  match 'jobs/:job_id/conversations/:c_id' => 'conversations#show_job_conversation'
+  match 'pins/:pin_id/conversations/:c_id' => 'conversations#show_pin_conversation'
 
-  match 'jobs/new/:type' => 'jobs#new'
+  match 'pins/new/:type' => 'pins#new'
 
-  match 'jobs/:id/new/:type' => 'jobs#new', :as => 'new_sub_job'
-  match 'jobs/:id/support' => 'jobs#support'
-  match 'jobs/:id/set_status' => 'jobs#set_status'
-  match 'jobs/:id/map_for_job' => 'jobs#map_for_job'
-  match 'jobs/:id/show_manager_list' => 'jobs#show_manager_list', :as => 'show_manager_list'
-  match 'jobs/:id/edit_manager_list' => 'jobs#edit_manager_list'
+  match 'pins/:id/new/:type' => 'pins#new', :as => 'new_sub_pin'
+  match 'pins/:id/support' => 'pins#support'
+  match 'pins/:id/set_status' => 'pins#set_status'
+  match 'pins/:id/map_for_pin' => 'pins#map_for_pin'
+  match 'pins/:id/show_manager_list' => 'pins#show_manager_list', :as => 'show_manager_list'
+  match 'pins/:id/edit_manager_list' => 'pins#edit_manager_list'
 
-  match 'jobs/:id/conversation/:conversation_id' => 'conversation#show'
+  match 'pins/:id/conversation/:conversation_id' => 'conversation#show'
 
-  match 'jobs/:id/new_file' => 'jobs#new_file'
+  match 'pins/:id/new_file' => 'pins#new_file'
 
-  put 'jobs/:id/like' => 'jobs#like', :as => 'like_job'
+  put 'pins/:id/like' => 'pins#like', :as => 'like_pin'
 
   # Sample of named route:
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
@@ -87,7 +87,7 @@ Duhajo::Application.routes.draw do
     get '/myprofile', :to => 'users#my_profile', :as => :myprofile
   end
 
-  root :to => 'jobs#index'
+  root :to => 'pins#index'
   authenticate :user do
     root :to => 'dashboard#index'
   end

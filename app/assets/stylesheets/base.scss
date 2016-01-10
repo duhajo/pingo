@@ -47,7 +47,7 @@ a:-moz-any-link:focus {
         float: none;
         margin: 17px auto;
 
-        #my-jobs-link .icon {
+        #my-pins-link .icon {
           position: absolute;
           left: 6px;
           top: 4px;
@@ -64,7 +64,7 @@ a:-moz-any-link:focus {
           top: 0;
         }
 
-        #my-jobs-list {
+        #my-pins-list {
           display: none;
           &.active {
             display: block;

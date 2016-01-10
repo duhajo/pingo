@@ -21,16 +21,16 @@ $(document).ready ->
     todayHighlight: true
 
 $("#search-input").bind "railsAutocomplete.select", (event, data) ->
-  window.location.replace "/jobs/"+data.item.id
+  window.location.replace "/pins/"+data.item.id
 
-$("#my-jobs-link").on 'click', ->
-  $('#my-jobs-list').toggleClass "active"
+$("#my-pins-link").on 'click', ->
+  $('#my-pins-list').toggleClass "active"
 
 $("#search-input").keyup ->
-  $('#my-jobs-list').removeClass "active"
+  $('#my-pins-list').removeClass "active"
 
 $("#search-input").on 'click', ->
-  $('#my-jobs-list').toggleClass "active"
+  $('#my-pins-list').toggleClass "active"
 
 $('[data-toggle="headline-tab"]').click (e) ->
   $this = $(this)

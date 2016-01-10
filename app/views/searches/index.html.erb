@@ -11,12 +11,12 @@
           <div class="row">
             <div class="col-md-6">
               <div class="list">
-                <h2><%= t('jobs_found') %></h2>
-                <% if @jobs.empty? %>
-                  <p><%= t('jobs_no_jobs') %></p>
+                <h2><%= t('pins_found') %></h2>
+                <% if @pins.empty? %>
+                  <p><%= t('pins_no_pins') %></p>
                 <% else %>
-                  <% @jobs.each do |job| %>
-                    <%= render :partial => "jobs/job_box", :locals => {:job => job} %>
+                  <% @pins.each do |pin| %>
+                    <%= render :partial => "pins/pin_box", :locals => {:pin => pin} %>
                   <% end %>
                 <% end %>
               </div>

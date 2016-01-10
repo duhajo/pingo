@@ -72,8 +72,11 @@
   &.add:before {
   	content: "\e001";
   }
-  &.job:before {
+  &.pin:before {
   	content: "\e002";
+  }
+  &.pin:before {
+    content: "\e00b";
   }
   &.alarm:before {
   	content: "\e003";
@@ -100,15 +103,15 @@
   	content: "\e00a";
   }
   &.notify:before {
-  	content: "\e00b";
-  }
-  &.tag:before {
   	content: "\e00c";
   }
-  &.pulse:before {
+  &.tag:before {
   	content: "\e00d";
   }
-  &.message:before {
+  &.pulse:before {
   	content: "\e00e";
+  }
+  &.message:before {
+  	content: "\e00f";
   }
 }

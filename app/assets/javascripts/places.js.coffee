@@ -17,7 +17,7 @@
         )
         title: val.title
       )
-      popupContent = val.title + '<br /><a class="btn btn-primary" href="'+val.url + '">Job anschauen' + '</a>'
+      popupContent = val.title + '<br /><a class="btn btn-primary" href="'+val.url + '">Pin anschauen' + '</a>'
       marker.bindPopup popupContent
       markers.addLayer marker
     map.addLayer markers

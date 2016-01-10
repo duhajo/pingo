@@ -1,0 +1,20 @@
+<% if @is_owner %><a href="javascript:;" onclick="chatBox.show_conversations()" class="btn">Zurück zur Übersicht</a><% end %>
+<div class="chat-head">
+  <div class="chat-title">
+    <i class="icon-chat"></i>
+    <span class="icon-label"><% if @is_owner %>Anfrage von<%else%>Chat mit dem Anbieter<% end%> <%= @reciever.name %></span>
+  </div>
+</div>
+<div class="chat-input">
+  <%= form_for([@conversation, @message], :remote => true, :html => {id: "conversation-form-#{@conversation.id}"}) do |f| %>
+    <%= f.text_area :body, rows: 2, id: "message-for-#{@conversation.id}", class: "chat-textarea form-control", "data-cid" => @conversation.id %>
+  <% end %>
+</div>
+<div class="form-actions">
+  <%= link_to 'Erstellen', "#", :onclick => "return false;", :class => "btn btn-primary send-chat-message", "data-cid" => @conversation.id %>
+</div>
+<div class="chat-content">
+  <% if @messages.any? %>
+  <%= render @messages %>
+  <% end %>
+</div>

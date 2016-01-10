@@ -1,0 +1,50 @@
+<div class="supplies list">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="pin-add-wrapper">
+        <div class="pin-add">
+          <a href="<%=new_pin_path%>/supply">
+            <span class="icon add"></span>
+            <span class="icon-label"><%= t("pins_new_supply") %></span>
+          </a>
+        </div>
+      </div>
+      <% if @supplies.empty? %>
+        <div class="no-entries">
+          <%= t('pins_no_pins') %>
+        </div>
+      <% else %>
+        <% @supplies.in_groups_of(2, false).each do |sup| %>
+          <% sup.each do |pin| %>
+            <%= render :partial => "pin_box", :locals => {:pin => pin} %>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="demands list">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="pin-add-wrapper">
+        <div class="pin-add">
+          <a href="<%=new_pin_path%>/demand">
+            <span class="icon add"></span>
+            <span class="icon-label"><%= t("pins_new_demand") %></span>
+          </a>
+        </div>
+      </div>
+      <% if @demands.empty? %>
+        <div class="no-entries">
+          <%= t('pins_no_pins') %>
+        </div>
+      <% else %>
+        <% @demands.in_groups_of(2, false).each do |dem| %>
+          <% dem.each do |pin| %>
+            <%= render :partial => "pin_box", :locals => {:pin => pin} %>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

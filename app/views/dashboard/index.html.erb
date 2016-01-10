@@ -6,22 +6,22 @@
     </div>
     <div class="col-md-6 space" id="recommendations">
       <h1><%= t('dashboard_recommendations') %></h1>
-      <% if @recommendations.blank? && @near_jobs.blank? %>
+      <% if @recommendations.blank? && @near_pins.blank? %>
         <%= t('dashboard_no_recommendations') %>
       <% else %>
         <% if !@recommendations.blank? %>
           <h2><%= t('dashboard_recommendations_on_tags') %></h2>
           <div class="list row">
-            <% @recommendations.each do |job| %>
-              <%= render :partial => "jobs/job_box", :locals => {:job => job} %>
+            <% @recommendations.each do |pin| %>
+              <%= render :partial => "pins/pin_box", :locals => {:pin => pin} %>
             <% end %>
           </div>
         <% end %>
-        <% if !@near_jobs.blank? %>
+        <% if !@near_pins.blank? %>
           <h2><%= t('dashboard_recommendations_on_place') %></h2>
           <div class="list row">
-            <% @near_jobs.each do |job| %>
-              <%= render :partial => "jobs/job_box", :locals => {:job => job} %>
+            <% @near_pins.each do |pin| %>
+              <%= render :partial => "pins/pin_box", :locals => {:pin => pin} %>
             <% end %>
           </div>
         <% end %>

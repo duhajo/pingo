@@ -1,0 +1,13 @@
+<% if user_signed_in? %>
+  <li role="presentation" class="ui-menu-item dropdown-header">Meine Pins</li>
+  <%if my_pins.empty? %>
+    <li role="presentation" class="ui-menu-item disabled">Es sind noch keine Pins vorhanden.</li>
+  <% else %>
+    <% my_pins.each do |pin| %>
+      <li class="ui-menu-item"><%= link_to pin.title, pin %></li>
+    <% end %>
+  <% end %>
+
+<% else %>
+  <li role="presentation" class="ui-menu-item disabled">Du bist nicht angemeldet <%= link_to 'einloggen?', login_path, :class => "btn btn-primary" %></li>
+<% end %>

@@ -1,0 +1,127 @@
+<%= javascript_include_tag "pins" %>
+<div class="container">
+  <div id="edit-pin-page" class="form col-md-6 col-md-offset-3 white-panel clear-top" data-id="<%= @pin.id %>">
+    <h1>
+      <% if @pin.type != 0 %>
+        <%= t('pins_edit_header') %>
+      <% else %>
+        <%= t('pins_edit_header_categorie') %>
+      <% end %>
+    </h1>
+    <%= simple_form_for @pin, html: {multipart: true} do |f| %>
+      <% if @pin.errors.any? %>
+        <div class="error_messages">
+          <h2>Form is invalid</h2>
+          <ul>
+            <% for message in @pin.errors.full_messages %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <% if @type == 0 %>
+        <%= f.hidden_field :type, value: 0 %>
+        <div class="form-group">
+          <%= f.label :title, t('pin_form_title') %>
+          <%= f.text_field :title, class: "form-control" %>
+        </div>
+      <% else %>
+        <div class="row">
+          <% if @pin.type != 0 %>
+            <div class="form-group col-md-12">
+              <%= f.label :parent_id, t('pin_form_category') %>
+              <%= f.select :parent_id, categories_nested_select(pin) {|i| "#{'-' * i.level} #{i.title}" }, {prompt: t('pins_category_choose')}, {class: "form-control"}%>
+            </div>
+          <% end %>
+          <div class="form-group col-md-4">
+            <%= f.label :type, t('pin_form_type') %>
+            <select class="form-control" id="pin_type" name="pin[type]">
+              <% if @type == 1 %>
+                <option value="1">Ich biete...</option>
+              <% else %>
+                <option value="2">Ich suche...</option>
+              <% end %>
+            </select>
+            <script type="text/javascript">
+              $('#pin_type option[value="' + <%=@pin.type%> + '"]').attr('selected', 'selected');
+            </script>
+          </div>
+          <div class="form-group col-md-8">
+            <%= f.label :title, t('pin_form_title') %>
+            <%= f.text_field :title, class: "form-control" %>
+          </div>
+        </div>
+      <% end %>
+      <div class="form-group area html-content">
+        <%= f.label :description, t('pin_form_description') %>
+        <%= f.resizable_text_area :description, :class => "form-control", rows: "4" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :skill_list, t('pin_form_tags') %>
+        <%= f.text_field :skill_list, :class => "form-control" %>
+      </div>
+      <% if @pin.type != 0 %>
+        <div class="form-group">
+          <% if @pin.deadline.nil?
+               @setDeadline = true %>
+              <div id="show-deadline-link">
+                <%= link_to t('pin_form_set_deadline'), '#',
+                            :onclick => 'showDeadline(); return false;', :class => 'btn btn-default' %>
+              </div>
+          <% end %>
+          <div id="deadline-field"
+               <% if @setDeadline %> style="display: none;"
+               <% end %>>
+            <%= f.label :deadline, t('pin_form_deadline') %>
+            <%= f.text_field :deadline, class: "form-control datepicker" %>
+          </div>
+        </div>
+        <div class="form-group">
+          <% if @pin.latitude.nil? && @pin.longitude.nil?
+               @setLocation = true %>
+              <div id="show-location-link">
+                <%= link_to t('pin_form_set_location'), '#',
+                            :onclick => 'showLocation(); return false;', :class => 'btn btn-default' %>
+              </div>
+          <% end %>
+          <div id="location-field" class="form-group row"
+               <% if @setLocation %> style="display: none;"
+               <% end %>>
+            <div class="col-md-4">
+              <%= f.label :country, t('pin_form_country') %>
+              <%= f.text_field :country, :class => "form-control" %>
+            </div>
+            <div class="col-md-4">
+              <%= f.label :city, t('pin_form_city') %>
+              <%= f.text_field :city, :class => "form-control" %>
+            </div>
+            <div class="col-md-4">
+              <%= f.label :street, t('pin_form_street') %>
+              <%= f.text_field :street, :class => "form-control" %>
+            </div>
+          </div>
+        </div>
+      <% else %>
+        <div class="form-group">
+          <%= f.label :picture, t('pin_form_picture') %>
+          <%= image_tag(@pin.picture_url) if @pin.picture? %>
+          <%= f.file_field :picture, :class => "form-control" %>
+          <%= f.hidden_field :picture_cache %>
+        </div>
+      <% end %>
+      <div class="form-group row">
+        <div class="col-xs-4">
+          <%= link_to t('cancel'), pin_path(@pin), :class => "btn btn-default" %>
+        </div>
+        <div class="col-xs-4 center">
+          <% if @pin.leaf? %>
+            <%= link_to t('delete'), @pin, :method => :delete, :confirm => "Are you sure ?", :class => "btn btn-default" %>
+          <% end %>
+        </div>
+        <div class="col-xs-4">
+          <%= link_to t('save'), "#", :onclick => "nicEditors.findEditor('pin_description').saveContent();sendForm('edit_pin');return false;", :class => "btn btn-primary pull-right" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

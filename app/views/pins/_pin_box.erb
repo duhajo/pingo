@@ -1,0 +1,53 @@
+<%if pin.type == 1
+    @type_prefix = t('pins_supply')
+    @type_class = 'supply'
+  elsif pin.type == 2
+    @type_prefix = t('pins_demand')
+    @type_class = 'demand'
+end %>
+
+<div class="pin-box-wrapper <%=@type_class%>">
+  <div class="pin-box">
+    <h3 class="title">
+      <%=link_to pin do %>
+        <span class="prefix icon <% if pin.type == 2%>search<% elsif pin.type == 1%>loudspeaker<% end %>"></span>
+        <span class="icon-label"><%= pin.title %></span>
+      <% end %>
+    </h3>
+    <% if not pin.skill_list.empty? %>
+      <div class="tag-list overflow small">
+        <% pin.tag_counts_on(:skills, :limit => 5, :order => "count desc").each do |tag| %>
+          <%= link_to tag.name, {:controller => :tags, :action => :show, :id => tag.id}, :class => "tag" %>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="description">
+        <%= truncate_html pin.description.gsub('<br>', ''), :length => 120 %>
+      </div>
+    <% end %>
+    <div class="pin-bottom-line">
+      <div class="pin-time">
+        <%= link_to pin do %>
+          <span class="icon alarm"><!----></span>
+          <span class="icon-label">
+            <span class="datetime" title="<%= pin.created_at.to_formatted_s(:long) %>"><%= t("created_at", :time => time_ago_in_words(pin.created_at))%></span>
+            <% if !pin.deadline.blank? %>
+              <span class="deadline" title="<%= pin.deadline.to_formatted_s(:long) %>">(
+                <% if pin.deadline < DateTime.now %>
+                  <%= t("deadline_past", :time => distance_of_time_in_words(Time.now, pin.deadline, true)) %>
+                <% else %>
+                  <%= t("deadline_active", :time => distance_of_time_in_words(Time.now, pin.deadline, true)) %>
+                <% end %>
+                )
+              </span>
+            <% end %>
+          </span>
+        <% end %>
+      </div>
+      <div class="pin-manager">
+        <%= link_to image_tag(avatar_url(pin.user_email),
+        alt: pin.user_name, :class => "img-circle small"), user_path(pin.user_id), :class => "profile-avatar show-tooltip", :title => pin.user_name, data: {toggle: "tooltip"} %>
+      </div>
+    </div>
+  </div>
+</div>

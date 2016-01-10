@@ -3,7 +3,7 @@
       <script type="text/javascript">
         var ready = function () {
         <% init_chats.each do |conversation|
-          if conversation.job_id.nil? %>
+          if conversation.pin_id.nil? %>
             chatBox.createChatBox(<%= conversation.id %>, 1);
           <% end
         end %>

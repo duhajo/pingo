@@ -1,15 +1,15 @@
 class PlacesController < ApplicationController
   def index
-    @jobs = Job.where("longitude IS NOT NULL AND latitude IS NOT NULL").all
+    @pins = Pin.where("longitude IS NOT NULL AND latitude IS NOT NULL").all
     @geojson = Array.new
 
-    @jobs.each do |job|
+    @pins.each do |pin|
       @geojson << {
-          longitude: job.longitude,
-          latitude: job.latitude,
-          title: job.title,
-          job_id: job.id,
-          url: job_path(job.id)
+          longitude: pin.longitude,
+          latitude: pin.latitude,
+          title: pin.title,
+          pin_id: pin.id,
+          url: pin_path(pin.id)
       }
     end
 

@@ -3,18 +3,18 @@
   var chatbox = $("#chatbox_" + id + " .chat-content");
   var sender_id = "<%= @message.user.id %>";
   var reciever_id = $('meta[name=user-id]').attr("content");
-  <% if @conversation.job %>
-    var job_id = "<%= @conversation.job.id %>";
+  <% if @conversation.pin %>
+    var pin_id = "<%= @conversation.pin.id %>";
     chatbox.prepend("<%= j render( partial: @message ) %>");
   <% else %>
     chatbox.append("<%= j render( partial: @message ) %>");
   <% end %>
-  
+
   chatbox.scrollTop(chatbox[0].scrollHeight);
 
   if(sender_id != reciever_id){
-    <% if @conversation.job %>
-      chatBox.chatWithJob(id);
+    <% if @conversation.pin %>
+      chatBox.chatWithPin(id);
     <% else %>
       chatBox.chatWith(id);
     <% end %>

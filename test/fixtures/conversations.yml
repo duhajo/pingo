@@ -3,9 +3,9 @@
 one:
   sender_id: 1
   recipient_id: 1
-  job_id: 1
+  pin_id: 1
 
 two:
   sender_id: 1
   recipient_id: 1
-  job_id: 1
+  pin_id: 1

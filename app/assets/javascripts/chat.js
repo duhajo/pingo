@@ -20,8 +20,8 @@ var ready = function () {
     var convLink = $(this),
       chatbox = $("#chatbox_" + convLink.data('conversation'));
     if (chatbox.size() === 0) {
-      $("#chat-wrapper").append('<div id="chatbox_' + convLink.data("conversation") + '" class="job-chat"></div>');
-      $.get(convLink.data("job_id") + "/conversations/" + convLink.data("conversation"), function (data) {
+      $("#chat-wrapper").append('<div id="chatbox_' + convLink.data("conversation") + '" class="pin-chat"></div>');
+      $.get(convLink.data("pin_id") + "/conversations/" + convLink.data("conversation"), function (data) {
         $("#chatbox_" + convLink.data('conversation')).html(data);
       }, "html");
     }
@@ -33,7 +33,7 @@ var ready = function () {
 
     show_conversations: function () {
       $("#conversation-list").show();
-      $(".job-chat").hide();
+      $(".pin-chat").hide();
     },
 
 
@@ -49,8 +49,8 @@ var ready = function () {
       $("#chatbox_" + conversation_id + " .chat-textarea").focus();
     },
 
-    chatWithJob: function (conversation_id, job_id) {
-      chatBox.createJobChatWrapper(conversation_id, job_id);
+    chatWithPin: function (conversation_id, pin_id) {
+      chatBox.createpinChatWrapper(conversation_id, pin_id);
       $("#chatbox_" + conversation_id + " .chat-textarea").focus();
     },
 
@@ -95,12 +95,12 @@ var ready = function () {
       }
     },
 
-    createJobChatWrapper: function (conversation_id, job_id) {
+    createPinChatWrapper: function (conversation_id, pin_id) {
       $("#chatbox_" + conversation_id + " .chat-textarea").focus();
 
-      $("#chat-messages").append('<div id="chatbox_' + conversation_id + '" class="job-chat"></div>');
-      
-      $.get(job_id + "/conversations/" + conversation_id, function (data) {
+      $("#chat-messages").append('<div id="chatbox_' + conversation_id + '" class="pin-chat"></div>');
+
+      $.get(pin_id + "/conversations/" + conversation_id, function (data) {
         $('#chatbox_' + conversation_id).html(data);
       }, "html");
 

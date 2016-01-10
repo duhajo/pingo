@@ -47,15 +47,18 @@ margin-left: 20px;
 .flaticon-multiple25:before {
 	content: "\e00a";
 }
-.flaticon-notify:before {
+.flaticon-note65:before {
 	content: "\e00b";
 }
-.flaticon-onlinestore1:before {
+.flaticon-notify:before {
 	content: "\e00c";
 }
-.flaticon-pulse1:before {
+.flaticon-onlinestore1:before {
 	content: "\e00d";
 }
-.flaticon-speech96:before {
+.flaticon-pulse1:before {
 	content: "\e00e";
+}
+.flaticon-speech96:before {
+	content: "\e00f";
 }

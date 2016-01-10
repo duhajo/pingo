@@ -22,19 +22,19 @@ ready = ->
       return
     return
 
-  $('#job .start-conversation').click (e) ->
+  $('#pin .start-conversation').click (e) ->
     e.preventDefault()
     e.target.remove()
     sender_id = $(this).data('sid')
     recipient_id = $(this).data('rip')
-    job_id = $(this).data('job_id')
+    pin_id = $(this).data('pin_id')
     $.post '/conversations', {
-      job_id: job_id
+      pin_id: pin_id
       sender_id: sender_id
       recipient_id: recipient_id
     }, (data) ->
-      $('#job-conversations').html('<div id="chat-messages"></div>');
-      chatBox.chatWithJob data.conversation_id, job_id
+      $('#pin-conversations').html('<div id="chat-messages"></div>');
+      chatBox.chatWithPin data.conversation_id, pin_id
       return
     return
 

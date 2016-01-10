@@ -16,12 +16,12 @@ ActiveRecord::Schema.define(:version => 20160102155748) do
   create_table "conversations", :force => true do |t|
     t.integer  "sender_id"
     t.integer  "recipient_id"
-    t.integer  "job_id"
+    t.integer  "pin_id"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end
 
-  create_table "jobs", :force => true do |t|
+  create_table "pins", :force => true do |t|
     t.string   "title"
     t.text     "description"
     t.date     "deadline"
@@ -42,9 +42,9 @@ ActiveRecord::Schema.define(:version => 20160102155748) do
     t.string   "picture"
   end
 
-  create_table "jobs_files", :force => true do |t|
+  create_table "pins_files", :force => true do |t|
     t.integer  "user_id"
-    t.integer  "job_id"
+    t.integer  "pin_id"
     t.string   "file"
     t.string   "title"
     t.text     "description"
@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(:version => 20160102155748) do
     t.datetime "updated_at",  :null => false
   end
 
-  add_index "jobs_files", ["job_id", "user_id"], :name => "index_jobs_files_on_job_id_and_user_id"
+  add_index "pins_files", ["pin_id", "user_id"], :name => "index_pins_files_on_pin_id_and_user_id"
 
   create_table "messages", :force => true do |t|
     t.text     "body"

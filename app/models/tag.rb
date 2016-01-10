@@ -2,7 +2,7 @@ class Tag < ActiveRecord::Base
   attr_accessible :name
   
   belongs_to :user
-  belongs_to :job
+  belongs_to :pin
   
   def self.tags(options = {})
     query = "select tags.id, name, count(*) as count"

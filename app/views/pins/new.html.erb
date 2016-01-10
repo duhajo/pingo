@@ -1,0 +1,115 @@
+<%= javascript_include_tag "pins" %>
+<div class="container">
+  <div id="new-pin-page" class="form col-md-6 col-md-offset-3 white-panel clear-top" data-id="<%= @pin.id %>">
+
+    <h1>
+      <%if !@type.nil? && @type == 0%>
+        <%=t('pins_new_category')%>
+      <%elsif @type == 1 %>
+        <%=t('pins_new_supply')%>
+      <%elsif @type == 2 %>
+        <%=t('pins_new_demand')%>
+      <%else%>
+        <%=t('pins_new')%>
+      <%end%>
+      <% if not @parent_pin.nil?%> <%=t('for')%> "<%= @parent_pin.title %>"<% end %>
+    </h1>
+
+    <%= form_for(@pin) do |f| %>
+      <% if @pin.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@pin.errors.count, "error") %> prohibited this pin from being saved:</h2>
+          <ul>
+            <% @pin.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <% if not @parent_pin.nil? %>
+        <%= f.hidden_field :parent_id, value: @parent_pin.id %>
+      <% end %>
+    <% if @type != false %>
+      <%= f.hidden_field :type, value: @type %>
+        <div class="form-group">
+          <%= f.label :title, t('pin_form_title') %>
+          <%= f.text_field :title, class: "form-control" %>
+        </div>
+      <% else %>
+        <div class="row">
+          <div class="form-group col-md-4">
+            <%= f.label :type, t('pin_form_type') %>
+            <div class="btn-group" data-toggle="buttons">
+              <label class="btn btn-primary active">
+                <input type="radio" name="pin[type]" id="pin_type_demand" autocomplete="off" value="2" checked>Ich suche...
+              </label>
+              <label class="btn btn-primary">
+                <input type="radio" value="1" name="pin[type]" id="pin_type_supply" autocomplete="off">Ich biete...
+              </label>
+            </div>
+          </div>
+          <div class="form-group col-md-8">
+            <%= f.label :title, t('pin_form_title') %>
+            <%= f.text_field :title, class: "form-control" %>
+          </div>
+        </div>
+      <% end %>
+      <div class="area html-content form-group">
+        <%= f.label :description, t('pin_form_description') %>
+        <%= f.resizable_text_area :description, class: "form-control", rows: "4" %>
+      </div>
+      <% if @type != 0 %>
+        <div class="form-group">
+          <%= f.label :skill_list, t('pin_form_tags') %>
+          <br/>
+          <%= f.text_field :skill_list, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <div id="show-deadline-link">
+            <%= link_to t('pin_form_set_deadline'), '#',
+                        :onclick => 'showDeadline()', class: "btn btn-default" %>
+          </div>
+          <div id="deadline-field" class="field" style="display: none;">
+            <%= f.label :deadline, t('pin_form_deadline') %>
+            <br/>
+            <%= f.text_field :deadline, class: "form-control datepicker" %>
+          </div>
+        </div>
+        <div class="form-group">
+          <div id="show-location-link">
+            <%= link_to t('pin_form_set_location'), '#', :onclick => 'showLocation()', class: "btn btn-default" %>
+          </div>
+          <div id="location-field" style="display: none;">
+            <div class="form-group">
+              <%= f.label :country, t('pin_form_country') %>
+              <br/>
+              <%= f.text_field :country, class: "form-control" %>
+            </div>
+            <div class="form-group">
+              <%= f.label :city, t('pin_form_city') %>
+              <br/>
+              <%= f.text_field :city, class: "form-control" %>
+            </div>
+            <div class="form-group">
+              <%= f.label :street, t('pin_form_street') %>
+              <br/>
+              <%= f.text_field :street, class: "form-control" %>
+            </div>
+          </div>
+        </div>
+      <% else %>
+        <div class="field">
+          <%= f.label :picture, t('pin_form_picture') %>
+          <%= image_tag(@pin.picture_url) if @pin.picture? %>
+          <%= f.file_field :picture, class: "form-control" %>
+          <%= f.hidden_field :picture_cache %>
+        </div>
+      <% end %>
+      <div class="form-group top-margin">
+        <%= link_to 'Abbrechen', pins_path, :class => "btn btn-default" %>
+        <%= link_to 'Erstellen', "#", :onclick => "nicEditors.findEditor('pin_description').saveContent();sendForm('new_pin');return false;", :class => "btn btn-primary pull-right" %>
+      </div>
+    <% end %>
+  </div>
+</div>

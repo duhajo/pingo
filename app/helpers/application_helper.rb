@@ -22,7 +22,7 @@ module ApplicationHelper
   # depending on who is looking
   def whose?(user, object)
     case object
-      when Job
+      when pin
         owner = current_user
       when Comment
         owner = object.user

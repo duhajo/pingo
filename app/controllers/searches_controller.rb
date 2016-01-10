@@ -4,7 +4,7 @@ class SearchesController < ApplicationController
     if params[:search]
       @search = params[:search]
       if !@search.blank?
-        @jobs = Job.search(params[:search])
+        @pins = Pin.search(params[:search])
         @tags = Tag.search(params[:search])
       end
     end

@@ -1,0 +1,8 @@
+<%= javascript_include_tag "pins" %>
+<% if @pin.type == 0 %>
+  <%= render 'pins/types/category' %>
+<% elsif @pin.type == 1 %>
+  <%= render 'pins/types/supply' %>
+<% else %>
+  <%= render 'pins/types/demand' %>
+<% end %>

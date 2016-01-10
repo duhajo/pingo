@@ -32,52 +32,52 @@
       </div>
     <%end%>
   </div>
-  <div id="tag-rel-jobs-header" class="container-fluid">
-    <h2><%= t("jobs_related_tags") %></h2>
-    <div id="job-type-header">
+  <div id="tag-rel-pins-header" class="container-fluid">
+    <h2><%= t("pins_related_tags") %></h2>
+    <div id="pin-type-header">
       <div class="header supply">
         <h3>
           <span class="icon loudspeaker"></span>
-          <span class="icon-label"><span class="pre"><%= t('jobs_list_pre') %></span> <%= t('jobs_list_supplies') %></span>
+          <span class="icon-label"><span class="pre"><%= t('pins_list_pre') %></span> <%= t('pins_list_supplies') %></span>
         </h3>
       </div>
       <div class="header filter-wrapper">
         <div class="filter">
-          <%= form_tag jobs_path, :method => 'get', :id => 'jobs-search' do %>
+          <%= form_tag pins_path, :method => 'get', :id => 'pins-search' do %>
             <%= text_field_tag :name, params[:name], :placeholder => t('filter_by'), :class => 'search-input form-control',
-            :data => { :scope => "jobs" } %>
+            :data => { :scope => "pins" } %>
           <% end %>
         </div>
       </div>
       <div class="header demand">
         <h3>
-          <span class="icon-label"><span class="pre"><%= t('jobs_list_pre') %></span> <%= t('jobs_list_demands') %></span>
+          <span class="icon-label"><span class="pre"><%= t('pins_list_pre') %></span> <%= t('pins_list_demands') %></span>
           <span class="icon search"></span>
         </h3>
       </div>
     </div>
   </div>
-  <div id="tag-rel-jobs-content">
-    <div id="list-jobs">
+  <div id="tag-rel-pins-content">
+    <div id="list-pins">
       <div class="supplies list">
         <div class="container-fluid">
           <div class="row">
-            <div class="job-add-wrapper">
-              <div class="job-add">
-                <a href="<%=new_job_path%>/supply">
+            <div class="pin-add-wrapper">
+              <div class="pin-add">
+                <a href="<%=new_pin_path%>/supply">
                   <span class="icon add"></span>
-                  <span class="icon-label"><%= t("jobs_new_supply") %></span>
+                  <span class="icon-label"><%= t("pins_new_supply") %></span>
                 </a>
               </div>
             </div>
             <% if @supplies.blank? %>
               <div class="no-entries">
-                <span class="notice"><%= t('jobs_no_jobs') %></span>
+                <span class="notice"><%= t('pins_no_pins') %></span>
               </div>
             <% else %>
               <% @supplies.in_groups_of(2, false).each do |sup| %>
-                <% sup.each do |job| %>
-                  <%= render :partial => "jobs/job_box", :locals => {:job => job} %>
+                <% sup.each do |pin| %>
+                  <%= render :partial => "pins/pin_box", :locals => {:pin => pin} %>
                 <% end %>
               <% end %>
             <% end %>
@@ -87,22 +87,22 @@
       <div class="demands list">
         <div class="container-fluid">
           <div class="row">
-            <div class="job-add-wrapper">
-              <div class="job-add">
-                <a href="<%=new_job_path%>/demand">
+            <div class="pin-add-wrapper">
+              <div class="pin-add">
+                <a href="<%=new_pin_path%>/demand">
                   <span class="icon add"></span>
-                  <span class="icon-label"><%= t("jobs_new_demand") %></span>
+                  <span class="icon-label"><%= t("pins_new_demand") %></span>
                 </a>
               </div>
             </div>
             <% if @demands.blank? %>
               <div class="no-entries">
-                <span class="notice"><%= t('jobs_no_jobs') %></span>
+                <span class="notice"><%= t('pins_no_pins') %></span>
               </div>
             <% else %>
               <% @demands.in_groups_of(2, false).each do |dem| %>
-                <% dem.each do |job| %>
-                  <%= render :partial => "jobs/job_box", :locals => {:job => job} %>
+                <% dem.each do |pin| %>
+                  <%= render :partial => "pins/pin_box", :locals => {:pin => pin} %>
                 <% end %>
               <% end %>
             <% end %>
@@ -112,4 +112,4 @@
     </div>
   </div>
 </div>
-<%= javascript_include_tag "jobs" %>
+<%= javascript_include_tag "pins" %>

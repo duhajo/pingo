@@ -1,0 +1,134 @@
+<div class="breadcrumb-bar">
+  <ol class="breadcrumb">
+    <% if !@pin.parent_id.nil? && pin.find(@pin.parent_id).type == 0 %>
+      <li><%= link_to t('pins_category_overview'), :action => "index" %></li>
+    <% else %>
+      <li><%= link_to t('pins_overview'), :action => "index" %></li>
+    <% end %>
+    <% if !@parent_pins.nil? %>
+      <% @parent_pins.each.with_index do |pin, index| %>
+        <% break if (pin.id == @pin.id) %>
+        <li><%= link_to pin.title, pin %></li>
+      <% end %>
+    <% end %>
+  </ol>
+</div>
+
+<div <% if @pin.status == 3 || user_signed_in? && @pin.parent_id.nil? %>class="closed"<% end %> id="pin" data-id="<%= @pin.id %>">
+  <div id="pin-title">
+    <h1>
+      <span class="icon search" title="<%=t('pins_demand') %>"></span>
+      <span class="icon-label"><%= @pin.title %></span>
+    </h1>
+    <% if @is_manager && user_signed_in? %></span>
+      <div id="pin-actions">
+        <a href="<%= edit_pin_path(@pin) %>" class="header-actions"><span class="icon settings"></span></a>
+        <% if @pin.status.nil? %>
+          <div id="pin-status">
+            <a href="#toDo" class="btn btn-primary">Nachfrage erledigt!</a>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+  <div id="pin-content">
+    <div class="row">
+      <div id="pin-specification" class="col">
+        <div id="pin-details">
+          <div id="pin-meta" <% if !@pin.address.blank? %>class ="two-cols"<% end %>>
+            <div id="pin-time" <% if !@pin.address.blank? %>class="col-lg-6"<% end %>>
+              <span class="icon alarm"><!----></span>
+              <span class="icon-label">
+                <span class="datetime" title="<%= @pin.created_at.to_formatted_s(:long) %>"><%= t("created_at", :time => time_ago_in_words(@pin.created_at))%></span>
+                <% if !@pin.deadline.blank? %>
+                  <span class="deadline" title="<%= @pin.deadline.to_formatted_s(:long) %>">(
+                    <% if @pin.deadline < DateTime.now %>
+                      <%= t("deadline_past", :time => distance_of_time_in_words(Time.now, @pin.deadline, true)) %>
+                    <% else %>
+                      <%= t("deadline_active", :time => distance_of_time_in_words(Time.now, @pin.deadline, true)) %>
+                    <% end %>
+                    )
+                  </span>
+                <% end %>
+              </span>
+            </div>
+            <% if !@pin.address.blank? %>
+              <div id="pin-location" <% if !@pin.address.blank? %>class="col-lg-6"<% end %>>
+                <span class="icon map"><!----></span>
+                <span class="icon-label">
+                  <%= link_to @pin.address, {:action => :map_for_pin}, :id => "show-map-button",
+                              class: "header-actions left",
+                              data: {toggle: "modal", target: "#ajax-modal",
+                                     lat: @pin.latitude, long: @pin.longitude} %>
+                </span>
+              </div>
+            <% end %>
+          </div>
+          <div id="pin-description" class="html-content top-margin">
+            <% if strip_tags(@pin.description).empty? %>
+              <span class="notice">Noch keine Beschreibung vorhanden...</span>
+            <% else %>
+              <div class="pin-description-preview"><%= truncate_html @pin.description, :length => 150 %>
+                <% if @pin.description.html_safe.length > 150 %>
+                  <%= link_to_function 'Alles lesen', "$('.pin-description-preview').hide();$('.pin-description-full').show();$('#splitter-close').show();$(this).parent().hide();" %>
+                <% end %>
+              </div>
+              <div class="pin-description-full" style="display:none;"><%= @pin.description.html_safe %>
+                <%= link_to_function 'Weniger', "$('.pin-description-full').hide();$('.pin-description-preview').show();$('#splitter-open').show();$(this).parent().hide();" %>
+              </div>
+            <% end %>
+          </div>
+          <div id="pin-tags" class="top-margin">
+            <% if not @pin.skill_list.empty? %>
+              <ul class="tag-list overflow">
+                <li><span class="icon tag"></span></li>
+                <% @pin.tag_counts_on(:skills, :limit => 5, :order => "count desc").each do |tag| %>
+                  <li><%= link_to tag.name, {:controller => :tags, :action => :show, :id => tag.id}, :class => "tag" %></li>
+                <% end %>
+              </ul>
+            <% end %>
+          </div>
+          <%= render 'pins/files' %>
+        </div>
+      </div>
+      <div id="pin-communication" class="col">
+        <div id="pin-contact">
+          <h2 class="overflow with-buttons"><span class="icon-label"><%= t("pin_interested_in") %></span></h2>
+          <div class="manager">
+            <%= link_to @manager, :title => @manager.name do %>
+              <span class="profile-avatar manager">
+                <%= image_tag(avatar_url(@manager.email), alt: "?", :class => "img-circle") %>
+              </span>
+              <span class="user-name"><%=@manager.name%></span>
+            <% end %>
+            <p class="user-about">
+              <%= truncate_html @manager.about, :length => 150 %>
+            </p>
+          </div>
+          <div class="actions">
+            <% if user_signed_in? %>
+              <% if !@is_manager && @conversations.empty? %>
+                <%= link_to "#", class: "btn btn-primary start-conversation",
+                  "data-sid" =>  current_user.id, "data-rip" => @manager.id, 'data-pin_id' => @pin.id do %>
+                  <span class="icon message"></span><span class="icon-label"><%= t("contact_manager") %></span>
+                <% end %>
+              <% end %>
+            <% else %>
+              <%= link_to login_path, class: "btn btn-primary" do %>
+                <span class="icon message"></span><span class="icon-label"><%= t("contact_manager") %></span>
+              <% end %>
+            <% end %>
+          </div>
+          <div id="pin-conversations">
+            <%= render partial: 'pins/pin_chat' %>
+          </div>
+        </div>
+        <div id="pin-similar">
+          <h2 class="title">Ähnliche Annoncen</h2>
+          <div class="well">#ToDo: Funktion der Aktivitäten durch ähnliche Annoncen ersetzt</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<%= gflash %>
